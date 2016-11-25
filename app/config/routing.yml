@@ -1,0 +1,10 @@
+htl_spendenportal:
+    resource: "@HtlSpendenportalBundle/Resources/config/routing.xml"
+    prefix:   /
+
+app:
+    resource: "@AppBundle/Controller/"
+    type:     annotation
+
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"

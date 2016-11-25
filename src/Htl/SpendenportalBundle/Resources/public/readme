@@ -1,0 +1,2 @@
+Damit die Web-assets im public Ordner übernommen werden führe folgenden Befehl aus:
+bin/console assets:install web

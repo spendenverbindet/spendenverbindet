@@ -1,0 +1,7 @@
+/bin
+/tests
+/var
+/vendor
+/web
+/src/AppBundle/*
+/phpunit.xml.dist
