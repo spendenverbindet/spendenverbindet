@@ -2,13 +2,48 @@
 <html data-ng-app="SpendenverbindetApp">
 <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width">
 
     <title>{% block title_text %} Spendenverbindet {% endblock %}</title>
 
     <link rel="stylesheet" href="{{ asset('bundles/htlspendenportal/bower_components/bootstrap/dist/css/bootstrap.min.css') }}" />
 
+    <link rel="stylesheet" href="{{ asset('bundles/htlspendenportal/bower_components/uikit/css/uikit.min.css') }}" />
+
+    <link rel="stylesheet" href="{{ asset('bundles/htlspendenportal/bower_components/uikit/css/components/slideshow.css') }}" />
+
+    <link rel="stylesheet" href="{{ asset('bundles/htlspendenportal/css/sv-stylesheet.css') }}" />
+
 </head>
 <body data-ng-controller="spendenverbindetController" >
+
+<!-- === navbar === -->
+<nav class="navbar navbar-default navbar-static-top">
+    <div class="container">
+        <div class="navbar-header">
+
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+
+            <a class="brand" href="index.html">
+               <img class="my-logo" src="http://placehold.it/270x80" alt="logo">
+            </a>
+
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <li class="active"><a href="#">&Uuml;BER UNS</a></li>
+                <li><a href="#">ANMELDEN</a></li>
+                <li><a href="#">REGISTRIEREN</a></li>
+                <li></li>
+            </ul>
+        </div>
+    </div>
+</nav>
 
 
 

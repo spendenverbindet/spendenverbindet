@@ -1,0 +1,90 @@
+    /* --------------------------------------------------------------------------------------------------------------*/
+    /* navbar */
+    /* --------------------------------------------------------------------------------------------------------------*/
+
+    .navbar-default {
+        background-color: black;
+        border-width: 0px;
+    }
+
+    /* Abstand zwischen nav und slider wegbringen */
+    .navbar {
+        margin-bottom: 0;
+        position: absolute;
+        width: 100%;
+    }
+
+    /* background color of active or color of active */
+    .navbar .nav > .active > a,.navbar .nav > .active > a:hover,.navbar .nav > .active > a:focus {
+        color: red;
+        background-color: transparent;
+    }
+
+    /* color of link */
+
+    .navbar .brand, .navbar .nav > li > a {
+        color: white;
+    }
+
+
+    /* color of link when hover */
+    .navbar .brand,.navbar .nav > li > a:hover {
+        color: blue;
+    }
+
+    /* Fontsize of nav-links */
+    .navbar .nav > li > a,.navbar .nav > li,.navbar .nav > li.current-menu-item > a,.navbar .nav > li.current-menu-ancestor > a {
+        font-size: 1.1em;
+    }
+
+    /*Color of brand*/
+    .my-brand {
+        color: #6679B2;
+        font-size: 1.2em;
+        font-family: 'Pacifico',cursive;
+    }
+
+    /* padding vom logo, hängt mit dem hier zusammen: ("Damit nav-height größer wird bei einer größeren display-width") */
+    .my-logo {
+        padding-top: 10px;
+        padding-bottom: 5px;
+        padding-left: 5px;
+    }
+
+
+    /* Damit nav-height größer wird bei einer größeren display-width */
+    @media screen and (min-width: 768px) {
+
+        .navbar-default {
+            background-color: transparent;
+        }
+
+        .navbar-brand,.navbar-nav li a {
+            line-height: 126px; /* height of logo.png + padding-top + padding-bottom of .my-logo */
+            height: 126px;      /* height of logo.png + padding-top + padding-bottom of .my-logo */
+            padding-top: 0;
+        }
+
+        /* Breite von einem einzelnem navbar-items
+           hier auf 126px gesetzt, ist die länge vom "impressum"-item,
+           dieses css löschen, damit alle navbar-items nicht mehr gleich lang sind
+        */
+        .navbar .nav li {
+            width: 126px;
+            text-align: center;
+        }
+    }
+
+
+
+    /* --------------------------------------------------------------------------------------------------------------*/
+    /* uk-slideshow */
+    /* --------------------------------------------------------------------------------------------------------------*/
+
+
+    /* overwrite properties */
+    .uk-slideshow-frame {
+        width:100vw;
+        height:100vh;
+        max-width:100%;
+    }
