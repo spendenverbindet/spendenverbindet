@@ -9,12 +9,9 @@ use Symfony\Component\HttpFoundation\Request;
 
 class DefaultController extends Controller
 {
-    /**
-     * @Route("/", name="homepage")
-     */
     public function indexAction()
     {
-
+        
         $persons = $this->getDoctrine()
             ->getRepository('BackendAdminBundle:Person')->findAll();
 
@@ -26,20 +23,16 @@ class DefaultController extends Controller
                 'No product found for id '
             );
         }
-        
+
 
         return $this->render('BackendAdminBundle::index.html.twig', array(
             'persons' => $persons,
         ));
+        
     }
 
-    /**
-     * @Route("/edit", name="editpage")
-     */
     public function editAction()
     {
         return $this->render('BackendAdminBundle::editUser.html.twig');
     }
-
-    
 }
