@@ -2,137 +2,585 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2b72b7ce-cbdf-40f9-9da6-1bdb744db9f2" name="Default" comment="pull">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/img/icon_f.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/img/icon_i.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Form/RegistrationType.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/views/Registration/check_email.html.twig" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/views/Registration/confirmed.html.twig" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/views/Registration/email.txt.twig" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/views/Registration/register.html.twig" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/views/Registration/register_content.html.twig" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/views/projektdetail.html.twig" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/copyright/profiles_settings.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/spendenportal.iml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/spendenverbindet.iml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/vcs.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/angular/.bower.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/angular/LICENSE.md" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/angular/README.md" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/angular/angular-csp.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/angular/angular.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/angular/angular.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/angular/angular.min.js.gzip" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/angular/angular.min.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/angular/bower.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/angular/index.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/angular/package.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/bootstrap/.bower.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/bootstrap/CHANGELOG.md" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/bootstrap/Gemfile" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/bootstrap/Gemfile.lock" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/bootstrap/Gruntfile.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/bootstrap/ISSUE_TEMPLATE.md" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/bootstrap/LICENSE" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/bootstrap/README.md" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/bootstrap/bower.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/bootstrap/dist/css/bootstrap-theme.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/bootstrap/dist/css/bootstrap-theme.css.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/bootstrap/dist/css/bootstrap-theme.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/bootstrap/dist/css/bootstrap-theme.min.css.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/bootstrap/dist/css/bootstrap.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/bootstrap/dist/css/bootstrap.css.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/bootstrap/dist/css/bootstrap.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/bootstrap/dist/css/bootstrap.min.css.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/bootstrap/dist/fonts/glyphicons-halflings-regular.eot" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/bootstrap/dist/fonts/glyphicons-halflings-regular.svg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/bootstrap/dist/fonts/glyphicons-halflings-regular.ttf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/bootstrap/dist/fonts/glyphicons-halflings-regular.woff" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/bootstrap/dist/fonts/glyphicons-halflings-regular.woff2" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/bootstrap/dist/js/bootstrap.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/bootstrap/dist/js/bootstrap.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/bootstrap/dist/js/npm.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/bootstrap/fonts/glyphicons-halflings-regular.eot" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/bootstrap/fonts/glyphicons-halflings-regular.svg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/bootstrap/fonts/glyphicons-halflings-regular.ttf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/bootstrap/fonts/glyphicons-halflings-regular.woff" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/bootstrap/fonts/glyphicons-halflings-regular.woff2" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/bootstrap/grunt/.jshintrc" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/bootstrap/grunt/bs-commonjs-generator.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/bootstrap/grunt/bs-glyphicons-data-generator.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/bootstrap/grunt/bs-lessdoc-parser.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/bootstrap/grunt/bs-raw-files-generator.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/bootstrap/grunt/change-version.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/bootstrap/grunt/configBridge.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/bootstrap/grunt/npm-shrinkwrap.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/bootstrap/grunt/sauce_browsers.yml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/bootstrap/js/.jscsrc" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/bootstrap/js/.jshintrc" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/bootstrap/js/affix.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/bootstrap/js/alert.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/bootstrap/js/button.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/bootstrap/js/carousel.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/bootstrap/js/collapse.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/bootstrap/js/dropdown.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/bootstrap/js/modal.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/bootstrap/js/popover.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/bootstrap/js/scrollspy.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/bootstrap/js/tab.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/bootstrap/js/tooltip.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/bootstrap/js/transition.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/bootstrap/less/.csscomb.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/bootstrap/less/.csslintrc" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/bootstrap/less/alerts.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/bootstrap/less/badges.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/bootstrap/less/bootstrap.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/bootstrap/less/breadcrumbs.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/bootstrap/less/button-groups.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/bootstrap/less/buttons.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/bootstrap/less/carousel.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/bootstrap/less/close.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/bootstrap/less/code.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/bootstrap/less/component-animations.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/bootstrap/less/dropdowns.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/bootstrap/less/forms.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/bootstrap/less/glyphicons.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/bootstrap/less/grid.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/bootstrap/less/input-groups.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/bootstrap/less/jumbotron.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/bootstrap/less/labels.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/bootstrap/less/list-group.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/bootstrap/less/media.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/bootstrap/less/mixins.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/bootstrap/less/mixins/alerts.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/bootstrap/less/mixins/background-variant.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/bootstrap/less/mixins/border-radius.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/bootstrap/less/mixins/buttons.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/bootstrap/less/mixins/center-block.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/bootstrap/less/mixins/clearfix.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/bootstrap/less/mixins/forms.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/bootstrap/less/mixins/gradients.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/bootstrap/less/mixins/grid-framework.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/bootstrap/less/mixins/grid.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/bootstrap/less/mixins/hide-text.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/bootstrap/less/mixins/image.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/bootstrap/less/mixins/labels.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/bootstrap/less/mixins/list-group.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/bootstrap/less/mixins/nav-divider.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/bootstrap/less/mixins/nav-vertical-align.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/bootstrap/less/mixins/opacity.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/bootstrap/less/mixins/pagination.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/bootstrap/less/mixins/panels.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/bootstrap/less/mixins/progress-bar.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/bootstrap/less/mixins/reset-filter.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/bootstrap/less/mixins/reset-text.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/bootstrap/less/mixins/resize.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/bootstrap/less/mixins/responsive-visibility.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/bootstrap/less/mixins/size.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/bootstrap/less/mixins/tab-focus.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/bootstrap/less/mixins/table-row.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/bootstrap/less/mixins/text-emphasis.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/bootstrap/less/mixins/text-overflow.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/bootstrap/less/mixins/vendor-prefixes.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/bootstrap/less/modals.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/bootstrap/less/navbar.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/bootstrap/less/navs.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/bootstrap/less/normalize.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/bootstrap/less/pager.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/bootstrap/less/pagination.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/bootstrap/less/panels.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/bootstrap/less/popovers.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/bootstrap/less/print.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/bootstrap/less/progress-bars.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/bootstrap/less/responsive-embed.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/bootstrap/less/responsive-utilities.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/bootstrap/less/scaffolding.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/bootstrap/less/tables.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/bootstrap/less/theme.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/bootstrap/less/thumbnails.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/bootstrap/less/tooltip.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/bootstrap/less/type.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/bootstrap/less/utilities.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/bootstrap/less/variables.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/bootstrap/less/wells.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/bootstrap/nuget/MyGet.ps1" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/bootstrap/nuget/bootstrap.less.nuspec" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/bootstrap/nuget/bootstrap.nuspec" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/bootstrap/package.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/bootstrap/package.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/.bower.json" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/MIT-LICENSE.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/bower.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/dist/jquery.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/dist/jquery.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/dist/jquery.min.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/ajax.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/ajax/jsonp.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/ajax/load.js" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/ajax/parseJSON.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/ajax/parseXML.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/ajax/script.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/ajax/var/nonce.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/ajax/var/rquery.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/ajax/xhr.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/attributes.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/attributes/attr.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/attributes/classes.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/attributes/prop.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/attributes/support.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/attributes/val.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/callbacks.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/core.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/core/access.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/core/init.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/core/parseHTML.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/core/ready.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/core/var/rsingleTag.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/css.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/css/addGetHookIf.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/css/curCSS.js" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/css/defaultDisplay.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/css/hiddenVisibleSelectors.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/css/support.js" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/css/swap.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/css/var/cssExpand.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/css/var/getStyles.js" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/css/var/isHidden.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/css/var/rmargin.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/css/var/rnumnonpx.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/data.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/data/Data.js" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/data/accepts.js" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/data/var/data_priv.js" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/data/var/data_user.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/deferred.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/deprecated.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/dimensions.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/effects.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/effects/Tween.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/effects/animatedSelector.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/event.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/event/ajax.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/event/alias.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/event/support.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/exports/amd.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/exports/global.js" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/intro.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/jquery.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/manipulation.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/manipulation/_evalUrl.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/manipulation/support.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/manipulation/var/rcheckableType.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/offset.js" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/outro.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/queue.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/queue/delay.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/selector-native.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/selector-sizzle.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/selector.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/serialize.js" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/sizzle/dist/sizzle.js" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/sizzle/dist/sizzle.min.js" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/sizzle/dist/sizzle.min.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/traversing.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/traversing/findFilter.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/traversing/var/rneedsContext.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/var/arr.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/var/class2type.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/var/concat.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/var/hasOwn.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/var/indexOf.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/var/pnum.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/var/push.js" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/var/rnotwhite.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/var/slice.js" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/var/strundefined.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/css/sv-stylesheet.css" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/views/index_neu.html.twig" afterPath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/views/entdecken.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/angular/angular.min.js.gzip" afterPath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/angular/angular.min.js.gzip" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/img/sliderimg-1.jpg" afterPath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/img/sliderimg-1.jpg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/img/sliderimg-2.jpg" afterPath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/img/sliderimg-2.jpg" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/var/support.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/var/toString.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/wrap.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/.bower.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/README.md" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/bower.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/css/components/accordion.almost-flat.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/css/components/accordion.almost-flat.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/css/components/accordion.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/css/components/accordion.gradient.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/css/components/accordion.gradient.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/css/components/accordion.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/css/components/autocomplete.almost-flat.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/css/components/autocomplete.almost-flat.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/css/components/autocomplete.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/css/components/autocomplete.gradient.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/css/components/autocomplete.gradient.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/css/components/autocomplete.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/css/components/datepicker.almost-flat.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/css/components/datepicker.almost-flat.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/css/components/datepicker.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/css/components/datepicker.gradient.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/css/components/datepicker.gradient.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/css/components/datepicker.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/css/components/dotnav.almost-flat.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/css/components/dotnav.almost-flat.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/css/components/dotnav.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/css/components/dotnav.gradient.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/css/components/dotnav.gradient.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/css/components/dotnav.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/css/components/form-advanced.almost-flat.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/css/components/form-advanced.almost-flat.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/css/components/form-advanced.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/css/components/form-advanced.gradient.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/css/components/form-advanced.gradient.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/css/components/form-advanced.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/css/components/form-file.almost-flat.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/css/components/form-file.almost-flat.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/css/components/form-file.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/css/components/form-file.gradient.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/css/components/form-file.gradient.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/css/components/form-file.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/css/components/form-password.almost-flat.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/css/components/form-password.almost-flat.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/css/components/form-password.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/css/components/form-password.gradient.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/css/components/form-password.gradient.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/css/components/form-password.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/css/components/form-select.almost-flat.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/css/components/form-select.almost-flat.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/css/components/form-select.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/css/components/form-select.gradient.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/css/components/form-select.gradient.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/css/components/form-select.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/css/components/htmleditor.almost-flat.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/css/components/htmleditor.almost-flat.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/css/components/htmleditor.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/css/components/htmleditor.gradient.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/css/components/htmleditor.gradient.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/css/components/htmleditor.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/css/components/nestable.almost-flat.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/css/components/nestable.almost-flat.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/css/components/nestable.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/css/components/nestable.gradient.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/css/components/nestable.gradient.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/css/components/nestable.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/css/components/notify.almost-flat.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/css/components/notify.almost-flat.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/css/components/notify.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/css/components/notify.gradient.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/css/components/notify.gradient.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/css/components/notify.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/css/components/placeholder.almost-flat.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/css/components/placeholder.almost-flat.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/css/components/placeholder.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/css/components/placeholder.gradient.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/css/components/placeholder.gradient.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/css/components/placeholder.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/css/components/progress.almost-flat.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/css/components/progress.almost-flat.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/css/components/progress.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/css/components/progress.gradient.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/css/components/progress.gradient.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/css/components/progress.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/css/components/search.almost-flat.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/css/components/search.almost-flat.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/css/components/search.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/css/components/search.gradient.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/css/components/search.gradient.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/css/components/search.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/css/components/slidenav.almost-flat.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/css/components/slidenav.almost-flat.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/css/components/slidenav.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/css/components/slidenav.gradient.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/css/components/slidenav.gradient.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/css/components/slidenav.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/css/components/slider.almost-flat.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/css/components/slider.almost-flat.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/css/components/slider.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/css/components/slider.gradient.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/css/components/slider.gradient.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/css/components/slider.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/css/components/slideshow.almost-flat.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/css/components/slideshow.almost-flat.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/css/components/slideshow.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/css/components/slideshow.gradient.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/css/components/slideshow.gradient.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/css/components/slideshow.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/css/components/sortable.almost-flat.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/css/components/sortable.almost-flat.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/css/components/sortable.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/css/components/sortable.gradient.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/css/components/sortable.gradient.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/css/components/sortable.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/css/components/sticky.almost-flat.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/css/components/sticky.almost-flat.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/css/components/sticky.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/css/components/sticky.gradient.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/css/components/sticky.gradient.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/css/components/sticky.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/css/components/tooltip.almost-flat.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/css/components/tooltip.almost-flat.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/css/components/tooltip.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/css/components/tooltip.gradient.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/css/components/tooltip.gradient.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/css/components/tooltip.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/css/components/upload.almost-flat.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/css/components/upload.almost-flat.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/css/components/upload.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/css/components/upload.gradient.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/css/components/upload.gradient.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/css/components/upload.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/css/uikit.almost-flat.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/css/uikit.almost-flat.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/css/uikit.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/css/uikit.gradient.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/css/uikit.gradient.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/css/uikit.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/fonts/FontAwesome.otf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/fonts/fontawesome-webfont.ttf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/fonts/fontawesome-webfont.woff" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/fonts/fontawesome-webfont.woff2" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/js/components/accordion.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/js/components/accordion.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/js/components/autocomplete.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/js/components/autocomplete.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/js/components/datepicker.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/js/components/datepicker.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/js/components/form-password.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/js/components/form-password.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/js/components/form-select.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/js/components/form-select.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/js/components/grid-parallax.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/js/components/grid-parallax.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/js/components/grid.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/js/components/grid.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/js/components/htmleditor.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/js/components/htmleditor.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/js/components/lightbox.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/js/components/lightbox.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/js/components/nestable.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/js/components/nestable.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/js/components/notify.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/js/components/notify.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/js/components/pagination.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/js/components/pagination.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/js/components/parallax.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/js/components/parallax.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/js/components/search.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/js/components/search.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/js/components/slider.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/js/components/slider.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/js/components/slideset.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/js/components/slideset.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/js/components/slideshow-fx.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/js/components/slideshow-fx.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/js/components/slideshow.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/js/components/slideshow.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/js/components/sortable.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/js/components/sortable.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/js/components/sticky.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/js/components/sticky.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/js/components/timepicker.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/js/components/timepicker.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/js/components/tooltip.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/js/components/tooltip.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/js/components/upload.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/js/components/upload.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/js/core/alert.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/js/core/alert.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/js/core/button.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/js/core/button.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/js/core/core.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/js/core/core.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/js/core/cover.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/js/core/cover.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/js/core/dropdown.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/js/core/dropdown.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/js/core/grid.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/js/core/grid.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/js/core/modal.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/js/core/modal.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/js/core/nav.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/js/core/nav.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/js/core/offcanvas.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/js/core/offcanvas.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/js/core/scrollspy.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/js/core/scrollspy.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/js/core/smooth-scroll.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/js/core/smooth-scroll.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/js/core/switcher.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/js/core/switcher.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/js/core/tab.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/js/core/tab.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/js/core/toggle.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/js/core/toggle.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/js/core/touch.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/js/core/touch.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/js/core/utility.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/js/core/utility.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/js/uikit.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/js/uikit.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/less/components/accordion.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/less/components/autocomplete.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/less/components/datepicker.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/less/components/dotnav.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/less/components/form-advanced.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/less/components/form-file.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/less/components/form-password.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/less/components/form-select.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/less/components/htmleditor.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/less/components/nestable.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/less/components/notify.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/less/components/placeholder.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/less/components/progress.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/less/components/search.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/less/components/slidenav.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/less/components/slider.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/less/components/slideshow.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/less/components/sortable.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/less/components/sticky.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/less/components/tooltip.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/less/components/upload.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/less/core/alert.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/less/core/animation.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/less/core/article.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/less/core/badge.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/less/core/base.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/less/core/block.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/less/core/breadcrumb.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/less/core/button.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/less/core/close.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/less/core/column.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/less/core/comment.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/less/core/contrast.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/less/core/cover.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/less/core/description-list.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/less/core/dropdown.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/less/core/flex.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/less/core/form.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/less/core/grid.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/less/core/icon.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/less/core/list.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/less/core/modal.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/less/core/nav.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/less/core/navbar.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/less/core/offcanvas.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/less/core/overlay.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/less/core/pagination.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/less/core/panel.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/less/core/print.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/less/core/subnav.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/less/core/switcher.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/less/core/tab.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/less/core/table.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/less/core/text.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/less/core/thumbnail.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/less/core/thumbnav.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/less/core/utility.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/less/core/variables.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/less/uikit-variables.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/less/uikit.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/scss/components/accordion.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/scss/components/autocomplete.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/scss/components/datepicker.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/scss/components/dotnav.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/scss/components/form-advanced.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/scss/components/form-file.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/scss/components/form-password.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/scss/components/form-select.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/scss/components/htmleditor.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/scss/components/nestable.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/scss/components/notify.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/scss/components/placeholder.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/scss/components/progress.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/scss/components/search.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/scss/components/slidenav.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/scss/components/slider.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/scss/components/slideshow.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/scss/components/sortable.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/scss/components/sticky.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/scss/components/tooltip.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/scss/components/upload.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/scss/core/alert.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/scss/core/animation.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/scss/core/article.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/scss/core/badge.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/scss/core/base.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/scss/core/block.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/scss/core/breadcrumb.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/scss/core/button.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/scss/core/close.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/scss/core/column.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/scss/core/comment.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/scss/core/contrast.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/scss/core/cover.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/scss/core/description-list.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/scss/core/dropdown.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/scss/core/flex.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/scss/core/form.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/scss/core/grid.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/scss/core/icon.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/scss/core/list.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/scss/core/modal.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/scss/core/nav.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/scss/core/navbar.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/scss/core/offcanvas.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/scss/core/overlay.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/scss/core/pagination.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/scss/core/panel.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/scss/core/print.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/scss/core/subnav.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/scss/core/switcher.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/scss/core/tab.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/scss/core/table.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/scss/core/text.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/scss/core/thumbnail.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/scss/core/thumbnav.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/scss/core/utility.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/scss/core/variables.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/scss/uikit-mixins.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/scss/uikit-variables.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/uikit/scss/uikit.scss" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/AppKernel.php" afterPath="$PROJECT_DIR$/app/AppKernel.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/config/config.yml" afterPath="$PROJECT_DIR$/app/config/config.yml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/config/config_dev.yml" afterPath="$PROJECT_DIR$/app/config/config_dev.yml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/composer.json" afterPath="$PROJECT_DIR$/composer.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/composer.lock" afterPath="$PROJECT_DIR$/composer.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Controller/DefaultController.php" afterPath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Controller/DefaultController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/config/routing.xml" afterPath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/config/routing.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower.json" afterPath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/angular/.bower.json" afterPath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/angular/.bower.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/angular/LICENSE.md" afterPath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/angular/LICENSE.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/angular/README.md" afterPath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/angular/README.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/angular/angular-csp.css" afterPath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/angular/angular-csp.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/angular/angular.js" afterPath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/angular/angular.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/angular/angular.min.js" afterPath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/angular/angular.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/angular/angular.min.js.map" afterPath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/angular/angular.min.js.map" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/angular/bower.json" afterPath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/angular/bower.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/angular/index.js" afterPath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/angular/index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/angular/package.json" afterPath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/angular/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/.bower.json" afterPath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/.bower.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/bower.json" afterPath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/bower.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/dist/jquery.js" afterPath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/dist/jquery.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/dist/jquery.min.js" afterPath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/dist/jquery.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/dist/jquery.min.map" afterPath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/dist/jquery.min.map" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/ajax.js" afterPath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/ajax.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/ajax/jsonp.js" afterPath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/ajax/jsonp.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/ajax/load.js" afterPath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/ajax/load.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/ajax/parseXML.js" afterPath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/ajax/parseXML.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/ajax/script.js" afterPath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/ajax/script.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/ajax/var/nonce.js" afterPath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/ajax/var/nonce.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/ajax/var/rquery.js" afterPath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/ajax/var/rquery.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/ajax/xhr.js" afterPath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/ajax/xhr.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/attributes.js" afterPath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/attributes.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/attributes/attr.js" afterPath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/attributes/attr.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/attributes/classes.js" afterPath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/attributes/classes.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/attributes/prop.js" afterPath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/attributes/prop.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/attributes/support.js" afterPath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/attributes/support.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/attributes/val.js" afterPath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/attributes/val.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/callbacks.js" afterPath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/callbacks.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/core.js" afterPath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/core.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/core/access.js" afterPath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/core/access.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/core/init.js" afterPath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/core/init.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/core/parseHTML.js" afterPath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/core/parseHTML.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/core/ready.js" afterPath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/core/ready.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/core/var/rsingleTag.js" afterPath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/core/var/rsingleTag.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/css.js" afterPath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/css.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/css/addGetHookIf.js" afterPath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/css/addGetHookIf.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/css/curCSS.js" afterPath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/css/curCSS.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/css/hiddenVisibleSelectors.js" afterPath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/css/hiddenVisibleSelectors.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/css/support.js" afterPath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/css/support.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/css/var/cssExpand.js" afterPath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/css/var/cssExpand.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/css/var/getStyles.js" afterPath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/css/var/getStyles.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/css/var/rmargin.js" afterPath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/css/var/rmargin.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/css/var/rnumnonpx.js" afterPath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/css/var/rnumnonpx.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/data.js" afterPath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/data.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/data/Data.js" afterPath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/data/Data.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/deferred.js" afterPath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/deferred.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/deprecated.js" afterPath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/deprecated.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/dimensions.js" afterPath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/dimensions.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/effects.js" afterPath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/effects.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/effects/Tween.js" afterPath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/effects/Tween.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/effects/animatedSelector.js" afterPath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/effects/animatedSelector.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/event.js" afterPath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/event.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/event/ajax.js" afterPath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/event/ajax.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/event/alias.js" afterPath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/event/alias.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/event/support.js" afterPath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/event/support.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/exports/amd.js" afterPath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/exports/amd.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/exports/global.js" afterPath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/exports/global.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/jquery.js" afterPath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/jquery.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/manipulation.js" afterPath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/manipulation.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/manipulation/_evalUrl.js" afterPath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/manipulation/_evalUrl.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/manipulation/support.js" afterPath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/manipulation/support.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/manipulation/var/rcheckableType.js" afterPath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/manipulation/var/rcheckableType.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/offset.js" afterPath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/offset.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/queue.js" afterPath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/queue.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/queue/delay.js" afterPath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/queue/delay.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/selector-native.js" afterPath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/selector-native.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/selector-sizzle.js" afterPath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/selector-sizzle.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/selector.js" afterPath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/selector.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/serialize.js" afterPath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/serialize.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/traversing.js" afterPath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/traversing.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/traversing/findFilter.js" afterPath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/traversing/findFilter.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/traversing/var/rneedsContext.js" afterPath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/traversing/var/rneedsContext.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/var/arr.js" afterPath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/var/arr.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/var/class2type.js" afterPath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/var/class2type.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/var/concat.js" afterPath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/var/concat.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/var/hasOwn.js" afterPath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/var/hasOwn.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/var/indexOf.js" afterPath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/var/indexOf.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/var/pnum.js" afterPath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/var/pnum.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/var/push.js" afterPath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/var/push.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/var/slice.js" afterPath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/var/slice.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/var/support.js" afterPath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/var/support.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/var/toString.js" afterPath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/var/toString.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/wrap.js" afterPath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower_components/jquery/src/wrap.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/sass/_custom.scss" afterPath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/sass/_custom.scss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/sass/_customVariables.scss" afterPath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/sass/_customVariables.scss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/sass/styles.scss" afterPath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/sass/styles.scss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/views/footer.html.twig" afterPath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/views/footer.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/views/header.html.twig" afterPath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/views/header.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/views/index.html.twig" afterPath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/views/index.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/views/layout.html.twig" afterPath="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/views/layout.html.twig" />
     </list>
     <ignored path="spendenportal.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -154,11 +602,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="_customVariables.scss" pinned="false" current-in-tab="true">
+      <file leaf-file-name="_customVariables.scss" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/sass/_customVariables.scss">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="71">
-              <caret line="572" column="30" selection-start-line="572" selection-start-column="30" selection-end-line="572" selection-end-column="30" />
+            <state relative-caret-position="555">
+              <caret line="594" column="0" selection-start-line="594" selection-start-column="0" selection-end-line="595" selection-end-column="29" />
               <folding />
             </state>
           </provider>
@@ -206,11 +654,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="false">
+      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/.gitignore">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="154">
-              <caret line="7" column="17" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
+            <state relative-caret-position="22">
+              <caret line="1" column="4" selection-start-line="1" selection-start-column="4" selection-end-line="1" selection-end-column="4" />
               <folding />
             </state>
           </provider>
@@ -278,8 +726,8 @@
         <option value="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/views/header.html.twig" />
         <option value="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/sass/_custom.scss" />
         <option value="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/views/projektdetail.html.twig" />
-        <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/sass/_customVariables.scss" />
+        <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
   </component>
@@ -487,264 +935,6 @@
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Htl" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="SpendenportalBundle" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="spendenverbindet" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="spendenverbindet" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Htl" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="SpendenportalBundle" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Resources" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="spendenverbindet" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="spendenverbindet" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Htl" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="SpendenportalBundle" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Resources" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="public" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="spendenverbindet" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="spendenverbindet" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Htl" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="SpendenportalBundle" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Resources" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="public" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="sass" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="spendenverbindet" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="spendenverbindet" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Htl" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="SpendenportalBundle" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Resources" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="public" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="img" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="spendenverbindet" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="spendenverbindet" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Htl" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="SpendenportalBundle" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Resources" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="config" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="spendenverbindet" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="spendenverbindet" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Htl" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="SpendenportalBundle" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Form" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="spendenverbindet" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="spendenverbindet" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Htl" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="SpendenportalBundle" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Entity" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="spendenverbindet" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="spendenverbindet" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Htl" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="SpendenportalBundle" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Controller" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="spendenverbindet" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="spendenverbindet" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
               <option name="myItemId" value="app" />
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
@@ -841,12 +1031,20 @@
       <workItem from="1483538545957" duration="28066000" />
       <workItem from="1484045369890" duration="150000" />
       <workItem from="1484048338715" duration="9587000" />
-      <workItem from="1484117829993" duration="1810000" />
+      <workItem from="1484117829993" duration="3469000" />
     </task>
+    <task id="LOCAL-00001" summary="pull">
+      <created>1484119657900</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1484119657900</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="177971000" />
+    <option name="totallyTimeSpent" value="179630000" />
   </component>
   <component name="TodoView" selected-index="4">
     <todo-panel id="selected-file">
@@ -859,17 +1057,17 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="1938" height="1048" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21888413" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3295711" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.26502147" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295711" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.5688487" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295711" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.03837472" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -904,20 +1102,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/vendor/leafo/scssphp/src/Version.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/leafo/scssphp/composer.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/vendor/leafo/scssphp/src/Compiler.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -1224,10 +1408,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower.json">
+    <entry file="file://$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/sass/_customVariables.scss">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="484">
-          <caret line="22" column="3" selection-start-line="22" selection-start-column="3" selection-end-line="22" selection-end-column="3" />
+        <state relative-caret-position="555">
+          <caret line="594" column="0" selection-start-line="594" selection-start-column="0" selection-end-line="595" selection-end-column="29" />
           <folding />
         </state>
       </provider>
@@ -1252,18 +1436,34 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
+    <entry file="file://$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/bower.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="154">
-          <caret line="7" column="17" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
+        <state relative-caret-position="484">
+          <caret line="22" column="3" selection-start-line="22" selection-start-column="3" selection-end-line="22" selection-end-column="3" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Htl/SpendenportalBundle/Resources/public/sass/_customVariables.scss">
+    <entry file="file://$PROJECT_DIR$/bin/symfony_requirements">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="71">
-          <caret line="572" column="30" selection-start-line="572" selection-start-column="30" selection-end-line="572" selection-end-column="30" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bin/console">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="22">
+          <caret line="1" column="4" selection-start-line="1" selection-start-column="4" selection-end-line="1" selection-end-column="4" />
           <folding />
         </state>
       </provider>

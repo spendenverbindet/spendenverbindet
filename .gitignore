@@ -1,8 +1,9 @@
 /src/AppBundle/
+/bin
 /.idea
 /src/Backend/AdminBundle/Resources/public/bower_components
 /src/Htl/SpendenportalBundle/Resources/public/bower_components
-/web/bundles/htlspendenportal/bower_components
-/web/bundles/backendadmin/bower_components
+/web
 /var
-/var/logs/dev.log
+/tests
+/vendor
