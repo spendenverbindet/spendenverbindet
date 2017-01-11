@@ -7,4 +7,13 @@
     <route id="htl_spendenportal_homepage" path="/">
         <default key="_controller">HtlSpendenportalBundle:Default:index</default>
     </route>
+
+    <route id="htl_spendenportal_entdecken" path="/entdecken">
+        <default key="_controller">HtlSpendenportalBundle:Default:entdecken</default>
+    </route>
+
+    <route id="htl_spendenportal_projektdetail" path="/projektdetail">
+        <default key="_controller">HtlSpendenportalBundle:Default:projektdetail</default>
+    </route>
+
 </routes>

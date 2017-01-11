@@ -1,0 +1,141 @@
+{% embed "HtlSpendenportalBundle::header.html.twig" %}
+    {# override the title-tag text #}
+    {% block title_text %}
+        Spendenverbindet | Entdecken
+    {% endblock %}
+{% endembed %}
+
+<div class="helper-navbar"></div>
+
+<div class="container">
+    <div class="row fisrt-ent-section">
+        <div class="col-xs-12 col-md-6 text-center"><h2>ENTDECKEN</h2></div>
+        <div class="col-xs-12 col-md-6">
+            <form>
+                <input class="search" type="text" placeholder="Suche" required>
+                <i class="fa fa-search icon" aria-hidden="true"></i>
+            </form>
+        </div>
+    </div>
+
+    <hr style="border: 1px solid lightgray">
+
+    <div class="row second-ent-section text-center">
+        <button data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample" class="uk-button uk-button-primary"><span style="font-size:18px;">KATEGORIEN</span></button>
+    </div>
+</div>
+
+<div class="container-fluid toggle-section collapse" id="collapseExample">
+        <div class="row">
+            <div class="col-xs-12 col-sm-4 text-center">
+                <ul>
+                    <li>Kategrorie 1</li>
+                    <li>Kategrorie 2</li>
+                    <li>Kategrorie 3</li>
+                </ul>
+            </div>
+            <div class="col-xs-12 col-sm-4 text-center">
+                <ul>
+                    <li>Kategrorie 4</li>
+                    <li>Kategrorie 5</li>
+                    <li>Kategrorie 6</li>
+                </ul>
+            </div>
+            <div class="col-xs-12 col-sm-4 text-center">
+                <ul>
+                    <li>Kategrorie 7</li>
+                    <li>Kategrorie 8</li>
+                    <li>Kategrorie 9</li>
+                </ul>
+            </div>
+        </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12"><h2 style="padding-left: 25px;">KATEGORIE 1</h2></div>
+    </div>
+
+    <div class="row">
+
+        <div class="col-xs-12 col-sm-4" style="padding:50px;">
+            <img src="{{ asset('bundles/htlspendenportal/img/sliderimg-1.jpg') }}" alt="">
+            <h3>Projekt Eins</h3>
+            <p style="padding-bottom:20px;">
+                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
+            </p>
+            <div class="uk-progress" style="margin-bottom:4px;border: 1px solid #272828;background-color: #fff">
+                <div class="uk-progress-bar" style="width: 40%">40%</div>
+            </div>
+            <p>Erreicht bis zum Ziel</p>
+
+            <table style="border-spacing: 15px;">
+                <tr>
+                    <td><span class="coo-blue-color">12.01.2017</span></td>
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="coo-blue-color">30</span></td>
+                </tr>
+                <tr>
+                    <td>Start</td>
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Spender</td>
+                </tr>
+            </table>
+
+        </div>
+
+        <div class="col-xs-12 col-sm-4" style="padding:50px;">
+            <img src="{{ asset('bundles/htlspendenportal/img/sliderimg-1.jpg') }}" alt="">
+            <h3>Projekt Eins</h3>
+            <p style="padding-bottom:20px;">
+                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
+            </p>
+            <div class="uk-progress" style="margin-bottom:4px;border: 1px solid #272828;background-color: #fff">
+                <div class="uk-progress-bar" style="width: 40%">40%</div>
+            </div>
+            <p>Erreicht bis zum Ziel</p>
+
+            <table style="border-spacing: 15px;">
+                <tr>
+                    <td><span class="coo-blue-color">12.01.2017</span></td>
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="coo-blue-color">30</span></td>
+                </tr>
+                <tr>
+                    <td>Start</td>
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Spender</td>
+                </tr>
+            </table>
+
+        </div>
+
+        <div class="col-xs-12 col-sm-4" style="padding:50px;">
+            <img src="{{ asset('bundles/htlspendenportal/img/sliderimg-1.jpg') }}" alt="">
+            <h3>Projekt Eins</h3>
+            <p style="padding-bottom:20px;">
+                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
+            </p>
+            <div class="uk-progress" style="margin-bottom:4px;border: 1px solid #272828;background-color: #fff">
+                <div class="uk-progress-bar" style="width: 40%">40%</div>
+            </div>
+            <p>Erreicht bis zum Ziel</p>
+
+            <table style="border-spacing: 15px;">
+                <tr>
+                    <td><span class="coo-blue-color">12.01.2017</span></td>
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="coo-blue-color">30</span></td>
+                </tr>
+                <tr>
+                    <td>Start</td>
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Spender</td>
+                </tr>
+            </table>
+
+        </div>
+
+    </div>
+
+
+</div>
+
+
+
+
+{% include "HtlSpendenportalBundle::footer.html.twig" %}

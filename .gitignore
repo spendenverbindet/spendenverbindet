@@ -1,7 +1,8 @@
-/bin
-/tests
+/src/AppBundle/
+/.idea
+/src/Backend/AdminBundle/Resources/public/bower_components
+/src/Htl/SpendenportalBundle/Resources/public/bower_components
+/web/bundles/htlspendenportal/bower_components
+/web/bundles/backendadmin/bower_components
 /var
-/vendor
-/web
-/src/AppBundle/*
-/phpunit.xml.dist
+/var/logs/dev.log

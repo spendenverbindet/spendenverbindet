@@ -1,0 +1,48 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+<div class="container">
+
+    {{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'form-signin'}}) }}
+
+    <h2 class="form-signin-heading">Registrieren</h2>
+
+
+    <div id="fos_user_registration_form">
+
+        <input class="form-control" type="email" id="fos_user_registration_form_email" name="fos_user_registration_form[email]" required="required" placeholder="Email" />
+
+        <input class="form-control" type="text" id="fos_user_registration_form_username" name="fos_user_registration_form[username]" required="required" maxlength="255" pattern=".{2,}" placeholder="Username" />
+
+        <input class="form-control" type="password" id="fos_user_registration_form_plainPassword_first" name="fos_user_registration_form[plainPassword][first]" required="required" placeholder="Password" />
+
+        <input class="form-control" type="password" id="fos_user_registration_form_plainPassword_second" name="fos_user_registration_form[plainPassword][second]" required="required" placeholder="Password again" />
+
+
+        <label class="required">Welche rolle nehmen Sie ein?</label>
+
+        <div id="fos_user_registration_form_isDonator">
+            <input type="radio" id="fos_user_registration_form_isDonator_0" name="fos_user_registration_form[isDonator]" required="required" value="1" />
+            <label for="fos_user_registration_form_isDonator_0" class="required">Spender</label><input type="radio" id="fos_user_registration_form_isDonator_1" name="fos_user_registration_form[isDonator]" required="required" value="0" checked="checked" />
+            <label for="fos_user_registration_form_isDonator_1" class="required">Empfänger</label>
+        </div>
+
+        <input class="form-control" type="text" id="fos_user_registration_form_mobil_pass_number" name="fos_user_registration_form[mobil_pass_number]" required="required" maxlength="10" pattern=".{10,}" placeholder="Mobilpassnummer" />
+
+        {{ form_widget(form._token) }}
+
+    </div>
+
+
+    <div>
+        <input class="btn btn-lg btn-success btn-block" type="submit" value="{{ 'Registrieren'|trans }}" />
+    </div>
+
+    {{ form_errors(form) }}
+    {% for child in form.children %}
+        {{ form_errors(child) }}
+    {% endfor %}
+
+    {{ form_end(form, {'render_rest': false}) }}
+
+
+</div>

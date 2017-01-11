@@ -1,0 +1,283 @@
+/* generally */
+
+.coo-blue-color {
+  color: $cooperative-design-color-blue;
+}
+
+h1, h2 {
+  font-family: 'Heebo';
+  font-weight: 800;
+  padding-bottom: 20px;
+  letter-spacing: 1px;
+}
+
+a:link {
+  color: #fff;
+  text-decoration: none;
+}
+
+a:visited {
+  color: #fff;
+}
+
+a:hover {
+  color: $cooperative-design-color-blue;
+}
+
+a:active {
+  color: #fff;
+}
+
+ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+li {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+/* navbar */
+
+$navbar-height-screen: 126px; /* Höhe der Navbar bei großem Bildschirm */
+$logo-height: 46px; /* Logo height muss in den entwickler-tools von chrome untersucht werden */
+
+.navbar {
+  position: absolute;
+  width: 100%;
+  border-width: 0;
+}
+
+.navbar .nav li {
+  text-align: center;
+}
+
+.sv-nav-logo {
+  margin-top: ($navbar-height / 2) - ( $logo-height / 2);
+  padding-left: 15px;
+}
+
+.sv-remove-margin {
+  margin-top:0;
+  margin-bottom:0;
+}
+
+/* uk-slideshow */
+
+.uk-overlay-fade {
+  opacity: 1;
+}
+
+.sv-spenden-btn {
+  padding:66px;
+  border: 10px solid #00a6e4;
+  background-color: rgba(0, 166, 228, 1);
+  margin-bottom: 10px;
+  font-size:25px;
+  font-weight:bold;
+}
+
+.sv-spenden-btn:hover {
+  background-color: #00a6e4;
+}
+
+.sv-empfangen-btn {
+  padding: 50px;
+  border: 10px solid white;
+  margin-top: 10px;
+  background-color: rgba(105, 105, 105, 0.6);
+  font-size:25px;
+  padding-top: 68px;
+  padding-bottom: 68px;
+  font-weight:bold;
+}
+
+.sv-empfangen-btn:hover {
+  background-color: rgba(105, 105, 105, 0.6);
+}
+
+/* homepage */
+
+.first-hp-section {
+  padding-top: 50px;
+}
+
+.sv-hp-section {
+  padding-bottom: 50px;
+}
+
+/* footer */
+
+footer {
+  background-color: $cooperative-design-color-gray;
+  color: white;
+}
+
+.sv-links-mobile {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  text-align: center;
+}
+.sv-links-wrapper {
+  margin-top: 60px;
+  margin-bottom: 60px;
+}
+.sv-links-screen {
+  padding-left: 50px;
+  padding-right: 50px;
+}
+.sv-links-wrapper-screen {
+  display:none;
+}
+
+.sv-icon-wrapper {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.sv-copyright-wrapper {
+  text-align: center;
+  margin-top: 50px;
+  margin-bottom: 20px;
+}
+
+/* helper-navbar */
+
+.helper-navbar {
+  position: static;
+  width: 100%;
+  height: 80px;
+}
+
+/* searchbar */
+
+form {
+  width:257px;
+  margin-top: 27px;
+  margin-bottom: 27px;
+  border: 1px solid $cooperative-design-color-gray;
+  position: relative;
+  left: 50%;
+  margin-left: -128px;
+}
+.search {
+  padding:8px 15px;
+  background: #fff;
+  border-width: 0px;
+  width: 200px;
+}
+
+input:focus{
+  outline: none;
+}
+
+.icon {
+  position:relative;
+  padding:10px 15px;
+  color: $cooperative-design-color-gray;
+}
+
+.icon:hover {
+  cursor: pointer;
+}
+
+/* entdecken seite */
+
+.fisrt-ent-section {
+  margin-top: 100px;
+  margin-bottom: 100px;
+}
+
+.second-ent-section {
+  margin-bottom: 25px;
+}
+
+.toggle-section {
+  background-color: deepskyblue;
+  color: #fff;
+  padding-top: 25px;
+  padding-bottom: 25px;
+}
+
+/* projektdetail seite */
+
+button:focus {
+  outline:0;
+}
+
+.folgen-detail-btn {
+  width: 100px;
+  border: 1px solid #47A1DE;
+  margin-right: 20px;
+  background-color: #47A1DE;
+  height: 40px;
+  color: white;
+}
+.folgen-detail-btn:hover {
+  background-color: #47A1DE;
+}
+
+.spenden-detail-btn {
+  background-color: white;
+  border: 1px solid #272828;
+  color: #272828;
+  width: 100px;
+  margin-left: 20px;
+  height: 40px;
+}
+.spenden-detail-btn:hover {
+  background-color: white;
+  color: #272828;
+}
+
+/*@media screen and (min-width: 768px) {*/
+@media screen and (min-width: 992px) {
+
+  /* navbar */
+
+  .navbar {
+    min-height: $navbar-height-screen;
+  }
+
+  .navbar-nav li a {
+    line-height: $navbar-height-screen;
+    height: $navbar-height-screen;
+    padding-top: 0;
+  }
+
+  .sv-nav-logo {
+    margin-top: ($navbar-height-screen / 2) - ( $logo-height / 2);
+    padding-right: 20px;
+  }
+
+  /* uk-slideshow */
+
+  .sv-spenden-btn {
+    padding:95px;
+    margin-bottom: 0px;
+  }
+
+  .sv-empfangen-btn {
+    padding: 95px;
+    margin-top: 0px;
+    padding-left: 77px;
+    padding-right: 77px;
+  }
+
+  /* footer */
+
+  .sv-links-wrapper-screen {
+    display:block;
+  }
+  .sv-links-wrapper-mobile {
+    display: none;
+  }
+
+  /* helper-navbar */
+
+  .helper-navbar {
+    height: 126px;
+  }
+
+}

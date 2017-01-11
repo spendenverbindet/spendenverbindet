@@ -8,10 +8,16 @@ class DefaultController extends Controller
 {
     public function indexAction()
     {
-        // return $this->render('HtlSpendenportalBundle::layout.html.twig');
-
         return $this->render('HtlSpendenportalBundle::index.html.twig');
-
     }
+
+    public function entdeckenAction(){
+        return $this->render('HtlSpendenportalBundle::entdecken.html.twig');
+    }
+
+    public function projektdetailAction(){
+        return $this->render('HtlSpendenportalBundle::projektdetail.html.twig');
+    }
+
 }
 

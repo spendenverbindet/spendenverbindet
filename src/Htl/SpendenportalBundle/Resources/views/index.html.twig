@@ -1,19 +1,139 @@
 {% embed "HtlSpendenportalBundle::header.html.twig" %}
-
     {# override the title-tag text #}
     {% block title_text %}
-        Über uns
+        Spendenverbindet | Über uns
     {% endblock %}
-
 {% endembed %}
 
-<ul class="uk-slideshow"  data-uk-slideshow="{autoplay:true, kenburns:'50s', height:'100vh'}" >
-    <li><img src="https://timedotcom.files.wordpress.com/2016/02/2_refugees_nachtwey_web.jpg?quality=85&w=838" alt="testimg"></li>
-    <li><img src="http://www.aljazeera.com/mritems/images/2013/11/29/2013112913303825402_8.jpg" width="400px" height="200px" alt="testimg"></li>
+{# override bg-color of navbar #}
+<style type="text/css">
+    @media screen and (min-width: 992px) {
+        .navbar-default {
+            background-color: transparent;
+        }
+    }
+</style>
+
+<ul class="uk-slideshow uk-overlay"  data-uk-slideshow="{autoplay:true, kenburns:'50s', height:'100vh'}" >
+    <li>
+        <img src="{{ asset('bundles/htlspendenportal/img/sliderimg-2.jpg') }}" alt="testimg">
+
+        {% if is_granted('ROLE_DONATOR')==false and is_granted('ROLE_RECEIVER')==false %}
+            <div class="uk-overlay-panel uk-overlay-background uk-overlay-fade uk-flex uk-flex-center uk-flex-middle uk-text-center">
+                <div>
+                    <div class="container" style="min-width:280px;max-width:780px;">
+                        <div class="col-sm-6">
+                            <button class="uk-button uk-button-primary sv-spenden-btn">SPENDEN</button>
+                        </div>
+                        <div class="col-sm-6">
+                            <button class="uk-button uk-button-primary sv-empfangen-btn">EMPFANGEN</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        {% endif %}
+
+        {% if is_granted('ROLE_DONATOR') %}
+            <div class="uk-overlay-panel uk-overlay-background uk-overlay-fade uk-flex uk-flex-center uk-flex-middle uk-text-center">
+                <div>
+                    <h1 style="text-transform: uppercase">Willkommen {{ app.user.username }}</h1>
+                    <!-- <p>
+                        Als Spender kannst du dir Projekte von Bedürftigen anschauen und bei Interesse direkt an sie spenden.<br>
+                        Jede Spende hilft, das Leben von Menschen in Österreich zu verbessern!
+                    </p> -->
+                    <button class="uk-button uk-button-primary"><span style="font-size:18px;">PROJEKT ENTDECKEN</span></button>
+                </div>
+            </div>
+        {% endif %}
+
+        {% if is_granted('ROLE_RECEIVER') %}
+            <div class="uk-overlay-panel uk-overlay-background uk-overlay-fade uk-flex uk-flex-center uk-flex-middle uk-text-center">
+                <div>
+                    <h1 style="text-transform: uppercase">Willkommen {{ app.user.username }}</h1>
+                    <!-- <p>
+                        Eine große Anzahl von Spendern wird sich dein Projekt anschauen und spenden!<br>
+                        Gestalte deshalb deine Kurzbeschreibung so informativ wie möglich und erkläre Ihnen wofür du das Geld brauchst.
+                    </p> -->
+                    <button class="uk-button uk-button-primary"><span style="font-size:18px;">PROJEKT ANLEGEN</span></button>
+                </div>
+            </div>
+        {% endif %}
+    </li>
+
+    <li>
+        <img src="{{ asset('bundles/htlspendenportal/img/sliderimg-1.jpg') }}" alt="testimg">
+        {% if is_granted('ROLE_DONATOR')==false and is_granted('ROLE_RECEIVER')==false %}
+            <div class="uk-overlay-panel uk-overlay-background uk-overlay-fade uk-flex uk-flex-center uk-flex-middle uk-text-center">
+                <div>
+                    <div class="container" style="min-width:280px;max-width:780px;">
+                        <div class="col-sm-6">
+                            <button class="uk-button uk-button-primary sv-spenden-btn">SPENDEN</button>
+                        </div>
+                        <div class="col-sm-6">
+                            <button class="uk-button uk-button-primary sv-empfangen-btn">EMPFANGEN</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        {% endif %}
+
+        {% if is_granted('ROLE_DONATOR') %}
+            <div class="uk-overlay-panel uk-overlay-background uk-overlay-fade uk-flex uk-flex-center uk-flex-middle uk-text-center">
+                <div>
+                    <h1 style="text-transform: uppercase" >Willkommen {{ app.user.username }}</h1>
+                    <!-- <p>
+                        Als Spender kannst du dir Projekte von Bedürftigen anschauen und bei Interesse direkt an sie spenden.<br>
+                        Jede Spende hilft, das Leben von Menschen in Österreich zu verbessern!
+                    </p> -->
+                    <button class="uk-button uk-button-primary"><span style="font-size:18px;">PROJEKT ENTDECKEN</span></button>
+                </div>
+            </div>
+        {% endif %}
+
+        {% if is_granted('ROLE_RECEIVER') %}
+            <div class="uk-overlay-panel uk-overlay-background uk-overlay-fade uk-flex uk-flex-center uk-flex-middle uk-text-center">
+                <div>
+                    <h1 style="text-transform: uppercase" >Willkommen {{ app.user.username }}</h1>
+                    <!-- <p>
+                        Eine große Anzahl von Spendern wird sich dein Projekt anschauen und spenden!<br>
+                        Gestalte deshalb deine Kurzbeschreibung so informativ wie möglich und erkläre Ihnen wofür du das Geld brauchst.
+                    </p> -->
+                    <button class="uk-button uk-button-primary"><span style="font-size:18px;">PROJEKT ANLEGEN</span></button>
+                </div>
+            </div>
+        {% endif %}
+    </li>
 </ul>
 
+<div class="container">
+    <div class="row">
+         <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 homepage-main-part">
 
-<h1> {{ '{{testvariable}}' }} </h1>
+            <div class="first-hp-section sv-hp-section">
+                <h2>ÜBER UNS</h2>
+                <p>
+                    {{ '{{testvariable}}' }} - Wir haben uns ein einfaches Ziel gesetzt: Wir wollen Menschen in Not Freude bereiten. Damit wir das schaffen, haben wir uns nicht nur als geschäftliche Partner innerhalb eines Diplomarbeitsteams, sondern auch als Freunde zusammengeschlossen. Was uns verbindet, ist das Interesse an neuen Technologien und der Wunsch das Leid der Welt zu verringern. Den ersten Schritt setzen wir, in dem wir dir ermöglichen, Gutes zu tun und bedürftigen Personen in Österreich unter die Arme zu greifen. Falls du selbst jedoch Hilfe brauchst oder in Not bist, freuen wir uns, wenn du dich als „Empfänger“ registrierst! Wir garantieren dir, dass 100% deiner Spende ankommen und jeder Empfänger auch als bedürftig gemeldet ist.
+                </p>
+            </div>
 
+            <div class="sv-hp-section">
+                <h2>GESCHICHTE</h2>
+                <p>
+                    13 November 2015. Ein Tag an dem das Highlight eigentlich das Freundschaftsspiel zwischen Frankreich und Deutschland hätte sein sollen, bleibt leider wegen den Terrorangriffen in Paris in Erinnerung. Wir haben das gesamte Ereignis über die Live Berichterstattung verfolgt, und waren entsetzt über die Geschehnisse. Wenn man ein Baby, das vermutlich seine Mutter verloren hat, weinen hört oder einen jungen Mann sieht der gerade sein linkes Bein verloren hat möchte man nichts anderes tun als ihnen zu helfen. Als wir spenden wollten, haben wir im Internet jedoch nur Plattformen gefunden haben, die es ermöglichen an größere Projekte zu spenden, zweifelsfrei eine tolle Sache, aber zu dem Zeitpunkt nicht unser größtes Interesse. Getrieben von dem Wunsch den Leuten zu helfen, haben wir die SpendenVerbindet-Plattform aufgebaut. Um den Rahmen unserer Diplomarbeit nicht zu sprengen, haben wir uns auf die Verringerung des Leides in Österreich fokussiert. Selbst wenn wir, Gott sei Dank, kaum Opfer von Terrorangriffen sind, gibt es viele Personen die hier Hilfe brauchen. Wenn man im Winter die Rotenturmstraße entlang geht sieht man Dutzend Obdachlose die, trotz Diensten wie das „Kältetelefon“, so stark frieren, dass ihr ganzer Körper zittert. Wäre es nicht wunderschön diesen Menschen zu einem neuem Leben zu verhelfen? Ein Leben in dem sie nicht mehr frieren müssen sondern ein warmes Bett haben? Unser Traum ist es, das mit unserer Plattform zu erreichen!
+                </p>
+            </div>
+
+            <div class="sv-hp-section">
+                <h2>VISION</h2>
+                <p>
+                    In Zukunft wollen wir, dass sich Empfänger weltweit auf unserer Plattform registrieren können, damit überall in der Welt Freude bereitet werden kann. Außerdem wollen wir unsere Plattform so erweitern, dass im Falle von Krisen (Umweltkatastrophen, Terroranschläge, ...) alle Betroffenen auf unserer Startseite aufscheinen und so zielgerichtet an Personen in Notsituationen gespendet werden kann.
+                </p>
+            </div>
+
+        </div>
+    </div>
+</div>
 
 {% include "HtlSpendenportalBundle::footer.html.twig" %}

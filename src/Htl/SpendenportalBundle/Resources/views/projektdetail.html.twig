@@ -1,0 +1,124 @@
+{% embed "HtlSpendenportalBundle::header.html.twig" %}
+    {# override the title-tag text #}
+    {% block title_text %}
+        Spendenverbindet | Projektdetail
+    {% endblock %}
+{% endembed %}
+
+<div class="helper-navbar"></div>
+
+<div class="container">
+    <div class="row fisrt-ent-section text-center">
+        <button data-toggle="collapse" class="folgen-detail-btn"><span style="font-size:18px">FOLGEN</span></button>
+        <button data-toggle="collapse" class="spenden-detail-btn"><span style="font-size:18px">SPENDEN</span></button>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-sm-6" style="padding:50px;padding-top: 0">
+            <img src="{{ asset('bundles/htlspendenportal/img/sliderimg-1.jpg') }}" alt="">
+        </div>
+        <div class="col-xs-12 col-sm-6" style="padding:50px;padding-top: 0">
+            <h2>PROJEKT EINS</h2>
+            <p style="padding-bottom:20px">
+                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
+                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat.
+                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
+
+                <br>
+                <button data-toggle="collapse" data-target="#readmore" class=" spenden-detail-btn" style="width:150px;margin-left:0;margin-top:10px;"><span style="font-size:18px">weiter lesen</span></button>
+
+                <div id="readmore" class="collapse">
+                    Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat.
+                    Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
+                    Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat.
+                </div>
+
+            </p>
+        </div>
+    </div>
+</div>
+
+
+<div class="container" style="margin-top:50px;">
+    <div class="row">
+        <div class="col-xs-12 col-sm-6" style="padding:50px;padding-top: 0">
+
+            <div class="uk-progress" style="margin-bottom:4px;border: 1px solid #272828;background-color: #fff">
+                <div class="uk-progress-bar" style="width: 40%">40%</div>
+            </div>
+            <p>Erreicht bis zum Ziel</p>
+            <br>
+            <p>
+                <span class="coo-blue-color" style="font-size:20px"><b>12.01.2017</b></span><br>
+                <span>Start des Projekts</span>
+            </p>
+            <br>
+            <p>
+                <span class="coo-blue-color" style="font-size:20px"><b>4</b></span><br>
+                <span>Spender</span>
+            </p>
+
+        </div>
+        <div class="col-xs-12 col-sm-6" style="padding:50px;padding-top: 0">
+            <img src="{{ asset('bundles/htlspendenportal/img/sliderimg-1.jpg') }}" alt="">
+
+            <div class="uk-margin" data-uk-slideset="{default: 4}">
+                <div class="uk-slidenav-position uk-margin">
+                    <ul class="uk-slideset uk-grid uk-flex-center">
+                        <li><img src="{{ asset('bundles/htlspendenportal/img/sliderimg-1.jpg') }}" alt=""></li>
+                        <li><img src="{{ asset('bundles/htlspendenportal/img/sliderimg-1.jpg') }}" alt=""></li>
+                        <li><img src="{{ asset('bundles/htlspendenportal/img/sliderimg-1.jpg') }}" alt=""></li>
+                        <li><img src="{{ asset('bundles/htlspendenportal/img/sliderimg-1.jpg') }}" alt=""></li>
+                        <li><img src="{{ asset('bundles/htlspendenportal/img/sliderimg-1.jpg') }}" alt=""></li>
+                    </ul>
+                    <a href="#" class="uk-slidenav uk-slidenav-previous" data-uk-slideset-item="previous"></a>
+                    <a href="#" class="uk-slidenav uk-slidenav-next" data-uk-slideset-item="next"></a>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid" style="background-color: #47A1DE;">
+<div class="container">
+
+    <div class="row" style="padding-top: 50px;">
+        <div class="col-xs-12 col-sm-6" style="padding:50px;padding-top: 0">
+            <img src="{{ asset('bundles/htlspendenportal/img/sliderimg-1.jpg') }}" alt="">
+        </div>
+        <div class="col-xs-12 col-sm-6" style="color:white;padding:50px;padding-top: 0">
+            <h3>Post Eins</h3>
+            <p style="padding-bottom:20px">
+                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
+                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
+                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat.
+            </p>
+        </div>
+    </div>
+
+    <div class="row" style="padding-top: 50px;">
+        <div class="col-xs-12 col-sm-6 col-sm-push-6" style="padding:50px;padding-top: 0">
+            <img src="{{ asset('bundles/htlspendenportal/img/sliderimg-1.jpg') }}" alt="">
+        </div>
+        <div class="col-xs-12 col-sm-6 col-sm-pull-6" style="color:white;padding:50px;padding-top: 0">
+            <h3>Post Zwei</h3>
+            <p style="padding-bottom:20px">
+                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
+                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
+                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat.
+            </p>
+        </div>
+    </div>
+
+</div>
+</div>
+
+
+
+
+
+{% include "HtlSpendenportalBundle::footer.html.twig" %}

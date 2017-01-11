@@ -1,20 +1,23 @@
 <!DOCTYPE html>
-<html data-ng-app="SpendenverbindetApp">
+<html lang="de" data-ng-app="SpendenverbindetApp">
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>{% block title_text %} Spendenverbindet {% endblock %}</title>
 
-    <link rel="stylesheet" href="{{ asset('bundles/htlspendenportal/bower_components/bootstrap/dist/css/bootstrap.min.css') }}" />
-
-    <link rel="stylesheet" href="{{ asset('bundles/htlspendenportal/bower_components/uikit/css/uikit.min.css') }}" />
-
-    <link rel="stylesheet" href="{{ asset('bundles/htlspendenportal/bower_components/uikit/css/components/slideshow.css') }}" />
-
-    <link rel="stylesheet" href="{{ asset('bundles/htlspendenportal/css/sv-stylesheet.css') }}" />
+    {% stylesheets filter="scssphp" output="css/app.css"
+        'bundles/htlspendenportal/bower_components/uikit/css/uikit.min.css'
+        'bundles/htlspendenportal/bower_components/uikit/css/components/slideshow.css'
+        'bundles/htlspendenportal/bower_components/uikit/css/components/progress.css'
+        'bundles/htlspendenportal/bower_components/uikit/css/components/slidenav.min.css'
+        "bundles/htlspendenportal/sass/styles.scss"
+    %}
+    <link rel="stylesheet" href="{{ asset_url }}" />
+    {% endstylesheets %}
 
 </head>
+
 <body data-ng-controller="spendenverbindetController" >
 
 <!-- === navbar === -->
@@ -29,21 +32,37 @@
                 <span class="icon-bar"></span>
             </button>
 
-            <a class="brand" href="index.html">
-               <img class="my-logo" src="http://placehold.it/270x80" alt="logo">
+            <a class="brand" href="./">
+               <img class="sv-nav-logo" src="{{ asset('bundles/htlspendenportal/img/logo.png') }}" width="200" alt="logo">
             </a>
 
         </div>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav navbar-right">
-                <li class="active"><a href="#">&Uuml;BER UNS</a></li>
-                <li><a href="#">ANMELDEN</a></li>
-                <li><a href="#">REGISTRIEREN</a></li>
-                <li></li>
+            <!-- <ul class="nav navbar-nav navbar-right">  old version -->
+            <ul class="nav navbar-nav sv-remove-margin">
+
+                {% if is_granted('ROLE_RECEIVER') == false %}
+                    <li><a href="./entdecken">ENTDECKEN</a></li>
+                    <li><a href="#">BESTENLISTE</a></li>
+                {% endif %}
+                {% if is_granted('ROLE_DONATOR') %}
+                    <li><a href="#">ABONNIERT</a></li>
+                    <li><a href="#">MEIN PROFIL</a></li>
+                {% endif %}
+                {% if is_granted('ROLE_RECEIVER') %}
+                    <li><a href="#">MEINE PROJEKTE</a></li>
+                    <li><a href="#">MEIN PROFIL</a></li>
+                {% endif %}
+            </ul>
+            <ul class="nav navbar-nav navbar-right sv-remove-margin">
+                {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                    <li><a href="./logout">LOGOUT</a></li>
+                {% else %}
+                    <li><a href="./login">ANMELDEN</a></li>
+                    <li><a href="./register">REGISTRIEREN</a></li>
+                {% endif %}
+
             </ul>
         </div>
     </div>
 </nav>
-
-
-
