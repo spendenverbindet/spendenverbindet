@@ -1,6 +1,5 @@
-/src/AppBundle/
 /bin
-.idea/
+/.idea
 /src/Backend/AdminBundle/Resources/public/bower_components
 /src/Htl/SpendenportalBundle/Resources/public/bower_components
 /web
