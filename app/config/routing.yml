@@ -3,8 +3,7 @@ htl_spendenportal:
     prefix:   /
 
 backend_admin:
-    resource: "@BackendAdminBundle/Controller/"
-    type: annotation
+    resource: "@BackendAdminBundle/Resources/config/routing.xml"
     prefix:   /backend/
 
 app:

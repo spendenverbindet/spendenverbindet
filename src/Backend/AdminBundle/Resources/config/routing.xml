@@ -4,7 +4,7 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
 
-    <!--
+    <!--   Default Controller   -->
     <route id="backend_admin_userlist" path="/">
         <default key="_controller">BackendAdminBundle:Default:index</default>
     </route>
@@ -13,7 +13,12 @@
         <default key="_controller">BackendAdminBundle:Default:edit</default>
     </route>
 
-    <route id="backend_admin_editpage_project" path="/projects">
+    <!--   Project Controller   -->
+    <route id="backend_admin_listpage_project" path="/projects">
         <default key="_controller">BackendAdminBundle:Project:index</default>
-    </route>-->
+    </route>
+
+    <route id="backend_admin_editpage_project" path="/projects/1">
+        <default key="_controller">BackendAdminBundle:Project:show</default>
+    </route>
 </routes>
