@@ -8,16 +8,12 @@ use Symfony\Component\HttpFoundation\Request;
 
 class ProjectController extends Controller
 {
-    /**
-     * @Route("/project", name="projectslist")
-     *
-     * listing the Projects
-     */
+
     public function indexAction()
     {
 
         $projects = $this->getDoctrine()
-            ->getRepository('BackendAdminBundle:Projectamount')->findAll();
+            ->getRepository('HtlSpendenportalBundle:ProjectAmount')->findAll();
 
         /*
         $projectamounts = $this->getDoctrine()

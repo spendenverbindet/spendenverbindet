@@ -14,7 +14,11 @@
     </route>
 
     <!--   Project Controller   -->
-    <route id="backend_admin_editpage_project" path="/projects">
+    <route id="backend_admin_listpage_project" path="/projects">
         <default key="_controller">BackendAdminBundle:Project:index</default>
+    </route>
+
+    <route id="backend_admin_editpage_project" path="/projects/1">
+        <default key="_controller">BackendAdminBundle:Project:show</default>
     </route>
 </routes>
