@@ -13,7 +13,7 @@ class DefaultController extends Controller
     {
         
         $persons = $this->getDoctrine()
-            ->getRepository('BackendAdminBundle:Person')->findAll();
+            ->getRepository('HtlSpendenportalBundle:User')->findAll();
 
         
         var_dump($persons);
