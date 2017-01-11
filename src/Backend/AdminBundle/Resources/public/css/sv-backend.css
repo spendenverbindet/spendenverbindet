@@ -1,0 +1,36 @@
+.editTopHeight{
+    height: 70px;
+}
+
+.marginTop{
+    margin-top: 10pt;
+}
+
+.marginBottom{
+    margin-bottom: 20pt;
+}
+
+.contentBottom{
+    position: absolute;
+    bottom: 0pt;
+}
+
+.alignRight{
+    position: absolute;
+    right: 10pt;
+    top: 10pt;
+}
+
+.picAlignRight{
+    position: absolute;
+    right: 0pt;
+    bottom: -26pt;
+}
+
+.aktiv{
+    background-color: #DDDDDD;
+}
+
+#description{
+    resize: vertical;
+}

@@ -1,0 +1,136 @@
+{% embed "BackendAdminBundle::header.html.twig" %}
+
+    {# override the title-tag text #}
+    {% block title_text %}
+        Userbearbeitung
+    {% endblock %}
+
+    {# override the nav_active property #}
+    {% block user_nav %}
+        class="active"
+    {% endblock %}
+
+{% endembed %}
+<div class="container-fluid">
+    <div class="col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
+        <div class="col-sm-3 col-md-2 col-lg-2 sidebar">
+            <ul class="nav nav-sidebar">
+                <li><a href="#" class="aktiv">Bearbeiten</a></li>
+                <li><a href="#">Projekte</a></li>
+            </ul>
+        </div>
+        <form>
+            <div class="col-md-8 col-lg-8">
+                <!--
+                    Editfeld Header
+                    Inhalt:
+                        Profildbild
+                        Aktiviert-Checkbox
+                        Löschbutton
+                -->
+                <div class="row">
+                    <div class="col-md-3 col-lg-3 editTopHeight"><!-- Profilbild -->
+                        <div class="picAlignRight">
+                            <img style="height: 70px; width: 70px" alt="profilbild">
+                        </div>
+                    </div>
+                    <div class="col-md-9 col-lg-9 editTopHeight"><!-- Aktiviert-Box, Username, PW, Löschbutton -->
+                        <div class="contentBottom">
+                            <input type="checkbox" id="activated" name="activated"/>
+                            Aktiviert
+                        </div>
+                        <div class="alignRight">
+                            <input class="btn" type="button" value="delete">
+                        </div>
+                    </div>
+                </div>
+
+                <!--
+                    Editfeld Header2
+                    Inhalt:
+                        Username
+                        Password
+                -->
+                <div class="row marginBottom">
+                    <div class="col-md-offset-3 col-lg-offset-3 col-md-4 col-lg-4">
+                        <input class="form-control" type="text" value="Username" id="username">
+                    </div>
+                    <div class="col-md-4 col-lg-4">
+                        <input class="form-control" type="password" value="password" id="password">
+                    </div>
+                </div>
+
+                <!--
+                    Editfeld Header2
+                    Inhalt:
+                        Vorname
+                        Nachname
+                -->
+                <div class="row marginTop">
+                    <div class="col-md-offset-3 col-lg-offset-3 col-md-4 col-lg-4">
+                        <input class="form-control" type="text" value="Vorname" id="vorname">
+                    </div>
+                    <div class="col-md-4 col-lg-4">
+                        <input class="form-control" type="text" value="Nachname" id="nachname">
+                    </div>
+                </div>
+
+                <!--
+                    Editfeld Header2
+                    Inhalt:
+                        E-Mail
+                        Alter
+                -->
+                <div class="row marginTop">
+                    <div class="col-md-offset-3 col-lg-offset-3 col-md-4 col-lg-4">
+                        <input class="form-control" type="email" value="email@email.com" id="email">
+                    </div>
+                    <div class="col-md-4 col-lg-4">
+                        <input class="form-control" type="date" value="1980-09-29" id="geburtsdatum">
+                    </div>
+                </div>
+
+                <!--
+                    Editfeld Header2
+                    Inhalt:
+                        PLZ
+                        Ort
+                -->
+                <div class="row marginTop">
+                    <div class="col-md-offset-3 col-lg-offset-3 col-md-4 col-lg-4">
+                        <input class="form-control" type="number" value="42" id="plz">
+                    </div>
+                    <div class="col-md-4 col-lg-4">
+                        <input class="form-control" type="text" value="Ort" id="ort">
+                    </div>
+                </div>
+
+                <!--
+                    Editfeld Header2
+                    Inhalt:
+                        Straße
+                        Hausnummmer
+                -->
+                <div class="row marginTop">
+                    <div class="col-md-offset-3 col-lg-offset-3 col-md-4 col-lg-4">
+                        <input class="form-control" type="text" value="Strasse" id="strasse">
+                    </div>
+                    <div class="col-md-4 col-lg-4">
+                        <input class="form-control" type="text" value="10" id="hausnummer">
+                    </div>
+                </div>
+
+                <div class="row marginTop">
+                    <div class="col-md-offset-3 col-lg-offset-3 col-md-9 col-lg-9">
+                        <input class="btn" type="button" value="Fertig" id="fertig_button">
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+
+{% include "BackendAdminBundle::footer.html.twig" %}

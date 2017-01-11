@@ -1,0 +1,45 @@
+{% embed "BackendAdminBundle::header.html.twig" %}
+
+    {# override the title-tag text #}
+    {% block title_text %}
+        User
+    {% endblock %}
+
+    {# override the nav_active property #}
+    {% block project_nav %}
+        class="active"
+    {% endblock %}
+
+{% endembed %}
+<div class="container-fluid">
+    <div class="col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
+        <table class="table table-compressed">
+            <tr class="table-header">
+                <th>Titel</th>
+                <th>Projektinhaber</th>
+                <th>Spenderanzahl</th>
+                <th>Zielbetrag</th>
+                <th>Erreichte Spenden</th>
+                <th>Zieldatum des Projekts</th>
+                <th>Kategorie</th>
+                <th>Letzte Spnden</th>
+            </tr>
+
+            {% for project in projects %}
+            <tr>    <!-- data-ng-repeat="user in users" -->
+                <td>{{ project.title }}</td>
+                <td>Seiferich</td>
+                <td>5</td>
+                <td>50</td>
+                <td>40</td>
+                <td>{{ project.deadline | date('d.m.Y') }}</td>
+                <td>Schulsachen</td>
+                <td>15.08.2017</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</div>
+
+
+{% include "BackendAdminBundle::footer.html.twig" %}
