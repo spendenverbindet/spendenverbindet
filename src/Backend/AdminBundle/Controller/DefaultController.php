@@ -16,7 +16,7 @@ class DefaultController extends Controller
             ->getRepository('HtlSpendenportalBundle:User')->findAll();
 
         
-        var_dump($persons);
+        //var_dump($persons);
 
         if (!$persons) {
             throw $this->createNotFoundException(
