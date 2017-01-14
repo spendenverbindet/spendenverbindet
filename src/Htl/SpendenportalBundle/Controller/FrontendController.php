@@ -47,7 +47,7 @@ class FrontendController extends Controller
     /**
      * @Route("/createProduct")
      */
-    public function insertProduct($title, $desciption, $shortinfo, $deadline,$categoryId){
+    public function insertProduct($title, $desciption, $shortinfo, $deadline, $categoryId, $user, $projectamount, $follower, $report, $donation, $post){
 
         $category = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:Category')->find($categoryId);
 
@@ -64,6 +64,13 @@ class FrontendController extends Controller
             $product->setShortinfo($shortinfo);
             $product->setdeadline($deadline);
             $product->setCategory($category);
+            $product->setUser($user);
+            $product->setProjectamount($projectamount);
+            $product->setFollower($follower);
+            $product->setReport($report);
+            $product->setdonation($donation);
+            $product->setPost($post);
+
 
             $em = $this->getDoctrine()->getManager();
 
