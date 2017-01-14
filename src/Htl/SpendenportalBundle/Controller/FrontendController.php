@@ -50,6 +50,12 @@ class FrontendController extends Controller
     public function insertProduct($title, $desciption, $shortinfo, $deadline, $categoryId, $user, $projectamount, $follower, $report, $donation, $post){
 
         $category = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:Category')->find($categoryId);
+        $user = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:Category')->find($user);
+        $projectamount = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:Category')->find($projectamount);
+        $follower = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:Category')->find($follower);
+        $report = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:Category')->find($report);
+        $donation = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:Category')->find($donation);
+        $post = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:Category')->find($post);
 
         if (!$category) {
             throw $this->createNotFoundException(
