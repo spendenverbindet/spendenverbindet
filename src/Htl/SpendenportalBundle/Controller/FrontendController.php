@@ -8,9 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
 class FrontendController extends Controller
 {
-    /**
-     * @Route("/categories")
-     */
+    
     public function listCategories(){
 
         $repository = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:Category');
@@ -44,5 +42,38 @@ class FrontendController extends Controller
         return "irgendwas";
         return new JsonResponse("");*/
         
+    }
+
+    /**
+     * @Route("/createProduct")
+     */
+    public function insertProduct($title, $desciption, $shortinfo, $deadline,$categoryId){
+
+        $category = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:Category')->find($categoryId);
+
+        if (!$category) {
+            throw $this->createNotFoundException(
+                'No category found for id '.$categoryId
+            );
+        }
+        else{
+
+            $product = new Product();
+            $product->setTitle($title);
+            $product->setDescription($desciption);
+            $product->setShortinfo($shortinfo);
+            $product->setdeadline($deadline);
+            $product->setCategory($category);
+
+            $em = $this->getDoctrine()->getManager();
+
+            // tells Doctrine you want to (eventually) save the Product (no queries yet)
+            $em->persist($product);
+
+            // actually executes the queries (i.e. the INSERT query)
+            $em->flush();
+
+            return new Response('Saved new product with id '.$product->getId());
+        }
     }
 }
