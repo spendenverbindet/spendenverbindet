@@ -110,7 +110,7 @@ class Project
      *
      * @ORM\Column(name="followers", type="integer")
      *
-     * @ORM\OneToMany(targetEntity="Follower", mappedBy="project")
+     * @ORM\OneToMany(targetEntity="Follower", mappedBy="project", nullable=true)
      */
     private $followers;
 

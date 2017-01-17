@@ -21,7 +21,15 @@
     <!--  FERTL  -->
 
     <route id="categories" path="/categories">
-        <default key="_controller">HtlSpendenportalBundle:Default:listCategories</default>
+        <default key="_controller">HtlSpendenportalBundle:Frontend:listCategories</default>
+    </route>
+
+    <route id="listProjects" path="/listProject/{categoryId}">
+        <default key="_controller">HtlSpendenportalBundle:Frontend:listProjects</default>
+    </route>
+
+    <route id="createProject" path="/createProject" methods="POST">
+        <default key="_controller">HtlSpendenportalBundle:Frontend:createProject</default>
     </route>
 
 </routes>
