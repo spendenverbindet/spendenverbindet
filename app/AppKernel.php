@@ -20,6 +20,7 @@ class AppKernel extends Kernel
             new Htl\SpendenportalBundle\HtlSpendenportalBundle(),
             new Backend\AdminBundle\BackendAdminBundle(),
             new Symfony\Bundle\AsseticBundle\AsseticBundle(),
+            new Bazinga\Bundle\FakerBundle\BazingaFakerBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {
