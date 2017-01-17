@@ -4,6 +4,8 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
 
+    <!-- RICCO -->
+
     <route id="htl_spendenportal_homepage" path="/">
         <default key="_controller">HtlSpendenportalBundle:Default:index</default>
     </route>
@@ -14,6 +16,12 @@
 
     <route id="htl_spendenportal_projektdetail" path="/projektdetail">
         <default key="_controller">HtlSpendenportalBundle:Default:projektdetail</default>
+    </route>
+
+    <!--  FERTL  -->
+
+    <route id="categories" path="/categories">
+        <default key="_controller">HtlSpendenportalBundle:Default:listCategories</default>
     </route>
 
 </routes>

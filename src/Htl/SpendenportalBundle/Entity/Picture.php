@@ -7,10 +7,10 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Post
  *
- * @ORM\Table(name="post")
- * @ORM\Entity(repositoryClass="Htl\SpendenportalBundle\Repository\PostRepository")
+ * @ORM\Table(name="picture")
+ * @ORM\Entity(repositoryClass="Htl\SpendenportalBundle\Repository\PictureRepository")
  */
-class Post
+class Picture
 {
     /**
      * @var int
@@ -26,14 +26,7 @@ class Post
      *
      * @ORM\Column(name="picture", type="string")
      */
-    private $postPictureUrl;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="post_text", type="text")
-     */
-    private $postText;
+    private $pictureUrl;
 
     /**
      * @var \DateTime
@@ -47,7 +40,7 @@ class Post
      *
      * @ORM\Column(name="projecs", type="integer")
      *
-     * @ORM\ManyToOne(targetEntity="Project", inversedBy="posts")
+     * @ORM\ManyToOne(targetEntity="Project", inversedBy="pictures")
      * @ORM\JoinColumn(name="project_id", referencedColumnName="id")
      */
     private $projects;
@@ -64,51 +57,27 @@ class Post
     }
 
     /**
-     * Set postPictureUrl
+     * Set pictureUrl
      *
-     * @param string postPictureUrl
+     * @param string pictureUrl
      *
      * @return Project
      */
-    public function setPostPictureUrl($postPictureUrl)
+    public function setPictureUrl($pictureUrl)
     {
-        $this->postPictureUrl = $postPictureUrl;
+        $this->pictureUrl = $pictureUrl;
 
         return $this;
     }
 
     /**
-     * Get titlePictureUrl
+     * Get pictureUrl
      *
      * @return string
      */
-    public function getPostPictureUrl()
+    public function getPictureUrl()
     {
-        return $this->postPictureUrl;
-    }
-
-    /**
-     * Set postText
-     *
-     * @param string $postText
-     *
-     * @return Post
-     */
-    public function setPostText($postText)
-    {
-        $this->postText = $postText;
-    
-        return $this;
-    }
-
-    /**
-     * Get postText
-     *
-     * @return string
-     */
-    public function getPostText()
-    {
-        return $this->postText;
+        return $this->ictureUrl;
     }
 
     /**
@@ -121,7 +90,7 @@ class Post
     public function setCreatedAt($createdAt)
     {
         $this->createdAt = $createdAt;
-    
+
         return $this;
     }
 
