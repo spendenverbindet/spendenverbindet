@@ -31,7 +31,7 @@ class Project
     /**
      * @var sring
      * 
-     * @ORM\Column(name="picture", type="string", nullable=true)
+     * @ORM\Column(name="titlePictureUrl", type="string", nullable=true)
      */
     private $titlePictureUrl;
 
@@ -108,9 +108,9 @@ class Project
     /**
      * @var int
      *
-     * @ORM\Column(name="followers", type="integer")
+     * @ORM\Column(name="followers", type="integer", nullable=true)
      *
-     * @ORM\OneToMany(targetEntity="Follower", mappedBy="project", nullable=true)
+     * @ORM\OneToMany(targetEntity="Follower", mappedBy="project")
      */
     private $followers;
 

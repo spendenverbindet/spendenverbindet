@@ -99,7 +99,6 @@ class FrontendController extends Controller
             $project->setTargetAmount($data["targetAmount"]);
             $project->setCreatedAt($date);
             $project->setCategory($data["category"]);
-            $project->setFollowers($data["category"]);
             $project->setUsers($data["user"]);
             $project->setActive(true);
 
@@ -113,7 +112,7 @@ class FrontendController extends Controller
             // actually executes the queries (i.e. the INSERT query)
             $em->flush();
 
-            return new \Symfony\Component\HttpFoundation\Response('Saved new product with id ');//.$project->getId()
+            return new \Symfony\Component\HttpFoundation\Response('Saved new project');//.$project->getId()
         }
     }
 }
