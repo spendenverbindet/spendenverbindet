@@ -5,6 +5,8 @@ namespace Htl\SpendenportalBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Validator\Constraints\Date;
+use Symfony\Component\Validator\Constraints\DateTime;
 
 class FrontendController extends Controller
 {
@@ -45,48 +47,41 @@ class FrontendController extends Controller
     }
 
     /**
-     * @Route("/createProduct")
+     * @Route("/createProject")
      */
-    public function insertProduct($title, $desciption, $shortinfo, $deadline, $categoryId, $user, $projectamount, $follower, $report, $donation, $post){
+    public function createProject ($title, $desciption, $shortinfo, $categoryId, $user, $targetAmount, $titlePictureUrl){
 
         $category = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:Category')->find($categoryId);
-        $user = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:Category')->find($user);
-        $projectamount = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:Category')->find($projectamount);
-        $follower = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:Category')->find($follower);
-        $report = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:Category')->find($report);
-        $donation = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:Category')->find($donation);
-        $post = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:Category')->find($post);
+        $user = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:User')->find($user);
 
-        if (!$category) {
+        if (!$category || !$user) {
             throw $this->createNotFoundException(
-                'No category found for id '.$categoryId
+                'No category found for id '.$categoryId.' or not User found for id '.$user
             );
         }
         else{
 
-            $product = new Product();
-            $product->setTitle($title);
-            $product->setDescription($desciption);
-            $product->setShortinfo($shortinfo);
-            $product->setdeadline($deadline);
-            $product->setCategory($category);
-            $product->setUser($user);
-            $product->setProjectamount($projectamount);
-            $product->setFollower($follower);
-            $product->setReport($report);
-            $product->setdonation($donation);
-            $product->setPost($post);
+            $project = new Project();
+            $project->setTitle($title);
+            $project->setTitlePictureUrl($titlePictureUrl);
+            $project->setDescription($desciption);
+            $project->setShortinfo($shortinfo);
+            $project->setTargetAmount($targetAmount);
+            $project->setCreatedAt(date('d.m.Y'));
+            $project->setCategory($category);
+            $project->setUser($user);
+            $project->setActive(true);
 
 
             $em = $this->getDoctrine()->getManager();
 
             // tells Doctrine you want to (eventually) save the Product (no queries yet)
-            $em->persist($product);
+            $em->persist($project);
 
             // actually executes the queries (i.e. the INSERT query)
             $em->flush();
 
-            return new Response('Saved new product with id '.$product->getId());
+            return new Response('Saved new product with id '.$project->getId());
         }
     }
 }

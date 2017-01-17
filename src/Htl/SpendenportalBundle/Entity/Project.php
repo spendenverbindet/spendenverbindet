@@ -29,6 +29,13 @@ class Project
     private $title;
 
     /**
+     * @var sring
+     * 
+     * @ORM\Column(name="picture", type="string")
+     */
+    private $titlePictureUrl;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="description", type="string", length=255)
@@ -57,11 +64,25 @@ class Project
     private $createdAt;
 
     /**
-     * @var \DateTime
+     * @var string
      *
-     * @ORM\Column(name="deadline", type="datetime")
+     * @ORM\Column(name="target_amount", type="decimal", precision=10, scale=2)
      */
-    private $deadline;
+    private $targetAmount;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="achieved_amount", type="decimal", precision=10, scale=2)
+     */
+    private $achievedAmount;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="current_amount", type="decimal", precision=10, scale=2)
+     */
+    private $currentAmount;
 
     /**
      * @var int
@@ -83,15 +104,6 @@ class Project
      */
     private $categorys;
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="projectamounts", type="integer")
-     *
-     * @ORM\ManyToOne(targetEntity="Projectamount", inversedBy="projects")
-     * @ORM\JoinColumn(name="projectAmount_id", referencedColumnName="projectamounts")
-     */
-    private $projectamounts;
 
     /**
      * @var int
@@ -127,7 +139,16 @@ class Project
      *
      * @ORM\OneToMany(targetEntity="Post", mappedBy="project")
      */
-    private $post;
+    private $posts;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="pictures", type="integer")
+     *
+     * @ORM\OneToMany(targetEntity="Picture", mappedBy="project")
+     */
+    private $pictures;
 
     /**
      * Get id
@@ -161,6 +182,30 @@ class Project
     public function getTitle()
     {
         return $this->title;
+    }
+
+    /**
+     * Set titlePictureUrl
+     *
+     * @param string titlePictureUrl
+     *
+     * @return Project
+     */
+    public function setTitlePictureUrl($titlePictureUrl)
+    {
+        $this->title = $titlePictureUrl;
+
+        return $this;
+    }
+
+    /**
+     * Get titlePictureUrl
+     *
+     * @return string
+     */
+    public function getTitlePictureUrl()
+    {
+        return $this->titlePictureUrl;
     }
 
     /**
@@ -260,27 +305,75 @@ class Project
     }
 
     /**
-     * Set deadline
+     * Set targetAmount
      *
-     * @param \DateTime $deadline
+     * @param string $targetAmount
      *
-     * @return Project
+     * @return ProjectAmount
      */
-    public function setDeadline($deadline)
+    public function setTargetAmount($targetAmount)
     {
-        $this->deadline = $deadline;
-    
+        $this->targetAmount = $targetAmount;
+
         return $this;
     }
 
     /**
-     * Get deadline
+     * Get targetAmount
      *
-     * @return \DateTime
+     * @return string
      */
-    public function getDeadline()
+    public function getTargetAmount()
     {
-        return $this->deadline;
+        return $this->targetAmount;
+    }
+
+    /**
+     * Set achievedAmount
+     *
+     * @param string $achievedAmount
+     *
+     * @return ProjectAmount
+     */
+    public function setAchievedAmount($achievedAmount)
+    {
+        $this->achievedAmount = $achievedAmount;
+
+        return $this;
+    }
+
+    /**
+     * Get achievedAmount
+     *
+     * @return string
+     */
+    public function getAchievedAmount()
+    {
+        return $this->achievedAmount;
+    }
+
+    /**
+     * Set currentAmount
+     *
+     * @param string $currentAmount
+     *
+     * @return ProjectAmount
+     */
+    public function setCurrentAmount($currentAmount)
+    {
+        $this->currentAmount = $currentAmount;
+
+        return $this;
+    }
+
+    /**
+     * Get currentAmount
+     *
+     * @return string
+     */
+    public function getCurrentAmount()
+    {
+        return $this->currentAmount;
     }
 
     /**
@@ -434,7 +527,7 @@ class Project
      *
      * @return Project
      */
-    public function setPosts($posts)
+    public function setPost($posts)
     {
         $this->posts = $posts;
 
@@ -446,9 +539,33 @@ class Project
      *
      * @return integer
      */
-    public function getPosts()
+    public function getPost()
     {
         return $this->posts;
+    }
+
+    /**
+     * Set picture
+     *
+     * @param integer $picture
+     *
+     * @return Project
+     */
+    public function setPicture($pictures)
+    {
+        $this->pictures = $pictures;
+
+        return $this;
+    }
+
+    /**
+     * Get picture
+     *
+     * @return integer
+     */
+    public function getPicture()
+    {
+        return $this->pictures;
     }
 }
 
