@@ -85,68 +85,40 @@ class Project
     private $currentAmount;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="users", type="integer")
-     *
      * @ORM\ManyToOne(targetEntity="user", inversedBy="projects")
-     * @ORM\JoinColumn(name="user_id", referencedColumnName="users")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     private $users;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="categorys", type="integer")
-     *
      * @ORM\ManyToOne(targetEntity="Category", inversedBy="projects")
-     * @ORM\JoinColumn(name="category_id", referencedColumnName="categorys")
+     * @ORM\JoinColumn(name="category_id", referencedColumnName="id")
      */
     private $categorys;
 
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="followers", type="integer", nullable=true)
-     *
-     * @ORM\OneToMany(targetEntity="Follower", mappedBy="project")
+     * @ORM\OneToMany(targetEntity="Follower", mappedBy="projects")
      */
     private $followers;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="reports", type="integer", nullable=true)
-     *
-     * @ORM\OneToMany(targetEntity="Report", mappedBy="project")
+     * @ORM\OneToMany(targetEntity="Report", mappedBy="projects")
      */
     private $reports;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="donations", type="integer", nullable=true)
-     *
-     * @ORM\OneToMany(targetEntity="Donation", mappedBy="project")
+     * @ORM\OneToMany(targetEntity="Donation", mappedBy="projects")
      */
     private $donations;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="posts", type="integer", nullable=true)
-     *
-     * @ORM\OneToMany(targetEntity="Post", mappedBy="project")
+     * @ORM\OneToMany(targetEntity="Post", mappedBy="projects")
      */
     private $posts;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="pictures", type="integer", nullable=true)
-     *
-     * @ORM\OneToMany(targetEntity="Picture", mappedBy="project")
+     * @ORM\OneToMany(targetEntity="Picture", mappedBy="projects")
      */
     private $pictures;
 

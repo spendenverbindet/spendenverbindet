@@ -22,22 +22,14 @@ class Report
     private $id;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="users", type="integer")
-     *
      * @ORM\ManyToOne(targetEntity="User", inversedBy="reports")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     private $users;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="projects", type="integer")
-     *
      * @ORM\ManyToOne(targetEntity="Project", inversedBy="reports")
-     * @ORM\JoinColumn(name="project_id", referencedColumnName="projects")
+     * @ORM\JoinColumn(name="project_id", referencedColumnName="id")
      */
     private $projects;
 

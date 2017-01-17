@@ -31,11 +31,7 @@ class Category
     private $categoryText;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="projects", type="integer")
-     *
-     * @ORM\OneToMany(targetEntity="Project", mappedBy="category")
+     * @ORM\OneToMany(targetEntity="Project", mappedBy="categorys")
      */
     private $projects;
 

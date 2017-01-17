@@ -36,10 +36,6 @@ class Picture
     private $createdAt;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="projecs", type="integer")
-     *
      * @ORM\ManyToOne(targetEntity="Project", inversedBy="pictures")
      * @ORM\JoinColumn(name="project_id", referencedColumnName="id")
      */
