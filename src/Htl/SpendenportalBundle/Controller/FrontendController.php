@@ -2,10 +2,12 @@
 
 namespace Htl\SpendenportalBundle\Controller;
 
+use Htl\SpendenportalBundle\Entity\Category;
 use Htl\SpendenportalBundle\Entity\Project;
+use Htl\SpendenportalBundle\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\BrowserKit\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Validator\Constraints\Date;
@@ -32,12 +34,14 @@ class FrontendController extends Controller
     }
 
     /**
-     * @Route("/listProdukte/{categoryId}")
+     * @Route("/listProject/{categoryId}")
      */
     public function listProjectsAction($categoryId){
 
         $category = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:Category')->find($categoryId);
+
         $projects = $category->getProjects();
+
 
         $responseArray = array();
 
@@ -47,7 +51,7 @@ class FrontendController extends Controller
                 "title"=>$projects[$i]->getTitle(), 
                 "titlePictureUrl"=>$projects[$i]->getTitlePictureUrl(), 
                 "description"=>$projects[$i]->getDescription(), 
-                "shortinfo"=>$projects[$i]->getShortinfo, 
+                "shortinfo"=>$projects[$i]->getShortinfo(),
                 "created_at"=>$projects[$i]->getCreatedAt(), 
                 "targetAmount"=>$projects[$i]->getTargetAmount()
             );
@@ -71,16 +75,11 @@ class FrontendController extends Controller
     /**
      * @Route("/createProject")
      */
-    public function createProjectAction (Request $request){
-        //$title, $desciption, $shortinfo, $categoryId, $user, $targetAmount, $titlePictureUrl
+    public function createProjectAction (/* Request $request */ $title, $desciption, $shortinfo, $categoryId, $user, $targetAmount, $titlePictureUrl){
 
-        /*
         $category = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:Category')->find($categoryId);
         $user = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:User')->find($user);
-        */
-        $categoryId = 1;
-        $user = 1;
-
+        
         $date = new \DateTime('now');
 
         if (!$categoryId || !$user) {
@@ -89,7 +88,11 @@ class FrontendController extends Controller
             );
         }
         else{
-            $data = $request->request->all();
+
+            //$data = $request->request->all();
+
+            //var_dump($data);
+            /*
 
             $project = new Project();
             $project->setTitle($data["title"]);
@@ -98,10 +101,21 @@ class FrontendController extends Controller
             $project->setShortinfo($data["shortinfo"]);
             $project->setTargetAmount($data["targetAmount"]);
             $project->setCreatedAt($date);
-            $project->setCategory($data["category"]);
-            $project->setUsers($data["user"]);
+            $project->setCategory($categoryId);
+            $project->setUsers($user);
             $project->setActive(true);
+*/
 
+            $project = new Project();
+            $project->setTitle($title);
+            $project->setTitlePictureUrl($titlePictureUrl);
+            $project->setDescription($desciption);
+            $project->setShortinfo($shortinfo);
+            $project->setTargetAmount($targetAmount);
+            $project->setCreatedAt($date);
+            $project->setCategory($category);
+            $project->setUser($user);
+            $project->setActive(true);
 
 
             $em = $this->getDoctrine()->getManager();
@@ -112,19 +126,10 @@ class FrontendController extends Controller
             // actually executes the queries (i.e. the INSERT query)
             $em->flush();
 
-            return new \Symfony\Component\HttpFoundation\Response('Saved new project');//.$project->getId()
+            return new \Symfony\Component\HttpFoundation\Response('Inserted Project with id ').$project->getId();
         }
     }
 }
 /*
- * $project = new Project();
-            $project->setTitle($title);
-            $project->setTitlePictureUrl($titlePictureUrl);
-            $project->setDescription($desciption);
-            $project->setShortinfo($shortinfo);
-            $project->setTargetAmount($targetAmount);
-            $project->setCreatedAt(date('d.m.Y'));
-            $project->setCategory($categoryId);
-            $project->setUser($user);
-            $project->setActive(true);
+ *
  */
