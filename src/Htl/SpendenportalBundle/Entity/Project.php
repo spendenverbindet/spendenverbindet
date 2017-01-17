@@ -31,7 +31,7 @@ class Project
     /**
      * @var sring
      * 
-     * @ORM\Column(name="picture", type="string")
+     * @ORM\Column(name="picture", type="string", nullable=true)
      */
     private $titlePictureUrl;
 
@@ -73,14 +73,14 @@ class Project
     /**
      * @var string
      *
-     * @ORM\Column(name="achieved_amount", type="decimal", precision=10, scale=2)
+     * @ORM\Column(name="achieved_amount", type="decimal", precision=10, scale=2, nullable=true)
      */
     private $achievedAmount;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="current_amount", type="decimal", precision=10, scale=2)
+     * @ORM\Column(name="current_amount", type="decimal", precision=10, scale=2, nullable=true)
      */
     private $currentAmount;
 
@@ -117,7 +117,7 @@ class Project
     /**
      * @var int
      *
-     * @ORM\Column(name="reports", type="integer")
+     * @ORM\Column(name="reports", type="integer", nullable=true)
      *
      * @ORM\OneToMany(targetEntity="Report", mappedBy="project")
      */
@@ -126,7 +126,7 @@ class Project
     /**
      * @var int
      *
-     * @ORM\Column(name="donations", type="integer")
+     * @ORM\Column(name="donations", type="integer", nullable=true)
      *
      * @ORM\OneToMany(targetEntity="Donation", mappedBy="project")
      */
@@ -135,7 +135,7 @@ class Project
     /**
      * @var int
      *
-     * @ORM\Column(name="posts", type="integer")
+     * @ORM\Column(name="posts", type="integer", nullable=true)
      *
      * @ORM\OneToMany(targetEntity="Post", mappedBy="project")
      */
@@ -144,7 +144,7 @@ class Project
     /**
      * @var int
      *
-     * @ORM\Column(name="pictures", type="integer")
+     * @ORM\Column(name="pictures", type="integer", nullable=true)
      *
      * @ORM\OneToMany(targetEntity="Picture", mappedBy="project")
      */
