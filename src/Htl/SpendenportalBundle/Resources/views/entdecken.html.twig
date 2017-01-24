@@ -26,26 +26,25 @@
 </div>
 
 <div class="container-fluid toggle-section collapse" id="collapseExample">
-        <div class="row">
+        <div class="row" style="text-transform: uppercase;">
             <div class="col-xs-12 col-sm-4 text-center">
                 <ul>
-                    <li>Kategrorie 1</li>
-                    <li>Kategrorie 2</li>
-                    <li>Kategrorie 3</li>
+                    <li style="cursor: pointer;" ng-click="loadAllProjects()">Alle Projekte</li>
+                    <li style="cursor: pointer;" ng-click="loadProjectsWithId(allCategories[0].id, allCategories[0].name)" >[[allCategories[0].name]]</li>
+                    <li style="cursor: pointer;" ng-click="loadProjectsWithId(allCategories[1].id, allCategories[1].name)">[[allCategories[1].name]]</li>
                 </ul>
             </div>
             <div class="col-xs-12 col-sm-4 text-center">
                 <ul>
-                    <li>Kategrorie 4</li>
-                    <li>Kategrorie 5</li>
-                    <li>Kategrorie 6</li>
+                    <li style="cursor: pointer;" ng-click="loadProjectsWithId(allCategories[2].id, allCategories[2].name)">[[allCategories[2].name]]</li>
+                    <li style="cursor: pointer;" ng-click="loadProjectsWithId(allCategories[3].id, allCategories[3].name)">[[allCategories[3].name]]</li>
+                    <li style="cursor: pointer;" ng-click="loadProjectsWithId(allCategories[4].id, allCategories[4].name)">[[allCategories[4].name]]</li>
                 </ul>
             </div>
             <div class="col-xs-12 col-sm-4 text-center">
                 <ul>
-                    <li>Kategrorie 7</li>
-                    <li>Kategrorie 8</li>
-                    <li>Kategrorie 9</li>
+                    <li style="cursor: pointer;" ng-click="loadProjectsWithId(allCategories[5].id, allCategories[5].name)">[[allCategories[5].name]]</li>
+                    <li style="cursor: pointer;" ng-click="loadProjectsWithId(allCategories[6].id, allCategories[6].name)">[[allCategories[6].name]]</li>
                 </ul>
             </div>
         </div>
@@ -53,81 +52,49 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-xs-12"><h2 style="padding-left: 25px;">KATEGORIE 1</h2></div>
+        <div class="col-xs-12"><h2 style="padding-left: 25px;text-transform: uppercase;">[[activeCategorie]]</h2></div>
     </div>
 
-    <div class="row">
 
-        <div class="col-xs-12 col-sm-4" style="padding:50px;">
-            <img src="{{ asset('bundles/htlspendenportal/img/sliderimg-1.jpg') }}" alt="">
-            <h3>Projekt Eins</h3>
-            <p style="padding-bottom:20px;">
-                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
-            </p>
-            <div class="uk-progress" style="margin-bottom:4px;border: 1px solid #272828;background-color: #fff">
-                <div class="uk-progress-bar" style="width: 40%">40%</div>
+    <div ng-show="showLoadingIndicator" class="row">
+        <div class="col-xs-12" style="padding:50px;">
+            <div class="cssload-thecube">
+                <div class="cssload-cube cssload-c1"></div>
+                <div class="cssload-cube cssload-c2"></div>
+                <div class="cssload-cube cssload-c4"></div>
+                <div class="cssload-cube cssload-c3"></div>
             </div>
-            <p>Erreicht bis zum Ziel</p>
-
-            <table style="border-spacing: 15px;">
-                <tr>
-                    <td><span class="coo-blue-color">12.01.2017</span></td>
-                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="coo-blue-color">30</span></td>
-                </tr>
-                <tr>
-                    <td>Start</td>
-                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Spender</td>
-                </tr>
-            </table>
-
         </div>
+    </div>
 
-        <div class="col-xs-12 col-sm-4" style="padding:50px;">
-            <img src="{{ asset('bundles/htlspendenportal/img/sliderimg-1.jpg') }}" alt="">
-            <h3>Projekt Eins</h3>
+
+    <div ng-repeat="projectspart in projectsPrepared" class="row">
+
+        <div ng-repeat="project in projectspart" class="col-xs-12 col-sm-4" style="padding:50px;">
+
+            <img src="{{ asset('bundles/htlspendenportal/img/[[project.titlePictureUrl]]') }}" alt="">
+
+            <h3>[[project.title]]</h3>
+
             <p style="padding-bottom:20px;">
-                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
+                [[project.shortinfo]]
             </p>
+
             <div class="uk-progress" style="margin-bottom:4px;border: 1px solid #272828;background-color: #fff">
-                <div class="uk-progress-bar" style="width: 40%">40%</div>
+                <div class="uk-progress-bar" style="width:[[project.progress]]%">[[project.progress]]%</div>
             </div>
             <p>Erreicht bis zum Ziel</p>
 
             <table style="border-spacing: 15px;">
                 <tr>
-                    <td><span class="coo-blue-color">12.01.2017</span></td>
-                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="coo-blue-color">30</span></td>
+                    <td><span class="coo-blue-color">[[project.created_at]]</span></td>
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="coo-blue-color">[[project.currentDonators]]</span></td>
                 </tr>
                 <tr>
                     <td>Start</td>
                     <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Spender</td>
                 </tr>
             </table>
-
-        </div>
-
-        <div class="col-xs-12 col-sm-4" style="padding:50px;">
-            <img src="{{ asset('bundles/htlspendenportal/img/sliderimg-1.jpg') }}" alt="">
-            <h3>Projekt Eins</h3>
-            <p style="padding-bottom:20px;">
-                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
-            </p>
-            <div class="uk-progress" style="margin-bottom:4px;border: 1px solid #272828;background-color: #fff">
-                <div class="uk-progress-bar" style="width: 40%">40%</div>
-            </div>
-            <p>Erreicht bis zum Ziel</p>
-
-            <table style="border-spacing: 15px;">
-                <tr>
-                    <td><span class="coo-blue-color">12.01.2017</span></td>
-                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="coo-blue-color">30</span></td>
-                </tr>
-                <tr>
-                    <td>Start</td>
-                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Spender</td>
-                </tr>
-            </table>
-
         </div>
 
     </div>
