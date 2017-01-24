@@ -47,6 +47,7 @@ class ProjectController extends Controller
         $responseArray = array();
 
         for($i=0;$i<count($projects);$i++){
+            $progress = Math.floor(($projects[$i]->getCurrentAmount()-$projects[$i]->getTargetAmount())*100);
             $item = array(
                 "id"=>$projects[$i]->getId(),
                 "title"=>$projects[$i]->getTitle(),
@@ -55,8 +56,9 @@ class ProjectController extends Controller
                 "shortinfo"=>$projects[$i]->getShortinfo(),
                 "created_at"=>$projects[$i]->getCreatedAt(),
                 "targetAmount"=>$projects[$i]->getTargetAmount(),
-                "currentDonators"=>$projects[$i]->getCurrentDonators(),
-                "currentAmount"=>$projects[$i]->getCurrentAmount()
+                "currentAmount"=>$projects[$i]->getCurrentAmount(),
+                "progress"=>$progress,
+                "currentDonators"=>$projects[$i]->getCurrentDonators()
 
             );
             array_push($responseArray, $item);
