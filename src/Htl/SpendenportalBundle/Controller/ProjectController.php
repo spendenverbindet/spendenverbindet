@@ -83,6 +83,8 @@ class ProjectController extends Controller
             $project->setDescription($desciption);
             $project->setShortinfo($shortinfo);
             $project->setTargetAmount($targetAmount);
+            $project->setCurrentAmount(0);
+            $project->setCurrentDonators(0);
             $project->setCreatedAt($date);
             $project->setCategory($categoryId);
             $project->setUser($user);

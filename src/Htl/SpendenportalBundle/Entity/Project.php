@@ -80,14 +80,14 @@ class Project
     /**
      * @var string
      *
-     * @ORM\Column(name="current_amount", type="decimal", precision=10, scale=2, nullable=true)
+     * @ORM\Column(name="current_amount", type="decimal", precision=10, scale=2)
      */
     private $currentAmount;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="current_donators", nullable=true)
+     * @ORM\Column(name="current_donators")
      */
     private $currentDonators;
 
@@ -359,7 +359,7 @@ class Project
     /**
      * Set currentDonators
      *
-     * @param string $currentDonators
+     * @param integer $currentDonators
      *
      * @return ProjectAmount
      */
@@ -373,7 +373,7 @@ class Project
     /**
      * Get currentDonators
      *
-     * @return string
+     * @return integer
      */
     public function getCurrentDonators()
     {
