@@ -106,38 +106,22 @@ class User extends BaseUser
     private $locked;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="reports", type="integer")
-     *
-     * @ORM\OneToMany(targetEntity="Report", mappedBy="person")
+     * @ORM\OneToMany(targetEntity="Report", mappedBy="users")
      */
     private $reports;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="donations", type="integer")
-     *
-     * @ORM\OneToMany(targetEntity="Donation", mappedBy="person")
+     * @ORM\OneToMany(targetEntity="Donation", mappedBy="users")
      */
     private $donations;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="followers", type="integer")
-     *
-     * @ORM\OneToMany(targetEntity="Follower", mappedBy="person")
+     * @ORM\OneToMany(targetEntity="Follower", mappedBy="users")
      */
     private $followers;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="projects", type="integer")
-     *
-     * @ORM\OneToMany(targetEntity="Project", mappedBy="person")
+     * @ORM\OneToMany(targetEntity="Project", mappedBy="users")
      */
     private $projects;
     

@@ -18,10 +18,137 @@
         <default key="_controller">HtlSpendenportalBundle:Default:projektdetail</default>
     </route>
 
-    <!--  FERTL  -->
+    <!--                                        FERTL                                              -->
 
-    <route id="categories" path="/categories">
-        <default key="_controller">HtlSpendenportalBundle:Default:listCategories</default>
+    <!--  Category  -->
+    <route id="categories" path="/categories" methods="GET">
+        <default key="_controller">HtlSpendenportalBundle:Category:list</default>
     </route>
 
+    <route id="createCategories" path="/createCategory" methods="POST">
+        <default key="_controller">HtlSpendenportalBundle:Category:create</default>
+    </route>
+
+    <route id="updateCategories" path="/updateCategory/{categoryId}" methods="PUT">
+        <default key="_controller">HtlSpendenportalBundle:Category:update</default>
+    </route>
+
+    <route id="deleteCategories" path="/deleteCategory/{categoryId}" methods="DESTROY">
+        <default key="_controller">HtlSpendenportalBundle:Category:delete</default>
+    </route>
+
+    <!--  Donation  -->
+    <route id="createDonation" path="/createDonation" methods="POST">
+        <default key="_controller">HtlSpendenportalBundle:Donation:create</default>
+    </route>
+
+    <route id="updateDonation" path="/updateDonation/{donationId}"  methods="PUT">
+        <default key="_controller">HtlSpendenportalBundle:Category:update</default>
+    </route>
+
+    <route id="deleteCategories" path="/deleteDonation/{donationId}"  methods="DESTROY">
+        <default key="_controller">HtlSpendenportalBundle:Category:delete</default>
+    </route>
+
+    <!--  Follower  -->
+    <route id="listFromProjectFollower" path="/listFollowerFromProject/{projectId}" methods="GET">
+        <default key="_controller">HtlSpendenportalBundle:Follower:listFromProject</default>
+    </route>
+
+    <route id="createFollower" path="/createFollower" methods="POST">
+        <default key="_controller">HtlSpendenportalBundle:Follower:create</default>
+    </route>
+
+    <route id="updateFollower" path="/updateFollower/{followerId}" methods="PUT">
+        <default key="_controller">HtlSpendenportalBundle:Follower:update</default>
+    </route>
+
+    <route id="deleteFollower" path="/deleteFollower/{followerId}" methods="DESTROY">
+        <default key="_controller">HtlSpendenportalBundle:Follower:delete</default>
+    </route>
+
+    <!--  Picture  -->
+    <route id="listFromProjectPicture" path="/listPicturesFromProject/{projectId}" methods="GET">
+        <default key="_controller">HtlSpendenportalBundle:Picture:listFromProject</default>
+    </route>
+
+    <route id="createPicture" path="/createPicture" methods="POST">
+        <default key="_controller">HtlSpendenportalBundle:Picture:create</default>
+    </route>
+
+    <route id="updatePicture" path="/updatePicture/{pictureId}" methods="PUT">
+        <default key="_controller">HtlSpendenportalBundle:Picture:update</default>
+    </route>
+
+    <route id="deletePicture" path="/deletePicture/{pictureId}" methods="DESTROY">
+        <default key="_controller">HtlSpendenportalBundle:Picture:delete</default>
+    </route>
+
+    <!--  Post  -->
+    <route id="listFromProjectPost" path="/listPostsFromProject/{projectId}" methods="GET">
+        <default key="_controller">HtlSpendenportalBundle:Post:listFromProject</default>
+    </route>
+
+    <route id="createPost" path="/createPost" methods="POST">
+        <default key="_controller">HtlSpendenportalBundle:Post:create</default>
+    </route>
+
+    <route id="updatePost" path="/updatePost/{postId}" methods="PUT">
+        <default key="_controller">HtlSpendenportalBundle:Post:update</default>
+    </route>
+
+    <route id="deletePost" path="/deletePost/{postId}" methods="POST">
+        <default key="_controller">HtlSpendenportalBundle:Post:delete</default>
+    </route>
+
+    <!--  Project  -->
+    <route id="listProjects" path="/listProject/{categoryId}" methods="GET">
+        <default key="_controller">HtlSpendenportalBundle:Project:listFromCategory</default>
+    </route>
+
+    <route id="createProject" path="/createProject" methods="POST">
+        <default key="_controller">HtlSpendenportalBundle:Project:create</default>
+    </route>
+
+    <route id="updateProjects" path="/updateProject/{projectId}"  methods="PUT">
+        <default key="_controller">HtlSpendenportalBundle:Project:update</default>
+    </route>
+
+    <route id="deleteProjects" path="/deleteProject/{projectId}" methods="DESTROY">
+        <default key="_controller">HtlSpendenportalBundle:Project:delete</default>
+    </route>
+
+    <!--  Report  -->
+    <route id="listReports" path="/listReportsFromUser/{userId}" methods="GET">
+        <default key="_controller">HtlSpendenportalBundle:Report:listFromUser</default>
+    </route>
+
+    <route id="createReport" path="/createReport" methods="POST">
+        <default key="_controller">HtlSpendenportalBundle:Report:create</default>
+    </route>
+
+    <route id="updateReport" path="/updateReport/{reportId}"  methods="PUT">
+        <default key="_controller">HtlSpendenportalBundle:Report:update</default>
+    </route>
+
+    <route id="deleteReport" path="/deleteReport/{reportId}" methods="DESTROY">
+        <default key="_controller">HtlSpendenportalBundle:Report:delete</default>
+    </route>
+
+    <!--  User  -->
+    <route id="listUser" path="/listUser" methods="GET">
+        <default key="_controller">HtlSpendenportalBundle:User:list</default>
+    </route>
+
+    <route id="createUser" path="/createUser" methods="POST">
+        <default key="_controller">HtlSpendenportalBundle:User:create</default>
+    </route>
+
+    <route id="updateUser" path="/updateUser/{userId}"  methods="PUT">
+        <default key="_controller">HtlSpendenportalBundle:User:update</default>
+    </route>
+
+    <route id="deleteUser" path="/deleteUser/{userId}" methods="DESTROY">
+        <default key="_controller">HtlSpendenportalBundle:User:delete</default>
+    </route>
 </routes>

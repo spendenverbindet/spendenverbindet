@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Category
  *
  * @ORM\Table(name="category")
- * @ORM\Entity(repositoryClass="Backend\AdminBundle\Repository\CategoryRepository")
+ * @ORM\Entity(repositoryClass="Htl\SpendenportalBundle\Repository\CategoryRepository")
  */
 class Category
 {
@@ -18,8 +18,6 @@ class Category
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
-     *
-     * @ORM\OneToMany(targetEntity="Project", mappedBy="category")
      */
     private $id;
 
@@ -31,11 +29,7 @@ class Category
     private $categoryText;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="projects", type="integer")
-     *
-     * @ORM\OneToMany(targetEntity="Project", mappedBy="category")
+     * @ORM\OneToMany(targetEntity="Project", mappedBy="categorys")
      */
     private $projects;
 
@@ -100,53 +94,6 @@ class Category
     public function getProjects()
     {
         return $this->projects;
-    }
-    /**
-     * Set isDonator
-     *
-     * @param boolean $isDonator
-     *
-     * @return User
-     */
-    public function setIsDonator($isDonator)
-    {
-        $this->isDonator = $isDonator;
-
-        return $this;
-    }
-
-    /**
-     * Get isDonator
-     *
-     * @return boolean
-     */
-    public function getIsDonator()
-    {
-        return $this->isDonator;
-    }
-
-    /**
-     * Set mobilPassNumber
-     *
-     * @param string $mobilPassNumber
-     *
-     * @return User
-     */
-    public function setMobilPassNumber($mobilPassNumber)
-    {
-        $this->mobil_pass_number = $mobilPassNumber;
-
-        return $this;
-    }
-
-    /**
-     * Get mobilPassNumber
-     *
-     * @return string
-     */
-    public function getMobilPassNumber()
-    {
-        return $this->mobil_pass_number;
     }
 }
 

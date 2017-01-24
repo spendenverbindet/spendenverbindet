@@ -22,24 +22,23 @@ class Report
     private $id;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="users", type="integer")
-     *
      * @ORM\ManyToOne(targetEntity="User", inversedBy="reports")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     private $users;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="projects", type="integer")
-     *
      * @ORM\ManyToOne(targetEntity="Project", inversedBy="reports")
-     * @ORM\JoinColumn(name="project_id", referencedColumnName="projects")
+     * @ORM\JoinColumn(name="project_id", referencedColumnName="id")
      */
     private $projects;
+
+    /**
+     * @var \String
+     *
+     * @ORM\Column(name="reportText", type="string")
+     */
+    private $reportText;
 
     /**
      * @var \DateTime
@@ -47,14 +46,6 @@ class Report
      * @ORM\Column(name="reported_at", type="datetime")
      */
     private $reportedAt;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="amount_reports", type="smallint")
-     */
-    private $amountReports;
-
 
     /**
      * Get id
@@ -95,7 +86,7 @@ class Report
      *
      * @param integer $projects
      *
-     * @return Follower
+     * @return Report
      */
     public function setProjects($projects)
     {
@@ -112,6 +103,30 @@ class Report
     public function getProjects()
     {
         return $this->projects;
+    }
+    
+    /**
+     * Set reportText
+     *
+     * @param \String $reportText
+     *
+     * @return Report
+     */
+    public function setReportText($reportText)
+    {
+        $this->reportText = $reportText;
+
+        return $this;
+    }
+
+    /**
+     * Get reportText
+     *
+     * @return \String
+     */
+    public function getReportText()
+    {
+        return $this->reportText;
     }
 
     /**
@@ -137,29 +152,6 @@ class Report
     {
         return $this->reportedAt;
     }
-
-    /**
-     * Set amountReports
-     *
-     * @param integer $amountReports
-     *
-     * @return Report
-     */
-    public function setAmountReports($amountReports)
-    {
-        $this->amountReports = $amountReports;
     
-        return $this;
-    }
-
-    /**
-     * Get amountReports
-     *
-     * @return integer
-     */
-    public function getAmountReports()
-    {
-        return $this->amountReports;
-    }
 }
 

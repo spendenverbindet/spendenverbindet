@@ -31,7 +31,7 @@ class Project
     /**
      * @var sring
      * 
-     * @ORM\Column(name="picture", type="string")
+     * @ORM\Column(name="titlePictureUrl", type="string", nullable=true)
      */
     private $titlePictureUrl;
 
@@ -73,80 +73,52 @@ class Project
     /**
      * @var string
      *
-     * @ORM\Column(name="achieved_amount", type="decimal", precision=10, scale=2)
+     * @ORM\Column(name="achieved_amount", type="decimal", precision=10, scale=2, nullable=true)
      */
     private $achievedAmount;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="current_amount", type="decimal", precision=10, scale=2)
+     * @ORM\Column(name="current_amount", type="decimal", precision=10, scale=2, nullable=true)
      */
     private $currentAmount;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="users", type="integer")
-     *
      * @ORM\ManyToOne(targetEntity="user", inversedBy="projects")
-     * @ORM\JoinColumn(name="user_id", referencedColumnName="users")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     private $users;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="categorys", type="integer")
-     *
      * @ORM\ManyToOne(targetEntity="Category", inversedBy="projects")
-     * @ORM\JoinColumn(name="category_id", referencedColumnName="categorys")
+     * @ORM\JoinColumn(name="category_id", referencedColumnName="id")
      */
     private $categorys;
 
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="followers", type="integer")
-     *
-     * @ORM\OneToMany(targetEntity="Follower", mappedBy="project")
+     * @ORM\OneToMany(targetEntity="Follower", mappedBy="projects")
      */
     private $followers;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="reports", type="integer")
-     *
-     * @ORM\OneToMany(targetEntity="Report", mappedBy="project")
+     * @ORM\OneToMany(targetEntity="Report", mappedBy="projects")
      */
     private $reports;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="donations", type="integer")
-     *
-     * @ORM\OneToMany(targetEntity="Donation", mappedBy="project")
+     * @ORM\OneToMany(targetEntity="Donation", mappedBy="projects")
      */
     private $donations;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="posts", type="integer")
-     *
-     * @ORM\OneToMany(targetEntity="Post", mappedBy="project")
+     * @ORM\OneToMany(targetEntity="Post", mappedBy="projects")
      */
     private $posts;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="pictures", type="integer")
-     *
-     * @ORM\OneToMany(targetEntity="Picture", mappedBy="project")
+     * @ORM\OneToMany(targetEntity="Picture", mappedBy="projects")
      */
     private $pictures;
 
@@ -422,30 +394,6 @@ class Project
     public function getCategory()
     {
         return $this->categorys;
-    }
-
-    /**
-     * Set projectamounts
-     *
-     * @param integer $projectamounts
-     *
-     * @return Project
-     */
-    public function setFkProjectProjectAmountID($projectamounts)
-    {
-        $this->projectamounts = $projectamounts;
-    
-        return $this;
-    }
-
-    /**
-     * Get projectamounts
-     *
-     * @return integer
-     */
-    public function getProjectamount()
-    {
-        return $this->projectamounts;
     }
 
     /**

@@ -22,22 +22,14 @@ class Follower
     private $id;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="users", type="integer")
-     *
      * @ORM\ManyToOne(targetEntity="user", inversedBy="followers")
-     * @ORM\JoinColumn(name="user_id", referencedColumnName="users")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     private $users;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="projects", type="integer")
-     *
      * @ORM\ManyToOne(targetEntity="Project", inversedBy="followers")
-     * @ORM\JoinColumn(name="project_id", referencedColumnName="projects")
+     * @ORM\JoinColumn(name="project_id", referencedColumnName="id")
      */
     private $projects;
 

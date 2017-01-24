@@ -108,7 +108,7 @@ bazinga_faker:
                     mobil_pass_number: { method: randomElement, parameters: [ [ '0123456789', '4658374632' ] ] }
                     firstname: { method: firstNameMale }
                     lastname: { method: lastName }
-                    
+
 
 
 

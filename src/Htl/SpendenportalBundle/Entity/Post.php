@@ -43,10 +43,6 @@ class Post
     private $createdAt;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="projecs", type="integer")
-     *
      * @ORM\ManyToOne(targetEntity="Project", inversedBy="posts")
      * @ORM\JoinColumn(name="project_id", referencedColumnName="id")
      */

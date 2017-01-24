@@ -50,22 +50,14 @@ class Donation
     private $anonym;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="users", type="integer")
-     *
      * @ORM\ManyToOne(targetEntity="user", inversedBy="donations")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     private $users;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="projects", type="integer")
-     *
      * @ORM\ManyToOne(targetEntity="Project", inversedBy="donations")
-     * @ORM\JoinColumn(name="project_id", referencedColumnName="projects")
+     * @ORM\JoinColumn(name="project_id", referencedColumnName="id")
      */
     private $projects;
 
