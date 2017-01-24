@@ -16,7 +16,7 @@ class ProjectController extends Controller
 
 
         for($i=0;$i<count($projects);$i++){
-            $progress = floor(($projects[$i]->getCurrentAmount()-$projects[$i]->getTargetAmount())*100);
+            $progress = floor(($projects[$i]->getCurrentAmount()/$projects[$i]->getTargetAmount())*100);
             $item = array(
                 "id"=>$projects[$i]->getId(),
                 "title"=>$projects[$i]->getTitle(),
@@ -47,7 +47,7 @@ class ProjectController extends Controller
         $responseArray = array();
 
         for($i=0;$i<count($projects);$i++){
-            $progress = floor(($projects[$i]->getCurrentAmount()-$projects[$i]->getTargetAmount())*100);
+            $progress = floor(($projects[$i]->getCurrentAmount()/$projects[$i]->getTargetAmount())*100);
             $item = array(
                 "id"=>$projects[$i]->getId(),
                 "title"=>$projects[$i]->getTitle(),
