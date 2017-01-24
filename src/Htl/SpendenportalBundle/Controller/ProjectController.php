@@ -22,8 +22,8 @@ class ProjectController extends Controller
                 "shortinfo"=>$projects[$i]->getShortinfo(),
                 "created_at"=>$projects[$i]->getCreatedAt(),
                 "targetAmount"=>$projects[$i]->getTargetAmount(),
-                "CurrentAmount"=>$projects[$i]->getCurrentAmount(),
-                "CurrentDonators"=>$projects[$i]->getCurrentDonators()
+                "currentAmount"=>$projects[$i]->getCurrentAmount(),
+                "currentDonators"=>$projects[$i]->getCurrentDonators()
 
             );
             array_push($responseArray, $item);
