@@ -21,7 +21,10 @@ class ProjectController extends Controller
                 "description"=>$projects[$i]->getDescription(),
                 "shortinfo"=>$projects[$i]->getShortinfo(),
                 "created_at"=>$projects[$i]->getCreatedAt(),
-                "targetAmount"=>$projects[$i]->getTargetAmount()
+                "targetAmount"=>$projects[$i]->getTargetAmount(),
+                "CurrentAmount"=>$projects[$i]->getCurrentAmount(),
+                "CurrentDonators"=>$projects[$i]->getCurrentDonators()
+
             );
             array_push($responseArray, $item);
         }
@@ -47,7 +50,10 @@ class ProjectController extends Controller
                 "description"=>$projects[$i]->getDescription(),
                 "shortinfo"=>$projects[$i]->getShortinfo(),
                 "created_at"=>$projects[$i]->getCreatedAt(),
-                "targetAmount"=>$projects[$i]->getTargetAmount()
+                "targetAmount"=>$projects[$i]->getTargetAmount(),
+                "currentDonators"=>$projects[$i]->getCurrentDonators(),
+                "currentAmount"=>$projects[$i]->getCurrentAmount()
+
             );
             array_push($responseArray, $item);
         }
