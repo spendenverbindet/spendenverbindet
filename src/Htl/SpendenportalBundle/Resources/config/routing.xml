@@ -102,7 +102,11 @@
     </route>
 
     <!--  Project  -->
-    <route id="listProjects" path="/listProject/{categoryId}" methods="GET">
+    <route id="listProjects" path="/projects" methods="GET">
+        <default key="_controller">HtlSpendenportalBundle:Project:list</default>
+    </route>
+
+    <route id="listProjectsFromCategory" path="/listProjectsFromCategory/{categoryId}" methods="GET">
         <default key="_controller">HtlSpendenportalBundle:Project:listFromCategory</default>
     </route>
 

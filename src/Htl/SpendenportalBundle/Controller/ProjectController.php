@@ -3,10 +3,34 @@
 namespace Htl\SpendenportalBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
 class ProjectController extends Controller
 {
+    public function listAction(){
+        $projects = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:Project')->findAll();
+        
+        $responseArray = array();
+
+        for($i=0;$i<count($projects);$i++){
+            $item = array(
+                "id"=>$projects[$i]->getId(),
+                "title"=>$projects[$i]->getTitle(),
+                "titlePictureUrl"=>$projects[$i]->getTitlePictureUrl(),
+                "description"=>$projects[$i]->getDescription(),
+                "shortinfo"=>$projects[$i]->getShortinfo(),
+                "created_at"=>$projects[$i]->getCreatedAt(),
+                "targetAmount"=>$projects[$i]->getTargetAmount()
+            );
+            array_push($responseArray, $item);
+        }
+
+        $responseArray = (object) $responseArray;
+
+        return new JsonResponse($responseArray);
+    }
+    
     public function listFromCategoryAction($categoryId){
         $category = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:Category')->find($categoryId);
 

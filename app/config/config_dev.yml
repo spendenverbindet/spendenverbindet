@@ -33,4 +33,4 @@ monolog:
 #swiftmailer:
 #    delivery_address: me@example.com
 
-bazinga_faker: ~
+#bazinga_faker: ~

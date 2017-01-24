@@ -90,24 +90,24 @@ assetic:
         #jpegoptim:
         #    bin: path/to/jpegoptim
 
-bazinga_faker:
-    orm: doctrine
-    entities:
-            Htl\SpendenportalBundle\Entity\User:
-                number: 5
-                custom_formatters:
-                    username:   { method: firstNameMale }
-                    usernameCanonical: { method: firstNameMale }
-                    email: { method: email }
-                    emailCanonical: { method: email }
-                    enabled: { method: boolean, parameters: [ 100 ] }
-                    password: { method: randomElement, parameters: [ [ '$2y$13$fq1D.EUzUYPAd5yCNQciK.X3b83fS1MhgDBkgZbrhjhULxE9sZTEe' ] ] }
-                    lastLogin: { method: dateTime, parameters: [ 'now', 'UTC' ] }
-                    #roles: müssen per console hinzugefügt werden
-                    isDonator: { method: boolean, parameters: [ 100 ] }
-                    mobil_pass_number: { method: randomElement, parameters: [ [ '0123456789', '4658374632' ] ] }
-                    firstname: { method: firstNameMale }
-                    lastname: { method: lastName }
+#bazinga_faker:
+#    orm: doctrine
+#    entities:
+#            Htl\SpendenportalBundle\Entity\User:
+#                number: 5
+#                custom_formatters:
+#                    username:   { method: firstNameMale }
+#                    usernameCanonical: { method: firstNameMale }
+#                    email: { method: email }
+#                    emailCanonical: { method: email }
+#                    enabled: { method: boolean, parameters: [ 100 ] }
+#                    password: { method: randomElement, parameters: [ [ '$2y$13$fq1D.EUzUYPAd5yCNQciK.X3b83fS1MhgDBkgZbrhjhULxE9sZTEe' ] ] }
+#                    lastLogin: { method: dateTime, parameters: [ 'now', 'UTC' ] }
+#                    #roles: müssen per console hinzugefügt werden
+#                    isDonator: { method: boolean, parameters: [ 100 ] }
+#                    mobil_pass_number: { method: randomElement, parameters: [ [ '0123456789', '4658374632' ] ] }
+#                    firstname: { method: firstNameMale }
+#                    lastname: { method: lastName }
 
 
 
