@@ -94,7 +94,7 @@ class ProjectController extends Controller
         }
     }
 
-    public function updateAction($projectId, $title, $desciption, $shortinfo, $categoryId, $user, $targetAmount, $titlePictureUrl, $active){
+    public function updateAction($projectId, $title, $desciption, $shortinfo, $categoryId, $user, $targetAmount, $currentAmount, $titlePictureUrl, $active){
 
         $em = $this->getDoctrine()->getManager();
         $project = $em->getRepository('HtlSpendenportalBundle:Project')->find($projectId);
@@ -110,6 +110,7 @@ class ProjectController extends Controller
         $project->setDescription($desciption);
         $project->setShortinfo($shortinfo);
         $project->setTargetAmount($targetAmount);
+        $project->setCurrentAmount($currentAmount);
         $project->setCategory($categoryId);
         $project->setUser($user);
         $project->setActive($active);

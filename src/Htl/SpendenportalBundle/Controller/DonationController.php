@@ -46,6 +46,10 @@ class DonationController extends Controller
             $donation->setAnonym(false);
             $donation->setProjects($projectId);
             $donation->setUsers($userId);
+            $currentAmount = $projectId->getCurrentAmount();
+            $currentDonators = $projectId->getCurrentDonators();
+            $projectId->setCurrentAmount($currentAmount + $amount);
+            $projectId->setCurrentAmount($currentDonators + 1);
 
 
 

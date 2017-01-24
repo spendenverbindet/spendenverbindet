@@ -85,6 +85,14 @@ class Project
     private $currentAmount;
 
     /**
+     * @var integer
+     *
+     * @ORM\Column(name="current_donators", nullable=true)
+     */
+    private $currentDonators;
+
+
+    /**
      * @ORM\ManyToOne(targetEntity="user", inversedBy="projects")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
@@ -347,6 +355,31 @@ class Project
     {
         return $this->currentAmount;
     }
+    
+    /**
+     * Set currentDonators
+     *
+     * @param string $currentDonators
+     *
+     * @return ProjectAmount
+     */
+    public function setCurrentDonators($currentDonators)
+    {
+        $this->currentDonators = $currentDonators;
+
+        return $this;
+    }
+
+    /**
+     * Get currentDonators
+     *
+     * @return string
+     */
+    public function getCurrentDonators()
+    {
+        return $this->currentDonators;
+    }
+
 
     /**
      * Set users
