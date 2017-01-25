@@ -1,6 +1,11 @@
+{% embed "HtlSpendenportalBundle::header.html.twig" %}
+    {# override the title-tag text #}
+    {% block title_text %}
+        Spendenverbindet | Login
+    {% endblock %}
+{% endembed %}
 
-
-
+<div class="helper-navbar"></div>
 
 
         <div>
@@ -24,10 +29,13 @@
             {% endfor %}
         {% endif %}
 
+
         <div>
             {% block fos_user_content %}
             {% endblock fos_user_content %}
         </div>
+
+
 
 
 {% include "HtlSpendenportalBundle::footer.html.twig" %}
