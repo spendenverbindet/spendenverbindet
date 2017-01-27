@@ -38,14 +38,14 @@ class Project
     /**
      * @var string
      *
-     * @ORM\Column(name="description", type="string", length=255)
+     * @ORM\Column(name="description", type="text")
      */
     private $description;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="shortinfo", type="text", nullable=true)
+     * @ORM\Column(name="shortinfo", type="string", length=255)
      */
     private $shortinfo;
 

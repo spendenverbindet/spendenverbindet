@@ -68,7 +68,7 @@
     </route>
 
     <!--  Picture  -->
-    <route id="listFromProjectPicture" path="/listPicturesFromProject/{projectId}" methods="GET">
+    <route id="listFromProjectPicture" path="/pictures/{projectId}" methods="GET">
         <default key="_controller">HtlSpendenportalBundle:Picture:listFromProject</default>
     </route>
 
@@ -85,7 +85,7 @@
     </route>
 
     <!--  Post  -->
-    <route id="listFromProjectPost" path="/listPostsFromProject/{projectId}" methods="GET">
+    <route id="listFromProjectPost" path="/posts/{projectId}" methods="GET">
         <default key="_controller">HtlSpendenportalBundle:Post:listFromProject</default>
     </route>
 

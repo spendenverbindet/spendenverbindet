@@ -1,0 +1,26 @@
+{% embed "BackendAdminBundle::header.html.twig" %}
+
+    {# override the title-tag text #}
+    {% block title_text %}
+        Projektbearbeitung
+    {% endblock %}
+
+    {# override the nav_active property #}
+    {% block project_nav %}
+        class="active"
+    {% endblock %}
+
+{% endembed %}
+<div class="container-fluid">
+    <div class="col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
+        <button class="btn">Hinzufügen</button>
+        <ul>
+            <li></li> <!-- ng-repeat -->
+        </ul>
+    </div>
+</div>
+
+
+
+
+{% include "BackendAdminBundle::footer.html.twig" %}

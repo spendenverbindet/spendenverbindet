@@ -15,7 +15,9 @@ class PictureController extends Controller
         $responseArray = array();
 
         for($i=0;$i<count($picture);$i++){
-            $item = array("id"=>$picture[$i]->getId(), "pictureUrl"=>$picture[$i]->getPictureUrl(), "created_at"=>$picture[$i]->getCreatedAt());
+            $item = array("id"=>$picture[$i]->getId(),
+                          "pictureUrl"=>$picture[$i]->getPictureUrl(),
+                          "created_at"=>$picture[$i]->getCreatedAt());
             array_push($responseArray, $item);
         }
 
