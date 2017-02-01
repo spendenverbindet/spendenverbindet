@@ -13,8 +13,6 @@ class ProjectController extends Controller
         
         $responseArray = array();
 
-
-
         for($i=0;$i<count($projects);$i++){
             $progress = floor(($projects[$i]->getCurrentAmount()/$projects[$i]->getTargetAmount())*100);
             $item = array(
