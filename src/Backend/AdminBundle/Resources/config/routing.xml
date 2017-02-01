@@ -21,4 +21,10 @@
     <route id="backend_admin_editpage_project" path="/projects/1">
         <default key="_controller">BackendAdminBundle:Project:show</default>
     </route>
+
+    <!--   Category Controller   -->
+    <route id="backend_admin_listpage_category" path="/categories">
+        <default key="_controller">BackendAdminBundle:Category:index</default>
+    </route>
+
 </routes>

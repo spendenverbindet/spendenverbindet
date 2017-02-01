@@ -26,7 +26,6 @@ class ProjectController extends Controller
                 "currentAmount"=>$projects[$i]->getCurrentAmount(),
                 "progress"=>$progress,
                 "currentDonators"=>$projects[$i]->getCurrentDonators()
-
             );
             array_push($responseArray, $item);
         }

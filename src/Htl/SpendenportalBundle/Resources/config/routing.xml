@@ -148,6 +148,10 @@
         <default key="_controller">HtlSpendenportalBundle:User:listAll</default>
     </route>
 
+    <route id="listUserBackend" path="/backend/users" methods="GET">
+        <default key="_controller">HtlSpendenportalBundle:User:listAllBackend</default>
+    </route>
+
     <route id="listSpecificUser" path="/users/{{uderId}}" methods="GET">
         <default key="_controller">HtlSpendenportalBundle:User:listSpecific</default>
     </route>
