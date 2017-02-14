@@ -29,23 +29,18 @@ class User extends BaseUser
 
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(name="BeduerftigkeitsbeweisFile", type="string", nullable=true)
      *
-     * @Assert\NotBlank(message="Please enter your mobilpass-number.", groups={"Registration", "Profile"})
-     * @Assert\Length(
-     *     min=10,
-     *     max=10,
-     *     minMessage="The number is too short.",
-     *     maxMessage="The number is too long.",
-     *     groups={"Registration", "Profile"}
-     * )
+     * @Assert\NotBlank(message="Please, upload the product brochure as a PDF file.")
+     * @Assert\File(mimeTypes={ "application/pdf" })
      */
-    protected $mobil_pass_number;
+    private $fileUpload;
+
 
     /**
      * @var string
      *
-     * @ORM\Column(name="firstname", type="string", length=40)
+     * @ORM\Column(name="firstname", type="string", length=50)
      */
     private $firstname;
 
@@ -57,9 +52,9 @@ class User extends BaseUser
     private $lastname;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="age", type="integer")
+     * @var string
+     * @ORM\Column(name="year_of_birth", type="string")
+     * @Assert\DateTime()
      */
     private $age;
 
@@ -80,30 +75,24 @@ class User extends BaseUser
     /**
      * @var string
      *
-     * @ORM\Column(name="housenumber", type="string", length=20, nullable=true)
+     * @ORM\Column(name="housenumber_doornumber", type="string", length=20, nullable=true)
      */
-    private $housenumber;
+    
+    private $housenumberDoornumber;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="reg_date", type="datetime")
+     * @ORM\Column(name="reg_date", type="datetime", nullable=true)
      */
     private $regDate;
-
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="expires_at", type="datetime")
-     */
-    private $expiresAt;
 
     /**
      * @var bool
      *
      * @ORM\Column(name="locked", type="boolean")
      */
-    private $locked;
+    private $locked = true;
 
     /**
      * @ORM\OneToMany(targetEntity="Report", mappedBy="users")
@@ -156,29 +145,23 @@ class User extends BaseUser
         return $this->isDonator;
     }
 
-    /**
-     * Set mobilPassNumber
-     *
-     * @param string $mobilPassNumber
-     *
-     * @return User
-     */
-    public function setMobilPassNumber($mobilPassNumber)
+
+    public function getFileUpload()
     {
-        $this->mobil_pass_number = $mobilPassNumber;
+        return $this->fileUpload;
+    }
+
+    public function setFileUpload($fileUpload)
+    {
+        $this->fileUpload = $fileUpload;
 
         return $this;
     }
 
-    /**
-     * Get mobilPassNumber
-     *
-     * @return string
-     */
-    public function getMobilPassNumber()
-    {
-        return $this->mobil_pass_number;
-    }
+
+
+
+
 
     /**
      * Get id
@@ -335,27 +318,27 @@ class User extends BaseUser
     }
 
     /**
-     * Set housenumber
+     * Set housenumberDoornumber
      *
-     * @param string $housenumber
+     * @param string $housenumberDoornumber
      *
      * @return Person
      */
-    public function setHousenumber($housenumber)
+    public function setHousenumberDoornumber($housenumberDoornumber)
     {
-        $this->housenumber = $housenumber;
+        $this->housenumberDoornumber = $housenumberDoornumber;
 
         return $this;
     }
 
     /**
-     * Get housenumber
+     * Get housenumberDoornumber
      *
      * @return string
      */
-    public function getHousenumber()
+    public function getHousenumberDoornumber()
     {
-        return $this->housenumber;
+        return $this->housenumberDoornumber;
     }
 
     /**
@@ -549,4 +532,5 @@ class User extends BaseUser
     {
         return $this->projects;
     }
+
 }

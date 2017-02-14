@@ -15,7 +15,7 @@ class DefaultController extends Controller
         return $this->render('HtlSpendenportalBundle::entdecken.html.twig');
     }
 
-    public function projektdetailAction(){
+    public function projektAction(){
         return $this->render('HtlSpendenportalBundle::projektdetail.html.twig');
     }
 

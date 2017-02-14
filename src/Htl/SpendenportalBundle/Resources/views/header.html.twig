@@ -32,7 +32,7 @@
                 <span class="icon-bar"></span>
             </button>
 
-            <a class="brand" href="./">
+            <a class="brand" href="/">
                <img class="sv-nav-logo" src="{{ asset('bundles/htlspendenportal/img/logo.png') }}" width="200" alt="logo">
             </a>
 
@@ -42,7 +42,7 @@
             <ul class="nav navbar-nav sv-remove-margin">
 
                 {% if is_granted('ROLE_RECEIVER') == false %}
-                    <li><a href="./entdecken">ENTDECKEN</a></li>
+                    <li><a id="entdecken_id" href="/entdecken">ENTDECKEN</a></li>
                     <li><a href="#">BESTENLISTE</a></li>
                 {% endif %}
                 {% if is_granted('ROLE_DONATOR') %}
@@ -56,10 +56,10 @@
             </ul>
             <ul class="nav navbar-nav navbar-right sv-remove-margin">
                 {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-                    <li><a href="./logout">LOGOUT</a></li>
+                    <li><a href="/logout">LOGOUT</a></li>
                 {% else %}
-                    <li><a href="./login">ANMELDEN</a></li>
-                    <li><a href="./register">REGISTRIEREN</a></li>
+                    <li><a id="login_id" href="/login">ANMELDEN</a></li>
+                    <li><a id="register_id" href="/register">REGISTRIEREN</a></li>
                 {% endif %}
 
             </ul>

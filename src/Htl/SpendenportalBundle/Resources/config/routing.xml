@@ -14,8 +14,8 @@
         <default key="_controller">HtlSpendenportalBundle:Default:entdecken</default>
     </route>
 
-    <route id="htl_spendenportal_projektdetail" path="/projektdetail">
-        <default key="_controller">HtlSpendenportalBundle:Default:projektdetail</default>
+    <route id="htl_spendenportal_projekt" path="/projekt/{projectname}">
+        <default key="_controller">HtlSpendenportalBundle:Default:projekt</default>
     </route>
 
     <!--                                        FERTL                                              -->

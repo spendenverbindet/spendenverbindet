@@ -5,6 +5,10 @@
     {% endblock %}
 {% endembed %}
 
+<script>
+    document.getElementById("entdecken_id").style["color"] = "#47A1DE";
+</script>
+
 <div class="helper-navbar"></div>
 
 <div class="container">
@@ -70,8 +74,8 @@
 
     <div ng-repeat="projectspart in projectsPrepared" class="row">
 
-        <div ng-repeat="project in projectspart" class="col-xs-12 col-sm-4" style="padding:50px;">
-
+        <div ng-click="redirectToProjekt([[project.id]],[[project.title]])" ng-repeat="project in projectspart" class="col-xs-12 col-sm-4" style="padding:50px;">
+            <div class="clickable">
             <img src="{{ asset('bundles/htlspendenportal/img/[[project.titlePictureUrl]]') }}" alt="">
 
             <h3>[[project.title]]</h3>
@@ -95,6 +99,7 @@
                     <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Spender</td>
                 </tr>
             </table>
+            </div>
         </div>
 
     </div>

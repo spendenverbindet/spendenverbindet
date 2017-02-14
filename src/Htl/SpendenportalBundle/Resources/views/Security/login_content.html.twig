@@ -1,24 +1,35 @@
+<script>
+    document.getElementById("login_id").style["color"] = "#47A1DE";
+    document.title = "Spendenverbindet | Login";
+</script>
+
 {% trans_default_domain 'FOSUserBundle' %}
 
 {% if error %}
     <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
 {% endif %}
 
-<form action="{{ path("fos_user_security_check") }}" method="post">
+<form style="border-width:0;margin-top:50px;margin-bottom: 100px;" action="{{ path("fos_user_security_check") }}" method="post">
     {% if csrf_token %}
         <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
     {% endif %}
 
-    <h2>ANMELDEN</h2>
-
-    <label for="username">{{ 'security.login.username'|trans }}</label>
-    <input type="text" id="username" name="_username" value="{{ last_username }}" required="required" />
-
-    <label for="password">{{ 'security.login.password'|trans }}</label>
-    <input type="password" id="password" name="_password" required="required" />
-
-    <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
-    <label for="remember_me">{{ 'security.login.remember_me'|trans }}</label>
-
-    <input type="submit" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans }}" />
+        <div class="row text-center">
+            <h2>ANMELDEN</h2>
+        </div>
+        <div class="row text-center">
+            <input style="margin:10px;padding:5px;width:250px;border:1px solid black;" placeholder="Benutzername" type="text" id="username" name="_username" value="{{ last_username }}" required="required" />
+        </div>
+        <div class="row text-center">
+            <input style="margin:10px;padding:5px;width:250px;border:1px solid black;margin-bottom: 0;" placeholder="Passwort" type="password" id="password" name="_password" required="required" />
+        </div>
+        <div class="row" style="padding-left:19px;">
+            <a href="#" style="color: #47A1DE;font-size: 10pt;">Passwort vergessen?</a>
+        </div>
+        <div class="row text-left" style="margin-top:10px;padding-left:23px;">
+             <input type="checkbox" id="remember_me" name="_remember_me" value="on" /> Erinnere dich an mich
+        </div>
+        <div class="row text-center">
+            <input style="margin-top:40px" class="folgen-detail-btn" type="submit" id="_submit" name="_submit" value="Anmelden" />
+        </div>
 </form>

@@ -12,8 +12,19 @@ class RegistrationType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        //$builder->add('isDonator');
-        $builder->add('mobil_pass_number');
+
+        $builder->add('firstname');
+
+        $builder->add('lastname');
+
+        $builder->add('age');
+
+        $builder->add('street');
+
+        $builder->add('zipcode');
+
+        $builder->add('housenumberDoornumber');
+
 
         $builder->add('isDonator',ChoiceType::class,
         array('choices' => array(
@@ -21,6 +32,7 @@ class RegistrationType extends AbstractType
             'Empfänger' => '0'),
             'choices_as_values' => true,'multiple'=>false,'expanded'=>true));
 
+        $builder->add('fileUpload');
 
     }
 

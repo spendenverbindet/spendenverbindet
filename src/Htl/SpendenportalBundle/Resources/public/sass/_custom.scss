@@ -382,6 +382,10 @@ input:focus{
   padding-bottom: 25px;
 }
 
+.clickable:hover {
+  cursor: pointer;
+}
+
 /* projektdetail seite */
 
 button:focus {
@@ -418,7 +422,7 @@ button:focus {
 
   /* navbar */
 
-  .navbar {
+    .navbar {
     min-height: $navbar-height-screen;
   }
 
@@ -429,9 +433,11 @@ button:focus {
   }
 
   .sv-nav-logo {
-    margin-top: ($navbar-height-screen / 2) - ( $logo-height / 2);
+    /* margin-top: ($navbar-height-screen / 2) - ( $logo-height / 2); */
     padding-right: 20px;
+    margin-top: 52px;
   }
+
 
   /* uk-slideshow */
 
