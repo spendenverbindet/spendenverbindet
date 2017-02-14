@@ -4,10 +4,11 @@ namespace Htl\SpendenportalBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class UserController extends Controller
 {
-    public function listAll($userId){
+    public function listAllAction(){
         $user = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:User')->findAll();
 
 
@@ -22,13 +23,47 @@ class UserController extends Controller
                 "emailCanonical"=>$user[$i]->getEmailCanonical(),
                 "enable"=>$user[$i]->getEnabled(),
                 "password"=>$user[$i]->getPassword(),
-                "role"=>$user[$i]->getRole(),
+                "role"=>$user[$i]->getRoles(),
                 "mobil_pass_number"=>$user[$i]->getMobilPassNumber(),
                 "firstname"=>$user[$i]->getFirstname(),
                 "lastname"=>$user[$i]->getLastname(),
                 "street"=>$user[$i]->getStreet(),
                 "zipcode"=>$user[$i]->getZipcode(),
-                "housenumber"=>$user[$i]->getHousnumber(),
+                "housenumber"=>$user[$i]->getHousenumber(),
+            );
+            array_push($responseArray, $item);
+        }
+
+        $responseArray = (object) $responseArray;
+
+        return new JsonResponse($responseArray);
+    }
+
+    public function listAllBackendAction(){
+        $user = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:User')->findAll();
+        
+
+        $responseArray = array();
+
+        for($i=0;$i<count($user);$i++){
+            $item = array(
+                "id"=>$user[$i]->getId(),
+                "username"=>$user[$i]->getUsername(),
+                "usernameCanonical"=>$user[$i]->getUsernameCanonical(),
+                "email"=>$user[$i]->getEmail(),
+                "emailCanonical"=>$user[$i]->getEmailCanonical(),
+                "enable"=>$user[$i]->getEnabled(),
+                "password"=>$user[$i]->getPassword(),
+                "role"=>$user[$i]->getRoles(),
+                "mobil_pass_number"=>$user[$i]->getMobilPassNumber(),
+                "firstname"=>$user[$i]->getFirstname(),
+                "lastname"=>$user[$i]->getLastname(),
+                "street"=>$user[$i]->getStreet(),
+                "age"=>$user[$i]->getAge(),
+                "zipcode"=>$user[$i]->getZipcode(),
+                "housenumber"=>$user[$i]->getHousenumber(),
+                "amountProjects"=>count($user[$i]->getProjects()),
+                "currentAmount"=>$user[$i]->getProjects()
             );
             array_push($responseArray, $item);
         }
@@ -52,13 +87,13 @@ class UserController extends Controller
                 "emailCanonical"=>$user[$i]->getEmailCanonical(),
                 "enable"=>$user[$i]->getEnabled(),
                 "password"=>$user[$i]->getPassword(),
-                "role"=>$user[$i]->getRole(),
+                "role"=>$user[$i]->getRoles(),
                 "mobil_pass_number"=>$user[$i]->getMobilPassNumber(),
                 "firstname"=>$user[$i]->getFirstname(),
                 "lastname"=>$user[$i]->getLastname(),
                 "street"=>$user[$i]->getStreet(),
                 "zipcode"=>$user[$i]->getZipcode(),
-                "housenumber"=>$user[$i]->getHousnumber(),
+                "housenumber"=>$user[$i]->getHousenumber(),
             );
             array_push($responseArray, $item);
         }

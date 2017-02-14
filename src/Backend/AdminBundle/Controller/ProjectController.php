@@ -13,24 +13,15 @@ class ProjectController extends Controller
     {
 
         $projects = $this->getDoctrine()
-            ->getRepository('HtlSpendenportalBundle:ProjectAmount')->findAll();
+            ->getRepository('HtlSpendenportalBundle:Project')->findAll();
 
-        /*
-        $projectamounts = $this->getDoctrine()
-            ->getRepository('AppBundle:projectamount')
-            ->findOneByIdJoinedToCategory($id);
-
-        $projectamount = $projectamounts->getProjects();
-        */
         if (!$projects) {
             throw $this->createNotFoundException(
                 'No product found for id '
             );
         }
 
-        return $this->render('BackendAdminBundle::listProjects.html.twig', array(
-            'projects' => $projects,
-        ));
+        return $this->render('BackendAdminBundle::listProjects.html.twig');
     }
 
     /**

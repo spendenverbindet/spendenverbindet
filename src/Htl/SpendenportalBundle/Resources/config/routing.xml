@@ -38,6 +38,10 @@
     </route>
 
     <!--  Donation  -->
+    <route id="createDonation" path="/donations" methods="POST">
+        <default key="_controller">HtlSpendenportalBundle:Donation:list</default>
+    </route>
+
     <route id="createDonation" path="/createDonation" methods="POST">
         <default key="_controller">HtlSpendenportalBundle:Donation:create</default>
     </route>
@@ -51,7 +55,7 @@
     </route>
 
     <!--  Follower  -->
-    <route id="listFromProjectFollower" path="/listFollowerFromProject/{projectId}" methods="GET">
+    <route id="listFromProjectFollower" path="/followers/{projectId}" methods="GET">
         <default key="_controller">HtlSpendenportalBundle:Follower:listFromProject</default>
     </route>
 
@@ -123,7 +127,7 @@
     </route>
 
     <!--  Report  -->
-    <route id="listReports" path="/listReportsFromUser/{userId}" methods="GET">
+    <route id="listReports" path="/reports/{userId}" methods="GET">
         <default key="_controller">HtlSpendenportalBundle:Report:listFromUser</default>
     </route>
 
@@ -140,8 +144,16 @@
     </route>
 
     <!--  User  -->
-    <route id="listUser" path="/listUser" methods="GET">
-        <default key="_controller">HtlSpendenportalBundle:User:list</default>
+    <route id="listUser" path="/users" methods="GET">
+        <default key="_controller">HtlSpendenportalBundle:User:listAll</default>
+    </route>
+
+    <route id="listUserBackend" path="/backend/users" methods="GET">
+        <default key="_controller">HtlSpendenportalBundle:User:listAllBackend</default>
+    </route>
+
+    <route id="listSpecificUser" path="/users/{{uderId}}" methods="GET">
+        <default key="_controller">HtlSpendenportalBundle:User:listSpecific</default>
     </route>
 
     <route id="createUser" path="/createUser" methods="POST">

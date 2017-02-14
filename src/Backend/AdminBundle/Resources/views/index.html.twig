@@ -25,18 +25,17 @@
                 <th>Letzte Anmeldung</th>
             </tr>
 
-            {% for person in persons %}
-            <tr>
-                <td>Spender</td>
-                <td>{{ person.username }}</td>
-                <td>{{ person.email }}</td>
-                <td>{{ person.age }}</td>
-                <td>Wien</td>
-                <td>-</td>
+
+            <tr data-ng-repeat="user in users">
+                <td>[[ user.role[0] ]]</td>
+                <td>[[ user.username ]]</td>
+                <td>[[ user.email ]]</td>
+                <td>[[ user.age ]]</td>
+                <td>[[ user.zipcode ]]</td>
+                <td>[[ user.amountProjects ]]</td>
                 <td>5000</td>
                 <td>15.09.2017</td>
             </tr>
-            {% endfor %}
         </table>
 
         <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">

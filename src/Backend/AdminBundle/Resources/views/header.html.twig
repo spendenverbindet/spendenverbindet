@@ -5,6 +5,9 @@
 
     <title>{% block title_text %} SV Backend {% endblock %}</title>
 
+    <!-- Tab Icon -->
+    <!--<link rel="icon" href="./public/img/logo_icon.ico">-->
+
     <link rel="stylesheet" href="{{ asset('bundles/backendadmin/bower_components/bootstrap/dist/css/bootstrap.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('bundles/backendadmin/css/sv-backend.css') }}" />
 
@@ -16,10 +19,10 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-6">
             <ul class="nav navbar-nav">
                 <li {% block user_nav %}{% endblock %}><a href="/backend/">User</a></li>
-                <li {% block project_nav %}{% endblock %}><a href="#">Projekte</a></li>
-                <li {% block report_nav %}{% endblock %}><a href="#">Berichte</a></li>
-                <li {% block meldung_nav %}{% endblock %}><a href="#">Meldungen</a></li>
-                <li {% block category_nav %}{% endblock %}><a href="#">Kategorien</a></li>
+                <li {% block project_nav %}{% endblock %}><a href="/backend/projects">Projekte</a></li>
+                <li {% block report_nav %}{% endblock %}><a href="/backend/reports">Berichte</a></li>
+                <li {% block meldung_nav %}{% endblock %}><a href="/backend/report">Meldungen</a></li>
+                <li {% block category_nav %}{% endblock %}><a href="/backend/categories">Kategorien</a></li>
             </ul>
         </div>
     </div>

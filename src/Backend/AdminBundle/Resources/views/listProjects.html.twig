@@ -2,7 +2,7 @@
 
     {# override the title-tag text #}
     {% block title_text %}
-        User
+        Projekte
     {% endblock %}
 
     {# override the nav_active property #}
@@ -20,23 +20,20 @@
                 <th>Spenderanzahl</th>
                 <th>Zielbetrag</th>
                 <th>Erreichte Spenden</th>
-                <th>Zieldatum des Projekts</th>
                 <th>Kategorie</th>
-                <th>Letzte Spnden</th>
+                <th>Letzte Spenden</th>
             </tr>
 
-            {% for project in projects %}
-            <tr>    <!-- data-ng-repeat="user in users" -->
-                <td>{{ project.title }}</td>
-                <td>Seiferich</td>
-                <td>5</td>
-                <td>50</td>
-                <td>40</td>
-                <td>{{ project.deadline | date('d.m.Y') }}</td>
-                <td>Schulsachen</td>
+
+            <tr data-ng-repeat="project in projects">
+                <td>[[ project.title ]]</td>
+                <td>-</td>
+                <td>[[ project.currentDonators ]]</td>
+                <td>[[ project.targetAmount ]] €</td>
+                <td>[[ project.currentAmount ]] €</td>
+                <td>[[ project.categorie ]]</td>
                 <td>15.08.2017</td>
             </tr>
-            {% endfor %}
         </table>
     </div>
 </div>

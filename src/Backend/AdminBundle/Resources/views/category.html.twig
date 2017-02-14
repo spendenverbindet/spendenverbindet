@@ -14,8 +14,8 @@
 <div class="container-fluid">
     <div class="col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
         <button class="btn">Hinzufügen</button>
-        <ul>
-            <li></li> <!-- ng-repeat -->
+        <ul data-ng-repeat="category in categorys">
+            <li>[[ category.name ]]</li>
         </ul>
     </div>
 </div>
