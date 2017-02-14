@@ -34,6 +34,35 @@ class ProjectController extends Controller
 
         return new JsonResponse($responseArray);
     }
+
+    public function listBackendAction(){
+        $projects = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:Project')->findAll();
+
+        $responseArray = array();
+
+        for($i=0;$i<count($projects);$i++){
+            $progress = floor(($projects[$i]->getCurrentAmount()/$projects[$i]->getTargetAmount())*100);
+            $item = array(
+                "id"=>$projects[$i]->getId(),
+                "title"=>$projects[$i]->getTitle(),
+                "titlePictureUrl"=>$projects[$i]->getTitlePictureUrl(),
+                "description"=>$projects[$i]->getDescription(),
+                "shortinfo"=>$projects[$i]->getShortinfo(),
+                "created_at"=>$projects[$i]->getCreatedAt()->format('d.m.Y'),
+                "targetAmount"=>$projects[$i]->getTargetAmount(),
+                "currentAmount"=>$projects[$i]->getCurrentAmount(),
+                "progress"=>$progress,
+                "currentDonators"=>$projects[$i]->getCurrentDonators(),
+                "username"=>$projects[$i]->getUsers()->getUsername(),
+                "category"=>$projects[$i]->getCategory()->getCategoryText()
+            );
+            array_push($responseArray, $item);
+        }
+
+        $responseArray = (object) $responseArray;
+
+        return new JsonResponse($responseArray);
+    }
     
     public function listFromCategoryAction($categoryId){
         $category = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:Category')->find($categoryId);

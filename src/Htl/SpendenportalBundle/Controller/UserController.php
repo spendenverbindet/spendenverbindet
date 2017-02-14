@@ -63,7 +63,7 @@ class UserController extends Controller
                 "zipcode"=>$user[$i]->getZipcode(),
                 "housenumber"=>$user[$i]->getHousenumber(),
                 "amountProjects"=>count($user[$i]->getProjects()),
-                "currentAmount"=>$user[$i]->getProjects()
+                "currentAmount"=>$user[$i]
             );
             array_push($responseArray, $item);
         }

@@ -17,15 +17,15 @@ app.controller('backendController', function($scope, $http) {
             $scope.users.push(response.data[u]);
         }
 
-        //console.log($scope.users);
+        console.log($scope.users);
 
     }, function errorCallback(response) {
-
+        console.log("hellO");
     });
 
     $http({
         method: 'GET',
-        url: '/projects'
+        url: '/backend/allprojects'
     }).then(function successCallback(response) {
 
         $scope.projects = [];
@@ -50,8 +50,6 @@ app.controller('backendController', function($scope, $http) {
         for(var u=0;u<Object.keys(response.data).length;u++){
             $scope.categorys.push(response.data[u]);
         }
-
-        console.log($scope.categorys);
 
     }, function errorCallback(response) {
 
