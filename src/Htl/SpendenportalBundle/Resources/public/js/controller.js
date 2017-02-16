@@ -62,7 +62,7 @@ app.controller('spendenverbindetController', function($scope, $http) {
         }
 
 
-        console.log($scope.projectsPrepared);
+        //console.log($scope.projectsPrepared);
 
     }, function errorCallback(response) {
 
@@ -159,27 +159,28 @@ app.controller('spendenverbindetController', function($scope, $http) {
 
     /* Projektdetailseite */
 
-    $scope.actualProjectId = 0;
-    $scope.projectDetailInfo = [];
+    $scope.projectDetailInfo = null;
 
     $scope.redirectToProjekt = function(id, projectTitle) {
         $scope.actualProjectId = id;
-        window.location.replace('./projekt/'+projectTitle);
+        window.location.replace('./projekt/'+projectTitle+"/"+id);
     }
 
     // Get the Projekt Informatio to a concrete Projekt
     $scope.initProjektDetail = function(){
+
+        // Aus der Url die projectId holen
+        var resArray = document.URL.split("/");
+        $scope.actualProjectId = resArray[resArray.length-1];
+
         $http({
             method: 'GET',
-            url: '/projects/'+$scope.actualProjectId
+            url: '/project/'+$scope.actualProjectId
         }).then(function successCallback(response) {
 
-            $scope.projectDetailInfo = response.data;
+            $scope.projectDetailInfo = response.data[0];
 
-            console.log("Here-----");
-            console.log($scope.actualProjectId);
-            console.log(projectDetailInfo);
-            console.log("Here-----");
+            console.log($scope.projectDetailInfo);
 
         }, function errorCallback(response) {
 
