@@ -27,7 +27,8 @@
 
 
             <tr data-ng-repeat="user in users">
-                <td>[[ user.role[0] ]]</td>
+                <a href="/backend/"+[[ user.id ]]>
+                <td>[[ user.role ]]</td>
                 <td>[[ user.username ]]</td>
                 <td>[[ user.email ]]</td>
                 <td>[[ user.age ]]</td>
@@ -35,6 +36,7 @@
                 <td>[[ user.amountProjects ]]</td>
                 <td>5000</td>
                 <td>15.09.2017</td>
+                </a>
             </tr>
         </table>
 

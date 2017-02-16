@@ -95,6 +95,30 @@ class ProjectController extends Controller
         return new JsonResponse($responseArray);
     }
 
+    public function showAction($projectId){
+        $projects = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:Project')->find($projectId);
+
+        $responseArray = array();
+
+        $progress = floor(($projects->getCurrentAmount()/$projects->getTargetAmount())*100);
+        $item = array(
+            "id"=>$projects->getId(),
+            "title"=>$projects->getTitle(),
+            "titlePictureUrl"=>$projects->getTitlePictureUrl(),
+            "description"=>$projects->getDescription(),
+            "shortinfo"=>$projects->getShortinfo(),
+            "created_at"=>$projects->getCreatedAt()->format('d.m.Y'),
+            "targetAmount"=>$projects->getTargetAmount(),
+            "currentAmount"=>$projects->getCurrentAmount(),
+            "progress"=>$progress,
+        );
+        array_push($responseArray, $item);
+
+        $responseArray = (object) $responseArray;
+
+        return new JsonResponse($responseArray);
+    }
+
     public function createAction ($title, $desciption, $shortinfo, $categoryId, $user, $targetAmount, $titlePictureUrl){
 
         $categoryId = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:Category')->find($categoryId);

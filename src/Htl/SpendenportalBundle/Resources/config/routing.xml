@@ -4,7 +4,7 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
 
-    <!-- RICCO -->
+    <!--                                       RICCO                                               -->
 
     <route id="htl_spendenportal_homepage" path="/">
         <default key="_controller">HtlSpendenportalBundle:Default:index</default>
@@ -118,6 +118,10 @@
         <default key="_controller">HtlSpendenportalBundle:Project:listFromCategory</default>
     </route>
 
+    <route id="listProjectsFromCategory" path="/project/{id}" methods="GET">
+        <default key="_controller">HtlSpendenportalBundle:Project:show</default>
+    </route>
+
     <route id="createProject" path="/createProject" methods="POST">
         <default key="_controller">HtlSpendenportalBundle:Project:create</default>
     </route>
@@ -156,7 +160,7 @@
         <default key="_controller">HtlSpendenportalBundle:User:listAllBackend</default>
     </route>
 
-    <route id="listSpecificUser" path="/users/{{uderId}}" methods="GET">
+    <route id="listSpecificUser" path="/users/{{userId}}" methods="GET">
         <default key="_controller">HtlSpendenportalBundle:User:listSpecific</default>
     </route>
 

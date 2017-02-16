@@ -5,7 +5,9 @@ app.config(function($interpolateProvider){
 });
 
 app.controller('backendController', function($scope, $http) {
-    
+
+    //getting all Users
+
     $http({
         method: 'GET',
         url: '/backend/users'
@@ -22,6 +24,8 @@ app.controller('backendController', function($scope, $http) {
     }, function errorCallback(response) {
         console.log("hellO");
     });
+
+    //getting all Projects
 
     $http({
         method: 'GET',
@@ -40,6 +44,8 @@ app.controller('backendController', function($scope, $http) {
 
     });
 
+    //getting all categories
+
     $http({
         method: 'GET',
         url: '/categories'
@@ -54,4 +60,34 @@ app.controller('backendController', function($scope, $http) {
     }, function errorCallback(response) {
 
     });
+
+    // Projektdetailseite
+
+    $scope.actualProjectId = 0;
+    $scope.projectDetailInfo = [];
+
+    $scope.redirectToProjekt = function(id, projectTitle) {
+        $scope.actualProjectId = id;
+        window.location.replace('./projekt/'+projectTitle);
+    }
+
+    // Get the Projekt Information to a concrete Projekt
+    $scope.initProjektDetail = function(){
+        $http({
+            method: 'GET',
+            url: '/projects/'+$scope.actualProjectId
+        }).then(function successCallback(response) {
+
+            $scope.projectDetailInfo = response.data;
+
+            console.log("Here-----");
+            console.log($scope.actualProjectId);
+            console.log(projectDetailInfo);
+            console.log("Here-----");
+
+        }, function errorCallback(response) {
+
+        });
+    }
+
 });

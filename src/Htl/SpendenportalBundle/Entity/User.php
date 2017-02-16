@@ -3,6 +3,7 @@
 
 namespace Htl\SpendenportalBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -113,12 +114,15 @@ class User extends BaseUser
      * @ORM\OneToMany(targetEntity="Project", mappedBy="users")
      */
     private $projects;
-    
 
+
+    /**
+     * User constructor.
+     */
     public function __construct()
     {
         parent::__construct();
-        // your own logic
+        $this->projects = new ArrayCollection();
     }
 
     /**
@@ -145,24 +149,30 @@ class User extends BaseUser
         return $this->isDonator;
     }
 
-
+    /**
+     * Get fileUpload
+     *
+     * @return string
+     */
     public function getFileUpload()
     {
         return $this->fileUpload;
     }
 
+    /**
+     * Set fileUpload
+     *
+     * @param string $fileUpload
+     *
+     * @return Person
+     */
     public function setFileUpload($fileUpload)
     {
         $this->fileUpload = $fileUpload;
 
         return $this;
     }
-
-
-
-
-
-
+    
     /**
      * Get id
      *

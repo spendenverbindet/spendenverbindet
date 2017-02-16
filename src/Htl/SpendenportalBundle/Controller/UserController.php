@@ -5,6 +5,7 @@ namespace Htl\SpendenportalBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\Validator\Constraints\DateTime;
 
 class UserController extends Controller
 {
@@ -24,12 +25,12 @@ class UserController extends Controller
                 "enable"=>$user[$i]->getEnabled(),
                 "password"=>$user[$i]->getPassword(),
                 "role"=>$user[$i]->getRoles(),
-                "mobil_pass_number"=>$user[$i]->getMobilPassNumber(),
+                "BeduerftigkeitsbeweisFile"=>$user[$i]->getFileUpload(),
                 "firstname"=>$user[$i]->getFirstname(),
                 "lastname"=>$user[$i]->getLastname(),
                 "street"=>$user[$i]->getStreet(),
                 "zipcode"=>$user[$i]->getZipcode(),
-                "housenumber"=>$user[$i]->getHousenumber(),
+                "housenumberDoornumber"=>$user[$i]->getHousenumberDoornumber(),
             );
             array_push($responseArray, $item);
         }
@@ -41,7 +42,6 @@ class UserController extends Controller
 
     public function listAllBackendAction(){
         $user = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:User')->findAll();
-        
 
         $responseArray = array();
 
@@ -54,16 +54,17 @@ class UserController extends Controller
                 "emailCanonical"=>$user[$i]->getEmailCanonical(),
                 "enable"=>$user[$i]->getEnabled(),
                 "password"=>$user[$i]->getPassword(),
-                "role"=>$user[$i]->getRoles(),
-                "mobil_pass_number"=>$user[$i]->getMobilPassNumber(),
+                "role"=> ($user[$i]->getRoles()[0] == "ROLE_DONATOR") ? "Spender" : "Empfänger",
+                "BeduerftigkeitsbeweisFile"=>$user[$i]->getFileUpload(),
                 "firstname"=>$user[$i]->getFirstname(),
                 "lastname"=>$user[$i]->getLastname(),
                 "street"=>$user[$i]->getStreet(),
-                "age"=>$user[$i]->getAge(),
-                "zipcode"=>$user[$i]->getZipcode(),
-                "housenumber"=>$user[$i]->getHousenumber(),
+                $birthDate = $this->GetAge($user[$i]->getAge()),
+                //$today   = (new \DateTime('today'))->format('d-m-y'),
+                "age" => $birthDate,"zipcode"=>$user[$i]->getZipcode(),
+                "housenumberDoornumber"=>$user[$i]->getHousenumberDoornumber(),
                 "amountProjects"=>count($user[$i]->getProjects()),
-                "currentAmount"=>$user[$i]
+                "currentAmount"=>$user[$i]->getProjects()[0]
             );
             array_push($responseArray, $item);
         }
@@ -71,6 +72,18 @@ class UserController extends Controller
         $responseArray = (object) $responseArray;
 
         return new JsonResponse($responseArray);
+    }
+
+    public function GetAge($dob)
+    {
+        $dob=explode("-",$dob);
+        $curMonth = date("m");
+        $curDay = date("j");
+        $curYear = date("Y");
+        $age = $curYear - $dob[0];
+        if($curMonth<$dob[1] || ($curMonth==$dob[1] && $curDay<$dob[2]))
+            $age--;
+        return $age;
     }
     
     public function listSpecificAction($userId){
@@ -78,32 +91,32 @@ class UserController extends Controller
         
         $responseArray = array();
 
-        for($i=0;$i<count($user);$i++){
+
             $item = array(
-                "id"=>$user[$i]->getId(),
-                "username"=>$user[$i]->getUsername(),
-                "usernameCanonical"=>$user[$i]->getUsernameCanonical(),
-                "email"=>$user[$i]->getEmail(),
-                "emailCanonical"=>$user[$i]->getEmailCanonical(),
-                "enable"=>$user[$i]->getEnabled(),
-                "password"=>$user[$i]->getPassword(),
-                "role"=>$user[$i]->getRoles(),
-                "mobil_pass_number"=>$user[$i]->getMobilPassNumber(),
-                "firstname"=>$user[$i]->getFirstname(),
-                "lastname"=>$user[$i]->getLastname(),
-                "street"=>$user[$i]->getStreet(),
-                "zipcode"=>$user[$i]->getZipcode(),
-                "housenumber"=>$user[$i]->getHousenumber(),
+                "id"=>$user->getId(),
+                "username"=>$user->getUsername(),
+                "usernameCanonical"=>$user->getUsernameCanonical(),
+                "email"=>$user->getEmail(),
+                "emailCanonical"=>$user->getEmailCanonical(),
+                "enable"=>$user->getEnabled(),
+                "password"=>$user->getPassword(),
+                "role"=>$user->getRoles(),
+                "BeduerftigkeitsbeweisFile"=>$user->getFileUpload(),
+                "firstname"=>$user->getFirstname(),
+                "lastname"=>$user->getLastname(),
+                "street"=>$user->getStreet(),
+                "zipcode"=>$user->getZipcode(),
+                "housenumberDoornumber"=>$user->getHousenumberDoornumber(),
             );
             array_push($responseArray, $item);
-        }
+
 
         $responseArray = (object) $responseArray;
 
         return new JsonResponse($responseArray);
     }
     
-    public function createAction ($username, $usernameCanonical, $email, $emailCanonical, $password, $mobil_pass_number, $role, $firstname, $lastname, $street, $zipcode, $housnumber) {
+    public function createAction ($username, $usernameCanonical, $email, $emailCanonical, $password, $BeduerftigkeitsbeweisFile, $role, $firstname, $lastname, $street, $zipcode, $housenumberDoornumber) {
 
         $date = new \DateTime('now');
 
@@ -124,12 +137,12 @@ class UserController extends Controller
             $user->setLastLogin($date);
             $user->addRole(array(''.$role.''));
             //$user->setIsDonator(true);
-            $user->setMobilPassNumber($mobil_pass_number);
+            $user->setFileUpload($BeduerftigkeitsbeweisFile);
             $user->setFirstname($firstname);
             $user->setLastname($lastname);
             $user->setStreet($street);
             $user->setZipcode($zipcode);
-            $user->setHousenumber($housnumber);
+            $user->setHousenumberDoornumber($housenumberDoornumber);
 
             
             $em = $this->getDoctrine()->getManager();
@@ -144,7 +157,7 @@ class UserController extends Controller
         }
     }
 
-    public function updateAction($userId, $username, $usernameCanonical, $email, $emailCanonical, $enable, $password, $mobil_pass_number, $role, $firstname, $lastname, $street, $zipcode, $housnumber){
+    public function updateAction($userId, $username, $usernameCanonical, $email, $emailCanonical, $enable, $password, $BeduerftigkeitsbeweisFile, $role, $firstname, $lastname, $street, $zipcode, $housenumberDoornumber){
 
         $em = $this->getDoctrine()->getManager();
         $user = $em->getRepository('HtlSpendenportalBundle:User')->find($userId);
@@ -163,12 +176,12 @@ class UserController extends Controller
         $user->setPassword($password);
         $user->addRole(array(''.$role.''));
         //$user->setIsDonator(true);
-        $user->setMobilPassNumber($mobil_pass_number);
+        $user->setFileUpload($BeduerftigkeitsbeweisFile);
         $user->setFirstname($firstname);
         $user->setLastname($lastname);
         $user->setStreet($street);
         $user->setZipcode($zipcode);
-        $user->setHousenumber($housnumber);
+        $user->setHousenumberDoornumber($housenumberDoornumber);
 
         $em->flush();
 

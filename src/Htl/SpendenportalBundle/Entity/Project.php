@@ -93,7 +93,7 @@ class Project
 
 
     /**
-     * @ORM\ManyToOne(targetEntity="user", inversedBy="projects")
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="projects")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     private $users;
