@@ -68,7 +68,7 @@ app.controller('backendController', function($scope, $http) {
 
     $scope.redirectToProjekt = function(id, projectTitle) {
         $scope.actualProjectId = id;
-        window.location.replace('./projekt/'+projectTitle);
+        window.location.replace('./projekt/'+projectTitle+'/'+id);
     }
 
     // Get the Projekt Information to a concrete Projekt

@@ -95,7 +95,7 @@ class ProjectController extends Controller
         return new JsonResponse($responseArray);
     }
 
-    public function showAction($projectId){
+    public function showAction($projectName, $projectId){
         $projects = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:Project')->find($projectId);
 
         $responseArray = array();
