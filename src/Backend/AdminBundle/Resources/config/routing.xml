@@ -22,11 +22,11 @@
         <default key="_controller">BackendAdminBundle:Project:index</default>
     </route>
 
-    <route id="backend_admin_editpage_project" path="/projects/edit">
-        <default key="_controller">BackendAdminBundle:Project:showa</default>
+    <route id="backend_admin_editpage_project" path="/project/{projectId}">
+        <default key="_controller">BackendAdminBundle:Project:renderEdit</default>
     </route>
 
-    <route id="backend_admin_editpage_project" path="/projects/{projectId}">
+    <route id="backend_admin_editpage_projecta" path="/projects/{projectId}">
         <default key="_controller">BackendAdminBundle:Project:show</default>
     </route>
 

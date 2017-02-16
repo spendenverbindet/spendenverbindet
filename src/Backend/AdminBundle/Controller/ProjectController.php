@@ -25,7 +25,7 @@ class ProjectController extends Controller
         return $this->render('BackendAdminBundle::listProjects.html.twig');
     }
     
-    public function showaAction()
+    public function renderEditAction()
     {
         return $this->render('BackendAdminBundle::editProject.html.twig');
     }

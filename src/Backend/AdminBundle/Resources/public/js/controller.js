@@ -19,10 +19,8 @@ app.controller('backendController', function($scope, $http) {
             $scope.users.push(response.data[u]);
         }
 
-        console.log($scope.users);
-
     }, function errorCallback(response) {
-        console.log("hellO");
+
     });
 
     //getting all Projects
@@ -37,8 +35,6 @@ app.controller('backendController', function($scope, $http) {
         for(var u=0;u<Object.keys(response.data).length;u++){
             $scope.projects.push(response.data[u]);
         }
-
-        console.log($scope.projects);
 
     }, function errorCallback(response) {
 
@@ -63,27 +59,29 @@ app.controller('backendController', function($scope, $http) {
 
     // Projektdetailseite
 
-    $scope.actualProjectId = 0;
+    $scope.actualProjectId = null;
     $scope.projectDetailInfo = [];
 
-    $scope.redirectToProjekt = function(id, projectTitle) {
+    $scope.redirectToProjekt = function(id) {
         $scope.actualProjectId = id;
-        window.location.replace('./projekt/'+projectTitle+'/'+id);
+        window.location.replace('./project/'+id);
     }
 
     // Get the Projekt Information to a concrete Projekt
     $scope.initProjektDetail = function(){
+
+        // Aus der Url die projectId holen
+        var resArray = document.URL.split("/");
+        $scope.actualProjectId = resArray[resArray.length-1];
+
         $http({
             method: 'GET',
             url: '/project/'+$scope.actualProjectId
         }).then(function successCallback(response) {
 
-            $scope.projectDetailInfo = response.data;
+            $scope.projectDetailInfo = response.data[0];
 
-            console.log("Here-----");
-            console.log($scope.actualProjectId);
-            console.log(projectDetailInfo);
-            console.log("Here-----");
+            console.log($scope.projectDetailInfo);
 
         }, function errorCallback(response) {
 

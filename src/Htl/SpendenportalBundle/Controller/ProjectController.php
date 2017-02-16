@@ -111,6 +111,7 @@ class ProjectController extends Controller
             "targetAmount"=>$projects->getTargetAmount(),
             "currentAmount"=>$projects->getCurrentAmount(),
             "progress"=>$progress,
+            "currentDonators"=>$projects->getCurrentDonators()
         );
         array_push($responseArray, $item);
 
