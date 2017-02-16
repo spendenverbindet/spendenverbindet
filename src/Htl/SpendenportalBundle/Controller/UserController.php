@@ -90,27 +90,25 @@ class UserController extends Controller
         $user = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:User')->find($userId);
         
         $responseArray = array();
-
-
-            $item = array(
-                "id"=>$user->getId(),
-                "username"=>$user->getUsername(),
-                "usernameCanonical"=>$user->getUsernameCanonical(),
-                "email"=>$user->getEmail(),
-                "emailCanonical"=>$user->getEmailCanonical(),
-                "enable"=>$user->getEnabled(),
-                "password"=>$user->getPassword(),
-                "role"=>$user->getRoles(),
-                "BeduerftigkeitsbeweisFile"=>$user->getFileUpload(),
-                "firstname"=>$user->getFirstname(),
-                "lastname"=>$user->getLastname(),
-                "street"=>$user->getStreet(),
-                "zipcode"=>$user->getZipcode(),
-                "housenumberDoornumber"=>$user->getHousenumberDoornumber(),
-            );
-            array_push($responseArray, $item);
-
-
+        
+        $item = array(
+            "id"=>$user->getId(),
+            "username"=>$user->getUsername(),
+            "usernameCanonical"=>$user->getUsernameCanonical(),
+            "email"=>$user->getEmail(),
+            "emailCanonical"=>$user->getEmailCanonical(),
+            "enable"=>$user->getEnabled(),
+            "password"=>$user->getPassword(),
+            "role"=>$user->getRoles(),
+            "BeduerftigkeitsbeweisFile"=>$user->getFileUpload(),
+            "firstname"=>$user->getFirstname(),
+            "lastname"=>$user->getLastname(),
+            "street"=>$user->getStreet(),
+            "zipcode"=>$user->getZipcode(),
+            "housenumberDoornumber"=>$user->getHousenumberDoornumber(),
+        );
+        array_push($responseArray, $item);
+        
         $responseArray = (object) $responseArray;
 
         return new JsonResponse($responseArray);
