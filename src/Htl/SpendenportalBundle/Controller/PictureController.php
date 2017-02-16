@@ -18,6 +18,7 @@ class PictureController extends Controller
             $item = array(
                 "id"=>$picture[$i]->getId(),
                 "pictureUrl"=>$picture[$i]->getPictureUrl(),
+                "pictureUrl"=>$picture[$i]->getPictureUrl(),
                 "created_at"=>$picture[$i]->getCreatedAt());
             array_push($responseArray, $item);
         }
