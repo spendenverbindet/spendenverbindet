@@ -14,7 +14,7 @@
         <default key="_controller">HtlSpendenportalBundle:Default:entdecken</default>
     </route>
 
-    <route id="htl_spendenportal_projekt" path="/projekt/{projectname}">
+    <route id="htl_spendenportal_projekt" path="/projekt/{projectName}/{projectId}">
         <default key="_controller">HtlSpendenportalBundle:Default:projekt</default>
     </route>
 
@@ -118,7 +118,7 @@
         <default key="_controller">HtlSpendenportalBundle:Project:listFromCategory</default>
     </route>
 
-    <route id="listProjectsFromCategory" path="/project/{projectName}/{projectId}" methods="GET">
+    <route id="listProjectsFromCategory" path="/project/{projectId}" methods="GET">
         <default key="_controller">HtlSpendenportalBundle:Project:show</default>
     </route>
 
