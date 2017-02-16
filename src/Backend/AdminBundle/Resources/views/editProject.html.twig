@@ -54,10 +54,10 @@
                 -->
                 <div class="row marginBottom">
                     <div class="col-md-offset-3 col-lg-offset-3 col-md-4 col-lg-4">
-                        <input class="form-control" type="text" value="Projekttitel" id="projecttitle">
+                        <input class="form-control" type="text" value="[[projectDetailInfo.title]]" id="projecttitle">
                     </div>
                     <div class="col-md-4 col-lg-4">
-                        <input class="form-control" type="password" value="Kategorie" id="category">
+                        <input class="form-control" type="text" value="[[projectDetailInfo.category]]" id="category">
                     </div>
                 </div>
 
@@ -69,10 +69,10 @@
                 -->
                 <div class="row marginTop">
                     <div class="col-md-offset-3 col-lg-offset-3 col-md-4 col-lg-4">
-                        <input class="form-control" type="date" value="2017-08-30" id="targetdate">
+                        <input class="form-control" type="date" value="[[projectDetailInfo.created_at]]" id="targetdate">
                     </div>
                     <div class="col-md-4 col-lg-4">
-                        <input class="form-control" type="number" value="400" id="donatetarget">
+                        <input class="form-control" type="number" value="[[projectDetailInfo.targetAmount]]" id="donatetarget">
                     </div>
                 </div>
 
@@ -84,10 +84,10 @@
                 -->
                 <div class="row marginTop">
                     <div class="col-md-offset-3 col-lg-offset-3 col-md-4 col-lg-4">
-                        <input class="form-control" type="email" value="email@email.com" id="email">
+                        <input class="form-control" type="email" value="[[projectDetailInfo.shortinfo]]" id="email">
                     </div>
                     <div class="col-md-4 col-lg-4">
-                        <input class="form-control" type="number" value="233" id="donatesnow">
+                        <input class="form-control" type="number" value="[[projectDetailInfo.currentAmount]]" id="donatesnow">
                     </div>
                 </div>
 
@@ -99,7 +99,7 @@
                 -->
                 <div class="row marginTop">
                     <div class="col-md-offset-3 col-lg-offset-3 col-md-8 col-lg-8">
-                        <textarea class="form-control" rows="4" placeholder="Beschreibung" id="description"></textarea>
+                        <textarea class="form-control" rows="4" placeholder="[[projectDetailInfo.description]]" id="description"></textarea>
                     </div>
                 </div>
 

@@ -29,6 +29,13 @@ class Picture
     private $pictureUrl;
 
     /**
+     * @var boolean
+     *
+     * @ORM\Column(name="picture", type="boolean")
+     */
+    private $isPublic;
+
+    /**
      * @var \DateTime
      *
      * @ORM\Column(name="created_at", type="datetime")
