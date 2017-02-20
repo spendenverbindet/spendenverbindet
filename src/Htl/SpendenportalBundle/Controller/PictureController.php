@@ -7,17 +7,19 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
 class PictureController extends Controller
 {
-    public function listFromProjectAction(){
+    public function listFromProjectAction($projectId){
 
-        $repository = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:Project');
+        $repository = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:Project')->findBy($projectId);
         $picture = $repository->getPictures();
 
         $responseArray = array();
 
         for($i=0;$i<count($picture);$i++){
-            $item = array("id"=>$picture[$i]->getId(),
-                          "pictureUrl"=>$picture[$i]->getPictureUrl(),
-                          "created_at"=>$picture[$i]->getCreatedAt());
+            $item = array(
+                "id"=>$picture[$i]->getId(),
+                "pictureUrl"=>$picture[$i]->getPictureUrl(),
+                "pictureUrl"=>$picture[$i]->getPictureUrl(),
+                "created_at"=>$picture[$i]->getCreatedAt());
             array_push($responseArray, $item);
         }
 
