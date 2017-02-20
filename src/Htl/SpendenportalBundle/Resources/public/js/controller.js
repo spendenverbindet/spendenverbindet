@@ -174,8 +174,10 @@ app.controller('spendenverbindetController', function($scope, $http) {
         $scope.actualProjectId = resArray[resArray.length-1];
 
         $http({
+            
             method: 'GET',
             url: '/project/'+$scope.actualProjectId
+
         }).then(function successCallback(response) {
 
             $scope.projectDetailInfo = response.data[0];
