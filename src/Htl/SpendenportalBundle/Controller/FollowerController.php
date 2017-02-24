@@ -22,24 +22,27 @@ class FollowerController extends Controller
     }
 
     public function ifFollowingAction($projectId){
+        //anzahl der ProjectIds checken
 
         $repository = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:Project')->find($projectId);
         $follower = $repository->getFollowers();
 
-        
+        /*
         if ( $this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY') || $this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_REMEMBERED') ) {
 
             $user = $this->getUser();
 
         }
-
+*/
         foreach($follower as $follower){
-            if($follower->getUsers()->getId() == $user->getId()){
+            if($follower->getUsers()->getId() == 2){
                 return new JsonResponse(true);
             } else {
                 return new JsonResponse(false);
             }
         }
+
+        return new JsonResponse(false);
 
     }
 
