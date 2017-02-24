@@ -11,7 +11,6 @@
     {% endblock %}
 
 {% endembed %}
-<div data-ng-init="initProjektDetail()"></div>
 <div class="container-fluid">
     <div class="col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
         <div class="col-sm-3 col-md-2 col-lg-2 sidebar">
@@ -20,7 +19,7 @@
                 <li><a >EDF</a></li>
             </ul>
         </div>
-        <form>
+        <form >
             <div class="col-md-8 col-lg-8">
                 <!--
                     Editfeld Header
@@ -54,7 +53,7 @@
                 -->
                 <div class="row marginBottom">
                     <div class="col-md-offset-3 col-lg-offset-3 col-md-4 col-lg-4">
-                        <input class="form-control" type="text" placeholder="Projekttitel" id="projecttitle">
+                        <input class="form-control" type="text" placeholder="Projekttitel" id="title">
                     </div>
                     <div class="col-md-4 col-lg-4">
                         <input class="form-control" type="text" placeholder="Kategorie"  id="category">
@@ -69,10 +68,10 @@
                 -->
                 <div class="row marginTop">
                     <div class="col-md-offset-3 col-lg-offset-3 col-md-4 col-lg-4">
-                        <input class="form-control" type="date" placeholder="Erstellt am" id="targetdate">
+                        <input class="form-control" type="date" placeholder="Erstellt am" id="created_at">
                     </div>
                     <div class="col-md-4 col-lg-4">
-                        <input class="form-control" type="number" placeholder="Zielbetrag"  id="donatetarget">
+                        <input class="form-control" type="number" placeholder="Zielbetrag"  id="targetAmount">
                     </div>
                 </div>
 
@@ -84,10 +83,10 @@
                 -->
                 <div class="row marginTop">
                     <div class="col-md-offset-3 col-lg-offset-3 col-md-4 col-lg-4">
-                        <input class="form-control" type="text" placeholder="Kurzinfo" id="email">
+                        <input class="form-control" type="text" placeholder="Kurzinfo" id="shortInfo">
                     </div>
                     <div class="col-md-4 col-lg-4">
-                        <input class="form-control" type="number" placeholder="aktueller Spendenbetrag" id="donatesnow">
+                        <input class="form-control" type="number" placeholder="aktueller Spendenbetrag" id="currentAmount">
                     </div>
                 </div>
 

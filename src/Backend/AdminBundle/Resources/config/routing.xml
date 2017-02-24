@@ -26,6 +26,14 @@
         <default key="_controller">BackendAdminBundle:Project:index</default>
     </route>
 
+    <route id="createProject" path="/createProject">
+        <default key="_controller">BackendAdminBundle:Project:renderCreate</default>
+    </route>
+
+    <route id="insertProject" path="/insertProject">
+        <default key="_controller">BackendAdminBundle:Project:create</default>
+    </route>
+
     <route id="backend_admin_editpage_project" path="/project/{projectId}">
         <default key="_controller">BackendAdminBundle:Project:renderEdit</default>
     </route>

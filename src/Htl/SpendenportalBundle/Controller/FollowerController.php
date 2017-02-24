@@ -146,24 +146,28 @@ class FollowerController extends Controller
     }
     */
 
-    public function deleteAction($followerId){
+    public function deleteAction($projectId){
+
+        if ( $this->get('security.authorization_checker')->isGranted('ROLE_DONATOR')) {
 
         $em = $this->getDoctrine()->getManager();
-        $follower = $em->getRepository('HtlSpendenportalBundle:Category')->find($followerId);
+        $followers = $em->getRepository('HtlSpendenportalBundle:Follower')->findAll();
+            
+            $user = $this->getUser();
 
-        if (!$follower) {
-            throw $this->createNotFoundException(
-                'No category found for id '.$followerId
-            );
+            foreach ($followers as $follower){
+                if($follower->getUsers()->getId() == $user->getId() && $follower->getProjects()->getId() == $projectId){
+
+                    $em->remove($follower);
+                    $em->flush();
+
+                    return new JsonResponse($user->getUsername().' hast unfollowed '.$follower->getProjects()->getTitle());
+                }
+            }
+
+            return new JsonResponse(false);
         }
 
-        /* Schauen ob es für diese Category childs existieren! */
-
-
-        $em->remove($follower);
-        $em->flush();
-
-
-        return new Response('Category has been deleted!');
+        return new JsonResponse(null);
     }
 }

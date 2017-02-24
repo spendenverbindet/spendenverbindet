@@ -87,7 +87,7 @@ class ProjectController extends Controller
         return new JsonResponse($responseArray);
     }
     
-    public function updateAction(Request $request)
+    public function createAction(Request $request)
     {
         $form = $this->createFormBuilder()
             ->add('title', TextType::class)
