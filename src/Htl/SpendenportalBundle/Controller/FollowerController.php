@@ -5,9 +5,11 @@ namespace Htl\SpendenportalBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
 
 class FollowerController extends Controller
 {
+    /*
     public function testCall(Request $request)
     {
 
@@ -20,6 +22,7 @@ class FollowerController extends Controller
 
         return new JsonResponse('error youre not logged in');
     }
+    */
 
     public function ifFollowingAction($projectId){
         //anzahl der ProjectIds checken
@@ -151,14 +154,17 @@ class FollowerController extends Controller
 
     public function deleteAction($projectId){
 
-        if ( $this->get('security.authorization_checker')->isGranted('ROLE_DONATOR')) {
+        //if ( $this->get('security.authorization_checker')->isGranted('ROLE_DONATOR')) {
 
         $em = $this->getDoctrine()->getManager();
-        $followers = $em->getRepository('HtlSpendenportalBundle:Follower')->findAll();
+        $followers = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:Follower')->findAll();
 
+        return new JsonResponse();
             $user = $this->getUser();
+            $user = 1;
 
             foreach ($followers as $follower){
+
                 if($follower->getUsers()->getId() == $user->getId() && $follower->getProjects()->getId() == $projectId){
 
                     $em->remove($follower);
@@ -169,7 +175,7 @@ class FollowerController extends Controller
             }
 
             return new JsonResponse(false);
-        }
+       // }
 
         return new JsonResponse(null);
     }
