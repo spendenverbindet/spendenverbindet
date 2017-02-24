@@ -9,12 +9,16 @@
         <default key="_controller">BackendAdminBundle:Default:index</default>
     </route>
 
-    <route id="backend_admin_editpage_user" path="/edit">
-        <default key="_controller">BackendAdminBundle:Default:edit</default>
+    <route id="backend_admin_rendereditpage_user" path="/user/{userId}">
+        <default key="_controller">BackendAdminBundle:Default:renderEdit</default>
     </route>
 
-    <route id="backend_admin_editpage_user" path="/user/{userId}">
-        <default key="_controller">BackendAdminBundle:Default:listSpecific</default>
+    <route id="backend_admin_userProjects_user" path="/user/projects/{userId}">
+        <default key="_controller">BackendAdminBundle:Default:userProjects</default>
+    </route>
+
+    <route id="backend_admin_editpage_user" path="/users/{userId}">
+        <default key="_controller">BackendAdminBundle:Default:show</default>
     </route>
 
     <!--   Project Controller   -->
@@ -33,6 +37,11 @@
     <!--   Category Controller   -->
     <route id="backend_admin_listpage_category" path="/categories">
         <default key="_controller">BackendAdminBundle:Category:index</default>
+    </route>
+
+    <!--   Follower Controller   -->
+    <route id="listFollower" path="/project/followers/{projectId}" methods="GET">
+        <default key="_controller">BackendAdminBundle:Default:projectFollower</default>
     </route>
 
 </routes>

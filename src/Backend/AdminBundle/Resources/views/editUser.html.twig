@@ -11,12 +11,13 @@
     {% endblock %}
 
 {% endembed %}
+<div data-ng-init="initUserDetail()"></div>
 <div class="container-fluid">
     <div class="col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
         <div class="col-sm-3 col-md-2 col-lg-2 sidebar">
             <ul class="nav nav-sidebar">
-                <li><a href="#" class="aktiv">Bearbeiten</a></li>
-                <li><a href="#">Projekte</a></li>
+                <li><a data-ng-click="redirectToUser([[user.id]])" class="aktiv">Bearbeiten</a></li>
+                <li><a data-ng-click="redirectToUserProjekte([[userDetailInfo.id]])">Projekte</a></li> <!-- data-ng-show="ifDonator([[userDetailInfo.role]])" -->
             </ul>
         </div>
         <form>
@@ -53,10 +54,10 @@
                 -->
                 <div class="row marginBottom">
                     <div class="col-md-offset-3 col-lg-offset-3 col-md-4 col-lg-4">
-                        <input class="form-control" type="text" value="Username" id="username">
+                        <input class="form-control" type="text" placeholder="Username" value="[[userDetailInfo.username]]" id="username">
                     </div>
                     <div class="col-md-4 col-lg-4">
-                        <input class="form-control" type="password" value="password" id="password">
+                        <input class="form-control" type="password" placeholder="Passwort" value="[[userDetailInfo.password]]" id="password">
                     </div>
                 </div>
 
@@ -68,10 +69,10 @@
                 -->
                 <div class="row marginTop">
                     <div class="col-md-offset-3 col-lg-offset-3 col-md-4 col-lg-4">
-                        <input class="form-control" type="text" value="Vorname" id="vorname">
+                        <input class="form-control" type="text" placeholder="Vorname" value="[[userDetailInfo.firstname]]" id="vorname">
                     </div>
                     <div class="col-md-4 col-lg-4">
-                        <input class="form-control" type="text" value="Nachname" id="nachname">
+                        <input class="form-control" type="text" placeholder="Nachname" value="[[userDetailInfo.lastname]]" id="nachname">
                     </div>
                 </div>
 
@@ -83,10 +84,10 @@
                 -->
                 <div class="row marginTop">
                     <div class="col-md-offset-3 col-lg-offset-3 col-md-4 col-lg-4">
-                        <input class="form-control" type="email" value="email@email.com" id="email">
+                        <input class="form-control" type="email" placeholder="E-Mail" value="[[userDetailInfo.email]]" id="email">
                     </div>
                     <div class="col-md-4 col-lg-4">
-                        <input class="form-control" type="date" value="1980-09-29" id="geburtsdatum">
+                        <input class="form-control" type="date" placeholder="Geburtsdatum" value="[[userDetailInfo.birthDate]]" id="geburtsdatum">
                     </div>
                 </div>
 
@@ -98,10 +99,10 @@
                 -->
                 <div class="row marginTop">
                     <div class="col-md-offset-3 col-lg-offset-3 col-md-4 col-lg-4">
-                        <input class="form-control" type="number" value="42" id="plz">
+                        <input class="form-control" type="number" placeholder="Postleitzahl" value="[[userDetailInfo.zipcode]]" id="plz">
                     </div>
                     <div class="col-md-4 col-lg-4">
-                        <input class="form-control" type="text" value="Ort" id="ort">
+                        <input class="form-control" type="text" placeholder="Stadt" value="[[userDetailInfo.town]]" id="ort">
                     </div>
                 </div>
 
@@ -113,10 +114,10 @@
                 -->
                 <div class="row marginTop">
                     <div class="col-md-offset-3 col-lg-offset-3 col-md-4 col-lg-4">
-                        <input class="form-control" type="text" value="Strasse" id="strasse">
+                        <input class="form-control" type="text" placeholder="Straße" value="[[userDetailInfo.street]]" id="strasse">
                     </div>
                     <div class="col-md-4 col-lg-4">
-                        <input class="form-control" type="text" value="10" id="hausnummer">
+                        <input class="form-control" type="text" placeholder="Hausnummer/Türnummer" value="[[userDetailInfo.housenumberDoornumber]]" id="hausnummer">
                     </div>
                 </div>
 

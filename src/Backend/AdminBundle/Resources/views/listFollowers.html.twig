@@ -1,0 +1,41 @@
+{% embed "BackendAdminBundle::header.html.twig" %}
+
+    {# override the title-tag text #}
+    {% block title_text %}
+        Project Followers
+    {% endblock %}
+
+    {# override the nav_active property #}
+    {% block project_nav %}
+        class="active"
+    {% endblock %}
+
+{% endembed %}
+<div data-ng-init="initProjectFollowers()"></div>
+<div class="container-fluid">
+    <div class="col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
+        <div class="col-sm-3 col-md-2 col-lg-2 sidebar">
+            <ul class="nav nav-sidebar">
+                <li><a data-ng-click="redirectToProjectFromFollower([[ actualProjectId ]])">Bearbeiten</a></li><!-- data-ng-click="redirectToUser()" -->
+                <li><a class="aktiv">Follower</a></li> <!-- data-ng-click="redirectToUserProjekte([[project.id]])" -->
+            </ul>
+        </div>
+        <div class="col-md-8 col-lg-8">
+            <h3>[[ projectFollowers[0].projects ]]</h3>
+            <table class="table table-compressed">
+                <tr class="table-header">
+                    <th>Follower</th>
+                    <th>gefolgt seit</th>
+                </tr>
+
+                <tr data-ng-repeat="followers in projectFollowers" data-ng-click="redirectToUserFromFollower([[followers.userId]])" >
+                    <td>[[ followers.user ]]</td>
+                    <td>[[ followers.followedSince ]]</td>
+                </tr>
+
+            </table>
+        </div>
+    </div>
+</div>
+
+{% include "BackendAdminBundle::footer.html.twig" %}

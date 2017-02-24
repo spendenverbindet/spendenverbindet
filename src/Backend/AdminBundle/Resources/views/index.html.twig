@@ -11,6 +11,7 @@
     {% endblock %}
 
 {% endembed %}
+<div data-ng-init="initUsers()"></div>
 <div class="container-fluid">
     <div class="col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
         <table class="table table-compressed">
@@ -26,7 +27,7 @@
             </tr>
 
 
-            <tr data-ng-repeat="user in users">
+            <tr data-ng-click="redirectToUser([[user.id]])" data-ng-repeat="user in users">
                 <a href="/backend/"+[[ user.id ]]>
                 <td>[[ user.role ]]</td>
                 <td>[[ user.username ]]</td>
@@ -34,8 +35,8 @@
                 <td>[[ user.age ]]</td>
                 <td>[[ user.zipcode ]]</td>
                 <td>[[ user.amountProjects ]]</td>
-                <td>5000</td>
-                <td>15.09.2017</td>
+                <td>[[ user.currentAmount ]]</td>
+                <td>[[ user.lastLogin ]]</td>
                 </a>
             </tr>
         </table>

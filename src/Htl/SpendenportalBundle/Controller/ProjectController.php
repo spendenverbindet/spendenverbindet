@@ -108,6 +108,7 @@ class ProjectController extends Controller
             "description"=>$projects->getDescription(),
             "shortinfo"=>$projects->getShortinfo(),
             "created_at"=>$projects->getCreatedAt()->format('d.m.Y'),
+            "created_at_backend"=>$projects->getCreatedAt()->format('Y-m-d'),
             "targetAmount"=>$projects->getTargetAmount(),
             "currentAmount"=>$projects->getCurrentAmount(),
             "progress"=>$progress,

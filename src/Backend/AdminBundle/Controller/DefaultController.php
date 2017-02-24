@@ -13,13 +13,13 @@ class DefaultController extends Controller
     public function indexAction()
     {
         
-        $persons = $this->getDoctrine()
+        $users = $this->getDoctrine()
             ->getRepository('HtlSpendenportalBundle:User')->findAll();
 
         
         //var_dump($persons);
 
-        if (!$persons) {
+        if (!$users) {
             throw $this->createNotFoundException(
                 'No product found for id '
             );
@@ -27,12 +27,12 @@ class DefaultController extends Controller
 
 
         return $this->render('BackendAdminBundle::index.html.twig', array(
-            'persons' => $persons,
+            'persons' => $users,
         ));
         
     }
 
-    public function listSpecificAction($userId){
+    public function showAction($userId){
         $user = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:User')->find($userId);
 
         $responseArray = array();
@@ -48,9 +48,11 @@ class DefaultController extends Controller
             "password"=>$user->getPassword(),
             "role"=>$user->getRoles(),
             "BeduerftigkeitsbeweisFile"=>$user->getFileUpload(),
+            "age"=>$user->getAge(),
             "firstname"=>$user->getFirstname(),
             "lastname"=>$user->getLastname(),
             "street"=>$user->getStreet(),
+            "town"=>$user->getTown(),
             "zipcode"=>$user->getZipcode(),
             "housenumberDoornumber"=>$user->getHousenumberDoornumber(),
         );
@@ -62,8 +64,18 @@ class DefaultController extends Controller
         return new JsonResponse($responseArray);
     }
 
-    public function editAction()
+    public function renderEditAction()
     {
         return $this->render('BackendAdminBundle::editUser.html.twig');
+    }
+
+    public function userProjectsAction()
+    {
+        return $this->render('BackendAdminBundle::userProjects.html.twig');
+    }
+
+    public function projectFollowerAction()
+    {
+        return $this->render('BackendAdminBundle::listFollowers.html.twig');
     }
 }

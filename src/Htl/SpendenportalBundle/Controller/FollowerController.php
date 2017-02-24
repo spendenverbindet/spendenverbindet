@@ -4,18 +4,25 @@ namespace Htl\SpendenportalBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class FollowerController extends Controller
 {
-    public function listFromProjectAction(){
+    public function listFromProjectAction($projectId){
 
-        $repository = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:Follower');
-        $follower = $repository->getPictures();
+        $repository = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:Project')->find($projectId);
+        $follower = $repository->getFollowers();
 
         $responseArray = array();
 
         for($i=0;$i<count($follower);$i++){
-            $item = array("id"=>$follower[$i]->getId(), "users"=>$follower[$i]->getUsers(), "projects"=>$follower[$i]->getProjects(), "users"=>$follower[$i]->getFollowedSince());
+            $item = array(
+                "id"=>$follower[$i]->getId(),
+                "user"=>$follower[$i]->getUsers()->getUsername(),
+                "userId"=>$follower[$i]->getUsers()->getId(),
+                "projects"=>$follower[$i]->getProjects()->getTitle(),
+                "followedSince"=>$follower[$i]->getFollowedSince()->format('d.m.Y')
+            );
             array_push($responseArray, $item);
         }
 
@@ -32,7 +39,11 @@ class FollowerController extends Controller
         $responseArray = array();
 
         for($i=0;$i<count($follower);$i++){
-            $item = array("id"=>$follower[$i]->getId(), "users"=>$follower[$i]->getUsers(), "projects"=>$follower[$i]->getProjects(), "users"=>$follower[$i]->getFollowedSince());
+            $item = array(
+                "id"=>$follower[$i]->getId(),
+                "users"=>$follower[$i]->getUsers(),
+                "projects"=>$follower[$i]->getProjects(),
+                "followedSince"=>$follower[$i]->getFollowedSince());
             array_push($responseArray, $item);
         }
 

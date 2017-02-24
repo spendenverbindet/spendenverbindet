@@ -69,7 +69,7 @@ class ProjectController extends Controller
             "titlePictureUrl"=>$projects->getTitlePictureUrl(),
             "description"=>$projects->getDescription(),
             "shortinfo"=>$projects->getShortinfo(),
-            "created_at"=>$projects->getCreatedAt()->format('d.m.Y'),
+            "created_at"=>$projects->getCreatedAt()->format('Y-m-d'),
             "targetAmount"=>$projects->getTargetAmount(),
             "currentAmount"=>$projects->getCurrentAmount(),
             "progress"=>$progress,

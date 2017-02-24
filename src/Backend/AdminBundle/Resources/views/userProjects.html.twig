@@ -1,0 +1,47 @@
+{% embed "BackendAdminBundle::header.html.twig" %}
+
+    {# override the title-tag text #}
+    {% block title_text %}
+        Userbearbeitung
+    {% endblock %}
+
+    {# override the nav_active property #}
+    {% block user_nav %}
+        class="active"
+    {% endblock %}
+
+{% endembed %}
+<div data-ng-init="initUserProjects()"></div>
+<div class="container-fluid">
+    <div class="col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
+        <div class="col-sm-3 col-md-2 col-lg-2 sidebar">
+            <ul class="nav nav-sidebar">
+                <li><a data-ng-click="redirectToUserFromUserProjects([[ actualUserId ]])">Bearbeiten</a></li><!-- data-ng-click="redirectToUser()" -->
+                <li><a class="aktiv">Projekte</a></li> <!-- data-ng-click="redirectToUserProjekte([[project.id]])" -->
+            </ul>
+        </div>
+        <div class="col-md-8 col-lg-8">
+            <table class="table table-compressed">
+                <tr class="table-header">
+                    <th>Titel</th>
+                    <th>Spenderanzahl</th>
+                    <th>Zielbetrag</th>
+                    <th>Erreichte Spenden</th>
+                    <th>Kategorie</th>
+                </tr>
+
+
+                <tr data-ng-repeat="project in userProjekte" data-ng-click="redirectToProjectFromUser([[project.id]])">
+                    <td>[[ project.title ]]</td>
+                    <td>[[ project.currentDonators ]]</td>
+                    <td>[[ project.targetAmount ]] €</td>
+                    <td>[[ project.currentAmount ]] €</td>
+                    <td>[[ project.category ]]</td>
+                </tr>
+
+            </table>
+        </div>
+    </div>
+</div>
+
+{% include "BackendAdminBundle::footer.html.twig" %}

@@ -11,6 +11,7 @@
     {% endblock %}
 
 {% endembed %}
+<div data-ng-init="initProjects()"></div>
 <div class="container-fluid">
     <div class="col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
         <table class="table table-compressed">
@@ -32,7 +33,7 @@
                 <td>[[ project.targetAmount ]] €</td>
                 <td>[[ project.currentAmount ]] €</td>
                 <td>[[ project.category ]]</td>
-                <td>15.08.2017</td>
+                <td>[[ project.created_at ]]</td>
             </tr>
         </table>
     </div>

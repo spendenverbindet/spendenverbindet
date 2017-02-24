@@ -62,6 +62,13 @@ class User extends BaseUser
     /**
      * @var string
      *
+     * @ORM\Column(name="town", type="string", nullable=true)
+     */
+    private $town;
+    
+    /**
+     * @var string
+     *
      * @ORM\Column(name="street", type="string", nullable=true)
      */
     private $street;
@@ -164,7 +171,7 @@ class User extends BaseUser
      *
      * @param string $fileUpload
      *
-     * @return Person
+     * @return User
      */
     public function setFileUpload($fileUpload)
     {
@@ -188,7 +195,7 @@ class User extends BaseUser
      *
      * @param string $firstname
      *
-     * @return Person
+     * @return User
      */
     public function setFirstname($firstname)
     {
@@ -212,7 +219,7 @@ class User extends BaseUser
      *
      * @param string $lastname
      *
-     * @return Person
+     * @return User
      */
     public function setLastname($lastname)
     {
@@ -236,7 +243,7 @@ class User extends BaseUser
      *
      * @param string $password
      *
-     * @return Person
+     * @return User
      */
     public function setPassword($password)
     {
@@ -260,7 +267,7 @@ class User extends BaseUser
      *
      * @param integer $age
      *
-     * @return Person
+     * @return User
      */
     public function setAge($age)
     {
@@ -278,13 +285,37 @@ class User extends BaseUser
     {
         return $this->age;
     }
+    
+    /**
+     * Set town
+     *
+     * @param string $town
+     *
+     * @return User
+     */
+    public function setTown($town)
+    {
+        $this->town = $town;
 
+        return $this;
+    }
+
+    /**
+     * Get town
+     *
+     * @return string
+     */
+    public function getTown()
+    {
+        return $this->town;
+    }
+    
     /**
      * Set street
      *
      * @param string $street
      *
-     * @return Person
+     * @return User
      */
     public function setStreet($street)
     {
@@ -308,7 +339,7 @@ class User extends BaseUser
      *
      * @param string $zipcode
      *
-     * @return Person
+     * @return User
      */
     public function setZipcode($zipcode)
     {
@@ -332,7 +363,7 @@ class User extends BaseUser
      *
      * @param string $housenumberDoornumber
      *
-     * @return Person
+     * @return User
      */
     public function setHousenumberDoornumber($housenumberDoornumber)
     {
@@ -356,7 +387,7 @@ class User extends BaseUser
      *
      * @param \DateTime $regDate
      *
-     * @return Person
+     * @return User
      */
     public function setRegDate($regDate)
     {
@@ -380,7 +411,7 @@ class User extends BaseUser
      *
      * @param boolean $enabled
      *
-     * @return Person
+     * @return User
      */
     public function setEnabled($enabled)
     {
@@ -404,7 +435,7 @@ class User extends BaseUser
      *
      * @param \DateTime $expiresAt
      *
-     * @return Person
+     * @return User
      */
     public function setExpiresAt($expiresAt)
     {
@@ -428,7 +459,7 @@ class User extends BaseUser
      *
      * @param boolean $locked
      *
-     * @return Person
+     * @return User
      */
     public function setLocked($locked)
     {
@@ -452,7 +483,7 @@ class User extends BaseUser
      *
      * @param integer $reports
      *
-     * @return Person
+     * @return User
      */
     public function setReport($reports)
     {
@@ -476,7 +507,7 @@ class User extends BaseUser
      *
      * @param integer $donations
      *
-     * @return Person
+     * @return User
      */
     public function setDonation($donations)
     {
@@ -500,7 +531,7 @@ class User extends BaseUser
      *
      * @param integer $followers
      *
-     * @return Person
+     * @return User
      */
     public function setFollower($followers)
     {
@@ -524,7 +555,7 @@ class User extends BaseUser
      *
      * @param integer $projects
      *
-     * @return Person
+     * @return User
      */
     public function setProjects($projects)
     {
@@ -534,7 +565,7 @@ class User extends BaseUser
     }
 
     /**
-     * Get persons
+     * Get projects
      *
      * @return integer
      */

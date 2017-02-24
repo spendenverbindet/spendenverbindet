@@ -6,7 +6,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Validator\Constraints\DateTime;
-
 class UserController extends Controller
 {
     public function listAllAction(){
@@ -29,6 +28,7 @@ class UserController extends Controller
                 "firstname"=>$user[$i]->getFirstname(),
                 "lastname"=>$user[$i]->getLastname(),
                 "street"=>$user[$i]->getStreet(),
+                //"town"=>$user->getTown(),
                 "zipcode"=>$user[$i]->getZipcode(),
                 "housenumberDoornumber"=>$user[$i]->getHousenumberDoornumber(),
             );
@@ -46,6 +46,14 @@ class UserController extends Controller
         $responseArray = array();
 
         for($i=0;$i<count($user);$i++){
+
+            $currentAmount = 0;
+
+            /* @var \Htl\SpendenportalBundle\Entity\Project $project  */
+            foreach($user[$i]->getProjects() as $project){
+                $currentAmount += $project->getCurrentAmount();
+            }
+
             $item = array(
                 "id"=>$user[$i]->getId(),
                 "username"=>$user[$i]->getUsername(),
@@ -61,10 +69,13 @@ class UserController extends Controller
                 "street"=>$user[$i]->getStreet(),
                 $birthDate = $this->GetAge($user[$i]->getAge()),
                 //$today   = (new \DateTime('today'))->format('d-m-y'),
-                "age" => $birthDate,"zipcode"=>$user[$i]->getZipcode(),
+                "age" => $birthDate,
+                "town"=>$user[$i]->getTown(),
+                "zipcode"=>$user[$i]->getZipcode(),
                 "housenumberDoornumber"=>$user[$i]->getHousenumberDoornumber(),
                 "amountProjects"=>count($user[$i]->getProjects()),
-                "currentAmount"=>$user[$i]->getProjects()[0]
+                "currentAmount"=>$currentAmount,
+                "lastLogin"=>$user[$i]->getLastLogin()->format('d.m.y'),
             );
             array_push($responseArray, $item);
         }
@@ -99,10 +110,15 @@ class UserController extends Controller
             "emailCanonical"=>$user->getEmailCanonical(),
             "enable"=>$user->getEnabled(),
             "password"=>$user->getPassword(),
-            "role"=>$user->getRoles(),
+            "role"=>($user->getRoles()[0] == "ROLE_DONATOR") ? "Spender" : "Empfänger",
             "BeduerftigkeitsbeweisFile"=>$user->getFileUpload(),
             "firstname"=>$user->getFirstname(),
             "lastname"=>$user->getLastname(),
+            "birthDate"=>$user->getAge(),
+            $birthDate = $this->GetAge($user->getAge()),
+            //$today   = (new \DateTime('today'))->format('d-m-y'),
+            "age" => $birthDate,
+            "town"=>$user->getTown(),
             "street"=>$user->getStreet(),
             "zipcode"=>$user->getZipcode(),
             "housenumberDoornumber"=>$user->getHousenumberDoornumber(),
@@ -113,8 +129,34 @@ class UserController extends Controller
 
         return new JsonResponse($responseArray);
     }
+
+    public function listProjectsFromUserAction($userId){
+        $user = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:User')->find($userId);
+
+        $responseArray = array();
+
+        /* @var \Htl\SpendenportalBundle\Entity\Project $project */
+        foreach($user->getProjects() as $project){
+            $test = 0;
+            $item = array(
+                "id"=>$project->getId(),
+                "title"=>$project->getTitle(),
+                "targetAmount"=>$project->getTargetAmount(),
+                "currentAmount"=>$project->getCurrentAmount(),
+                "currentDonators"=>$project->getCurrentDonators(),
+                "category"=>$project->getCategory()->getCategoryText(),
+            );
+            array_push($responseArray, $item);
+        }
+
+
+        
+        $responseArray = (object) $responseArray;
+
+        return new JsonResponse($responseArray);
+    }
     
-    public function createAction ($username, $usernameCanonical, $email, $emailCanonical, $password, $BeduerftigkeitsbeweisFile, $role, $firstname, $lastname, $street, $zipcode, $housenumberDoornumber) {
+    public function createAction ($username, $usernameCanonical, $email, $emailCanonical, $password, $BeduerftigkeitsbeweisFile, $role, $firstname, $lastname, $town, $street, $zipcode, $housenumberDoornumber) {
 
         $date = new \DateTime('now');
 
@@ -138,6 +180,7 @@ class UserController extends Controller
             $user->setFileUpload($BeduerftigkeitsbeweisFile);
             $user->setFirstname($firstname);
             $user->setLastname($lastname);
+            $user->setTown($town);
             $user->setStreet($street);
             $user->setZipcode($zipcode);
             $user->setHousenumberDoornumber($housenumberDoornumber);

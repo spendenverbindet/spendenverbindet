@@ -17,7 +17,7 @@
         <div class="col-sm-3 col-md-2 col-lg-2 sidebar">
             <ul class="nav nav-sidebar">
                 <li><a href="#" class="aktiv">Bearbeiten</a></li>
-                <li><a href="#">Projekte</a></li>
+                <li><a data-ng-click="redirectToProjectFollowers([[actualProjectId]])">Follower</a></li>
             </ul>
         </div>
         <form>
@@ -54,10 +54,10 @@
                 -->
                 <div class="row marginBottom">
                     <div class="col-md-offset-3 col-lg-offset-3 col-md-4 col-lg-4">
-                        <input class="form-control" type="text" value="[[projectDetailInfo.title]]" id="projecttitle">
+                        <input class="form-control" type="text" placeholder="Projekttitel" value="[[projectDetailInfo.title]]" id="projecttitle">
                     </div>
                     <div class="col-md-4 col-lg-4">
-                        <input class="form-control" type="text" value="[[projectDetailInfo.category]]" id="category">
+                        <input class="form-control" type="text" placeholder="Kategorie" value="[[projectDetailInfo.category]]" id="category">
                     </div>
                 </div>
 
@@ -69,10 +69,10 @@
                 -->
                 <div class="row marginTop">
                     <div class="col-md-offset-3 col-lg-offset-3 col-md-4 col-lg-4">
-                        <input class="form-control" type="date" value="[[projectDetailInfo.created_at]]" id="targetdate">
+                        <input class="form-control" type="date" placeholder="Erstellt am" value="[[projectDetailInfo.created_at_backend]]" id="targetdate">
                     </div>
                     <div class="col-md-4 col-lg-4">
-                        <input class="form-control" type="number" value="[[projectDetailInfo.targetAmount]]" id="donatetarget">
+                        <input class="form-control" type="number" placeholder="Zielbetrag" value="[[projectDetailInfo.targetAmount]]" id="donatetarget">
                     </div>
                 </div>
 
@@ -84,10 +84,10 @@
                 -->
                 <div class="row marginTop">
                     <div class="col-md-offset-3 col-lg-offset-3 col-md-4 col-lg-4">
-                        <input class="form-control" type="email" value="[[projectDetailInfo.shortinfo]]" id="email">
+                        <input class="form-control" type="email" placeholder="Kurzinfo" value="[[projectDetailInfo.shortinfo]]" id="email">
                     </div>
                     <div class="col-md-4 col-lg-4">
-                        <input class="form-control" type="number" value="[[projectDetailInfo.currentAmount]]" id="donatesnow">
+                        <input class="form-control" type="number" placeholder="aktueller Spendenbetrag" value="[[projectDetailInfo.currentAmount]]" id="donatesnow">
                     </div>
                 </div>
 
@@ -99,7 +99,7 @@
                 -->
                 <div class="row marginTop">
                     <div class="col-md-offset-3 col-lg-offset-3 col-md-8 col-lg-8">
-                        <textarea class="form-control" rows="4" value="[[projectDetailInfo.description]]" id="description"></textarea>
+                        <textarea class="form-control" rows="4" placeholder="Beschreibung" id="description">[[projectDetailInfo.description]]</textarea>
                     </div>
                 </div>
 

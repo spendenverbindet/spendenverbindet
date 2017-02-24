@@ -55,6 +55,10 @@
     </route>
 
     <!--  Follower  -->
+    <route id="listFollower" path="/followers" methods="GET">
+        <default key="_controller">HtlSpendenportalBundle:Follower:list</default>
+    </route>
+
     <route id="listFromProjectFollower" path="/followers/{projectId}" methods="GET">
         <default key="_controller">HtlSpendenportalBundle:Follower:listFromProject</default>
     </route>
@@ -160,8 +164,12 @@
         <default key="_controller">HtlSpendenportalBundle:User:listAllBackend</default>
     </route>
 
-    <route id="listSpecificUser" path="/users/{{userId}}" methods="GET">
+    <route id="listSpecificUser" path="/users/{userId}" methods="GET">
         <default key="_controller">HtlSpendenportalBundle:User:listSpecific</default>
+    </route>
+
+    <route id="listUserProjects" path="/userProjects/{userId}" methods="GET">
+        <default key="_controller">HtlSpendenportalBundle:User:listProjectsFromUser</default>
     </route>
 
     <route id="createUser" path="/createUser" methods="POST">
