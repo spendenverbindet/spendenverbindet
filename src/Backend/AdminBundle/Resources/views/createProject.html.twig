@@ -1,0 +1,119 @@
+{% embed "BackendAdminBundle::header.html.twig" %}
+
+    {# override the title-tag text #}
+    {% block title_text %}
+        Projektbearbeitung
+    {% endblock %}
+
+    {# override the nav_active property #}
+    {% block project_nav %}
+        class="active"
+    {% endblock %}
+
+{% endembed %}
+<div data-ng-init="initProjektDetail()"></div>
+<div class="container-fluid">
+    <div class="col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
+        <div class="col-sm-3 col-md-2 col-lg-2 sidebar">
+            <ul class="nav nav-sidebar">
+                <li><a class="aktiv">ABC</a></li>
+                <li><a >EDF</a></li>
+            </ul>
+        </div>
+        <form>
+            <div class="col-md-8 col-lg-8">
+                <!--
+                    Editfeld Header
+                    Inhalt:
+                        Profildbild
+                        Aktiviert-Checkbox
+                        Löschbutton
+                -->
+                <div class="row">
+                    <div class="col-md-3 col-lg-3 editTopHeight"><!-- Profilbild -->
+                        <div class="picAlignRight">
+                            <img style="height: 70px; width: 70px" alt="Projektbild">
+                        </div>
+                    </div>
+                    <div class="col-md-9 col-lg-9 editTopHeight"><!-- Aktiviert-Box, Username, PW, Löschbutton -->
+                        <div class="contentBottom">
+                            <input type="checkbox" id="activated" name="activated"/>
+                            Aktiviert
+                        </div>
+                        <div class="alignRight">
+                            <input class="btn" type="button" value="delete">
+                        </div>
+                    </div>
+                </div>
+
+                <!--
+                    Editfeld Header2
+                    Inhalt:
+                        Username
+                        Password
+                -->
+                <div class="row marginBottom">
+                    <div class="col-md-offset-3 col-lg-offset-3 col-md-4 col-lg-4">
+                        <input class="form-control" type="text" placeholder="Projekttitel" id="projecttitle">
+                    </div>
+                    <div class="col-md-4 col-lg-4">
+                        <input class="form-control" type="text" placeholder="Kategorie"  id="category">
+                    </div>
+                </div>
+
+                <!--
+                    Editfeld Header2
+                    Inhalt:
+                        Vorname
+                        Nachname
+                -->
+                <div class="row marginTop">
+                    <div class="col-md-offset-3 col-lg-offset-3 col-md-4 col-lg-4">
+                        <input class="form-control" type="date" placeholder="Erstellt am" id="targetdate">
+                    </div>
+                    <div class="col-md-4 col-lg-4">
+                        <input class="form-control" type="number" placeholder="Zielbetrag"  id="donatetarget">
+                    </div>
+                </div>
+
+                <!--
+                    Editfeld Header2
+                    Inhalt:
+                        E-Mail
+                        Alter
+                -->
+                <div class="row marginTop">
+                    <div class="col-md-offset-3 col-lg-offset-3 col-md-4 col-lg-4">
+                        <input class="form-control" type="text" placeholder="Kurzinfo" id="email">
+                    </div>
+                    <div class="col-md-4 col-lg-4">
+                        <input class="form-control" type="number" placeholder="aktueller Spendenbetrag" id="donatesnow">
+                    </div>
+                </div>
+
+                <!--
+                    Editfeld Header2
+                    Inhalt:
+                        PLZ
+                        Ort
+                -->
+                <div class="row marginTop">
+                    <div class="col-md-offset-3 col-lg-offset-3 col-md-8 col-lg-8">
+                        <textarea class="form-control" rows="4" placeholder="Beschreibung" id="description"></textarea>
+                    </div>
+                </div>
+
+                <div class="row marginTop">
+                    <div class="col-md-offset-3 col-lg-offset-3 col-md-9 col-lg-9">
+                        <input class="btn" type="button" value="Fertig" id="fertig_button">
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+
+{% include "BackendAdminBundle::footer.html.twig" %}

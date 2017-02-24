@@ -28,7 +28,7 @@ class FollowerController extends Controller
         $follower = $repository->getFollowers();
 
 
-        if ( $this->get('security.authorization_checker')->isGranted('ROLE_DONATOR')  ) {
+        if ( $this->get('security.authorization_checker')->isGranted('ROLE_DONATOR')) {
 
             $user = $this->getUser();
 
@@ -39,6 +39,8 @@ class FollowerController extends Controller
                     return new JsonResponse(false);
                 }
             }
+
+            return new JsonResponse(false);
 
         }
 

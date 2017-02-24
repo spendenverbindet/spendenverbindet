@@ -92,7 +92,7 @@ class ProjectController extends Controller
         $form = $this->createFormBuilder()
             ->add('title', TextType::class)
             ->add('category', TextType::class)
-            ->add('created_at_backend', DateTimeType::class)
+            ->add('created_at', DateTimeType::class)
             ->add('targetAmount', NumberType::class)
             ->add('shortinfo', TextType::class)
             ->add('currentAmount', NumberType::class)
@@ -107,21 +107,14 @@ class ProjectController extends Controller
 
             $em = $this->getDoctrine()->getManager();
 
-            $user = $em->getRepository('HtlSpendenportalBundle:User');
-            $user->setUsername("John Doe");
-            $user->setPhone($data["phone"]);
-
-            $user->setUsername($data["username"]);
-            $user->setEmail($data["email"]);
-            $user->setEnabled($data["enabled"]);
-            $user->setPassword($data["password"]);
-            $user->setFirstname($data["firstname"]);
-            $user->setLastname($data["lastname"]);
-            $user->setTown($data["town"]);
-            $user->setStreet($data["street"]);
-            $user->setZipcode($data["zipcode"]);
-            $user->setAge($data["year_of_birth"]);
-            $user->setHousenumberDoornumber($data["housenumber_doornumber"]);
+            $user = $em->getRepository('HtlSpendenportalBundle:Project');
+            $user->setTitle($data["title"]);
+            $user->setCategory($data["category"]);
+            $user->setCreatedAt($data["created_at"]);
+            $user->setTargetAmount($data["targetAmount"]);
+            $user->setShortinfo($data["shortinfo"]);
+            $user->setCurrentAmount($data["currentAmount"]);
+            $user->setDescription($data["description"]);
 
             // or this could be $contract = new Contract("John Doe", $data["phone"], $data["period"]);
 
