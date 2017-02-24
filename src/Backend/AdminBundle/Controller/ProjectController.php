@@ -2,8 +2,13 @@
 
 namespace Backend\AdminBundle\Controller;
 
+use Doctrine\DBAL\Types\TextType;
+use Leafo\ScssPhp\Node\Number;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
@@ -81,6 +86,49 @@ class ProjectController extends Controller
 
         return new JsonResponse($responseArray);
     }
+    
+    public function updateAction(Request $request)
+    {
+        $form = $this->createFormBuilder()
+            ->add('title', TextType::class)
+            ->add('category', TextType::class)
+            ->add('created_at_backend', DateTimeType::class)
+            ->add('targetAmount', NumberType::class)
+            ->add('shortinfo', TextType::class)
+            ->add('currentAmount', NumberType::class)
+            ->add('description', TextareaType::class)
+            ->getForm();
+
+        if ($request->isMethod('POST')) {
+            $form->bind($request);
+
+            // data is an array with "phone" and "period" keys
+            $data = $form->getData();
+
+            $em = $this->getDoctrine()->getManager();
+
+            $user = $em->getRepository('HtlSpendenportalBundle:User');
+            $user->setUsername("John Doe");
+            $user->setPhone($data["phone"]);
+
+            $user->setUsername($data["username"]);
+            $user->setEmail($data["email"]);
+            $user->setEnabled($data["enabled"]);
+            $user->setPassword($data["password"]);
+            $user->setFirstname($data["firstname"]);
+            $user->setLastname($data["lastname"]);
+            $user->setTown($data["town"]);
+            $user->setStreet($data["street"]);
+            $user->setZipcode($data["zipcode"]);
+            $user->setAge($data["year_of_birth"]);
+            $user->setHousenumberDoornumber($data["housenumber_doornumber"]);
+
+            // or this could be $contract = new Contract("John Doe", $data["phone"], $data["period"]);
+
+            $em->persist($user); // I set/modify the properties then persist
+        }
+    }
+    
 /*
     public function showAction($productId)
     {

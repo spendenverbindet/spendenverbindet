@@ -265,7 +265,7 @@ class User extends BaseUser
     /**
      * Set age
      *
-     * @param integer $age
+     * @param Datetime $age
      *
      * @return User
      */
@@ -279,7 +279,7 @@ class User extends BaseUser
     /**
      * Get age
      *
-     * @return integer
+     * @return DateTime
      */
     public function getAge()
     {

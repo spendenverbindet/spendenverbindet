@@ -27,22 +27,22 @@ class FollowerController extends Controller
         $repository = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:Project')->find($projectId);
         $follower = $repository->getFollowers();
 
-        /*
-        if ( $this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY') || $this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_REMEMBERED') ) {
+
+        if ( $this->get('security.authorization_checker')->isGranted('ROLE_DONATOR')  ) {
 
             $user = $this->getUser();
 
-        }
-*/
-        foreach($follower as $follower){
-            if($follower->getUsers()->getId() == 2){
-                return new JsonResponse(true);
-            } else {
-                return new JsonResponse(false);
+            foreach($follower as $follower){
+                if($follower->getUsers()->getId() == $user->getId()){
+                    return new JsonResponse(true);
+                } else {
+                    return new JsonResponse(false);
+                }
             }
+
         }
 
-        return new JsonResponse(false);
+        return new JsonResponse(null);
 
     }
 

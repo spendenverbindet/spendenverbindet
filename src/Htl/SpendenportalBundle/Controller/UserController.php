@@ -130,33 +130,34 @@ class UserController extends Controller
         return new JsonResponse($responseArray);
     }
 
-    public function listProjectsFromUserAction($userId){
+    public function listProjectsFromUserAction($userId)
+    {
         $user = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:User')->find($userId);
 
         $responseArray = array();
 
         /* @var \Htl\SpendenportalBundle\Entity\Project $project */
-        foreach($user->getProjects() as $project){
+        foreach ($user->getProjects() as $project) {
             $test = 0;
             $item = array(
-                "id"=>$project->getId(),
-                "title"=>$project->getTitle(),
-                "targetAmount"=>$project->getTargetAmount(),
-                "currentAmount"=>$project->getCurrentAmount(),
-                "currentDonators"=>$project->getCurrentDonators(),
-                "category"=>$project->getCategory()->getCategoryText(),
+                "id" => $project->getId(),
+                "title" => $project->getTitle(),
+                "targetAmount" => $project->getTargetAmount(),
+                "currentAmount" => $project->getCurrentAmount(),
+                "currentDonators" => $project->getCurrentDonators(),
+                "category" => $project->getCategory()->getCategoryText(),
             );
             array_push($responseArray, $item);
         }
 
 
-        
-        $responseArray = (object) $responseArray;
+        $responseArray = (object)$responseArray;
 
         return new JsonResponse($responseArray);
     }
-    
+        
     public function createAction ($username, $usernameCanonical, $email, $emailCanonical, $password, $BeduerftigkeitsbeweisFile, $role, $firstname, $lastname, $town, $street, $zipcode, $housenumberDoornumber) {
+        
 
         $date = new \DateTime('now');
 
@@ -185,6 +186,11 @@ class UserController extends Controller
             $user->setZipcode($zipcode);
             $user->setHousenumberDoornumber($housenumberDoornumber);
 
+            $form = $this->createFormBuilder($user)
+                ->add('username', TextType::class)
+                ->add('dueDate', DateType::class)
+                ->add('save', SubmitType::class, array('label' => 'Create Post'))
+                ->getForm();
             
             $em = $this->getDoctrine()->getManager();
 
