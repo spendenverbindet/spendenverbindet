@@ -73,7 +73,7 @@ class Picture
      */
     public function getPictureUrl()
     {
-        return $this->ictureUrl;
+        return $this->pictureUrl;
     }
 
     /**

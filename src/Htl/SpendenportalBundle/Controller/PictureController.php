@@ -10,7 +10,7 @@ class PictureController extends Controller
     public function listFromProjectAction($projectId){
 
         $repository = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:Project')->find($projectId);
-        $picture = $repository->getPictures();
+        $picture = $repository->getPicture();
 
         $responseArray = array();
 
