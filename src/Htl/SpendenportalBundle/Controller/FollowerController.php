@@ -8,6 +8,41 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 
 class FollowerController extends Controller
 {
+    public function testCall(Request $request)
+    {
+
+        if ( $this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY') || $this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_REMEMBERED') ) {
+
+            $user = $this->getUser();
+            return new JsonResponse($user->getUserName());
+
+        }
+
+        return new JsonResponse('error youre not logged in');
+    }
+
+    public function ifFollowingAction($projectId){
+
+        $repository = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:Project')->find($projectId);
+        $follower = $repository->getFollowers();
+
+        
+        if ( $this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY') || $this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_REMEMBERED') ) {
+
+            $user = $this->getUser();
+
+        }
+
+        foreach($follower as $follower){
+            if($follower->getUsers()->getId() == $user->getId()){
+                return new JsonResponse(true);
+            } else {
+                return new JsonResponse(false);
+            }
+        }
+
+    }
+
     public function listFromProjectAction($projectId){
 
         $repository = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:Project')->find($projectId);

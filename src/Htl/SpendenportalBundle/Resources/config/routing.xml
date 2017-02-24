@@ -58,6 +58,9 @@
     <route id="listFollower" path="/followers" methods="GET">
         <default key="_controller">HtlSpendenportalBundle:Follower:list</default>
     </route>
+    <route id="ifFollower" path="/initFollower/{projectId}" methods="GET">
+        <default key="_controller">HtlSpendenportalBundle:Follower:ifFollowing</default>
+    </route>
 
     <route id="listFromProjectFollower" path="/followers/{projectId}" methods="GET">
         <default key="_controller">HtlSpendenportalBundle:Follower:listFromProject</default>
