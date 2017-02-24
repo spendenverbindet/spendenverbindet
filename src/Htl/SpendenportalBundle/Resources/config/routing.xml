@@ -91,7 +91,7 @@
         <default key="_controller">HtlSpendenportalBundle:Picture:update</default>
     </route>
 
-    <route id="deletePicture" path="/deletePicture/{pictureId}" methods="DESTROY">
+    <route id="deletePicture" path="/deletePicture/{pictureId}" methods="DELETE">
         <default key="_controller">HtlSpendenportalBundle:Picture:delete</default>
     </route>
 

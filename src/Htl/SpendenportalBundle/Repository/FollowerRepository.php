@@ -1,6 +1,6 @@
 <?php
 
-namespace Backend\AdminBundle\Repository;
+namespace Htl\SpendenportalBundle\Repository;
 
 /**
  * FollowerRepository

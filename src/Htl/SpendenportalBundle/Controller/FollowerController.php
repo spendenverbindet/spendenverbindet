@@ -154,14 +154,15 @@ class FollowerController extends Controller
 
     public function deleteAction($projectId){
 
-        //if ( $this->get('security.authorization_checker')->isGranted('ROLE_DONATOR')) {
+        if ( $this->get('security.authorization_checker')->isGranted('ROLE_DONATOR')) {
 
         $em = $this->getDoctrine()->getManager();
-        $followers = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:Follower')->findAll();
+        $repository = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:Follower');
 
-        return new JsonResponse();
-            $user = $this->getUser();
-            $user = 1;
+        $followers = $repository->findAll();
+
+        $user = $this->getUser();
+
 
             foreach ($followers as $follower){
 
@@ -174,9 +175,7 @@ class FollowerController extends Controller
                 }
             }
 
-            return new JsonResponse(false);
-       // }
+    }
 
-        return new JsonResponse(null);
     }
 }
