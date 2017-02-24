@@ -92,36 +92,39 @@ class FollowerController extends Controller
         return new JsonResponse($responseArray);
     }
     
-    public function createAction ($projectId, $userId) {
+    public function createAction ($projectId) {
 
+        if ( $this->get('security.authorization_checker')->isGranted('ROLE_DONATOR')) {
 
-        $projectId = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:Project')->find($projectId);
-        $userId = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:User')->find($userId);
+            $projectId = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:Project')->find($projectId);
+            $user = $this->getUser();
+            $date = new \DateTime('now');
 
-        $date = new \DateTime('now');
+            if (false) {
+                throw $this->createNotFoundException(
+                    'No category found for id  or not User found for id '
+                );
+            } else {
+                //*
+                $follower = new Follower();
+                $follower->setFollowedSince($date);
+                $follower->setProjects($projectId);
+                $follower->setUsers($user->getId());
 
-        if (false) {
-            throw $this->createNotFoundException(
-                'No category found for id  or not User found for id '
-            );
+                $em = $this->getDoctrine()->getManager();
+
+                // tells Doctrine you want to (eventually) save the Product (no queries yet)
+                $em->persist($follower);
+
+                // actually executes the queries (i.e. the INSERT query)
+                $em->flush();
+
+                return new JsonResponse($user->getUsername().' has followed '.$follower->getProjects()->getTitle());
+            }
+
         }
-        else{
-            //*
-            $follower = new Follower();
-            $follower->setFollowedSince($date);
-            $follower->setProjects($projectId);
-            $follower->setUsers($userId);
 
-            $em = $this->getDoctrine()->getManager();
-
-            // tells Doctrine you want to (eventually) save the Product (no queries yet)
-            $em->persist($follower);
-
-            // actually executes the queries (i.e. the INSERT query)
-            $em->flush();
-
-            return new \Symfony\Component\HttpFoundation\Response('Inserted Project with id ').$follower->getId();
-        }
+        return new JsonResponse(null);
     }
 
     /*
@@ -152,7 +155,7 @@ class FollowerController extends Controller
 
         $em = $this->getDoctrine()->getManager();
         $followers = $em->getRepository('HtlSpendenportalBundle:Follower')->findAll();
-            
+
             $user = $this->getUser();
 
             foreach ($followers as $follower){
@@ -161,7 +164,7 @@ class FollowerController extends Controller
                     $em->remove($follower);
                     $em->flush();
 
-                    return new JsonResponse($user->getUsername().' hast unfollowed '.$follower->getProjects()->getTitle());
+                    return new JsonResponse($user->getUsername().' has unfollowed '.$follower->getProjects()->getTitle());
                 }
             }
 

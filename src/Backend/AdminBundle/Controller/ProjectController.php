@@ -121,6 +121,11 @@ class ProjectController extends Controller
             $em->persist($user); // I set/modify the properties then persist
         }
     }
+
+    public function renderCreateAction()
+    {
+        return $this->render('BackendAdminBundle::createProject.html.twig');
+    }
     
 /*
     public function showAction($productId)
