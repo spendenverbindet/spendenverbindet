@@ -4,30 +4,36 @@ namespace Htl\SpendenportalBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class PostController extends Controller
 {
     public function listFromProjectAction($projectId){
-        $projects = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:Project')->find($projectId);
 
-        $post = $projects->getPosts();
+        if ( $this->get('security.authorization_checker')->isGranted('ROLE_DONATOR')) {
+            $projects = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:Project')->find($projectId);
+
+            $post = $projects->getPost();
 
 
-        $responseArray = array();
+            $responseArray = array();
 
-        for($i=0;$i<count($post);$i++){
-            $item = array(
-                "id"=>$projects[$i]->getId(),
-                "postPictureUrl"=>$projects[$i]->getPostPictureUrl(),
-                "postText"=>$projects[$i]->getPosttText(),
-                "created_at"=>$projects[$i]->getCreatedAt()
-            );
-            array_push($responseArray, $item);
+            for ($i = 0; $i < count($post); $i++) {
+                $item = array(
+                    "id" => $post[$i]->getId(),
+                    "postPictureUrl" => $post[$i]->getPostPictureUrl(),
+                    "postText" => $post[$i]->getPostText(),
+                    "created_at" => $post[$i]->getCreatedAt()
+                );
+                array_push($responseArray, $item);
+            }
+
+            $responseArray = (object)$responseArray;
+
+            return new JsonResponse($responseArray);
         }
 
-        $responseArray = (object) $responseArray;
-
-        return new JsonResponse($responseArray);
+        return new JsonResponse(null);
     }
     
     public function createPostAction ($projectId, $postPictureUrl, $postText) {

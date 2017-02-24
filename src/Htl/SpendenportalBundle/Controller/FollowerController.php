@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
+use Htl\SpendenportalBundle\Entity\Follower;
 
 class FollowerController extends Controller
 {
@@ -112,7 +113,7 @@ class FollowerController extends Controller
                 $follower = new Follower();
                 $follower->setFollowedSince($date);
                 $follower->setProjects($projectId);
-                $follower->setUsers($user->getId());
+                $follower->setUsers($user);
 
                 $em = $this->getDoctrine()->getManager();
 
