@@ -4,9 +4,36 @@ namespace Htl\SpendenportalBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class DonationController extends Controller
 {
+    public function ifDonatedAction($projectId){
+        //anzahl der ProjectIds checken
+
+        if ( $this->get('security.authorization_checker')->isGranted('ROLE_DONATOR')) {
+            
+        $repository = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:Project')->find($projectId);
+        $donations = $repository->getDonations();
+
+            $user = $this->getUser();
+
+            foreach($donations as $donation){
+                if($donation->getUsers()->getId() == $user->getId()){
+                    return new JsonResponse(true);
+                } else {
+                    return new JsonResponse(false);
+                }
+            }
+
+            return new JsonResponse(false);
+
+        }
+
+        return new JsonResponse(null);
+
+    }
+
     public function listAction(){
 
         $repository = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:Follower');

@@ -42,6 +42,10 @@
         <default key="_controller">HtlSpendenportalBundle:Donation:list</default>
     </route>
 
+    <route id="alreadyDonated" path="/alreadyDonated/{projectId}" methods="GET">
+        <default key="_controller">HtlSpendenportalBundle:Donation:ifDonated</default>
+    </route>
+
     <route id="createDonation" path="/createDonation" methods="POST">
         <default key="_controller">HtlSpendenportalBundle:Donation:create</default>
     </route>
