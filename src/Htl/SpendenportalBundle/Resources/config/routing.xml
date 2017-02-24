@@ -74,7 +74,7 @@
         <default key="_controller">HtlSpendenportalBundle:Follower:update</default>
     </route>
 
-    <route id="deleteFollower" path="/deleteFollower/{followerId}" methods="DESTROY">
+    <route id="deleteFollower" path="/deleteFollower/{followerId}" methods="DELETE">
         <default key="_controller">HtlSpendenportalBundle:Follower:delete</default>
     </route>
 
