@@ -11,7 +11,7 @@ class DonationController extends Controller
     public function ifDonatedAction($projectId){
         //anzahl der ProjectIds checken
 
-        if ( $this->get('security.authorization_checker')->isGranted('ROLE_DONATOR')) {
+        if ($this->get('security.authorization_checker')->isGranted('ROLE_DONATOR')) {
             
         $repository = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:Project')->find($projectId);
         $donations = $repository->getDonations();
@@ -21,8 +21,6 @@ class DonationController extends Controller
             foreach($donations as $donation){
                 if($donation->getUsers()->getId() == $user->getId()){
                     return new JsonResponse(true);
-                } else {
-                    return new JsonResponse(false);
                 }
             }
 

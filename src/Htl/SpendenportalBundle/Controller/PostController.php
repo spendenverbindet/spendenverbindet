@@ -9,12 +9,11 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 class PostController extends Controller
 {
     public function listFromProjectAction($projectId){
+        if ($this->get('security.authorization_checker')->isGranted('ROLE_DONATOR') && $this->hasDonated($projectId)) {
 
-        if ( $this->get('security.authorization_checker')->isGranted('ROLE_DONATOR')) {
             $projects = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:Project')->find($projectId);
 
             $post = $projects->getPost();
-
 
             $responseArray = array();
 
@@ -34,6 +33,30 @@ class PostController extends Controller
         }
 
         return new JsonResponse(null);
+    }
+
+    public function hasDonated($projectId){
+        //anzahl der ProjectIds checken
+
+        //if ( $this->get('security.authorization_checker')->isGranted('ROLE_DONATOR')) {
+
+        $repository = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:Project')->find($projectId);
+        $donations = $repository->getDonations();
+
+        $user = $this->getUser();
+
+        foreach($donations as $donation){
+            if($donation->getUsers()->getId() == $user->getId()){
+                return true;
+            }
+        }
+
+        return false;
+
+        //}
+
+        return null;
+
     }
     
     public function createPostAction ($projectId, $postPictureUrl, $postText) {
