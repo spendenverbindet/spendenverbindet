@@ -35,7 +35,8 @@ class ProjectController extends Controller
         return $this->render('BackendAdminBundle::editProject.html.twig');
     }
 
-    public function listAction(){
+    public function listAction()
+    {
         $projects = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:Project')->findAll();
 
         $responseArray = array();
@@ -62,7 +63,8 @@ class ProjectController extends Controller
         return new JsonResponse($responseArray);
     }
 
-    public function showAction($projectId){
+    public function showAction($projectId)
+    {
         $projects = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:Project')->find($projectId);
 
         $responseArray = array();
@@ -86,7 +88,7 @@ class ProjectController extends Controller
 
         return new JsonResponse($responseArray);
     }
-    
+    /*
     public function createAction(Request $request)
     {
         $form = $this->createFormBuilder()
@@ -119,6 +121,41 @@ class ProjectController extends Controller
             // or this could be $contract = new Contract("John Doe", $data["phone"], $data["period"]);
 
             $em->persist($user); // I set/modify the properties then persist
+        }
+    }
+*/
+    public function buildForm(FormBuilderInterface $builder)
+    {
+        $builder
+            ->add('title', TextType::class)
+            ->add('category', TextType::class)
+            ->add('created_at', DateTimeType::class)
+            ->add('targetAmount', NumberType::class)
+            ->add('shortinfo', TextType::class)
+            ->add('currentAmount', NumberType::class)
+            ->add('description', TextareaType::class)
+        ;
+    }
+
+    public function createProjectAction(Request $request)
+    {
+        // 1) build the form
+        $project = new Project();
+        $form = $this->createForm(ProjectType::class, $project);
+
+        // 2) handle the submit (will only happen on POST)
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            // 3) save the Project!
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($project);
+            $em->flush();
+
+            // ... do any other work - like sending them an email, etc
+            // maybe set a "flash" success message for the user
+
+            return $this->redirectToRoute('BackendAdminBundle::listProjects.html.twig');
         }
     }
 

@@ -19,7 +19,7 @@
                 <li><a >EDF</a></li>
             </ul>
         </div>
-        <form action="{{url("createProject")}}">
+        <form action="{{ path('BackendAdminBundle::createProject.html.twig') }}">
             <div class="col-md-8 col-lg-8">
                 <!--
                     Editfeld Header
@@ -104,7 +104,7 @@
 
                 <div class="row marginTop">
                     <div class="col-md-offset-3 col-lg-offset-3 col-md-9 col-lg-9">
-                        <input class="btn" type="button" value="Fertig" id="fertig_button">
+                        <input class="btn" type="sumbit" value="Fertig" id="fertig_button">
                     </div>
                 </div>
             </div>

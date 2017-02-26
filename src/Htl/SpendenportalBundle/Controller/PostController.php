@@ -21,6 +21,7 @@ class PostController extends Controller
                 $item = array(
                     "id" => $post[$i]->getId(),
                     "postPictureUrl" => $post[$i]->getPostPictureUrl(),
+                    "postTitle" => $post[$i]->getTitle(),
                     "postText" => $post[$i]->getPostText(),
                     "created_at" => $post[$i]->getCreatedAt()
                 );

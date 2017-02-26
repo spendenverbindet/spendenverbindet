@@ -27,6 +27,13 @@ class Post
      * @ORM\Column(name="picture", type="string")
      */
     private $postPictureUrl;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="post_title", type="text")
+     */
+    private $title;
 
     /**
      * @var string
@@ -81,6 +88,30 @@ class Post
     public function getPostPictureUrl()
     {
         return $this->postPictureUrl;
+    }
+
+    /**
+     * Set title
+     *
+     * @param string $title
+     *
+     * @return Post
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
+
+        return $this;
+    }
+
+    /**
+     * Get title
+     *
+     * @return string
+     */
+    public function getTitle()
+    {
+        return $this->title;
     }
 
     /**
