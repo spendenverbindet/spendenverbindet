@@ -93,6 +93,8 @@ app.controller('backendController', function($scope, $http) {
 
             $scope.projectDetailInfo = response.data[0];
 
+            document.getElementById("activated").checked = response.data[0].active;
+
         }, function errorCallback(response) {
 
         });

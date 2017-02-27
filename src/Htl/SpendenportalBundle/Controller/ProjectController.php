@@ -14,19 +14,25 @@ class ProjectController extends Controller
         
         $responseArray = array();
 
-        for($i=0;$i<count($projects);$i++){
-            $progress = floor(($projects[$i]->getCurrentAmount()/$projects[$i]->getTargetAmount())*100);
+        $hasDonated = null;
+
+        foreach($projects as $project){
+            if ( $this->get('security.authorization_checker')->isGranted('ROLE_DONATOR')) {
+                $hasDonated = $this->hasDonated($project->getId());
+            }
+            $progress = floor(($project->getCurrentAmount()/$project->getTargetAmount())*100);
             $item = array(
-                "id"=>$projects[$i]->getId(),
-                "title"=>$projects[$i]->getTitle(),
-                "titlePictureUrl"=>$projects[$i]->getTitlePictureUrl(),
-                "description"=>$projects[$i]->getDescription(),
-                "shortinfo"=>$projects[$i]->getShortinfo(),
-                "created_at"=>$projects[$i]->getCreatedAt()->format('d.m.Y'),
-                "targetAmount"=>$projects[$i]->getTargetAmount(),
-                "currentAmount"=>$projects[$i]->getCurrentAmount(),
+                "id"=>$project->getId(),
+                "title"=>$project->getTitle(),
+                "titlePictureUrl"=>$project->getTitlePictureUrl(),
+                "description"=>$project->getDescription(),
+                "shortinfo"=>$project->getShortinfo(),
+                "created_at"=>$project->getCreatedAt()->format('d.m.Y'),
+                "targetAmount"=>$project->getTargetAmount(),
+                "currentAmount"=>$project->getCurrentAmount(),
                 "progress"=>$progress,
-                "currentDonators"=>$projects[$i]->getCurrentDonators()
+                "currentDonators"=>$project->getCurrentDonators(),
+                "hasDonated"=>$hasDonated
             );
             array_push($responseArray, $item);
         }
@@ -41,22 +47,22 @@ class ProjectController extends Controller
 
         $responseArray = array();
 
-        for($i=0;$i<count($projects);$i++){
-            $progress = floor(($projects[$i]->getCurrentAmount()/$projects[$i]->getTargetAmount())*100);
+        foreach($projects as $project){
+            $progress = floor(($project->getCurrentAmount()/$project->getTargetAmount())*100);
             $item = array(
-                "id"=>$projects[$i]->getId(),
-                "title"=>$projects[$i]->getTitle(),
-                "titlePictureUrl"=>$projects[$i]->getTitlePictureUrl(),
-                "description"=>$projects[$i]->getDescription(),
-                "descriptionPrivate"=>$projects->getDescriptionPrivate(),
-                "shortinfo"=>$projects[$i]->getShortinfo(),
-                "created_at"=>$projects[$i]->getCreatedAt()->format('d.m.Y'),
-                "targetAmount"=>$projects[$i]->getTargetAmount(),
-                "currentAmount"=>$projects[$i]->getCurrentAmount(),
+                "id"=>$project->getId(),
+                "title"=>$project->getTitle(),
+                "titlePictureUrl"=>$project->getTitlePictureUrl(),
+                "description"=>$project->getDescription(),
+                "descriptionPrivate"=>$project->getDescriptionPrivate(),
+                "shortinfo"=>$project->getShortinfo(),
+                "created_at"=>$project->getCreatedAt()->format('d.m.Y'),
+                "targetAmount"=>$project->getTargetAmount(),
+                "currentAmount"=>$project->getCurrentAmount(),
                 "progress"=>$progress,
-                "currentDonators"=>$projects[$i]->getCurrentDonators(),
-                "username"=>$projects[$i]->getUsers()->getUsername(),
-                "category"=>$projects[$i]->getCategory()->getCategoryText()
+                "currentDonators"=>$project->getCurrentDonators(),
+                "username"=>$project->getUsers()->getUsername(),
+                "category"=>$project->getCategory()->getCategoryText()
             );
             array_push($responseArray, $item);
         }
@@ -186,22 +192,22 @@ class ProjectController extends Controller
     public function hasDonated($projectId){
         //anzahl der ProjectIds checken
 
-        //if ( $this->get('security.authorization_checker')->isGranted('ROLE_DONATOR')) {
+        if ( $this->get('security.authorization_checker')->isGranted('ROLE_DONATOR')) {
 
-        $repository = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:Project')->find($projectId);
-        $donations = $repository->getDonations();
+            $repository = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:Project')->find($projectId);
+            $donations = $repository->getDonations();
 
-        $user = $this->getUser();
+            $user = $this->getUser();
 
-        foreach($donations as $donation){
-            if($donation->getUsers()->getId() == $user->getId()){
-                return true;
+            foreach($donations as $donation){
+                if($donation->getUsers()->getId() == $user->getId()){
+                    return true;
+                }
             }
+
+            return false;
+
         }
-
-        return false;
-
-        //}
 
         return null;
 
