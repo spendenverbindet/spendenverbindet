@@ -45,6 +45,13 @@ class Project
     /**
      * @var string
      *
+     * @ORM\Column(name="descriptionPrivate", type="text")
+     */
+    private $descriptionPrivate;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="shortinfo", type="string", length=255)
      */
     private $shortinfo;
@@ -210,6 +217,30 @@ class Project
     public function getDescription()
     {
         return $this->description;
+    }
+
+    /**
+     * Set descriptionPrivate
+     *
+     * @param string $descriptionPrivate
+     *
+     * @return Project
+     */
+    public function setDescriptionPrivate($descriptionPrivate)
+    {
+        $this->descriptionPrivate = $descriptionPrivate;
+
+        return $this;
+    }
+
+    /**
+     * Get descriptionPrivate
+     *
+     * @return string
+     */
+    public function getDescriptionPrivate()
+    {
+        return $this->descriptionPrivate;
     }
 
     /**

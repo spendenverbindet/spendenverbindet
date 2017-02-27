@@ -30,7 +30,7 @@
         <default key="_controller">BackendAdminBundle:Project:renderCreate</default>
     </route>
 
-    <route id="insertProject" path="/insertProject">
+    <route id="insertProject" path="/insertProject" methods="POST">
         <default key="_controller">BackendAdminBundle:Project:create</default>
     </route>
 

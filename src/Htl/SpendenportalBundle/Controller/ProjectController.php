@@ -20,6 +20,7 @@ class ProjectController extends Controller
                 "title"=>$projects[$i]->getTitle(),
                 "titlePictureUrl"=>$projects[$i]->getTitlePictureUrl(),
                 "description"=>$projects[$i]->getDescription(),
+                "descriptionPrivate"=>$projects->getDescriptionPrivate(),
                 "shortinfo"=>$projects[$i]->getShortinfo(),
                 "created_at"=>$projects[$i]->getCreatedAt()->format('d.m.Y'),
                 "targetAmount"=>$projects[$i]->getTargetAmount(),
@@ -47,6 +48,7 @@ class ProjectController extends Controller
                 "title"=>$projects[$i]->getTitle(),
                 "titlePictureUrl"=>$projects[$i]->getTitlePictureUrl(),
                 "description"=>$projects[$i]->getDescription(),
+                "descriptionPrivate"=>$projects->getDescriptionPrivate(),
                 "shortinfo"=>$projects[$i]->getShortinfo(),
                 "created_at"=>$projects[$i]->getCreatedAt()->format('d.m.Y'),
                 "targetAmount"=>$projects[$i]->getTargetAmount(),
@@ -79,6 +81,7 @@ class ProjectController extends Controller
                 "title"=>$projects[$i]->getTitle(),
                 "titlePictureUrl"=>$projects[$i]->getTitlePictureUrl(),
                 "description"=>$projects[$i]->getDescription(),
+                "descriptionPrivate"=>$projects->getDescriptionPrivate(),
                 "shortinfo"=>$projects[$i]->getShortinfo(),
                 "created_at"=>$projects[$i]->getCreatedAt()->format('d.m.Y'),
                 "targetAmount"=>$projects[$i]->getTargetAmount(),
@@ -104,9 +107,11 @@ class ProjectController extends Controller
         $item = array(
             "id"=>$projects->getId(),
             "title"=>$projects->getTitle(),
+            "active"=>$projects->getActive(),
             "titlePictureUrl"=>$projects->getTitlePictureUrl(),
             "description"=>$projects->getDescription(),
-            "shortinfo"=>$projects->getShortinfo(),
+            "descriptionPrivate"=>$projects->getDescriptionPrivate(),
+            "shortInfo"=>$projects->getShortinfo(),
             "created_at"=>$projects->getCreatedAt()->format('d.m.Y'),
             "created_at_backend"=>$projects->getCreatedAt()->format('Y-m-d'),
             "targetAmount"=>$projects->getTargetAmount(),
@@ -122,7 +127,7 @@ class ProjectController extends Controller
         return new JsonResponse($responseArray);
     }
 
-    public function createAction ($title, $desciption, $shortinfo, $categoryId, $user, $targetAmount, $titlePictureUrl){
+    public function createAction ($title, $desciption, $desciptionPrivate, $shortinfo, $categoryId, $user, $targetAmount, $titlePictureUrl){
 
         $categoryId = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:Category')->find($categoryId);
         $user = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:User')->find($user);
@@ -140,6 +145,7 @@ class ProjectController extends Controller
             $project->setTitle($title);
             $project->setTitlePictureUrl($titlePictureUrl);
             $project->setDescription($desciption);
+            $project->setDescriptionPrivate($desciptionPrivate);
             $project->setShortinfo($shortinfo);
             $project->setTargetAmount($targetAmount);
             $project->setCurrentAmount(0);
@@ -161,7 +167,7 @@ class ProjectController extends Controller
         }
     }
 
-    public function updateAction($projectId, $title, $desciption, $shortinfo, $categoryId, $user, $targetAmount, $currentAmount, $titlePictureUrl, $active){
+    public function updateAction($projectId, $title, $desciption, $desciptionPrivate, $shortinfo, $categoryId, $user, $targetAmount, $currentAmount, $titlePictureUrl, $active){
 
         $em = $this->getDoctrine()->getManager();
         $project = $em->getRepository('HtlSpendenportalBundle:Project')->find($projectId);
@@ -175,6 +181,7 @@ class ProjectController extends Controller
         $project->setTitle($title);
         $project->setTitlePictureUrl($titlePictureUrl);
         $project->setDescription($desciption);
+        $project->setDescriptionPrivate($desciptionPrivate);
         $project->setShortinfo($shortinfo);
         $project->setTargetAmount($targetAmount);
         $project->setCurrentAmount($currentAmount);

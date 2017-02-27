@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Form\Form;
 use Htl\SpendenportalBundle\Entity\Project;
+use Symfony\Component\Validator\Constraints\DateTime;
 
 class ProjectController extends Controller
 {
@@ -68,14 +69,15 @@ class ProjectController extends Controller
         $projects = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:Project')->find($projectId);
 
         $responseArray = array();
-
+        
         $progress = floor(($projects->getCurrentAmount()/$projects->getTargetAmount())*100);
         $item = array(
             "id"=>$projects->getId(),
             "title"=>$projects->getTitle(),
+            "active"=>$projects->getActive(),
             "titlePictureUrl"=>$projects->getTitlePictureUrl(),
             "description"=>$projects->getDescription(),
-            "shortinfo"=>$projects->getShortinfo(),
+            "shortInfo"=>$projects->getShortinfo(),
             "created_at"=>$projects->getCreatedAt()->format('Y-m-d'),
             "targetAmount"=>$projects->getTargetAmount(),
             "currentAmount"=>$projects->getCurrentAmount(),
@@ -96,37 +98,43 @@ class ProjectController extends Controller
             ->add('category')
             ->add('created_at')
             ->add('targetAmount')
-            ->add('shortinfo')
+            ->add('shortInfo')
             ->add('currentAmount')
             ->add('description')
             ->getForm();
 
         if ($request->isMethod('POST')) {
 
-            $form->submit($request->request->get($form->getName()));
-            
-            //return new JsonResponse($request);
+            $form->submit($request->request->all($form->getName()));
 
-            if ($form->isSubmitted() && $form->isValid()) {
+            if ($form->isSubmitted()) {
 
                 // data is an array with "phone" and "period" keys
                 $data = $form->getData();
 
                 $em = $this->getDoctrine()->getManager();
 
-                $project = $em->getRepository('HtlSpendenportalBundle:Project');
+                //return new JsonResponse(date_parse_from_format('Y-m-d', $data["created_at"]));
+
+                $project = new Project;
                 $project->setTitle($data["title"]);
-                $project->setCategory($data["category"]);
-                $project->setCreatedAt($data["created_at"]);
+                //$project->setCategory($data["category"]);
+                //$project->setCreatedAt(DateTime::createFromFormat('Y-m-d', $data["created_at"]));
                 $project->setTargetAmount($data["targetAmount"]);
-                $project->setShortinfo($data["shortinfo"]);
+                $project->setShortinfo($data["shortInfo"]);
                 $project->setCurrentAmount($data["currentAmount"]);
                 $project->setDescription($data["description"]);
 
                 // or this could be $contract = new Contract("John Doe", $data["phone"], $data["period"]);
 
                 $em->persist($project); // I set/modify the properties then persist
+
+                $em->flush();
+
+                return $this->render('BackendAdminBundle::listProjects.html.twig');
             }
+
+            return $this->render('BackendAdminBundle::createProject.html.twig');
         }
     }
 
