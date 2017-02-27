@@ -1,0 +1,82 @@
+{% if is_granted('ROLE_DONATOR') %}
+
+{% embed "HtlSpendenportalBundle::header.html.twig" %}
+    {# override the title-tag text #}
+    {% block title_text %}
+        Spendenverbindet | Abonniert
+    {% endblock %}
+{% endembed %}
+
+<script>
+    document.getElementById("abonniert_id").style["color"] = "#47A1DE";
+</script>
+
+<div class="helper-navbar"></div>
+
+
+<div class="container">
+
+    <div class="container">
+        <div class="row fisrt-ent-section">
+            <div class="col-xs-12 col-md-6 text-center"><h2>ABONNIERT</h2></div>
+            <div class="col-xs-12 col-md-6"></div>
+        </div>
+
+        <hr style="border: 1px solid lightgray">
+
+    </div>
+
+
+    <div ng-show="showLoadingIndicator" class="row">
+        <div class="col-xs-12" style="padding:50px;">
+            <div class="cssload-thecube">
+                <div class="cssload-cube cssload-c1"></div>
+                <div class="cssload-cube cssload-c2"></div>
+                <div class="cssload-cube cssload-c4"></div>
+                <div class="cssload-cube cssload-c3"></div>
+            </div>
+        </div>
+    </div>
+
+
+    <div ng-repeat="projectspart in projectsPrepared" class="row">
+
+        <div ng-click="redirectToProjekt([[project.id]],[[project.title]])" ng-repeat="project in projectspart" class="col-xs-12 col-sm-4" style="padding:50px;">
+            <div class="clickable">
+
+                <div class="corer-text-image-wrapper">
+                    <img src="{{ asset('bundles/htlspendenportal/img/[[project.titlePictureUrl]]') }}" alt="">
+                    <p>Bereits gespendet</p>
+                </div>
+
+                <h3>[[project.title]]</h3>
+
+                <p style="padding-bottom:20px;">
+                    [[project.shortinfo]]
+                </p>
+
+                <div class="uk-progress" style="margin-bottom:4px;border: 1px solid #272828;background-color: #fff">
+                    <div class="uk-progress-bar" style="width:[[project.progress]]%">[[project.progress]]%</div>
+                </div>
+                <p>Erreicht bis zum Ziel</p>
+
+                <table style="border-spacing: 15px;">
+                    <tr>
+                        <td><span class="coo-blue-color">[[project.created_at]]</span></td>
+                        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="coo-blue-color">[[project.currentDonators]]</span></td>
+                    </tr>
+                    <tr>
+                        <td>Start</td>
+                        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Spender</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+{% include "HtlSpendenportalBundle::footer.html.twig" %}
+
+{% endif %}

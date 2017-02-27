@@ -422,6 +422,24 @@ button:focus {
   color: #272828;
 }
 
+/* abonniert seite */
+
+.corer-text-image-wrapper {
+  position: relative;
+  width: 250px;
+}
+.corer-text-image-wrapper p {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  padding: 10px;
+  color: #FFF;
+  background-color: #47A1DE;
+  text-align: center;
+}
+
+
 /*@media screen and (min-width: 768px) {*/
 @media screen and (min-width: 992px) {
 

@@ -19,5 +19,9 @@ class DefaultController extends Controller
         return $this->render('HtlSpendenportalBundle::projektdetail.html.twig');
     }
 
+    public function abonniertAction(){
+        return $this->render('HtlSpendenportalBundle::abonniert.html.twig');
+    }
+
 }
 

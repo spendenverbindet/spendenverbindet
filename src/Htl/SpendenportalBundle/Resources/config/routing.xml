@@ -18,6 +18,11 @@
         <default key="_controller">HtlSpendenportalBundle:Default:projekt</default>
     </route>
 
+    <route id="htl_spendenportal_abonniert" path="/abonniert">
+        <default key="_controller">HtlSpendenportalBundle:Default:abonniert</default>
+    </route>
+
+
     <!--                                        FERTL                                              -->
 
     <!--  Category  -->

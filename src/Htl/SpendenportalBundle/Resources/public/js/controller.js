@@ -344,7 +344,7 @@ app.controller('spendenverbindetController', function($scope, $http) {
                     img_counter+=1;
                 }
             }
-            
+
             if( img_counter == 0){
                 document.getElementById("gallery_image_loader_id").setAttribute("style", "display:none");
             }
@@ -368,8 +368,6 @@ app.controller('spendenverbindetController', function($scope, $http) {
         }).then(function successCallback(response) {
 
             $scope.allPostsOfCurrentSite = response.data;
-
-            console.log($scope.allPostsOfCurrentSite);
 
             $scope.inishedLoadingProjektDetailCounter+=1;
             $scope.didFinishLoading();
