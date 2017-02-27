@@ -179,6 +179,9 @@ app.controller('spendenverbindetController', function($scope, $http) {
     /* Projektdetailseite */
 
     $scope.projectDetailInfo = null;
+    $scope.firstPartOfText = "";
+    $scope.secondPartOfText = "";
+
 
     $scope.redirectToProjekt = function(id, projectTitle) {
         $scope.actualProjectId = id;
@@ -201,6 +204,15 @@ app.controller('spendenverbindetController', function($scope, $http) {
 
             $scope.projectDetailInfo = response.data[0];
 
+            // Split Project description into two parts
+            for(var i=0;i<$scope.projectDetailInfo.description.length;i++){
+                var c = $scope.projectDetailInfo.description.charAt(i);
+                if(i > 350 && c==" "){
+                    $scope.firstPartOfText = $scope.projectDetailInfo.description.substring(0, i);
+                    $scope.secondPartOfText = $scope.projectDetailInfo.description.substring(i,$scope.projectDetailInfo.description.length);
+                    break;
+                }
+            }
 
             $scope.inishedLoadingProjektDetailCounter+=1;
             $scope.didFinishLoading();
