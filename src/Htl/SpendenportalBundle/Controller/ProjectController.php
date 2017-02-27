@@ -193,6 +193,7 @@ class ProjectController extends Controller
 
             return new JsonResponse($responseArray);
         }
+        return new JsonResponse(null);
     }
 
     public function hasDonated($projectId){
@@ -204,6 +205,7 @@ class ProjectController extends Controller
         $donations = $repository->getDonations();
 
         $user = $this->getUser();
+        $user = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:User')->find(1);
 
         foreach($donations as $donation){
             if($donation->getUsers()->getId() == $user->getId()){
