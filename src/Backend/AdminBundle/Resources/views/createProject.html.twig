@@ -19,7 +19,7 @@
                 <li><a >EDF</a></li>
             </ul>
         </div>
-        <form action="{{ path('BackendAdminBundle::createProject.html.twig') }}">
+        <form action="{{ path('insertProject') }}" method="post">
             <div class="col-md-8 col-lg-8">
                 <!--
                     Editfeld Header
@@ -31,7 +31,7 @@
                 <div class="row">
                     <div class="col-md-3 col-lg-3 editTopHeight"><!-- Profilbild -->
                         <div class="picAlignRight">
-                            <img style="height: 70px; width: 70px" alt="Projektbild">
+                            <img style="height: 70px; width: 70px" alt="Projektbild" name="projectpicture">
                         </div>
                     </div>
                     <div class="col-md-9 col-lg-9 editTopHeight"><!-- Aktiviert-Box, Username, PW, Löschbutton -->
@@ -53,10 +53,10 @@
                 -->
                 <div class="row marginBottom">
                     <div class="col-md-offset-3 col-lg-offset-3 col-md-4 col-lg-4">
-                        <input class="form-control" type="text" placeholder="Projekttitel" id="title">
+                        <input class="form-control" type="text" placeholder="Projekttitel" id="title" name="title">
                     </div>
                     <div class="col-md-4 col-lg-4">
-                        <input class="form-control" type="text" placeholder="Kategorie"  id="category">
+                        <input class="form-control" type="text" placeholder="Kategorie"  id="category" name="category">
                     </div>
                 </div>
 
@@ -68,10 +68,10 @@
                 -->
                 <div class="row marginTop">
                     <div class="col-md-offset-3 col-lg-offset-3 col-md-4 col-lg-4">
-                        <input class="form-control" type="date" placeholder="Erstellt am" id="created_at">
+                        <input class="form-control" type="date" placeholder="Erstellt am" id="created_at" name="created_at">
                     </div>
                     <div class="col-md-4 col-lg-4">
-                        <input class="form-control" type="number" placeholder="Zielbetrag"  id="targetAmount">
+                        <input class="form-control" type="number" placeholder="Zielbetrag"  id="targetAmount" name="targetAmount">
                     </div>
                 </div>
 
@@ -83,10 +83,10 @@
                 -->
                 <div class="row marginTop">
                     <div class="col-md-offset-3 col-lg-offset-3 col-md-4 col-lg-4">
-                        <input class="form-control" type="text" placeholder="Kurzinfo" id="shortInfo">
+                        <input class="form-control" type="text" placeholder="Kurzinfo" id="shortInfo" name="shortInfo">
                     </div>
                     <div class="col-md-4 col-lg-4">
-                        <input class="form-control" type="number" placeholder="aktueller Spendenbetrag" id="currentAmount">
+                        <input class="form-control" type="number" placeholder="aktueller Spendenbetrag" id="currentAmount" name="currentAmount">
                     </div>
                 </div>
 
@@ -98,13 +98,13 @@
                 -->
                 <div class="row marginTop">
                     <div class="col-md-offset-3 col-lg-offset-3 col-md-8 col-lg-8">
-                        <textarea class="form-control" rows="4" placeholder="Beschreibung" id="description"></textarea>
+                        <textarea class="form-control" rows="4" placeholder="Beschreibung" id="description" name="description"></textarea>
                     </div>
                 </div>
 
                 <div class="row marginTop">
                     <div class="col-md-offset-3 col-lg-offset-3 col-md-9 col-lg-9">
-                        <input class="btn" type="sumbit" value="Fertig" id="fertig_button">
+                        <button type="sumbit" id="fertig_button" class="btn">Submit</button>
                     </div>
                 </div>
             </div>

@@ -2,8 +2,6 @@
 
 namespace Backend\AdminBundle\Controller;
 
-use Doctrine\DBAL\Types\TextType;
-use Leafo\ScssPhp\Node\Number;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
@@ -11,6 +9,8 @@ use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\Form\Form;
+use Htl\SpendenportalBundle\Entity\Project;
 
 class ProjectController extends Controller
 {
@@ -88,55 +88,61 @@ class ProjectController extends Controller
 
         return new JsonResponse($responseArray);
     }
-    /*
+
     public function createAction(Request $request)
     {
         $form = $this->createFormBuilder()
-            ->add('title', TextType::class)
-            ->add('category', TextType::class)
-            ->add('created_at', DateTimeType::class)
-            ->add('targetAmount', NumberType::class)
-            ->add('shortinfo', TextType::class)
-            ->add('currentAmount', NumberType::class)
-            ->add('description', TextareaType::class)
+            ->add('title')
+            ->add('category')
+            ->add('created_at')
+            ->add('targetAmount')
+            ->add('shortinfo')
+            ->add('currentAmount')
+            ->add('description')
             ->getForm();
 
         if ($request->isMethod('POST')) {
-            $form->bind($request);
 
-            // data is an array with "phone" and "period" keys
-            $data = $form->getData();
+            $form->submit($request->request->get($form->getName()));
+            
+            //return new JsonResponse($request);
 
-            $em = $this->getDoctrine()->getManager();
+            if ($form->isSubmitted() && $form->isValid()) {
 
-            $user = $em->getRepository('HtlSpendenportalBundle:Project');
-            $user->setTitle($data["title"]);
-            $user->setCategory($data["category"]);
-            $user->setCreatedAt($data["created_at"]);
-            $user->setTargetAmount($data["targetAmount"]);
-            $user->setShortinfo($data["shortinfo"]);
-            $user->setCurrentAmount($data["currentAmount"]);
-            $user->setDescription($data["description"]);
+                // data is an array with "phone" and "period" keys
+                $data = $form->getData();
 
-            // or this could be $contract = new Contract("John Doe", $data["phone"], $data["period"]);
+                $em = $this->getDoctrine()->getManager();
 
-            $em->persist($user); // I set/modify the properties then persist
+                $project = $em->getRepository('HtlSpendenportalBundle:Project');
+                $project->setTitle($data["title"]);
+                $project->setCategory($data["category"]);
+                $project->setCreatedAt($data["created_at"]);
+                $project->setTargetAmount($data["targetAmount"]);
+                $project->setShortinfo($data["shortinfo"]);
+                $project->setCurrentAmount($data["currentAmount"]);
+                $project->setDescription($data["description"]);
+
+                // or this could be $contract = new Contract("John Doe", $data["phone"], $data["period"]);
+
+                $em->persist($project); // I set/modify the properties then persist
+            }
         }
     }
-*/
+
     public function buildForm(FormBuilderInterface $builder)
     {
         $builder
-            ->add('title', TextType::class)
-            ->add('category', TextType::class)
-            ->add('created_at', DateTimeType::class)
-            ->add('targetAmount', NumberType::class)
-            ->add('shortinfo', TextType::class)
-            ->add('currentAmount', NumberType::class)
-            ->add('description', TextareaType::class)
+            ->add('title')
+            ->add('category')
+            ->add('created_at')
+            ->add('targetAmount')
+            ->add('shortinfo')
+            ->add('currentAmount')
+            ->add('description')
         ;
     }
-
+/*
     public function createProjectAction(Request $request)
     {
         // 1) build the form
@@ -158,7 +164,7 @@ class ProjectController extends Controller
             return $this->redirectToRoute('BackendAdminBundle::listProjects.html.twig');
         }
     }
-
+*/
     public function renderCreateAction()
     {
         return $this->render('BackendAdminBundle::createProject.html.twig');

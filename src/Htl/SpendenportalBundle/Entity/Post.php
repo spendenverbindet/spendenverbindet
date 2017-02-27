@@ -31,7 +31,7 @@ class Post
     /**
      * @var string
      *
-     * @ORM\Column(name="post_title", type="text")
+     * @ORM\Column(name="post_title", type="string")
      */
     private $title;
 

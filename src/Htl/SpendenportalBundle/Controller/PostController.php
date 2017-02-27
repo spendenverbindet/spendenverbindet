@@ -14,7 +14,7 @@ class PostController extends Controller
             $projects = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:Project')->find($projectId);
 
             $post = $projects->getPost();
-
+            
             $responseArray = array();
 
             for ($i = 0; $i < count($post); $i++) {
