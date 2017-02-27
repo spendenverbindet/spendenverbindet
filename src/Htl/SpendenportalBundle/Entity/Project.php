@@ -288,7 +288,7 @@ class Project
      */
     public function getActive()
     {
-        return $this->active;
+        return (boolean)$this->active;
     }
 
     /**
