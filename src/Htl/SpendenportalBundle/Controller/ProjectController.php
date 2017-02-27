@@ -5,6 +5,7 @@ namespace Htl\SpendenportalBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Htl\SpendenportalBundle\Entity\Project;
 
 class ProjectController extends Controller
 {
@@ -99,32 +100,58 @@ class ProjectController extends Controller
     }
 
     public function showAction($projectId){
-        $projects = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:Project')->find($projectId);
+        if ( $this->get('security.authorization_checker')->isGranted('ROLE_DONATOR')  && hasDonated($projectId)) {
+            $projects = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:Project')->find($projectId);
 
-        $responseArray = array();
+            $responseArray = array();
 
-        $progress = floor(($projects->getCurrentAmount()/$projects->getTargetAmount())*100);
-        $item = array(
-            "id"=>$projects->getId(),
-            "title"=>$projects->getTitle(),
-            "active"=>$projects->getActive(),
-            "titlePictureUrl"=>$projects->getTitlePictureUrl(),
-            "description"=>$projects->getDescription(),
-            "descriptionPrivate"=>$projects->getDescriptionPrivate(),
-            "shortInfo"=>$projects->getShortinfo(),
-            "created_at"=>$projects->getCreatedAt()->format('d.m.Y'),
-            "created_at_backend"=>$projects->getCreatedAt()->format('Y-m-d'),
-            "targetAmount"=>$projects->getTargetAmount(),
-            "currentAmount"=>$projects->getCurrentAmount(),
-            "progress"=>$progress,
-            "currentDonators"=>$projects->getCurrentDonators(),
-            "category"=>$projects->getCategory()->getCategoryText()
-        );
-        array_push($responseArray, $item);
+            $progress = floor(($projects->getCurrentAmount() / $projects->getTargetAmount()) * 100);
+            $item = array(
+                "id" => $projects->getId(),
+                "title" => $projects->getTitle(),
+                "active" => $projects->getActive(),
+                "titlePictureUrl" => $projects->getTitlePictureUrl(),
+                "description" => $projects->getDescription(),
+                "descriptionPrivate" => $projects->getDescriptionPrivate(),
+                "shortInfo" => $projects->getShortinfo(),
+                "created_at" => $projects->getCreatedAt()->format('d.m.Y'),
+                "created_at_backend" => $projects->getCreatedAt()->format('Y-m-d'),
+                "targetAmount" => $projects->getTargetAmount(),
+                "currentAmount" => $projects->getCurrentAmount(),
+                "progress" => $progress,
+                "currentDonators" => $projects->getCurrentDonators(),
+                "category" => $projects->getCategory()->getCategoryText()
+            );
+            array_push($responseArray, $item);
 
-        $responseArray = (object) $responseArray;
+            $responseArray = (object)$responseArray;
 
-        return new JsonResponse($responseArray);
+            return new JsonResponse($responseArray);
+        }
+    }
+
+    public function hasDonated($projectId){
+        //anzahl der ProjectIds checken
+
+        //if ( $this->get('security.authorization_checker')->isGranted('ROLE_DONATOR')) {
+
+        $repository = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:Project')->find($projectId);
+        $donations = $repository->getDonations();
+
+        $user = $this->getUser();
+
+        foreach($donations as $donation){
+            if($donation->getUsers()->getId() == $user->getId()){
+                return true;
+            }
+        }
+
+        return false;
+
+        //}
+
+        return null;
+
     }
 
     public function createAction ($title, $desciption, $desciptionPrivate, $shortinfo, $categoryId, $user, $targetAmount, $titlePictureUrl){
