@@ -21,7 +21,6 @@ class ProjectController extends Controller
                 "title"=>$projects[$i]->getTitle(),
                 "titlePictureUrl"=>$projects[$i]->getTitlePictureUrl(),
                 "description"=>$projects[$i]->getDescription(),
-                "descriptionPrivate"=>$projects->getDescriptionPrivate(),
                 "shortinfo"=>$projects[$i]->getShortinfo(),
                 "created_at"=>$projects[$i]->getCreatedAt()->format('d.m.Y'),
                 "targetAmount"=>$projects[$i]->getTargetAmount(),
@@ -97,6 +96,55 @@ class ProjectController extends Controller
         $responseArray = (object) $responseArray;
 
         return new JsonResponse($responseArray);
+    }
+
+    public function listFollowingAction(){
+        $projects = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:Project')->findAll();
+
+        $responseArray = array();
+
+
+        foreach($projects as $project){
+
+            if($this->ifFollowing($project) == true){
+                $progress = floor(($project->getCurrentAmount()/$project->getTargetAmount())*100);
+                $item = array(
+                    "id"=>$project->getId(),
+                    "title"=>$project->getTitle(),
+                    "titlePictureUrl"=>$project->getTitlePictureUrl(),
+                    "shortinfo"=>$project->getShortinfo(),
+                    "created_at"=>$project->getCreatedAt()->format('d.m.Y'),
+                    "targetAmount"=>$project->getTargetAmount(),
+                    "currentAmount"=>$project->getCurrentAmount(),
+                    "progress"=>$progress,
+                    "currentDonators"=>$project->getCurrentDonators()
+                );
+                array_push($responseArray, $item);
+            }
+        }
+
+        $responseArray = (object) $responseArray;
+
+        return new JsonResponse($responseArray);
+    }
+
+    public function ifFollowing($projectId){
+        //anzahl der ProjectIds checken
+
+        $repository = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:Project')->find($projectId);
+        $follower = $repository->getFollowers();
+
+        $user = $this->getUser();
+        $user = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:User')->find(2);
+
+        foreach($follower as $follower){
+            if($follower->getUsers()->getId() == $user->getId()){
+                return true;
+            } else {
+                return false;
+            }
+        }
+        return false;
     }
 
     public function showAction($projectId){
