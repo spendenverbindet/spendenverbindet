@@ -119,7 +119,7 @@ class ProjectController extends Controller
                 $project = new Project;
                 $project->setTitle($data["title"]);
                 //$project->setCategory($data["category"]);
-                //$project->setCreatedAt(DateTime::createFromFormat('Y-m-d', $data["created_at"]));
+                $project->setCreatedAt(date_create_from_format('Y-m-d', $data["created_at"]));
                 $project->setTargetAmount($data["targetAmount"]);
                 $project->setShortinfo($data["shortInfo"]);
                 $project->setCurrentAmount($data["currentAmount"]);

@@ -11,7 +11,7 @@ class ProjectController extends Controller
 {
     public function listAction(){
         $projects = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:Project')->findAll();
-        
+
         $responseArray = array();
 
         $hasDonated = null;
@@ -157,6 +157,7 @@ class ProjectController extends Controller
 
     public function showAction($projectId){
         if ( $this->get('security.authorization_checker')->isGranted('ROLE_DONATOR')) {
+
             $projects = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:Project')->find($projectId);
 
             $responseArray = array();
@@ -166,6 +167,9 @@ class ProjectController extends Controller
                 $description = $projects->getDescription();
             }
             $progress = floor(($projects->getCurrentAmount() / $projects->getTargetAmount()) * 100);
+
+            $hasDonated = $this->hasDonated($projects->getId());
+
             $item = array(
                 "id" => $projects->getId(),
                 "title" => $projects->getTitle(),
@@ -179,7 +183,9 @@ class ProjectController extends Controller
                 "currentAmount" => $projects->getCurrentAmount(),
                 "progress" => $progress,
                 "currentDonators" => $projects->getCurrentDonators(),
-                "category" => $projects->getCategory()->getCategoryText()
+                "category" => $projects->getCategory()->getCategoryText(),
+                "hasDonated"=>$hasDonated
+
             );
             array_push($responseArray, $item);
 
@@ -192,22 +198,22 @@ class ProjectController extends Controller
     public function hasDonated($projectId){
         //anzahl der ProjectIds checken
 
-        if ( $this->get('security.authorization_checker')->isGranted('ROLE_DONATOR')) {
+        //if ( $this->get('security.authorization_checker')->isGranted('ROLE_DONATOR')) {
 
-            $repository = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:Project')->find($projectId);
-            $donations = $repository->getDonations();
+        $repository = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:Project')->find($projectId);
+        $donations = $repository->getDonations();
 
-            $user = $this->getUser();
+        $user = $this->getUser();
 
-            foreach($donations as $donation){
-                if($donation->getUsers()->getId() == $user->getId()){
-                    return true;
-                }
+        foreach($donations as $donation){
+            if($donation->getUsers()->getId() == $user->getId()){
+                return true;
             }
-
-            return false;
-
         }
+
+        return false;
+
+        //}
 
         return null;
 
