@@ -100,19 +100,22 @@ class ProjectController extends Controller
     }
 
     public function showAction($projectId){
-        if ( $this->get('security.authorization_checker')->isGranted('ROLE_DONATOR')  && hasDonated($projectId)) {
+        if ( $this->get('security.authorization_checker')->isGranted('ROLE_DONATOR')) {
             $projects = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:Project')->find($projectId);
 
             $responseArray = array();
-
+            if ($this->hasDonated($projectId)){
+                $description = $projects->getDescriptionPrivate();
+            } else {
+                $description = $projects->getDescription();
+            }
             $progress = floor(($projects->getCurrentAmount() / $projects->getTargetAmount()) * 100);
             $item = array(
                 "id" => $projects->getId(),
                 "title" => $projects->getTitle(),
                 "active" => $projects->getActive(),
                 "titlePictureUrl" => $projects->getTitlePictureUrl(),
-                "description" => $projects->getDescription(),
-                "descriptionPrivate" => $projects->getDescriptionPrivate(),
+                "description" => $description,
                 "shortInfo" => $projects->getShortinfo(),
                 "created_at" => $projects->getCreatedAt()->format('d.m.Y'),
                 "created_at_backend" => $projects->getCreatedAt()->format('Y-m-d'),
