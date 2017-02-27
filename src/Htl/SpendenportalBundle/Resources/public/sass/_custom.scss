@@ -11,6 +11,10 @@ h1, h2 {
   letter-spacing: 1px;
 }
 
+a:focus {
+  outline: 0;
+}
+
 a:link {
   color: #fff;
   text-decoration: none;
@@ -27,6 +31,7 @@ a:hover {
 a:active {
   color: #fff;
 }
+
 
 ul {
   list-style-type: none;
