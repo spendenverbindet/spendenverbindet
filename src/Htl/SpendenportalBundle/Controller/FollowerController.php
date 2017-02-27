@@ -30,17 +30,18 @@ class FollowerController extends Controller
 
         $repository = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:Project')->find($projectId);
         $follower = $repository->getFollowers();
-
-
+        
         if ( $this->get('security.authorization_checker')->isGranted('ROLE_DONATOR')) {
 
             $user = $this->getUser();
+            $user = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:User')->find(1);
+
 
             foreach($follower as $follower){
                 if($follower->getUsers()->getId() == $user->getId()){
                     return new JsonResponse(true);
                 } else {
-                    return new JsonResponse(false);
+                    continue;
                 }
             }
 

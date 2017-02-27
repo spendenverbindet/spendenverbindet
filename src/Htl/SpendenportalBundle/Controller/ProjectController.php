@@ -99,33 +99,36 @@ class ProjectController extends Controller
     }
 
     public function listFollowingAction(){
-        $projects = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:Project')->findAll();
+        if ( $this->get('security.authorization_checker')->isGranted('ROLE_DONATOR')) {
+            $projects = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:Project')->findAll();
 
-        $responseArray = array();
+            $responseArray = array();
 
 
-        foreach($projects as $project){
+            foreach ($projects as $project) {
 
-            if($this->ifFollowing($project) == true){
-                $progress = floor(($project->getCurrentAmount()/$project->getTargetAmount())*100);
-                $item = array(
-                    "id"=>$project->getId(),
-                    "title"=>$project->getTitle(),
-                    "titlePictureUrl"=>$project->getTitlePictureUrl(),
-                    "shortinfo"=>$project->getShortinfo(),
-                    "created_at"=>$project->getCreatedAt()->format('d.m.Y'),
-                    "targetAmount"=>$project->getTargetAmount(),
-                    "currentAmount"=>$project->getCurrentAmount(),
-                    "progress"=>$progress,
-                    "currentDonators"=>$project->getCurrentDonators()
-                );
-                array_push($responseArray, $item);
+                if ($this->ifFollowing($project) == true) {
+                    $progress = floor(($project->getCurrentAmount() / $project->getTargetAmount()) * 100);
+                    $item = array(
+                        "id" => $project->getId(),
+                        "title" => $project->getTitle(),
+                        "titlePictureUrl" => $project->getTitlePictureUrl(),
+                        "shortinfo" => $project->getShortinfo(),
+                        "created_at" => $project->getCreatedAt()->format('d.m.Y'),
+                        "targetAmount" => $project->getTargetAmount(),
+                        "currentAmount" => $project->getCurrentAmount(),
+                        "progress" => $progress,
+                        "currentDonators" => $project->getCurrentDonators()
+                    );
+                    array_push($responseArray, $item);
+                }
             }
+
+            $responseArray = (object)$responseArray;
+
+            return new JsonResponse($responseArray);
         }
-
-        $responseArray = (object) $responseArray;
-
-        return new JsonResponse($responseArray);
+        return new JsonResponse(null);
     }
 
     public function ifFollowing($projectId){
@@ -135,13 +138,12 @@ class ProjectController extends Controller
         $follower = $repository->getFollowers();
 
         $user = $this->getUser();
-        $user = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:User')->find(2);
 
         foreach($follower as $follower){
             if($follower->getUsers()->getId() == $user->getId()){
                 return true;
             } else {
-                return false;
+                continue;
             }
         }
         return false;
