@@ -161,6 +161,9 @@ class ProjectController extends Controller
             $responseArray = array();
 
             for ($i = 0; $i < count($projects); $i++) {
+                if ($this->get('security.authorization_checker')->isGranted('ROLE_DONATOR')) {
+                    $hasDonated = $this->hasDonated($projects[$i]->getId());
+                }
                 if ($projects[$i]->getTargetAmount() == 0) {
                     $progress = 0;
                 } else {
@@ -176,8 +179,8 @@ class ProjectController extends Controller
                     "targetAmount" => $projects[$i]->getTargetAmount(),
                     "currentAmount" => $projects[$i]->getCurrentAmount(),
                     "progress" => $progress,
-                    "currentDonators" => $projects[$i]->getCurrentDonators()
-
+                    "currentDonators" => $projects[$i]->getCurrentDonators(),
+                    "hasDonated" => $hasDonated
                 );
                 array_push($responseArray, $item);
             }
