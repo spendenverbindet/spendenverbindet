@@ -23,5 +23,9 @@ class DefaultController extends Controller
         return $this->render('HtlSpendenportalBundle::abonniert.html.twig');
     }
 
+    public function empfaenger_dashboardAction(){
+        return $this->render('HtlSpendenportalBundle::empfaenger_dashboard.html.twig');
+    }
+
 }
 

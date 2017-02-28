@@ -1,0 +1,43 @@
+{% if is_granted('ROLE_RECEIVER') %}
+
+    {% embed "HtlSpendenportalBundle::header.html.twig" %}
+        {# override the title-tag text #}
+        {% block title_text %}
+            Spendenverbindet | MEINE PROJEKTE
+        {% endblock %}
+    {% endembed %}
+
+    <script>
+        document.getElementById("meine_projekte_id").style["color"] = "#47A1DE";
+    </script>
+
+    <div class="helper-navbar"></div>
+
+
+
+    <div class="container">
+        <div class="row fisrt-ent-section">
+            <div class="col-xs-12 col-md-6 text-center"><h2>MEIN PROJEKT</h2></div>
+            <div class="col-xs-12 col-md-6">
+                <form>
+                    <input class="search" type="text" placeholder="Suche" required>
+                    <i class="fa fa-search icon" aria-hidden="true"></i>
+                </form>
+            </div>
+        </div>
+
+
+
+
+        <hr style="border: 1px solid lightgray">
+
+    </div>
+
+
+
+
+
+
+    {% include "HtlSpendenportalBundle::footer.html.twig" %}
+
+{% endif %}
