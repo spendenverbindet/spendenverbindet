@@ -181,6 +181,7 @@ app.controller('spendenverbindetController', function($scope, $http) {
     $scope.projectDetailInfo = null;
     $scope.firstPartOfText = "";
     $scope.secondPartOfText = "";
+    $scope.hideReadMoreBtn = false;
 
 
     $scope.redirectToProjekt = function(id, projectTitle) {
@@ -204,15 +205,29 @@ app.controller('spendenverbindetController', function($scope, $http) {
 
             $scope.projectDetailInfo = response.data[0];
 
+            console.log($scope.projectDetailInfo);
+
             // Split Project description into two parts
-            for(var i=0;i<$scope.projectDetailInfo.description.length;i++){
-                var c = $scope.projectDetailInfo.description.charAt(i);
-                if(i > 350 && c==" "){
-                    $scope.firstPartOfText = $scope.projectDetailInfo.description.substring(0, i);
-                    $scope.secondPartOfText = $scope.projectDetailInfo.description.substring(i,$scope.projectDetailInfo.description.length);
-                    break;
+
+            if( $scope.projectDetailInfo.description.length <= 350 ){
+
+                $scope.firstPartOfText = $scope.projectDetailInfo.description;
+                $scope.hideReadMoreBtn = true;
+
+            }else{
+
+                for(var i=0;i<$scope.projectDetailInfo.description.length;i++){
+                    var c = $scope.projectDetailInfo.description.charAt(i);
+                    if(i > 350 && c==" "){
+                        $scope.firstPartOfText = $scope.projectDetailInfo.description.substring(0, i);
+                        $scope.secondPartOfText = $scope.projectDetailInfo.description.substring(i,$scope.projectDetailInfo.description.length);
+                        break;
+                    }
                 }
+
             }
+
+
 
             $scope.inishedLoadingProjektDetailCounter+=1;
             $scope.didFinishLoading();
@@ -329,6 +344,14 @@ app.controller('spendenverbindetController', function($scope, $http) {
 
         // insert the pictures manually because if not the silderframework would have problems
         window.onload = function () {
+            
+            // Schon gespendet button ein/ausblenden anfang
+            var hasDonated = document.getElementById("getHasDonatedValueId").innerHTML;
+            if(hasDonated == "true" ){
+                document.getElementById("ifDonatedShowId").setAttribute("style", "display:block");
+            }
+            // Schon gespendet button ein/ausblenden ende
+            
 
             var ul = document.getElementById("allSilderPicturesId");
             ul.removeChild(document.getElementById("dummyentry"));
@@ -389,13 +412,75 @@ app.controller('spendenverbindetController', function($scope, $http) {
 
     }
 
-
-
     $scope.didFinishLoading = function(){
         if($scope.inishedLoadingProjektDetailCounter == 3){ // Becuase of the functions initFollowerButton();initProjektDetail();initPosts()
             $scope.loadingFinished = true;
         }
     }
+
+
+
+
+
+
+
+
+
+    $scope.showLoadingIndicatorAbonniert = true;
+    $scope.projectsAbonniert = [];
+    $scope.projectsPreparedAbonniert = [];
+
+    // Get all abonnierte projects in an array
+    $scope.loadAllProjectsAbonniert = function(){
+
+        $http({
+            method: 'GET',
+            url: '/followingproject'
+        }).then(function successCallback(response) {
+
+            $scope.showLoadingIndicatorAbonniert = false;
+
+            for(var u=0;u<Object.keys(response.data).length;u++){
+                $scope.projectsAbonniert.push(response.data[u]);
+            }
+
+            if( $scope.projectsAbonniert.length > 3){
+
+                var itarationValue = ($scope.projectsAbonniert.length / 3) | 0;
+
+                for(var z=0;z<itarationValue;z++){
+                    $scope.projectsPreparedAbonniert.push([$scope.projectsAbonniert[0],$scope.projectsAbonniert[1],$scope.projectsAbonniert[2]]);
+                    $scope.projectsAbonniert.splice(0, 3);
+                }
+
+                if($scope.projectsAbonniert.length % 3 != 0){
+                    $scope.projectsPreparedAbonniert.push($scope.projectsAbonniert);
+                }
+
+            }else{
+                $scope.projectsPreparedAbonniert.push($scope.projectsAbonniert);
+            }
+
+        }, function errorCallback(response) {
+
+        });
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

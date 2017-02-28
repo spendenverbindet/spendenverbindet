@@ -75,8 +75,12 @@
     <div ng-repeat="projectspart in projectsPrepared" class="row">
 
         <div ng-click="redirectToProjekt([[project.id]],[[project.title]])" ng-repeat="project in projectspart" class="col-xs-12 col-sm-4" style="padding:50px;">
+
             <div class="clickable">
-            <img src="{{ asset('bundles/htlspendenportal/img/[[project.titlePictureUrl]]') }}" alt="">
+                <div class="corner-text-image-wrapper">
+                    <img src="{{ asset('bundles/htlspendenportal/img/[[project.titlePictureUrl]]') }}" alt="">
+                    <p ng-show="[[project.hasDonated]]">Bereits gespendet</p>
+                </div>
 
             <h3>[[project.title]]</h3>
 
@@ -87,7 +91,7 @@
             <div class="uk-progress" style="margin-bottom:4px;border: 1px solid #272828;background-color: #fff">
                 <div class="uk-progress-bar" style="width:[[project.progress]]%">[[project.progress]]%</div>
             </div>
-            <p>Erreicht bis zum Ziel</p>
+            <p>[[project.currentAmount]]€ erreicht von [[project.targetAmount]]€</p>
 
             <table style="border-spacing: 15px;">
                 <tr>
