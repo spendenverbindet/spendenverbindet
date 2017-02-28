@@ -17,24 +17,28 @@ class ProjectController extends Controller
             $hasDonated = null;
 
             foreach ($projects as $project) {
-                if ($this->get('security.authorization_checker')->isGranted('ROLE_DONATOR')) {
-                    $hasDonated = $this->hasDonated($project->getId());
-                }
-                $progress = floor(($project->getCurrentAmount() / $project->getTargetAmount()) * 100);
-                $item = array(
-                    "id" => $project->getId(),
-                    "title" => $project->getTitle(),
-                    "titlePictureUrl" => $project->getTitlePictureUrl(),
-                    "description" => $project->getDescription(),
-                    "shortinfo" => $project->getShortinfo(),
-                    "created_at" => $project->getCreatedAt()->format('d.m.Y'),
-                    "targetAmount" => $project->getTargetAmount(),
-                    "currentAmount" => $project->getCurrentAmount(),
-                    "progress" => $progress,
-                    "currentDonators" => $project->getCurrentDonators(),
-                    "hasDonated" => $hasDonated
-                );
-                array_push($responseArray, $item);
+                //if($project->getActive()) {
+                    if ($this->get('security.authorization_checker')->isGranted('ROLE_DONATOR')) {
+                        $hasDonated = $this->hasDonated($project->getId());
+                    }
+
+                    $progress = ($project->getTargetAmount() == 0) ? 0 : floor(($project->getCurrentAmount() / $project->getTargetAmount()) * 100);
+
+                    $item = array(
+                        "id" => $project->getId(),
+                        "title" => $project->getTitle(),
+                        "titlePictureUrl" => $project->getTitlePictureUrl(),
+                        "description" => $project->getDescription(),
+                        "shortinfo" => $project->getShortinfo(),
+                        "created_at" => $project->getCreatedAt()->format('d.m.Y'),
+                        "targetAmount" => $project->getTargetAmount(),
+                        "currentAmount" => $project->getCurrentAmount(),
+                        "progress" => $progress,
+                        "currentDonators" => $project->getCurrentDonators(),
+                        "hasDonated" => $hasDonated
+                    );
+                    array_push($responseArray, $item);
+                //}
             }
 
             $responseArray = (object)$responseArray;
@@ -51,7 +55,7 @@ class ProjectController extends Controller
             
             foreach ($projects as $project) {
                 if ($project->getActive()) {
-                    $progress = floor(($project->getCurrentAmount() / $project->getTargetAmount()) * 100);
+                    $progress = ($project->getTargetAmount() == 0) ? 0 : floor(($project->getCurrentAmount() / $project->getTargetAmount()) * 100);
                     $item = array(
                         "id" => $project->getId(),
                         "title" => $project->getTitle(),
@@ -76,15 +80,17 @@ class ProjectController extends Controller
     }
 
     public function listMyFinishedAction(){
-        if ( $this->get('security.authorization_checker')->isGranted('ROLE_RECEIVER')) {
+        //if ( $this->get('security.authorization_checker')->isGranted('ROLE_RECEIVER')) {
 
             $projects = $this->getUser()->getProjects();
+
+            $projects = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:User')->find(3)->getProjects();
 
             $responseArray = array();
 
             foreach ($projects as $project) {
                 if (!$project->getActive()) {
-                    $progress = floor(($project->getCurrentAmount() / $project->getTargetAmount()) * 100);
+                    $progress = ($project->getTargetAmount() == 0) ? 0 : floor(($project->getCurrentAmount() / $project->getTargetAmount()) * 100);
                     $item = array(
                         "id" => $project->getId(),
                         "title" => $project->getTitle(),
@@ -104,8 +110,8 @@ class ProjectController extends Controller
             $responseArray = (object)$responseArray;
 
             return new JsonResponse($responseArray);
-        }
-        return new JsonResponse(null);
+        //}
+        //return new JsonResponse(null);
     }
 
     public function listBackendAction(){
@@ -378,7 +384,7 @@ class ProjectController extends Controller
 
     public function deleteAction($projectId)
     {
-        if ($this->get('security.authorization_checker')->isGranted('ROLE_DONATOR')  && $this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
+        if ($this->get('security.authorization_checker')->isGranted('ROLE_RECEIVER') && $this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
 
             $em = $this->getDoctrine()->getManager();
             $project = $em->getRepository('HtlSpendenportalBundle:Category')->find($projectId);

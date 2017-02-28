@@ -163,6 +163,8 @@ class ProjectController extends Controller
 
                 $project = $em->getRepository('HtlSpendenportalBundle:Project')->find($projectId);
 
+                $project = $em->getRepository('HtlSpendenportalBundle:Category')->findBy('Title', $data['category']);
+
                 if (!$project) {
                     throw $this->createNotFoundException(
                         'No category found for id ' . $data["id"]
@@ -176,7 +178,7 @@ class ProjectController extends Controller
                 $project->setShortinfo($data["shortInfo"]);
                 $project->setTargetAmount($data["targetAmount"]);
                 $project->setCurrentAmount($data["currentAmount"]);
-                //$project->setCategory($categoryId);
+                //$project->setCategory($this->getDoctrine()->getRepository('HtlSpendenportalBundle:Category')->findBy('Title', $data['category']));
                 //$project->setUser($user);
                 $project->setActive($data["activated"]);
 
