@@ -26,12 +26,11 @@ class FollowerController extends Controller
     */
 
     public function ifFollowingAction($projectId){
+        if ( $this->get('security.authorization_checker')->isGranted('ROLE_DONATOR')) {
         //anzahl der ProjectIds checken
 
         $repository = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:Project')->find($projectId);
         $follower = $repository->getFollowers();
-        
-        if ( $this->get('security.authorization_checker')->isGranted('ROLE_DONATOR')) {
 
             $user = $this->getUser();
             //$user = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:User')->find(1);
