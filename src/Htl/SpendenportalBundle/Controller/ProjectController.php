@@ -10,36 +10,39 @@ use Htl\SpendenportalBundle\Entity\Project;
 class ProjectController extends Controller
 {
     public function listAction(){
-        $projects = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:Project')->findAll();
+        if ( $this->get('security.authorization_checker')->isGranted('ROLE_DONATOR')) {
+            $projects = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:Project')->findAll();
 
-        $responseArray = array();
+            $responseArray = array();
 
-        $hasDonated = null;
+            $hasDonated = null;
 
-        foreach($projects as $project){
-            if ( $this->get('security.authorization_checker')->isGranted('ROLE_DONATOR')) {
-                $hasDonated = $this->hasDonated($project->getId());
+            foreach ($projects as $project) {
+                if ($this->get('security.authorization_checker')->isGranted('ROLE_DONATOR')) {
+                    $hasDonated = $this->hasDonated($project->getId());
+                }
+                $progress = floor(($project->getCurrentAmount() / $project->getTargetAmount()) * 100);
+                $item = array(
+                    "id" => $project->getId(),
+                    "title" => $project->getTitle(),
+                    "titlePictureUrl" => $project->getTitlePictureUrl(),
+                    "description" => $project->getDescription(),
+                    "shortinfo" => $project->getShortinfo(),
+                    "created_at" => $project->getCreatedAt()->format('d.m.Y'),
+                    "targetAmount" => $project->getTargetAmount(),
+                    "currentAmount" => $project->getCurrentAmount(),
+                    "progress" => $progress,
+                    "currentDonators" => $project->getCurrentDonators(),
+                    "hasDonated" => $hasDonated
+                );
+                array_push($responseArray, $item);
             }
-            $progress = floor(($project->getCurrentAmount()/$project->getTargetAmount())*100);
-            $item = array(
-                "id"=>$project->getId(),
-                "title"=>$project->getTitle(),
-                "titlePictureUrl"=>$project->getTitlePictureUrl(),
-                "description"=>$project->getDescription(),
-                "shortinfo"=>$project->getShortinfo(),
-                "created_at"=>$project->getCreatedAt()->format('d.m.Y'),
-                "targetAmount"=>$project->getTargetAmount(),
-                "currentAmount"=>$project->getCurrentAmount(),
-                "progress"=>$progress,
-                "currentDonators"=>$project->getCurrentDonators(),
-                "hasDonated"=>$hasDonated
-            );
-            array_push($responseArray, $item);
+
+            $responseArray = (object)$responseArray;
+
+            return new JsonResponse($responseArray);
         }
-
-        $responseArray = (object) $responseArray;
-
-        return new JsonResponse($responseArray);
+        return new JsonResponse(null);
     }
 
     public function listMyActiveAction(){
@@ -109,74 +112,80 @@ class ProjectController extends Controller
     }
 
     public function listBackendAction(){
-        $projects = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:Project')->findAll();
+        //if ( $this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
+            $projects = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:Project')->findAll();
 
-        $responseArray = array();
+            $responseArray = array();
 
-        foreach($projects as $project){
-            if($project->getTargetAmount()==0){
-                $progress = 0;
-            } else {
-                $progress = floor(($project->getCurrentAmount() / $project->getTargetAmount()) * 100);
+            foreach ($projects as $project) {
+                if ($project->getTargetAmount() == 0) {
+                    $progress = 0;
+                } else {
+                    $progress = floor(($project->getCurrentAmount() / $project->getTargetAmount()) * 100);
+                }
+                $item = array(
+                    "id" => $project->getId(),
+                    "title" => $project->getTitle(),
+                    "active" => $project->getActive(),
+                    "titlePictureUrl" => $project->getTitlePictureUrl(),
+                    "description" => $project->getDescription(),
+                    "descriptionPrivate" => $project->getDescriptionPrivate(),
+                    "shortinfo" => $project->getShortinfo(),
+                    "created_at" => $project->getCreatedAt()->format('d.m.Y'),
+                    "targetAmount" => $project->getTargetAmount(),
+                    "currentAmount" => $project->getCurrentAmount(),
+                    "progress" => $progress,
+                    "currentDonators" => $project->getCurrentDonators(),
+                    "username" => $project->getUsers()->getUsername(),
+                    "category" => $project->getCategory()->getCategoryText()
+                );
+                array_push($responseArray, $item);
             }
-            $item = array(
-                "id"=>$project->getId(),
-                "title"=>$project->getTitle(),
-                "active"=>$project->getActive(),
-                "titlePictureUrl"=>$project->getTitlePictureUrl(),
-                "description"=>$project->getDescription(),
-                "descriptionPrivate"=>$project->getDescriptionPrivate(),
-                "shortinfo"=>$project->getShortinfo(),
-                "created_at"=>$project->getCreatedAt()->format('d.m.Y'),
-                "targetAmount"=>$project->getTargetAmount(),
-                "currentAmount"=>$project->getCurrentAmount(),
-                "progress"=>$progress,
-                "currentDonators"=>$project->getCurrentDonators(),
-                "username"=>$project->getUsers()->getUsername(),
-                "category"=>$project->getCategory()->getCategoryText()
-            );
-            array_push($responseArray, $item);
-        }
 
-        $responseArray = (object) $responseArray;
+            $responseArray = (object)$responseArray;
 
-        return new JsonResponse($responseArray);
+            return new JsonResponse($responseArray);
+        //}
+        //return new JsonResponse(null);
     }
     
     public function listFromCategoryAction($categoryId){
-        $category = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:Category')->find($categoryId);
+        if ( $this->get('security.authorization_checker')->isGranted('ROLE_RECEIVER') && $this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
+            $category = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:Category')->find($categoryId);
 
-        $projects = $category->getProjects();
+            $projects = $category->getProjects();
 
 
-        $responseArray = array();
+            $responseArray = array();
 
-        for($i=0;$i<count($projects);$i++){
-            if($projects[$i]->getTargetAmount==0){
-                $progress = 0;
-            } else {
-                $progress = floor(($projects[$i]->getCurrentAmount() / $projects[$i]->getTargetAmount()) * 100);
+            for ($i = 0; $i < count($projects); $i++) {
+                if ($projects[$i]->getTargetAmount == 0) {
+                    $progress = 0;
+                } else {
+                    $progress = floor(($projects[$i]->getCurrentAmount() / $projects[$i]->getTargetAmount()) * 100);
+                }
+                $item = array(
+                    "id" => $projects[$i]->getId(),
+                    "title" => $projects[$i]->getTitle(),
+                    "titlePictureUrl" => $projects[$i]->getTitlePictureUrl(),
+                    "description" => $projects[$i]->getDescription(),
+                    "descriptionPrivate" => $projects->getDescriptionPrivate(),
+                    "shortinfo" => $projects[$i]->getShortinfo(),
+                    "created_at" => $projects[$i]->getCreatedAt()->format('d.m.Y'),
+                    "targetAmount" => $projects[$i]->getTargetAmount(),
+                    "currentAmount" => $projects[$i]->getCurrentAmount(),
+                    "progress" => $progress,
+                    "currentDonators" => $projects[$i]->getCurrentDonators()
+
+                );
+                array_push($responseArray, $item);
             }
-            $item = array(
-                "id"=>$projects[$i]->getId(),
-                "title"=>$projects[$i]->getTitle(),
-                "titlePictureUrl"=>$projects[$i]->getTitlePictureUrl(),
-                "description"=>$projects[$i]->getDescription(),
-                "descriptionPrivate"=>$projects->getDescriptionPrivate(),
-                "shortinfo"=>$projects[$i]->getShortinfo(),
-                "created_at"=>$projects[$i]->getCreatedAt()->format('d.m.Y'),
-                "targetAmount"=>$projects[$i]->getTargetAmount(),
-                "currentAmount"=>$projects[$i]->getCurrentAmount(),
-                "progress"=>$progress,
-                "currentDonators"=>$projects[$i]->getCurrentDonators()
 
-            );
-            array_push($responseArray, $item);
+            $responseArray = (object)$responseArray;
+
+            return new JsonResponse($responseArray);
         }
-
-        $responseArray = (object) $responseArray;
-
-        return new JsonResponse($responseArray);
+        return new JsonResponse(null);
     }
 
     public function listFollowingAction(){
@@ -285,19 +294,19 @@ class ProjectController extends Controller
 
         if ( $this->get('security.authorization_checker')->isGranted('ROLE_DONATOR')) {
 
-        $repository = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:Project')->find($projectId);
-        $donations = $repository->getDonations();
-
-        $user = $this->getUser();
-        //$user = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:User')->find(1);
-
-        foreach($donations as $donation){
-            if($donation->getUsers()->getId() == $user->getId()){
-                return true;
+            $repository = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:Project')->find($projectId);
+            $donations = $repository->getDonations();
+    
+            $user = $this->getUser();
+            //$user = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:User')->find(1);
+    
+            foreach($donations as $donation){
+                if($donation->getUsers()->getId() == $user->getId()){
+                    return true;
+                }
             }
-        }
-
-        return false;
+    
+            return false;
 
         }
 
@@ -305,91 +314,101 @@ class ProjectController extends Controller
 
     }
 
-    public function createAction ($title, $desciption, $desciptionPrivate, $shortinfo, $categoryId, $user, $targetAmount, $titlePictureUrl){
+    public function createAction ($title, $desciption, $desciptionPrivate, $shortinfo, $categoryId, $user, $targetAmount, $titlePictureUrl)
+    {
+        if ( $this->get('security.authorization_checker')->isGranted('ROLE_RECEIVER')) {
 
-        $categoryId = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:Category')->find($categoryId);
-        $user = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:User')->find($user);
-
-        $date = new \DateTime('now');
-
-        if (!$categoryId || !$user) {
-            throw $this->createNotFoundException(
-                'No category found for id '.$categoryId.' or not User found for id '.$user
-            );
+            $categoryId = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:Category')->find($categoryId);
+            $user = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:User')->find($user);
+    
+            $date = new \DateTime('now');
+    
+            if (!$categoryId || !$user) {
+                throw $this->createNotFoundException(
+                    'No category found for id ' . $categoryId . ' or not User found for id ' . $user
+                );
+            } else {
+    
+                $project = new Project();
+                $project->setTitle($title);
+                $project->setTitlePictureUrl($titlePictureUrl);
+                $project->setDescription($desciption);
+                $project->setDescriptionPrivate($desciptionPrivate);
+                $project->setShortinfo($shortinfo);
+                $project->setTargetAmount($targetAmount);
+                $project->setCurrentAmount(0);
+                $project->setCurrentDonators(0);
+                $project->setCreatedAt($date);
+                $project->setCategory($categoryId);
+                $project->setUser($user);
+                $project->setActive(true);
+    
+                $em = $this->getDoctrine()->getManager();
+    
+                // tells Doctrine you want to (eventually) save the Product (no queries yet)
+                $em->persist($project);
+    
+                // actually executes the queries (i.e. the INSERT query)
+                $em->flush();
+    
+                return new \Symfony\Component\HttpFoundation\Response('Inserted Project successful');
+            }
         }
-        else{
-            
-            $project = new Project();
+    }
+
+    public function updateAction($projectId, $title, $desciption, $desciptionPrivate, $shortinfo, $categoryId, $user, $targetAmount, $currentAmount, $titlePictureUrl, $active){
+
+        if ( $this->get('security.authorization_checker')->isGranted('ROLE_RECEIVER')) {
+
+            $em = $this->getDoctrine()->getManager();
+            $project = $em->getRepository('HtlSpendenportalBundle:Project')->find($projectId);
+
+            if (!$project) {
+                throw $this->createNotFoundException(
+                    'No category found for id ' . $projectId
+                );
+            }
+
             $project->setTitle($title);
             $project->setTitlePictureUrl($titlePictureUrl);
             $project->setDescription($desciption);
             $project->setDescriptionPrivate($desciptionPrivate);
             $project->setShortinfo($shortinfo);
             $project->setTargetAmount($targetAmount);
-            $project->setCurrentAmount(0);
-            $project->setCurrentDonators(0);
-            $project->setCreatedAt($date);
+            $project->setCurrentAmount($currentAmount);
             $project->setCategory($categoryId);
             $project->setUser($user);
-            $project->setActive(true);
-            
-            $em = $this->getDoctrine()->getManager();
+            $project->setActive($active);
 
-            // tells Doctrine you want to (eventually) save the Product (no queries yet)
-            $em->persist($project);
-
-            // actually executes the queries (i.e. the INSERT query)
             $em->flush();
 
-            return new \Symfony\Component\HttpFoundation\Response('Inserted Project successful');
+            return new JsonResponse('Updated post successful');
         }
+        return new JsonResponse(false);
     }
 
-    public function updateAction($projectId, $title, $desciption, $desciptionPrivate, $shortinfo, $categoryId, $user, $targetAmount, $currentAmount, $titlePictureUrl, $active){
+    public function deleteAction($projectId)
+    {
+        if ($this->get('security.authorization_checker')->isGranted('ROLE_DONATOR')  && $this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
 
-        $em = $this->getDoctrine()->getManager();
-        $project = $em->getRepository('HtlSpendenportalBundle:Project')->find($projectId);
+            $em = $this->getDoctrine()->getManager();
+            $project = $em->getRepository('HtlSpendenportalBundle:Category')->find($projectId);
 
-        if (!$project) {
-            throw $this->createNotFoundException(
-                'No category found for id '.$projectId
-            );
+            if (!$project) {
+                throw $this->createNotFoundException(
+                    'No category found for id ' . $project
+                );
+            }
+
+            /* Schauen ob es für dieses Project childs existieren! */
+
+
+            $em->remove($project);
+            $em->flush();
+
+
+            return new Response('Picture has been deleted!');
         }
-        
-        $project->setTitle($title);
-        $project->setTitlePictureUrl($titlePictureUrl);
-        $project->setDescription($desciption);
-        $project->setDescriptionPrivate($desciptionPrivate);
-        $project->setShortinfo($shortinfo);
-        $project->setTargetAmount($targetAmount);
-        $project->setCurrentAmount($currentAmount);
-        $project->setCategory($categoryId);
-        $project->setUser($user);
-        $project->setActive($active);
-
-        $em->flush();
-
-        return new Response('Updated post successful');
-    }
-
-    public function deleteAction($projectId){
-
-        $em = $this->getDoctrine()->getManager();
-        $project = $em->getRepository('HtlSpendenportalBundle:Category')->find($projectId);
-
-        if (!$project) {
-            throw $this->createNotFoundException(
-                'No category found for id '.$project
-            );
-        }
-
-        /* Schauen ob es für dieses Project childs existieren! */
-
-
-        $em->remove($project);
-        $em->flush();
-
-
-        return new Response('Picture has been deleted!');
+        return new JsonResponse(false);
     }
 }
