@@ -147,7 +147,6 @@ class ProjectController extends Controller
     }
     
     public function listFromCategoryAction($categoryId){
-        if ( $this->get('security.authorization_checker')->isGranted('ROLE_RECEIVER') && $this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
             $category = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:Category')->find($categoryId);
 
             $projects = $category->getProjects();
@@ -181,8 +180,6 @@ class ProjectController extends Controller
             $responseArray = (object)$responseArray;
 
             return new JsonResponse($responseArray);
-        }
-        return new JsonResponse(null);
     }
 
     public function listFollowingAction(){
