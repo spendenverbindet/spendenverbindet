@@ -3,7 +3,7 @@
 {% embed "HtlSpendenportalBundle::header.html.twig" %}
     {# override the title-tag text #}
     {% block title_text %}
-        Spendenverbindet | Abonniert
+        Spendenverbindet | FOLGE ICH
     {% endblock %}
 {% endembed %}
 
@@ -11,14 +11,14 @@
     document.getElementById("abonniert_id").style["color"] = "#47A1DE";
 </script>
 
-<div class="helper-navbar"></div>
+<div ng-init="loadAllProjectsAbonniert()" class="helper-navbar"></div>
 
 
 <div class="container">
 
     <div class="container">
         <div class="row fisrt-ent-section">
-            <div class="col-xs-12 col-md-6 text-center"><h2>ABONNIERT</h2></div>
+            <div class="col-xs-12 col-md-6 text-center"><h2>FOLGE ICH</h2></div>
             <div class="col-xs-12 col-md-6"></div>
         </div>
 
@@ -27,7 +27,7 @@
     </div>
 
 
-    <div ng-show="showLoadingIndicator" class="row">
+    <div ng-show="showLoadingIndicatorAbonniert" class="row">
         <div class="col-xs-12" style="padding:50px;">
             <div class="cssload-thecube">
                 <div class="cssload-cube cssload-c1"></div>
@@ -39,14 +39,14 @@
     </div>
 
 
-    <div ng-repeat="projectspart in projectsPrepared" class="row">
+    <div ng-repeat="projectspart in projectsPreparedAbonniert" class="row">
 
         <div ng-click="redirectToProjekt([[project.id]],[[project.title]])" ng-repeat="project in projectspart" class="col-xs-12 col-sm-4" style="padding:50px;">
             <div class="clickable">
 
-                <div class="corer-text-image-wrapper">
+                <div class="corner-text-image-wrapper">
                     <img src="{{ asset('bundles/htlspendenportal/img/[[project.titlePictureUrl]]') }}" alt="">
-                    <p>Bereits gespendet</p>
+                    <p ng-show="[[project.hasDonated]]" >Bereits gespendet</p>
                 </div>
 
                 <h3>[[project.title]]</h3>
@@ -58,7 +58,7 @@
                 <div class="uk-progress" style="margin-bottom:4px;border: 1px solid #272828;background-color: #fff">
                     <div class="uk-progress-bar" style="width:[[project.progress]]%">[[project.progress]]%</div>
                 </div>
-                <p>Erreicht bis zum Ziel</p>
+                <p>[[project.currentAmount]]€ erreicht von [[project.targetAmount]]€</p>
 
                 <table style="border-spacing: 15px;">
                     <tr>
