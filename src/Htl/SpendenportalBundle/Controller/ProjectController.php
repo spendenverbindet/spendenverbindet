@@ -10,7 +10,6 @@ use Htl\SpendenportalBundle\Entity\Project;
 class ProjectController extends Controller
 {
     public function listAction(){
-        if ( $this->get('security.authorization_checker')->isGranted('ROLE_DONATOR')) {
             $projects = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:Project')->findAll();
 
             $responseArray = array();
@@ -41,8 +40,6 @@ class ProjectController extends Controller
             $responseArray = (object)$responseArray;
 
             return new JsonResponse($responseArray);
-        }
-        return new JsonResponse(null);
     }
 
     public function listMyActiveAction(){
