@@ -24,7 +24,7 @@
 
     <route id="htl_spendenportal_empfaenger_dashboard" path="/empfaenger_dashboard">
         <default key="_controller">HtlSpendenportalBundle:Default:empfaenger_dashboard</default>
-    </route>
+    </route> 
 
 
     <!--                                        FERTL                                              -->
