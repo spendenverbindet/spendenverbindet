@@ -138,41 +138,59 @@ class ProjectController extends Controller
         }
     }
 
-    public function buildForm(FormBuilderInterface $builder)
-    {
-        $builder
+    public function updateAction(Request $request){
+        $form = $this->createFormBuilder()
+            ->add('id')
             ->add('title')
             ->add('category')
             ->add('created_at')
             ->add('targetAmount')
-            ->add('shortinfo')
+            ->add('shortInfo')
             ->add('currentAmount')
             ->add('description')
-        ;
+            ->add('activated')
+            ->getForm();
+
+        if ($request->isMethod('PUT')) {
+
+            $form->submit($request->request->all($form->getName()));
+
+            //if ($form->isSubmitted()) {
+
+                $data = $form->getData();
+
+                $em = $this->getDoctrine()->getManager();
+
+                $project = $em->getRepository('HtlSpendenportalBundle:Project')->find($data["id"]);
+
+
+
+                if (!$project) {
+                    throw $this->createNotFoundException(
+                        'No category found for id ' . $data["id"]
+                    );
+                }
+
+                $project->setTitle($data["title"]);
+                //$project->setTitlePictureUrl($data["titlePictureUrl"]);
+                $project->setDescription($data["description"]);
+                //$project->setDescriptionPrivate($data["descriptionPrivate"]);
+                $project->setShortinfo($data["shortInfo"]);
+                $project->setTargetAmount($data["targetAmount"]);
+                $project->setCurrentAmount($data["currentAmount"]);
+                //$project->setCategory($categoryId);
+                //$project->setUser($user);
+                $project->setActive($data["activated"]);
+
+                $em->flush();
+
+                return new JsonResponse('Updated post successful');
+            }
+            return new JsonResponse(null);
+        //}
+        //return new JsonResponse(null);
     }
-/*
-    public function createProjectAction(Request $request)
-    {
-        // 1) build the form
-        $project = new Project();
-        $form = $this->createForm(ProjectType::class, $project);
 
-        // 2) handle the submit (will only happen on POST)
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-
-            // 3) save the Project!
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($project);
-            $em->flush();
-
-            // ... do any other work - like sending them an email, etc
-            // maybe set a "flash" success message for the user
-
-            return $this->redirectToRoute('BackendAdminBundle::listProjects.html.twig');
-        }
-    }
-*/
     public function renderCreateAction()
     {
         return $this->render('BackendAdminBundle::createProject.html.twig');

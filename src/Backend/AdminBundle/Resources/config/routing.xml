@@ -34,6 +34,10 @@
         <default key="_controller">BackendAdminBundle:Project:create</default>
     </route>
 
+    <route id="updateProject" path="/updateProject" methods="PUT">
+        <default key="_controller">BackendAdminBundle:Project:update</default>
+    </route>
+
     <route id="backend_admin_editpage_project" path="/project/{projectId}">
         <default key="_controller">BackendAdminBundle:Project:renderEdit</default>
     </route>

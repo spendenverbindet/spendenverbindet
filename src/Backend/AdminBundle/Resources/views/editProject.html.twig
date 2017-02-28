@@ -20,7 +20,7 @@
                 <li><a data-ng-click="redirectToProjectFollowers([[actualProjectId]])">Follower</a></li>
             </ul>
         </div>
-        <form>
+        <form action="{{ path('updateProject') }}" name="_method" value="PUT">
             <div class="col-md-8 col-lg-8">
                 <!--
                     Editfeld Header
@@ -37,7 +37,7 @@
                     </div>
                     <div class="col-md-9 col-lg-9 editTopHeight"><!-- Aktiviert-Box, Username, PW, Löschbutton -->
                         <div class="contentBottom">
-                            <input type="checkbox" id="activated" name="activated"/>
+                            <input type="checkbox" id="activated" name="activated" />
                             Aktiviert
                         </div>
                         <div class="alignRight">
@@ -54,10 +54,10 @@
                 -->
                 <div class="row marginBottom">
                     <div class="col-md-offset-3 col-lg-offset-3 col-md-4 col-lg-4">
-                        <input class="form-control" type="text" placeholder="Projekttitel" value="[[projectDetailInfo.title]]" id="projecttitle">
+                        <input class="form-control" type="text" placeholder="Projekttitel" value="[[projectDetailInfo.title]]" name="title" id="title">
                     </div>
                     <div class="col-md-4 col-lg-4">
-                        <input class="form-control" type="text" placeholder="Kategorie" value="[[projectDetailInfo.category]]" id="category">
+                        <input class="form-control" type="text" placeholder="Kategorie" value="[[projectDetailInfo.category]]" name="category" id="category">
                     </div>
                 </div>
 
@@ -69,10 +69,10 @@
                 -->
                 <div class="row marginTop">
                     <div class="col-md-offset-3 col-lg-offset-3 col-md-4 col-lg-4">
-                        <input class="form-control" type="date" placeholder="Erstellt am" value="[[projectDetailInfo.created_at_backend]]" id="targetdate">
+                        <input class="form-control" type="date" placeholder="Erstellt am" value="[[projectDetailInfo.created_at_backend]]" name="created_at" id="created_at">
                     </div>
                     <div class="col-md-4 col-lg-4">
-                        <input class="form-control" type="number" placeholder="Zielbetrag" value="[[projectDetailInfo.targetAmount]]" id="donatetarget">
+                        <input class="form-control" type="number" placeholder="Zielbetrag" value="[[projectDetailInfo.targetAmount]]" name="targetAmount" id="targetAmount">
                     </div>
                 </div>
 
@@ -84,10 +84,13 @@
                 -->
                 <div class="row marginTop">
                     <div class="col-md-offset-3 col-lg-offset-3 col-md-4 col-lg-4">
-                        <input class="form-control" type="text" placeholder="Kurzinfo" value="[[projectDetailInfo.shortinfo]]" id="email">
+                        <input class="form-control" type="text" placeholder="Kurzinfo" value="[[projectDetailInfo.shortInfo]]" name="email" id="email">
                     </div>
                     <div class="col-md-4 col-lg-4">
-                        <input class="form-control" type="number" placeholder="aktueller Spendenbetrag" value="[[projectDetailInfo.currentAmount]]" id="donatesnow">
+                        <input class="form-control" type="number" placeholder="aktueller Spendenbetrag" value="[[projectDetailInfo.currentAmount]]" name="currentAmount" id="currentAmount">
+                    </div>
+                    <div ng-show="false">
+                        <input type="text" value="[[projectDetailInfo.id]]" name="id" id="id">
                     </div>
                 </div>
 
@@ -99,13 +102,19 @@
                 -->
                 <div class="row marginTop">
                     <div class="col-md-offset-3 col-lg-offset-3 col-md-8 col-lg-8">
-                        <textarea class="form-control" rows="4" placeholder="Beschreibung" id="description">[[projectDetailInfo.description]]</textarea>
+                        <textarea class="form-control" rows="4" placeholder="Beschreibung" name="description" id="description">[[projectDetailInfo.description]]</textarea>
                     </div>
                 </div>
-
+                <!--
+                <div class="row marginTop">
+                    <div class="col-md-offset-3 col-lg-offset-3 col-md-8 col-lg-8">
+                        <textarea class="form-control" rows="4" placeholder="Beschreibung privat" id="descriptionPrivate">[[projectDetailInfo.descriptionPrivate]]</textarea>
+                    </div>
+                </div>
+                -->
                 <div class="row marginTop">
                     <div class="col-md-offset-3 col-lg-offset-3 col-md-9 col-lg-9">
-                        <input class="btn" type="button" value="Fertig" id="fertig_button">
+                        <button type="sumbit" id="fertig_button" class="btn">Submit</button>
                     </div>
                 </div>
             </div>
