@@ -163,8 +163,6 @@ class ProjectController extends Controller
 
                 $project = $em->getRepository('HtlSpendenportalBundle:Project')->find($projectId);
 
-
-
                 if (!$project) {
                     throw $this->createNotFoundException(
                         'No category found for id ' . $data["id"]

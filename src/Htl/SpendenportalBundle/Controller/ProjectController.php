@@ -242,8 +242,6 @@ class ProjectController extends Controller
     }
 
     public function showAction($projectId){
-        if ( $this->get('security.authorization_checker')->isGranted('ROLE_DONATOR')) {
-
             $projects = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:Project')->find($projectId);
 
             $responseArray = array();
@@ -278,8 +276,6 @@ class ProjectController extends Controller
             $responseArray = (object)$responseArray;
 
             return new JsonResponse($responseArray);
-        }
-        return new JsonResponse(null);
     }
 
     public function hasDonated($projectId){
