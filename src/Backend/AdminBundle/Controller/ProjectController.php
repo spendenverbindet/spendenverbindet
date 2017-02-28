@@ -138,7 +138,7 @@ class ProjectController extends Controller
         }
     }
 
-    public function updateAction(Request $request){
+    public function updateAction($projectId, Request $request){
         $form = $this->createFormBuilder()
             ->add('id')
             ->add('title')
@@ -161,7 +161,7 @@ class ProjectController extends Controller
 
                 $em = $this->getDoctrine()->getManager();
 
-                $project = $em->getRepository('HtlSpendenportalBundle:Project')->find(3);
+                $project = $em->getRepository('HtlSpendenportalBundle:Project')->find($projectId);
 
 
 

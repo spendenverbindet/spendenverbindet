@@ -75,16 +75,54 @@ class ProjectController extends Controller
         return new JsonResponse(null);
     }
 
+    public function listMyFinishedAction(){
+        if ( $this->get('security.authorization_checker')->isGranted('ROLE_RECEIVER')) {
+
+            $projects = $this->getUser()->getProjects();
+
+            $responseArray = array();
+
+            foreach ($projects as $project) {
+                if (!$project->getActive()) {
+                    $progress = floor(($project->getCurrentAmount() / $project->getTargetAmount()) * 100);
+                    $item = array(
+                        "id" => $project->getId(),
+                        "title" => $project->getTitle(),
+                        "titlePictureUrl" => $project->getTitlePictureUrl(),
+                        "description" => $project->getDescription(),
+                        "shortinfo" => $project->getShortinfo(),
+                        "created_at" => $project->getCreatedAt()->format('d.m.Y'),
+                        "targetAmount" => $project->getTargetAmount(),
+                        "currentAmount" => $project->getCurrentAmount(),
+                        "progress" => $progress,
+                        "currentDonators" => $project->getCurrentDonators(),
+                    );
+                    array_push($responseArray, $item);
+                }
+            }
+
+            $responseArray = (object)$responseArray;
+
+            return new JsonResponse($responseArray);
+        }
+        return new JsonResponse(null);
+    }
+
     public function listBackendAction(){
         $projects = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:Project')->findAll();
 
         $responseArray = array();
 
         foreach($projects as $project){
-            $progress = floor(($project->getCurrentAmount()/$project->getTargetAmount())*100);
+            if($project->getTargetAmount()==0){
+                $progress = 0;
+            } else {
+                $progress = floor(($project->getCurrentAmount() / $project->getTargetAmount()) * 100);
+            }
             $item = array(
                 "id"=>$project->getId(),
                 "title"=>$project->getTitle(),
+                "active"=>$project->getActive(),
                 "titlePictureUrl"=>$project->getTitlePictureUrl(),
                 "description"=>$project->getDescription(),
                 "descriptionPrivate"=>$project->getDescriptionPrivate(),
@@ -114,7 +152,11 @@ class ProjectController extends Controller
         $responseArray = array();
 
         for($i=0;$i<count($projects);$i++){
-            $progress = floor(($projects[$i]->getCurrentAmount()/$projects[$i]->getTargetAmount())*100);
+            if($projects[$i]->getTargetAmount==0){
+                $progress = 0;
+            } else {
+                $progress = floor(($projects[$i]->getCurrentAmount() / $projects[$i]->getTargetAmount()) * 100);
+            }
             $item = array(
                 "id"=>$projects[$i]->getId(),
                 "title"=>$projects[$i]->getTitle(),
@@ -147,7 +189,11 @@ class ProjectController extends Controller
             foreach ($projects as $project) {
 
                 if ($this->ifFollowing($project) == true) {
-                    $progress = floor(($project->getCurrentAmount() / $project->getTargetAmount()) * 100);
+                    if($project->getTargetAmount==0){
+                        $progress = 0;
+                    } else {
+                        $progress = floor(($project->getCurrentAmount() / $project->getTargetAmount()) * 100);
+                    }
                     $item = array(
                         "id" => $project->getId(),
                         "title" => $project->getTitle(),
@@ -157,7 +203,8 @@ class ProjectController extends Controller
                         "targetAmount" => $project->getTargetAmount(),
                         "currentAmount" => $project->getCurrentAmount(),
                         "progress" => $progress,
-                        "currentDonators" => $project->getCurrentDonators()
+                        "currentDonators" => $project->getCurrentDonators(),
+                        "hasDonated" => $this->hasDonated($project->getId()),
                     );
                     array_push($responseArray, $item);
                 }

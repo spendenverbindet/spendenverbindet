@@ -130,6 +130,10 @@
         <default key="_controller">HtlSpendenportalBundle:Project:listMyActive</default>
     </route>
 
+    <route id="listMyFinishedProjects" path="/finishedprojects" methods="GET">
+        <default key="_controller">HtlSpendenportalBundle:Project:listMyFinished</default>
+    </route>
+
     <route id="listBackendProjects" path="/backend/allprojects" methods="GET">
         <default key="_controller">HtlSpendenportalBundle:Project:listBackend</default>
     </route>

@@ -20,7 +20,7 @@
                 <li><a data-ng-click="redirectToProjectFollowers([[actualProjectId]])">Follower</a></li>
             </ul>
         </div>
-        <form action="{{ path('updateProject') }}" name="_method" value="PUT">
+        <form action="{{ path('updateProject'+[[actualProjectId]]) }}" name="_method" value="PUT">
             <div class="col-md-8 col-lg-8">
                 <!--
                     Editfeld Header
