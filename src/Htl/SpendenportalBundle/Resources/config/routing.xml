@@ -150,7 +150,7 @@
         <default key="_controller">HtlSpendenportalBundle:Project:listFollowing</default>
     </route>
 
-    <route id="listProjectsFromCategory" path="/project/{projectId}" methods="GET">
+    <route id="showProjectsFromCategory" path="/project/{projectId}" methods="GET">
         <default key="_controller">HtlSpendenportalBundle:Project:show</default>
     </route>
 

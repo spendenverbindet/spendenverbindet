@@ -155,7 +155,7 @@ class ProjectController extends Controller
             $responseArray = array();
 
             for ($i = 0; $i < count($projects); $i++) {
-                if ($projects[$i]->getTargetAmount == 0) {
+                if ($projects[$i]->getTargetAmount() == 0) {
                     $progress = 0;
                 } else {
                     $progress = floor(($projects[$i]->getCurrentAmount() / $projects[$i]->getTargetAmount()) * 100);
@@ -165,7 +165,6 @@ class ProjectController extends Controller
                     "title" => $projects[$i]->getTitle(),
                     "titlePictureUrl" => $projects[$i]->getTitlePictureUrl(),
                     "description" => $projects[$i]->getDescription(),
-                    "descriptionPrivate" => $projects->getDescriptionPrivate(),
                     "shortinfo" => $projects[$i]->getShortinfo(),
                     "created_at" => $projects[$i]->getCreatedAt()->format('d.m.Y'),
                     "targetAmount" => $projects[$i]->getTargetAmount(),
