@@ -189,7 +189,7 @@ class ProjectController extends Controller
             foreach ($projects as $project) {
 
                 if ($this->ifFollowing($project) == true) {
-                    if($project->getTargetAmount==0){
+                    if($project->getTargetAmount()==0){
                         $progress = 0;
                     } else {
                         $progress = floor(($project->getCurrentAmount() / $project->getTargetAmount()) * 100);
@@ -218,19 +218,23 @@ class ProjectController extends Controller
     }
 
     public function ifFollowing($projectId){
-        //anzahl der ProjectIds checken
+        if ( $this->get('security.authorization_checker')->isGranted('ROLE_DONATOR')) {
+            //anzahl der ProjectIds checken
 
-        $repository = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:Project')->find($projectId);
-        $follower = $repository->getFollowers();
+            $repository = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:Project')->find($projectId);
+            $follower = $repository->getFollowers();
 
-        $user = $this->getUser();
+            $user = $this->getUser();
+            //$user = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:User')->find(1);
 
-        foreach($follower as $follower){
-            if($follower->getUsers()->getId() == $user->getId()){
-                return true;
-            } else {
-                continue;
+            foreach ($follower as $follower) {
+                if ($follower->getUsers()->getId() == $user->getId()) {
+                    return true;
+                } else {
+                    continue;
+                }
             }
+            return false;
         }
         return false;
     }
@@ -279,13 +283,13 @@ class ProjectController extends Controller
     public function hasDonated($projectId){
         //anzahl der ProjectIds checken
 
-        //if ( $this->get('security.authorization_checker')->isGranted('ROLE_DONATOR')) {
+        if ( $this->get('security.authorization_checker')->isGranted('ROLE_DONATOR')) {
 
         $repository = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:Project')->find($projectId);
         $donations = $repository->getDonations();
 
         $user = $this->getUser();
-        $user = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:User')->find(1);
+        //$user = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:User')->find(1);
 
         foreach($donations as $donation){
             if($donation->getUsers()->getId() == $user->getId()){
@@ -295,7 +299,7 @@ class ProjectController extends Controller
 
         return false;
 
-        //}
+        }
 
         return null;
 
