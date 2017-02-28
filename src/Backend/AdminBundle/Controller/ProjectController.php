@@ -161,7 +161,7 @@ class ProjectController extends Controller
 
                 $em = $this->getDoctrine()->getManager();
 
-                $project = $em->getRepository('HtlSpendenportalBundle:Project')->find($data["id"]);
+                $project = $em->getRepository('HtlSpendenportalBundle:Project')->find(3);
 
 
 
@@ -184,7 +184,7 @@ class ProjectController extends Controller
 
                 $em->flush();
 
-                return new JsonResponse('Updated post successful');
+                return $this->render('BackendAdminBundle::listProjects.html.twig');
             }
             return new JsonResponse(null);
         //}
