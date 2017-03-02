@@ -154,7 +154,7 @@
         <default key="_controller">HtlSpendenportalBundle:Project:show</default>
     </route>
 
-    <route id="createProject" path="/createProject" methods="POST">
+    <route id="insertingProject" path="/insertProject" methods="POST">
         <default key="_controller">HtlSpendenportalBundle:Project:create</default>
     </route>
 
@@ -211,4 +211,18 @@
     <route id="deleteUser" path="/deleteUser/{userId}" methods="DESTROY">
         <default key="_controller">HtlSpendenportalBundle:User:delete</default>
     </route>
+
+
+
+
+
+
+
+
+
+    <!--
+    <route id="testAtion" path="/test" methods="GET">
+        <default key="_controller">HtlSpendenportalBundle:Project:test</default>
+    </route>
+    -->
 </routes>

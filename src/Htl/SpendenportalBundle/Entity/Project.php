@@ -174,7 +174,7 @@ class Project
     /**
      * Set titlePictureUrl
      *
-     * @param string titlePictureUrl
+     * @param string $titlePictureUrl
      *
      * @return Project
      */

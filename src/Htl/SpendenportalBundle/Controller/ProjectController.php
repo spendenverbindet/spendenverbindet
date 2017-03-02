@@ -6,9 +6,23 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Htl\SpendenportalBundle\Entity\Project;
+use Symfony\Component\HttpFoundation\Request;
+use Htl\SpendenportalBundle\Entity\Picture;
 
 class ProjectController extends Controller
 {
+    /*
+    public function testAction(){
+        $product = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:Category')->findOneBy(
+            array('categoryText' => 'Bildung')
+        );
+
+        $categorys = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:Category')->find(1)->getCategoryText();
+        
+        return new JsonResponse($product->getCategoryText());
+    }
+    */
+    
     public function listAction(){
             $projects = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:Project')->findAll();
 
@@ -246,7 +260,7 @@ class ProjectController extends Controller
             $follower = $repository->getFollowers();
 
             $user = $this->getUser();
-            $user = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:User')->find(1);
+            //$user = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:User')->find(1);
 
             foreach ($follower as $follower) {
                 if ($follower->getUsers()->getId() == $user->getId()) {
@@ -324,17 +338,17 @@ class ProjectController extends Controller
 
     public function createAction(Request $request)
     {
-        if ( $this->get('security.authorization_checker')->isGranted('ROLE_RECEIVER')) {
+       // if ( $this->get('security.authorization_checker')->isGranted('ROLE_RECEIVER')) {
 
             $form = $this->createFormBuilder()
+                ->add('titlePictureUrl')
                 ->add('title')
-                ->add('category')
-                ->add('created_at')
-                ->add('targetAmount')
                 ->add('shortInfo')
-                ->add('currentAmount')
                 ->add('description')
                 ->add('descriptionPrivate')
+                ->add('pictureUrl')
+                ->add('targetAmount')
+                ->add('category')
                 ->getForm();
 
             if ($request->isMethod('POST')) {
@@ -342,6 +356,8 @@ class ProjectController extends Controller
                 $form->submit($request->request->all($form->getName()));
 
                 if ($form->isSubmitted()) {
+
+                    $date = new \DateTime('now');
 
                     // data is an array with "phone" and "period" keys
                     $data = $form->getData();
@@ -351,26 +367,31 @@ class ProjectController extends Controller
                     //return new JsonResponse(date_parse_from_format('Y-m-d', $data["created_at"]));
 
                     $project = new Project;
-                    $project->setTitle($data["title"]);
+                    $project->setTitlePictureUrl($data["titlePictureUrl"]);
                     $project->setShortinfo($data["shortInfo"]);
                     $project->setDescription($data["description"]);
                     $project->setDescriptionPrivate($data["descriptionPrivate"]);
-                    $project->setTitlePictureUrl($data["titlePictureUrl"]);
+                    $project->setTitle($data["title"]);
+
 
                     $picture = new Picture();
+
                     $picture->setPictureUrl($data['pictureUrl']);
-                    $picture->setCreatedAt(date_create_from_format('Y-m-d', $data["created_at"]));
+                    $picture->setCreatedAt($date); //date_create_from_format('Y-m-d', $data["created_at"])
                     $picture->setProjects($project->getId());
 
                     $project->setActive(true);
-                    $project->setCreatedAt(date_create_from_format('Y-m-d', $data["created_at"]));
+                    $project->setCreatedAt($date);
                     $project->setTargetAmount($data["targetAmount"]);
-                    //$project->setCategory($data["category"]);
-                    $product = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:Category')->findOneBy(
-                        array('category_text' => $data["category"])
-                    );
+                    $project->setCurrentAmount(0);
+                    $project->setCurrentDonators(0);
 
-                    $project->setUsers($this->getUser());
+                    $project->setCategory($this->getDoctrine()->getRepository('HtlSpendenportalBundle:Category')->findOneBy(
+                        array('categoryText' => $data["category"])
+                    ));
+
+                    //$project->setUsers($this->getUser());
+                    $project->setUsers($this->getDoctrine()->getRepository('HtlSpendenportalBundle:User')->find(3));
 
                     // or this could be $contract = new Contract("John Doe", $data["phone"], $data["period"]);
 
@@ -378,13 +399,14 @@ class ProjectController extends Controller
 
                     $em->flush();
 
+                    return new JsonResponse($project);
                     return $this->render('BackendAdminBundle::listProjects.html.twig');
                 }
 
                 return $this->render('BackendAdminBundle::createProject.html.twig');
             }
             return new JsonResponse("false method");
-        }
+        //}
         return new JsonResponse("not logged in");
     }
 
