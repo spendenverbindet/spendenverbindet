@@ -50,7 +50,8 @@ class ProjectController extends Controller
         if ( $this->get('security.authorization_checker')->isGranted('ROLE_RECEIVER')) {
 
             $projects = $this->getUser()->getProjects();
-            $projects = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:User')->find(3)->getProjects();
+
+            //$projects = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:User')->find(3)->getProjects();
             
             $responseArray = array();
             
@@ -75,9 +76,13 @@ class ProjectController extends Controller
 
             $responseArray = (object)$responseArray;
 
+            if(empty($responseArray)){
+                return null;
+            }
+
             return new JsonResponse($responseArray);
         }
-        return new JsonResponse(null);
+        return null;
     }
 
     public function listMyFinishedAction(){
@@ -110,9 +115,13 @@ class ProjectController extends Controller
 
             $responseArray = (object)$responseArray;
 
+            if(empty($responseArray)){
+                return null;
+            }
+
             return new JsonResponse($responseArray);
         }
-        return new JsonResponse(null);
+        return null;
     }
 
     public function listBackendAction(){
@@ -297,7 +306,7 @@ class ProjectController extends Controller
             $donations = $repository->getDonations();
     
             $user = $this->getUser();
-            $user = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:User')->find(1);
+            //$user = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:User')->find(1);
     
             foreach($donations as $donation){
                 if($donation->getUsers()->getId() == $user->getId()){
@@ -346,11 +355,22 @@ class ProjectController extends Controller
                     $project->setShortinfo($data["shortInfo"]);
                     $project->setDescription($data["description"]);
                     $project->setDescriptionPrivate($data["descriptionPrivate"]);
-                    $project->setDescription($data["titlePictureUrl"]);
-                    //$project->setCategory($data["category"]);
+                    $project->setTitlePictureUrl($data["titlePictureUrl"]);
+
+                    $picture = new Picture();
+                    $picture->setPictureUrl($data['pictureUrl']);
+                    $picture->setCreatedAt(date_create_from_format('Y-m-d', $data["created_at"]));
+                    $picture->setProjects($project->getId());
+
+                    $project->setActive(true);
                     $project->setCreatedAt(date_create_from_format('Y-m-d', $data["created_at"]));
                     $project->setTargetAmount($data["targetAmount"]);
-                    $project->setCurrentAmount($data["currentAmount"]);
+                    //$project->setCategory($data["category"]);
+                    $product = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:Category')->findOneBy(
+                        array('category_text' => $data["category"])
+                    );
+
+                    $project->setUsers($this->getUser());
 
                     // or this could be $contract = new Contract("John Doe", $data["phone"], $data["period"]);
 
