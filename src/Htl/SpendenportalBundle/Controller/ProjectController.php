@@ -50,6 +50,7 @@ class ProjectController extends Controller
         if ( $this->get('security.authorization_checker')->isGranted('ROLE_RECEIVER')) {
 
             $projects = $this->getUser()->getProjects();
+            $projects = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:User')->find(3)->getProjects();
             
             $responseArray = array();
             
@@ -80,11 +81,11 @@ class ProjectController extends Controller
     }
 
     public function listMyFinishedAction(){
-        //if ( $this->get('security.authorization_checker')->isGranted('ROLE_RECEIVER')) {
+        if ( $this->get('security.authorization_checker')->isGranted('ROLE_RECEIVER')) {
 
             $projects = $this->getUser()->getProjects();
 
-            $projects = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:User')->find(3)->getProjects();
+            //$projects = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:User')->find(3)->getProjects();
 
             $responseArray = array();
 
@@ -110,12 +111,12 @@ class ProjectController extends Controller
             $responseArray = (object)$responseArray;
 
             return new JsonResponse($responseArray);
-        //}
-        //return new JsonResponse(null);
+        }
+        return new JsonResponse(null);
     }
 
     public function listBackendAction(){
-        //if ( $this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
+        if ( $this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
             $projects = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:Project')->findAll();
 
             $responseArray = array();
@@ -148,8 +149,8 @@ class ProjectController extends Controller
             $responseArray = (object)$responseArray;
 
             return new JsonResponse($responseArray);
-        //}
-        //return new JsonResponse(null);
+        }
+        return new JsonResponse(null);
     }
     
     public function listFromCategoryAction($categoryId){
@@ -236,7 +237,7 @@ class ProjectController extends Controller
             $follower = $repository->getFollowers();
 
             $user = $this->getUser();
-            //$user = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:User')->find(1);
+            $user = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:User')->find(1);
 
             foreach ($follower as $follower) {
                 if ($follower->getUsers()->getId() == $user->getId()) {
@@ -296,7 +297,7 @@ class ProjectController extends Controller
             $donations = $repository->getDonations();
     
             $user = $this->getUser();
-            //$user = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:User')->find(1);
+            $user = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:User')->find(1);
     
             foreach($donations as $donation){
                 if($donation->getUsers()->getId() == $user->getId()){
@@ -312,46 +313,59 @@ class ProjectController extends Controller
 
     }
 
-    public function createAction ($title, $desciption, $desciptionPrivate, $shortinfo, $categoryId, $user, $targetAmount, $titlePictureUrl)
+    public function createAction(Request $request)
     {
         if ( $this->get('security.authorization_checker')->isGranted('ROLE_RECEIVER')) {
 
-            $categoryId = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:Category')->find($categoryId);
-            $user = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:User')->find($user);
-    
-            $date = new \DateTime('now');
-    
-            if (!$categoryId || !$user) {
-                throw $this->createNotFoundException(
-                    'No category found for id ' . $categoryId . ' or not User found for id ' . $user
-                );
-            } else {
-    
-                $project = new Project();
-                $project->setTitle($title);
-                $project->setTitlePictureUrl($titlePictureUrl);
-                $project->setDescription($desciption);
-                $project->setDescriptionPrivate($desciptionPrivate);
-                $project->setShortinfo($shortinfo);
-                $project->setTargetAmount($targetAmount);
-                $project->setCurrentAmount(0);
-                $project->setCurrentDonators(0);
-                $project->setCreatedAt($date);
-                $project->setCategory($categoryId);
-                $project->setUser($user);
-                $project->setActive(true);
-    
-                $em = $this->getDoctrine()->getManager();
-    
-                // tells Doctrine you want to (eventually) save the Product (no queries yet)
-                $em->persist($project);
-    
-                // actually executes the queries (i.e. the INSERT query)
-                $em->flush();
-    
-                return new \Symfony\Component\HttpFoundation\Response('Inserted Project successful');
+            $form = $this->createFormBuilder()
+                ->add('title')
+                ->add('category')
+                ->add('created_at')
+                ->add('targetAmount')
+                ->add('shortInfo')
+                ->add('currentAmount')
+                ->add('description')
+                ->add('descriptionPrivate')
+                ->getForm();
+
+            if ($request->isMethod('POST')) {
+
+                $form->submit($request->request->all($form->getName()));
+
+                if ($form->isSubmitted()) {
+
+                    // data is an array with "phone" and "period" keys
+                    $data = $form->getData();
+
+                    $em = $this->getDoctrine()->getManager();
+
+                    //return new JsonResponse(date_parse_from_format('Y-m-d', $data["created_at"]));
+
+                    $project = new Project;
+                    $project->setTitle($data["title"]);
+                    $project->setShortinfo($data["shortInfo"]);
+                    $project->setDescription($data["description"]);
+                    $project->setDescriptionPrivate($data["descriptionPrivate"]);
+                    $project->setDescription($data["titlePictureUrl"]);
+                    //$project->setCategory($data["category"]);
+                    $project->setCreatedAt(date_create_from_format('Y-m-d', $data["created_at"]));
+                    $project->setTargetAmount($data["targetAmount"]);
+                    $project->setCurrentAmount($data["currentAmount"]);
+
+                    // or this could be $contract = new Contract("John Doe", $data["phone"], $data["period"]);
+
+                    $em->persist($project); // I set/modify the properties then persist
+
+                    $em->flush();
+
+                    return $this->render('BackendAdminBundle::listProjects.html.twig');
+                }
+
+                return $this->render('BackendAdminBundle::createProject.html.twig');
             }
+            return new JsonResponse("false method");
         }
+        return new JsonResponse("not logged in");
     }
 
     public function updateAction($projectId, $title, $desciption, $desciptionPrivate, $shortinfo, $categoryId, $user, $targetAmount, $currentAmount, $titlePictureUrl, $active){
