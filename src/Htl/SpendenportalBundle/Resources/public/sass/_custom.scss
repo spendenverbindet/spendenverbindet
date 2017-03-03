@@ -438,6 +438,11 @@ button:focus {
   text-align: center;
 }
 
+/* Imageslider on projektdetailseite, show the nav-items always */
+.uk-slidenav-position .uk-slidenav {
+  display:block;
+}
+
 
 /*@media screen and (min-width: 768px) {*/
 @media screen and (min-width: 992px) {

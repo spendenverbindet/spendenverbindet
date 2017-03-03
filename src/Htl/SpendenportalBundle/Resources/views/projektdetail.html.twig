@@ -68,7 +68,7 @@
                     <div id="readmore" class="collapse">
                        [[secondPartOfText]]
                     </div>
-                    <button ng-show="[[hideReadMoreBtn]]" ng-click="readMoreOrLessTriggered()" data-toggle="collapse" data-target="#readmore" class=" spenden-detail-btn" style="width:150px;margin-left:0;margin-top:10px;"><span style="font-size:18px">[[readMoreTxt]]</span></button>
+                    <button style="display:none;width:150px;margin-left:0;margin-top:10px;" id="readMoreBtnId" ng-click="readMoreOrLessTriggered()" data-toggle="collapse" data-target="#readmore" class="spenden-detail-btn" ><span style="font-size:18px">[[readMoreTxt]]</span></button>
 
                 </p>
             </div>
@@ -98,26 +98,10 @@
             </div>
             <div class="col-xs-12 col-sm-6" style="padding:50px;padding-top: 0">
 
-
-                <div id="gallery_image_loader_id" class="cssload-thecube">
-                    <div class="cssload-cube cssload-c1"></div>
-                    <div class="cssload-cube cssload-c2"></div>
-                    <div class="cssload-cube cssload-c4"></div>
-                    <div class="cssload-cube cssload-c3"></div>
-                </div>
-
-
-                <div style="display:none" id="img_wrapper_id">
-                    <img id="main_img_id" src="{{ asset('bundles/htlspendenportal/img/sliderimg-1.jpg') }}" >
-                    <div class="uk-margin" data-uk-slideset="{default: 4}">
-                        <div class="uk-slidenav-position uk-margin">
-                            <ul id="allSilderPicturesId" class="uk-slideset uk-grid uk-flex-center">
-                                <li id="dummyentry" ><img src="{{ asset('dummy.jpg') }}" alt="dummypicture"></li>
-                            </ul>
-                            <a href="#" class="uk-slidenav uk-slidenav-previous" data-uk-slideset-item="previous"></a>
-                            <a href="#" class="uk-slidenav uk-slidenav-next" data-uk-slideset-item="next"></a>
-                        </div>
-                    </div>
+                <div id="img_wrapper_id" class="uk-slidenav-position" data-uk-slideshow="{animation: 'scroll'}" data-uk-slideshow>
+                    <ul id="allSilderPicturesId" class="uk-slideshow"></ul>
+                    <a href="" class="uk-slidenav uk-slidenav-contrast uk-slidenav-previous" data-uk-slideshow-item="previous"></a>
+                    <a href="" class="uk-slidenav uk-slidenav-contrast uk-slidenav-next" data-uk-slideshow-item="next"></a>
                 </div>
 
 
@@ -145,20 +129,6 @@
     </div>
 
 </div>
-
-<script>
-    function showThisImageInBig(test) {
-        var main_img = document.getElementById("main_img_id");
-        main_img.setAttribute("src", "/bundles/htlspendenportal/img/".concat(test));
-    }
-
-    function pictureLoaded(){
-        document.getElementById("gallery_image_loader_id").setAttribute("style", "display:none");
-        document.getElementById("img_wrapper_id").setAttribute("style", "display:block");
-    }
-
-
-</script>
 
 
 
