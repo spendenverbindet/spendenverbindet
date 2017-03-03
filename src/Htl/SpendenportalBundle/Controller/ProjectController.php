@@ -350,8 +350,8 @@ class ProjectController extends Controller
     }
     
     public function createAction(Request $request){
-        
-        if ( $this->get('security.authorization_checker')->isGranted('ROLE_RECEIVER') && $this->hasActive()) {
+
+        if ( $this->get('security.authorization_checker')->isGranted('ROLE_RECEIVER') && !$this->hasActive()) {
 
             $form = $this->createFormBuilder()
                 ->add('titlePictureUrl')
@@ -359,7 +359,7 @@ class ProjectController extends Controller
                 ->add('shortInfo')
                 ->add('description')
                 ->add('descriptionPrivate')
-                ->add('pictureUrl')
+                ->add('uploadFile')
                 ->add('targetAmount')
                 ->add('category')
                 ->getForm();
@@ -378,6 +378,10 @@ class ProjectController extends Controller
                     $em = $this->getDoctrine()->getManager();
 
                     //return new JsonResponse(date_parse_from_format('Y-m-d', $data["created_at"]));
+
+                    $target_dir = "uploads/";
+                    $target_file = $target_dir . basename($_FILES["uploadFile"]["name"]);
+                    $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
 
                     $project = new Project;
                     $project->setTitle($data["title"]);
