@@ -11,35 +11,40 @@
     <div ng-show="loadingFinished" class="row fisrt-ent-section text-center">
 
         {% if is_granted('ROLE_DONATOR') %}
-            <button ng-click="followerBtnPressed()" ng-disabled="followerBtnDisabled" data-toggle="collapse" class="folgen-detail-btn"><span style="font-size:18px">[[followerBtnText]]</span></button>
+            <button style="width:110px;" ng-click="followerBtnPressed()" ng-disabled="followerBtnDisabled" data-toggle="collapse" class="folgen-detail-btn"><span style="font-size:18px;">[[followerBtnText]]</span></button>
         {% else %}
-            <button data-uk-modal="{target:'#follower-modal'}" data-toggle="collapse" class="folgen-detail-btn"><span style="font-size:18px">FOLGEN</span></button>
 
-            <div id="follower-modal" class="uk-modal">
-                <div class="uk-modal-dialog">
-                    <a class="uk-modal-close uk-close"></a>
-                    Sie müssen angemeldet sein um diesem Projekt folgen zu können!<br />
-                    Hier zum <a style="color:#47A1DE" href="/login">anmelden</a> oder <a style="color:#47A1DE" href="/register">registrieren</a>
+            {% if is_granted('ROLE_RECEIVER') == false %}
+                <button style="width:110px;" data-uk-modal="{target:'#follower-modal'}" data-toggle="collapse" class="folgen-detail-btn"><span style="font-size:18px">FOLGEN</span></button>
+
+                <div id="follower-modal" class="uk-modal">
+                    <div class="uk-modal-dialog">
+                        <a class="uk-modal-close uk-close"></a>
+                        Sie müssen angemeldet sein um diesem Projekt folgen zu können!<br />
+                        Hier zum <a style="color:#47A1DE" href="/login">anmelden</a> oder <a style="color:#47A1DE" href="/register">registrieren</a>
+                    </div>
                 </div>
-            </div>
+            {% endif %}
 
         {% endif %}
 
+        {% if is_granted('ROLE_RECEIVER') == false %}
+            <button style="width:110px;" data-toggle="collapse" class="spenden-detail-btn"><span style="font-size:18px">SPENDEN</span></button>
+        {% endif %}
 
-        <button data-toggle="collapse" class="spenden-detail-btn"><span style="font-size:18px">SPENDEN</span></button>
     </div>
 
 
         <div ng-hide="loadingFinished" class="row">
-        <div class="col-xs-12" style="padding:50px;">
-            <div class="cssload-thecube">
-                <div class="cssload-cube cssload-c1"></div>
-                <div class="cssload-cube cssload-c2"></div>
-                <div class="cssload-cube cssload-c4"></div>
-                <div class="cssload-cube cssload-c3"></div>
+            <div class="col-xs-12" style="padding:50px;">
+                <div class="cssload-thecube">
+                    <div class="cssload-cube cssload-c1"></div>
+                    <div class="cssload-cube cssload-c2"></div>
+                    <div class="cssload-cube cssload-c4"></div>
+                    <div class="cssload-cube cssload-c3"></div>
+                </div>
             </div>
         </div>
-</div>
 
 </div>
 

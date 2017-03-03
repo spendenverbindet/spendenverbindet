@@ -227,6 +227,9 @@ app.controller('spendenverbindetController', function($scope, $http) {
 
             }
 
+            console.log($scope.firstPartOfText);
+            console.log($scope.secondPartOfText);
+
 
 
             $scope.inishedLoadingProjektDetailCounter+=1;
@@ -467,22 +470,101 @@ app.controller('spendenverbindetController', function($scope, $http) {
     }
 
 
+    /* Empfänger Dashboard Seite */
+    $scope.allFinishedProjects = null;
+    $scope.showFinishedProjects = false;
+
+    
+    $scope.finishedDashboardLoadingCounter = 0;
+    $scope.showIndicatorDashboard = true;
+   
+
+    $scope.loadAllfinishedProjects = function(){
+
+        $http({
+            method: 'GET',
+            url: '/finishedprojects'
+
+        }).then(function successCallback(response) {
+
+            $scope.allFinishedProjects = response.data;
+
+            if( false == isEmpty($scope.allFinishedProjects) && $scope.allFinishedProjects != null ){
+                $scope.showFinishedProjects = true;
+            }
+
+            $scope.finishedDashboardLoadingCounter+=1;
+
+            if($scope.finishedDashboardLoadingCounter == 2){
+                $scope.showIndicatorDashboard = false;
+            }
+
+        }, function errorCallback(response) {
+        });
+    }
+
+    $scope.activeProject = null;
+    $scope.showActiveProject = false;
+    
+    $scope.showAnlegenText = false; // Wenn er noch kein Projekt angelegt hat!
+    
+    $scope.loadActiveProject = function(){
+
+        $http({
+            method: 'GET',
+            url: '/activeprojects'
+
+        }).then(function successCallback(response) {
+
+            $scope.activeProject = response.data;
+
+            if( false == isEmpty($scope.activeProject) && $scope.activeProject != null ){
+                $scope.showActiveProject = true;
+            }else{
+                $scope.showAnlegenText = true;
+            }
+
+            $scope.finishedDashboardLoadingCounter+=1;
+
+            if($scope.finishedDashboardLoadingCounter == 2){
+                $scope.showIndicatorDashboard = false;
+            }
+
+        }, function errorCallback(response) {
+        });
+    }
 
 
+    function isEmpty(obj) {
 
+        // null and undefined are "empty"
+        if (obj == null) return true;
 
+        // Assume if it has a length property with a non-zero value
+        // that that property is correct.
+        if (obj.length > 0)    return false;
+        if (obj.length === 0)  return true;
 
+        // If it isn't an object at this point
+        // it is empty, but it can't be anything *but* empty
+        // Is it empty?  Depends on your application.
+        if (typeof obj !== "object") return true;
 
+        // Otherwise, does it have any properties of its own?
+        // Note that this doesn't handle
+        // toString and valueOf enumeration bugs in IE < 9
+        for (var key in obj) {
+            if (hasOwnProperty.call(obj, key)) return false;
+        }
 
-
-
-
-
-
-
-
-
-
+        return true;
+    }
+    
+    
+    
+    
+    
+    
 
 
 });
