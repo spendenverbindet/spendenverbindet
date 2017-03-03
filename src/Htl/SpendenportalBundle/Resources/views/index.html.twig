@@ -14,7 +14,7 @@
     }
 </style>
 
-<ul class="uk-slideshow uk-overlay"  data-uk-slideshow="{autoplay:true, kenburns:'50s', height:'100vh'}" >
+<ul ng-init="loadActiveProject()" class="uk-slideshow uk-overlay"  data-uk-slideshow="{autoplay:true, kenburns:'50s', height:'100vh'}" >
     <li>
         <img src="{{ asset('bundles/htlspendenportal/img/sliderimg-2.jpg') }}" alt="testimg">
 
@@ -57,7 +57,7 @@
                         Eine große Anzahl von Spendern wird sich dein Projekt anschauen und spenden!<br>
                         Gestalte deshalb deine Kurzbeschreibung so informativ wie möglich und erkläre Ihnen wofür du das Geld brauchst.
                     </p> -->
-                    <button onclick="location.href='/empfaenger_dashboard';" class="uk-button uk-button-primary"><span style="font-size:18px;">PROJEKT ANLEGEN</span></button>
+                    <button onclick="location.href='/empfaenger_dashboard';" class="uk-button uk-button-primary"><span style="font-size:18px;"><span ng-show="showAnlegenText">PROJEKT ANLEGEN</span><span ng-hide="showAnlegenText">PROJEKT VERWALTEN</span></span></button>
                 </div>
             </div>
         {% endif %}
@@ -104,7 +104,7 @@
                         Eine große Anzahl von Spendern wird sich dein Projekt anschauen und spenden!<br>
                         Gestalte deshalb deine Kurzbeschreibung so informativ wie möglich und erkläre Ihnen wofür du das Geld brauchst.
                     </p> -->
-                    <button onclick="location.href='/empfaenger_dashboard';" class="uk-button uk-button-primary"><span style="font-size:18px;">PROJEKT ANLEGEN</span></button>
+                    <button onclick="location.href='/empfaenger_dashboard';" class="uk-button uk-button-primary"><span style="font-size:18px;"><span ng-show="showAnlegenText">PROJEKT ANLEGEN</span><span ng-hide="showAnlegenText">PROJEKT VERWALTEN</span></span></button>
                 </div>
             </div>
         {% endif %}

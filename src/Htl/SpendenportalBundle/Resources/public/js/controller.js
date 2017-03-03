@@ -81,8 +81,6 @@ app.controller('spendenverbindetController', function($scope, $http) {
         }
 
 
-        //console.log($scope.projectsPrepared);
-
     }, function errorCallback(response) {
 
     });
@@ -181,7 +179,6 @@ app.controller('spendenverbindetController', function($scope, $http) {
     $scope.projectDetailInfo = null;
     $scope.firstPartOfText = "";
     $scope.secondPartOfText = "";
-    $scope.hideReadMoreBtn = false;
 
 
     $scope.redirectToProjekt = function(id, projectTitle) {
@@ -205,30 +202,29 @@ app.controller('spendenverbindetController', function($scope, $http) {
 
             $scope.projectDetailInfo = response.data[0];
 
-            console.log($scope.projectDetailInfo);
-
             // Split Project description into two parts
 
-            if( $scope.projectDetailInfo.description.length <= 350 ){
+            var cutTextAtCharLength = 400;
+
+            if( $scope.projectDetailInfo.description.length <= cutTextAtCharLength ){
 
                 $scope.firstPartOfText = $scope.projectDetailInfo.description;
-                $scope.hideReadMoreBtn = true;
 
             }else{
-
+                
                 for(var i=0;i<$scope.projectDetailInfo.description.length;i++){
                     var c = $scope.projectDetailInfo.description.charAt(i);
-                    if(i > 350 && c==" "){
+                    if(i > (cutTextAtCharLength-50) && c==" "){ 
                         $scope.firstPartOfText = $scope.projectDetailInfo.description.substring(0, i);
                         $scope.secondPartOfText = $scope.projectDetailInfo.description.substring(i,$scope.projectDetailInfo.description.length);
                         break;
                     }
                 }
-
+                
+                document.getElementById('readMoreBtnId').style.display = "block";
             }
 
-
-
+            
             $scope.inishedLoadingProjektDetailCounter+=1;
             $scope.didFinishLoading();
 
@@ -334,27 +330,20 @@ app.controller('spendenverbindetController', function($scope, $http) {
 
             $scope.allProjectPictures = response.data;
 
+            callThisFuncAfterAllPicturesLoaded();
 
         }, function errorCallback(response) {
-
         });
 
-
-
-
         // insert the pictures manually because if not the silderframework would have problems
-        window.onload = function () {
-            
+        function callThisFuncAfterAllPicturesLoaded() {
+
             // Schon gespendet button ein/ausblenden anfang
             var hasDonated = document.getElementById("getHasDonatedValueId").innerHTML;
             if(hasDonated == "true" ){
                 document.getElementById("ifDonatedShowId").setAttribute("style", "display:block");
             }
             // Schon gespendet button ein/ausblenden ende
-            
-
-            var ul = document.getElementById("allSilderPicturesId");
-            ul.removeChild(document.getElementById("dummyentry"));
 
             var img_counter = 0;
 
@@ -367,13 +356,8 @@ app.controller('spendenverbindetController', function($scope, $http) {
                     var img_element = document.createElement("img");
 
                     img_element.setAttribute("src", "/bundles/htlspendenportal/img/".concat($scope.allProjectPictures[property].pictureUrl));
-                    img_element.setAttribute("onclick", "showThisImageInBig('".concat($scope.allProjectPictures[property].pictureUrl).concat("')"));
-                    img_element.setAttribute("class", "clickable");
-                    img_element.setAttribute("onload", "pictureLoaded()");
-
 
                     li_element.appendChild(img_element);
-
                     ul.appendChild(li_element);
 
                     img_counter+=1;
@@ -383,7 +367,6 @@ app.controller('spendenverbindetController', function($scope, $http) {
             if( img_counter == 0){
                 document.getElementById("gallery_image_loader_id").setAttribute("style", "display:none");
             }
-
         }
     }
     
@@ -467,22 +450,101 @@ app.controller('spendenverbindetController', function($scope, $http) {
     }
 
 
+    /* Empfänger Dashboard Seite */
+    $scope.allFinishedProjects = null;
+    $scope.showFinishedProjects = false;
+
+    
+    $scope.finishedDashboardLoadingCounter = 0;
+    $scope.showIndicatorDashboard = true;
+   
+
+    $scope.loadAllfinishedProjects = function(){
+
+        $http({
+            method: 'GET',
+            url: '/finishedprojects'
+
+        }).then(function successCallback(response) {
+
+            $scope.allFinishedProjects = response.data;
+
+            if( false == isEmpty($scope.allFinishedProjects) && $scope.allFinishedProjects != null ){
+                $scope.showFinishedProjects = true;
+            }
+
+            $scope.finishedDashboardLoadingCounter+=1;
+
+            if($scope.finishedDashboardLoadingCounter == 2){
+                $scope.showIndicatorDashboard = false;
+            }
+
+        }, function errorCallback(response) {
+        });
+    }
+
+    $scope.activeProject = null;
+    $scope.showActiveProject = false;
+    
+    $scope.showAnlegenText = false; // Wenn er noch kein Projekt angelegt hat!
+    
+    $scope.loadActiveProject = function(){
+
+        $http({
+            method: 'GET',
+            url: '/activeprojects'
+
+        }).then(function successCallback(response) {
+
+            $scope.activeProject = response.data;
+
+            if( false == isEmpty($scope.activeProject) && $scope.activeProject != null ){
+                $scope.showActiveProject = true;
+            }else{
+                $scope.showAnlegenText = true;
+            }
+
+            $scope.finishedDashboardLoadingCounter+=1;
+
+            if($scope.finishedDashboardLoadingCounter == 2){
+                $scope.showIndicatorDashboard = false;
+            }
+
+        }, function errorCallback(response) {
+        });
+    }
 
 
+    function isEmpty(obj) {
 
+        // null and undefined are "empty"
+        if (obj == null) return true;
 
+        // Assume if it has a length property with a non-zero value
+        // that that property is correct.
+        if (obj.length > 0)    return false;
+        if (obj.length === 0)  return true;
 
+        // If it isn't an object at this point
+        // it is empty, but it can't be anything *but* empty
+        // Is it empty?  Depends on your application.
+        if (typeof obj !== "object") return true;
 
+        // Otherwise, does it have any properties of its own?
+        // Note that this doesn't handle
+        // toString and valueOf enumeration bugs in IE < 9
+        for (var key in obj) {
+            if (hasOwnProperty.call(obj, key)) return false;
+        }
 
-
-
-
-
-
-
-
-
-
+        return true;
+    }
+    
+    
+    
+    
+    
+    
 
 
 });

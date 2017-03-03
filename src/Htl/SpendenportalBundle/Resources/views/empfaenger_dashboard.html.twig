@@ -11,84 +11,111 @@
         document.getElementById("meine_projekte_id").style["color"] = "#47A1DE";
     </script>
 
-    <div class="helper-navbar"></div>
 
+    <div ng-show="showIndicatorDashboard" class="helper-navbar"></div>
 
-
-    <div class="container">
-        <div class="row fisrt-ent-section">
-            <div class="col-xs-12 col-md-6 text-center"><h2>MEIN PROJEKT</h2></div>
-            <div class="col-xs-12 col-md-6">
-                <div class="row second-ent-section text-center">
-                    <button style="margin-top:27px;" class="uk-button uk-button-primary"><span style="font-size:18px;">PROJEKT ERSTELLEN</span></button>
-                </div>
+    <div ng-show="showIndicatorDashboard" class="row">
+        <div class="col-xs-12" style="padding:50px;">
+            <div class="cssload-thecube">
+                <div class="cssload-cube cssload-c1"></div>
+                <div class="cssload-cube cssload-c2"></div>
+                <div class="cssload-cube cssload-c4"></div>
+                <div class="cssload-cube cssload-c3"></div>
             </div>
         </div>
-
-
-            <div class="row">
-                <div class="col-xs-12 col-sm-6" style="padding:50px;padding-top: 0">
-                    <img src="{{ asset('bundles/htlspendenportal/img/testbild1.jpg') }}" alt="">
-                </div>
-                <div class="col-xs-12 col-sm-6" style="padding:50px;padding-top:0">
-                    <h2>Titel des Projekts</h2>
-                    <p style="padding-bottom:20px">
-                        Shorttext here!Beschreibungstext BeschreibungstextBeschreibungstextBeschreibungstextBeschreibungstext
-                        BeschreibungstextBeschreibungstextBeschreibungstextBeschreibungstext
-                        BeschreibungstextBeschreibungstextBeschreibungstextBeschreibungstext
-                    </p>
-                    <button class="spenden-detail-btn" style="width:200px;margin-left:0;margin-top:10px;"><span style="font-size:18px">PROJEKT ANSEHEN</span></button>
-                </div>
-            </div>
-
-        <div class="row fisrt-ent-section text-center" style="margin-top:40px;margin-bottom: 50px;">
-            <button class="folgen-detail-btn" style="width:120px;"><span style="font-size:18px">LÖSCHEN</span></button>
-            <button class="spenden-detail-btn" style="width:120px;"><span style="font-size:18px">BEARBEITEN</span></button>
-        </div>
-
-        <hr style="border: 1px solid lightgray">
-
-        <div class="row fisrt-ent-section">
-            <div class="col-xs-12 col-md-6 text-center"><h2>ABGESCHLOSSENE PROJEKTE</h2></div>
-            <div class="col-xs-12 col-md-6"></div>
-        </div>
-
-        <div style="margin-bottom:50px;" class="row">
-            <div class="col-xs-12 col-sm-6" style="padding:50px;padding-top: 0">
-                <img src="{{ asset('bundles/htlspendenportal/img/testbild1.jpg') }}" alt="">
-            </div>
-            <div class="col-xs-12 col-sm-6" style="padding:50px;padding-top:0">
-                <h2>Titel des Projekts</h2>
-                <p style="padding-bottom:20px">
-                    Beschreibungstext BeschreibungstextBeschreibungstextBeschreibungstextBeschreibungstext
-                    BeschreibungstextBeschreibungstextBeschreibungstextBeschreibungstext
-                    BeschreibungstextBeschreibungstextBeschreibungstextBeschreibungstext
-                </p>
-                <button class="spenden-detail-btn" style="width:200px;margin-left:0;margin-top:10px;"><span style="font-size:18px">PROJEKT ANSEHEN</span></button>
-            </div>
-        </div>
-
-        <div style="margin-bottom:50px;" class="row">
-            <div class="col-xs-12 col-sm-6" style="padding:50px;padding-top: 0">
-                <img src="{{ asset('bundles/htlspendenportal/img/testbild1.jpg') }}" alt="">
-            </div>
-            <div class="col-xs-12 col-sm-6" style="padding:50px;padding-top:0">
-                <h2>Titel des Projekts</h2>
-                <p style="padding-bottom:20px">
-                    Beschreibungstext BeschreibungstextBeschreibungstextBeschreibungstextBeschreibungstext
-                    BeschreibungstextBeschreibungstextBeschreibungstextBeschreibungstext
-                    BeschreibungstextBeschreibungstextBeschreibungstextBeschreibungstext
-                </p>
-                <button class="spenden-detail-btn" style="width:200px;margin-left:0;margin-top:10px;"><span style="font-size:18px">PROJEKT ANSEHEN</span></button>
-            </div>
-        </div>
-
-
-
-
     </div>
 
 
+
+    <div ng-hide="showIndicatorDashboard">
+
+        <div ng-init="loadAllfinishedProjects();loadActiveProject()" class="helper-navbar"></div>
+
+
+
+        <div class="container">
+            <div class="row fisrt-ent-section">
+                <div class="col-xs-12 col-md-6 text-center"><h2>MEIN PROJEKT</h2></div>
+                <div class="col-xs-12 col-md-6">
+                    <div class="row second-ent-section text-center">
+                        <button ng-hide="showActiveProject" style="margin-top:27px;" class="uk-button uk-button-primary"><span style="font-size:18px;">PROJEKT ERSTELLEN</span></button>
+                    </div>
+                </div>
+            </div>
+
+            <div ng-hide="showActiveProject" class="row fisrt-ent-section text-center">
+                <h3>Sie haben derzeit kein aktives Projekt</h3>
+            </div>
+
+
+
+                <div ng-show="showActiveProject" class="row">
+                    <div class="col-xs-12 col-sm-6" style="padding:50px;padding-top: 0">
+                        <img src="{{ asset('bundles/htlspendenportal/img/[[activeProject[0].titlePictureUrl]]') }}" alt="">
+                    </div>
+                    <div class="col-xs-12 col-sm-6" style="padding:50px;padding-top:0">
+                        <h2>[[activeProject[0].title]]</h2>
+                        <p style="padding-bottom:20px">
+                            [[activeProject[0].shortinfo]]
+                        </p>
+                        <button ng-click="redirectToProjekt([[activeProject[0].id]],[[activeProject[0].title]])" class="spenden-detail-btn" style="width:200px;margin-left:0;margin-top:10px;"><span style="font-size:18px">PROJEKT ANSEHEN</span></button>
+                    </div>
+                </div>
+
+            <div ng-show="showActiveProject" class="row fisrt-ent-section text-center" style="margin-top:40px;margin-bottom: 50px;">
+                <button data-uk-modal="{target:'#follower-modal'}" data-toggle="collapse" class="folgen-detail-btn" style="width:120px;"><span style="font-size:18px">LÖSCHEN</span></button>
+                <button class="spenden-detail-btn" style="width:120px;"><span style="font-size:18px">BEARBEITEN</span></button>
+
+                <div id="follower-modal" class="uk-modal">
+                    <div class="uk-modal-dialog uk-modal-body">
+                    <h2 class="uk-modal-title">Projekt löschen</h2>
+                    <p>
+                        Möchten Sie ihr aktuelles Projekt wirklich löschen?
+                        <br>
+                        <br>
+                    </p>
+                    <p class="uk-text-center">
+                        <button class="folgen-detail-btn" style="width:120px;"><span style="font-size:18px">LÖSCHEN</span></button>
+                        <button class="spenden-detail-btn uk-modal-close" style="width:120px;"><span style="font-size:18px">ABBRECHEN</span></button>
+                    </p>
+                        </div>
+                </div>
+
+
+
+
+
+            </div>
+
+            <div ng-show="showFinishedProjects">
+                <hr style="border: 1px solid lightgray">
+
+                <div class="row fisrt-ent-section">
+                    <div class="col-xs-12 col-md-6 text-center"><h2>ABGESCHLOSSENE PROJEKTE</h2></div>
+                    <div class="col-xs-12 col-md-6"></div>
+                </div>
+
+                <div ng-repeat="project in allFinishedProjects">
+                    <div style="margin-bottom:50px;" class="row">
+                        <div class="col-xs-12 col-sm-6" style="padding:50px;padding-top: 0">
+                            <img src="{{ asset('bundles/htlspendenportal/img/[[project.titlePictureUrl]]') }}" alt="">
+                        </div>
+                        <div class="col-xs-12 col-sm-6" style="padding:50px;padding-top:0">
+                            <h2>[[project.title]]</h2>
+                            <p style="padding-bottom:20px">
+                                [[project.shortinfo]]
+                            </p>
+                            <button ng-click="redirectToProjekt([[project.id]],[[project.title]])" class="spenden-detail-btn" style="width:200px;margin-left:0;margin-top:10px;"><span style="font-size:18px">PROJEKT ANSEHEN</span></button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
 
 
 
