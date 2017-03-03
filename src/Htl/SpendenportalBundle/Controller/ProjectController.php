@@ -63,12 +63,12 @@ class ProjectController extends Controller
     public function listMyActiveAction(){
         if ( $this->get('security.authorization_checker')->isGranted('ROLE_RECEIVER')) {
 
-            $projects = $this->getUser()->getProjects();
+            //$projects = $this->getUser()->getProjects();
 
-            //$projects = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:User')->find(3)->getProjects();
-            
+            $projects = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:User')->find(5)->getProjects();
+
             $responseArray = array();
-            
+
             foreach ($projects as $project) {
                 if ($project->getActive()) {
                     $progress = ($project->getTargetAmount() == 0) ? 0 : floor(($project->getCurrentAmount() / $project->getTargetAmount()) * 100);
@@ -89,10 +89,6 @@ class ProjectController extends Controller
             }
 
             $responseArray = (object)$responseArray;
-
-            if(empty($responseArray)){
-                return null;
-            }
 
             return new JsonResponse($responseArray);
         }
@@ -336,9 +332,26 @@ class ProjectController extends Controller
 
     }
 
-    public function createAction(Request $request)
-    {
-       // if ( $this->get('security.authorization_checker')->isGranted('ROLE_RECEIVER')) {
+    public function hasActive(){
+        
+        $projects = $this->getUser()->getProjects();
+        //$projects = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:User')->find(3)->getProjects();
+
+        foreach($projects as $project){
+            if($project->getActive()==true){
+                return true;
+            }else{
+                continue;
+            }
+        }
+
+        return false;
+        
+    }
+    
+    public function createAction(Request $request){
+        
+        if ( $this->get('security.authorization_checker')->isGranted('ROLE_RECEIVER') && $this->hasActive()) {
 
             $form = $this->createFormBuilder()
                 ->add('titlePictureUrl')
@@ -367,12 +380,11 @@ class ProjectController extends Controller
                     //return new JsonResponse(date_parse_from_format('Y-m-d', $data["created_at"]));
 
                     $project = new Project;
-                    $project->setTitlePictureUrl($data["titlePictureUrl"]);
+                    $project->setTitle($data["title"]);
                     $project->setShortinfo($data["shortInfo"]);
                     $project->setDescription($data["description"]);
                     $project->setDescriptionPrivate($data["descriptionPrivate"]);
-                    $project->setTitle($data["title"]);
-
+                    $project->setTitlePictureUrl($data["titlePictureUrl"]);
 
                     $picture = new Picture();
 
@@ -390,8 +402,8 @@ class ProjectController extends Controller
                         array('categoryText' => $data["category"])
                     ));
 
-                    //$project->setUsers($this->getUser());
-                    $project->setUsers($this->getDoctrine()->getRepository('HtlSpendenportalBundle:User')->find(3));
+                    $project->setUsers($this->getUser());
+                    //$project->setUsers($this->getDoctrine()->getRepository('HtlSpendenportalBundle:User')->find(3));
 
                     // or this could be $contract = new Contract("John Doe", $data["phone"], $data["period"]);
 
@@ -399,46 +411,76 @@ class ProjectController extends Controller
 
                     $em->flush();
 
-                    return new JsonResponse($project);
-                    return $this->render('BackendAdminBundle::listProjects.html.twig');
+                    return true;
                 }
 
-                return $this->render('BackendAdminBundle::createProject.html.twig');
+                return false;
             }
             return new JsonResponse("false method");
-        //}
+        }
         return new JsonResponse("not logged in");
     }
 
-    public function updateAction($projectId, $title, $desciption, $desciptionPrivate, $shortinfo, $categoryId, $user, $targetAmount, $currentAmount, $titlePictureUrl, $active){
-
+    public function updateAction($projectId, Request $request)
+    {
         if ( $this->get('security.authorization_checker')->isGranted('ROLE_RECEIVER')) {
 
-            $em = $this->getDoctrine()->getManager();
-            $project = $em->getRepository('HtlSpendenportalBundle:Project')->find($projectId);
+        $form = $this->createFormBuilder()
+            ->add('title')
+            ->add('shortInfo')
+            ->add('description')
+            ->add('descriptionPrivate')
+            ->add('titlePictureUrl')
+            //->add('pictureUrl')
+            ->add('category')
+            ->getForm();
 
-            if (!$project) {
-                throw $this->createNotFoundException(
-                    'No category found for id ' . $projectId
-                );
+        if ($request->isMethod('POST')) {
+
+            $form->submit($request->request->all($form->getName()));
+            //return new JsonResponse($request);
+
+            if ($form->isSubmitted()) {
+
+                $date = new \DateTime('now');
+
+                // data is an array with "phone" and "period" keys
+                $data = $form->getData();
+
+                $em = $this->getDoctrine()->getManager();
+
+                //return new JsonResponse(date_parse_from_format('Y-m-d', $data["created_at"]));
+
+                $project = $em->getRepository('HtlSpendenportalBundle:Project')->find($projectId);
+                $project->setTitle($data["title"]);
+                $project->setShortinfo($data["shortInfo"]);
+                $project->setDescription($data["description"]);
+                $project->setDescriptionPrivate($data["descriptionPrivate"]);
+                $project->setTitlePictureUrl($data["titlePictureUrl"]);
+
+               // $picture = new Picture();
+
+                //$picture->setPictureUrl($data['pictureUrl']);
+                //$picture->setCreatedAt($date); //date_create_from_format('Y-m-d', $data["created_at"])
+                //$picture->setProjects($project->getId());
+
+                $project->setCategory($this->getDoctrine()->getRepository('HtlSpendenportalBundle:Category')->findOneBy(
+                    array('categoryText' => $data["category"])
+                ));
+
+                $project->setUsers($this->getUser());
+                //$project->setUsers($this->getDoctrine()->getRepository('HtlSpendenportalBundle:User')->find(3));
+
+                $em->flush();
+
+                return true;
             }
 
-            $project->setTitle($title);
-            $project->setTitlePictureUrl($titlePictureUrl);
-            $project->setDescription($desciption);
-            $project->setDescriptionPrivate($desciptionPrivate);
-            $project->setShortinfo($shortinfo);
-            $project->setTargetAmount($targetAmount);
-            $project->setCurrentAmount($currentAmount);
-            $project->setCategory($categoryId);
-            $project->setUser($user);
-            $project->setActive($active);
-
-            $em->flush();
-
-            return new JsonResponse('Updated post successful');
+            return false;
         }
-        return new JsonResponse(false);
+        return new JsonResponse("false method");
+        }
+        return new JsonResponse("not logged in");
     }
 
     public function deleteAction($projectId)
@@ -446,11 +488,11 @@ class ProjectController extends Controller
         if ($this->get('security.authorization_checker')->isGranted('ROLE_RECEIVER') && $this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
 
             $em = $this->getDoctrine()->getManager();
-            $project = $em->getRepository('HtlSpendenportalBundle:Category')->find($projectId);
+            $project = $em->getRepository('HtlSpendenportalBundle:Project')->find($projectId);
 
             if (!$project) {
                 throw $this->createNotFoundException(
-                    'No category found for id ' . $project
+                    'No Project found for id ' . $project
                 );
             }
 
@@ -461,7 +503,7 @@ class ProjectController extends Controller
             $em->flush();
 
 
-            return new Response('Picture has been deleted!');
+            return new Response('Project has been deleted!');
         }
         return new JsonResponse(false);
     }

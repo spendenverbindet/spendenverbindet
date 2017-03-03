@@ -31,71 +31,83 @@ class PictureController extends Controller
 
     public function createPictureAction ($projectId, $pictureUrl) {
 
-        $projectId = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:Project')->find($projectId);
+        if ($this->get('security.authorization_checker')->isGranted('ROLE_RECEIVER')) {
 
-        $date = new \DateTime('now');
+            $projectId = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:Project')->find($projectId);
 
-        if (false) {
-            throw $this->createNotFoundException(
-                'No category found for id  or not User found for id '
-            );
-        }
-        else{
+            $date = new \DateTime('now');
 
-            $picture = new Picture();
-            $picture->setPictureUrl($pictureUrl);
-            $picture->setCreatedAt($date);
-            $picture->setProjects($projectId);
+            if (false) {
+                throw $this->createNotFoundException(
+                    'No category found for id  or not User found for id '
+                );
+            } else {
+
+                $picture = new Picture();
+                $picture->setPictureUrl($pictureUrl);
+                $picture->setCreatedAt($date);
+                $picture->setProjects($projectId);
 
 
-            $em = $this->getDoctrine()->getManager();
+                $em = $this->getDoctrine()->getManager();
 
-            // tells Doctrine you want to (eventually) save the Product (no queries yet)
-            $em->persist($picture);
+                // tells Doctrine you want to (eventually) save the Product (no queries yet)
+                $em->persist($picture);
 
-            // actually executes the queries (i.e. the INSERT query)
-            $em->flush();
+                // actually executes the queries (i.e. the INSERT query)
+                $em->flush();
 
-            return new \Symfony\Component\HttpFoundation\Response('Inserted Picture successful');
+                return new \Symfony\Component\HttpFoundation\Response('Inserted Picture successful');
+            }
+            return new JsonResponse('not logged in');
         }
     }
 
     public function updateAction($pictureId,$newUrl){
 
-        $em = $this->getDoctrine()->getManager();
-        $picture = $em->getRepository('HtlSpendenportalBundle:Category')->find($pictureId);
+        if ($this->get('security.authorization_checker')->isGranted('ROLE_RECEIVER')) {
 
-        if (!$picture) {
-            throw $this->createNotFoundException(
-                'No category found for id '.$pictureId
-            );
+            $em = $this->getDoctrine()->getManager();
+            $picture = $em->getRepository('HtlSpendenportalBundle:Category')->find($pictureId);
+
+            if (!$picture) {
+                throw $this->createNotFoundException(
+                    'No category found for id ' . $pictureId
+                );
+            }
+
+            $picture->setName($newUrl);
+
+            $em->flush();
+
+            return new Response('Updated picture successful');
         }
-
-        $picture->setName($newUrl);
-
-        $em->flush();
-
-        return new Response('Updated picture successful');
+        return new JsonResponse('not logged in');
     }
 
-    public function deleteAction($pictureId){
+    public function deleteAction($pictureId)
+    {
 
-        $em = $this->getDoctrine()->getManager();
-        $picture = $em->getRepository('HtlSpendenportalBundle:Picture')->find($pictureId);
+        if ($this->get('security.authorization_checker')->isGranted('ROLE_RECEIVER')) {
 
-        if (!$picture) {
-            throw $this->createNotFoundException(
-                'No category found for id '.$pictureId
-            );
+            $em = $this->getDoctrine()->getManager();
+            $picture = $em->getRepository('HtlSpendenportalBundle:Picture')->find($pictureId);
+
+            if (!$picture) {
+                throw $this->createNotFoundException(
+                    'No category found for id ' . $pictureId
+                );
+            }
+
+            /* Schauen ob es für dieses Picture childs existieren! */
+
+
+            $em->remove($picture);
+            $em->flush();
+
+
+            return new JsonResponse('Picture has been deleted!');
         }
-
-        /* Schauen ob es für dieses Picture childs existieren! */
-
-
-        $em->remove($picture);
-        $em->flush();
-
-
-        return new Response('Picture has been deleted!');
+        return new JsonResponse('not logged in');
     }
 }

@@ -53,26 +53,28 @@ class FollowerController extends Controller
     }
 
     public function listFromProjectAction($projectId){
+        if ($this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
+            $repository = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:Project')->find($projectId);
+            $follower = $repository->getFollowers();
 
-        $repository = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:Project')->find($projectId);
-        $follower = $repository->getFollowers();
+            $responseArray = array();
 
-        $responseArray = array();
+            for ($i = 0; $i < count($follower); $i++) {
+                $item = array(
+                    "id" => $follower[$i]->getId(),
+                    "user" => $follower[$i]->getUsers()->getUsername(),
+                    "userId" => $follower[$i]->getUsers()->getId(),
+                    "projects" => $follower[$i]->getProjects()->getTitle(),
+                    "followedSince" => $follower[$i]->getFollowedSince()->format('d.m.Y')
+                );
+                array_push($responseArray, $item);
+            }
 
-        for($i=0;$i<count($follower);$i++){
-            $item = array(
-                "id"=>$follower[$i]->getId(),
-                "user"=>$follower[$i]->getUsers()->getUsername(),
-                "userId"=>$follower[$i]->getUsers()->getId(),
-                "projects"=>$follower[$i]->getProjects()->getTitle(),
-                "followedSince"=>$follower[$i]->getFollowedSince()->format('d.m.Y')
-            );
-            array_push($responseArray, $item);
+            $responseArray = (object)$responseArray;
+
+            return new JsonResponse($responseArray);
         }
-
-        $responseArray = (object) $responseArray;
-
-        return new JsonResponse($responseArray);
+        return new JsonResponse('not logged in');
     }
     
     public function listAction(){

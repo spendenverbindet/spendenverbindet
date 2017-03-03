@@ -180,7 +180,7 @@ class Project
      */
     public function setTitlePictureUrl($titlePictureUrl)
     {
-        $this->title = $titlePictureUrl;
+        $this->titlePictureUrl = $titlePictureUrl;
 
         return $this;
     }

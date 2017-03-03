@@ -15,50 +15,57 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 
 class DefaultController extends Controller
 {
-    public function updateAction(Request $request)
+    public function updateAction(Request $request, $userId)
     {
-        $form = $this->createFormBuilder()
-            ->add('username', TextType::class)
-            ->add('email', EmailType::class)
-            ->add('enabled', BooleanType::class)
-            ->add('password', PasswordType::class)
-            ->add('firstname', TextType::class)
-            ->add('lastname', TextType::class)
-            ->add('town', TextType::class)
-            ->add('street', TextType::class)
-            ->add('zipcode', NumberType::class)
-            ->add('year_of_birth', DateTimeType::class)
-            ->add('housenumber_doornumber', TextType::class)
-            ->getForm();
+        //if ( $this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
+            $form = $this->createFormBuilder()
+                ->add('username')
+                ->add('email')
+                //->add('enabled')
+                ->add('password')
+                ->add('firstname')
+                ->add('lastname')
+                ->add('town')
+                ->add('street')
+                ->add('zipcode')
+                ->add('year_of_birth')
+                ->add('housenumber_doornumber')
+                ->getForm();
 
-        if ($request->isMethod('POST')) {
-            $form->bind($request);
+            if ($request->isMethod('POST')) {
 
-            // data is an array with "phone" and "period" keys
-            $data = $form->getData();
+                $form->submit($request->request->all($form->getName()));
+                //return new JsonResponse($request);
 
-            $em = $this->getDoctrine()->getManager();
+                if ($form->isSubmitted()) {
 
-            $user = $em->getRepository('HtlSpendenportalBundle:User');
-            $user->setUsername("John Doe");
-            $user->setPhone($data["phone"]);
+                    // data is an array with "phone" and "period" keys
+                    $data = $form->getData();
 
-            $user->setUsername($data["username"]);
-            $user->setEmail($data["email"]);
-            $user->setEnabled($data["enabled"]);
-            $user->setPassword($data["password"]);
-            $user->setFirstname($data["firstname"]);
-            $user->setLastname($data["lastname"]);
-            $user->setTown($data["town"]);
-            $user->setStreet($data["street"]);
-            $user->setZipcode($data["zipcode"]);
-            $user->setAge($data["year_of_birth"]);
-            $user->setHousenumberDoornumber($data["housenumber_doornumber"]);
+                    $em = $this->getDoctrine()->getManager();
 
-            // or this could be $contract = new Contract("John Doe", $data["phone"], $data["period"]);
+                    $user = $em->getRepository('HtlSpendenportalBundle:User')->find($userId);
 
-            $em->persist($user); // I set/modify the properties then persist
-        }
+                    $user->setUsername($data["username"]);
+                    $user->setEmail($data["email"]);
+                    //$user->setEnabled($data["enabled"]);
+                    $user->setPassword($data["password"]);
+                    $user->setFirstname($data["firstname"]);
+                    $user->setLastname($data["lastname"]);
+                    $user->setTown($data["town"]);
+                    $user->setStreet($data["street"]);
+                    $user->setZipcode($data["zipcode"]);
+                    $user->setAge($data["year_of_birth"]);
+                    $user->setHousenumberDoornumber($data["housenumber_doornumber"]);
+
+                    // or this could be $contract = new Contract("John Doe", $data["phone"], $data["period"]);
+
+                    $em->flush();
+
+                    return $this->render('BackendAdminBundle::index.html.twig');
+                }
+            }
+        //}
     }
 
     public function indexAction()

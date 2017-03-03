@@ -20,7 +20,7 @@
                 <li><a data-ng-click="redirectToProjectFollowers([[actualProjectId]])">Follower</a></li>
             </ul>
         </div>
-        <form action="{{ path('updateProject')}}" name="_method" value="PUT">
+        <form action="{{ path('updateProject'+[[actualProjectId]])}}" method="post">
             <div class="col-md-8 col-lg-8">
                 <!--
                     Editfeld Header
@@ -105,13 +105,13 @@
                         <textarea class="form-control" rows="4" placeholder="Beschreibung" name="description" id="description">[[projectDetailInfo.description]]</textarea>
                     </div>
                 </div>
-                <!--
+
                 <div class="row marginTop">
                     <div class="col-md-offset-3 col-lg-offset-3 col-md-8 col-lg-8">
                         <textarea class="form-control" rows="4" placeholder="Beschreibung privat" id="descriptionPrivate">[[projectDetailInfo.descriptionPrivate]]</textarea>
                     </div>
                 </div>
-                -->
+
                 <div class="row marginTop">
                     <div class="col-md-offset-3 col-lg-offset-3 col-md-9 col-lg-9">
                         <button type="sumbit" id="fertig_button" class="btn">Submit</button>

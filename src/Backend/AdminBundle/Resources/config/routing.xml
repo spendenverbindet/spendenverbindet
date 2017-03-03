@@ -21,6 +21,11 @@
         <default key="_controller">BackendAdminBundle:Default:show</default>
     </route>
 
+    <route id="updateUser" path="/updateUser/{userId}" methods="POST">
+        <default key="_controller">BackendAdminBundle:Default:update</default>
+    </route>
+
+
     <!--   Project Controller   -->
     <route id="backend_admin_listpage_project" path="/projects">
         <default key="_controller">BackendAdminBundle:Project:index</default>
@@ -34,7 +39,7 @@
         <default key="_controller">BackendAdminBundle:Project:create</default>
     </route>
 
-    <route id="updateProject" path="/updateProject" methods="PUT">
+    <route id="updateProject" path="/updateProject/{projectId}" methods="POST">
         <default key="_controller">BackendAdminBundle:Project:update</default>
     </route>
 

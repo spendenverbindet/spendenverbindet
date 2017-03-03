@@ -41,48 +41,51 @@ class UserController extends Controller
     }
 
     public function listAllBackendAction(){
-        $user = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:User')->findAll();
+        if ($this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
+            $user = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:User')->findAll();
 
-        $responseArray = array();
+            $responseArray = array();
 
-        for($i=0;$i<count($user);$i++){
+            for ($i = 0; $i < count($user); $i++) {
 
-            $currentAmount = 0;
+                $currentAmount = 0;
 
-            /* @var \Htl\SpendenportalBundle\Entity\Project $project  */
-            foreach($user[$i]->getProjects() as $project){
-                $currentAmount += $project->getCurrentAmount();
+                /* @var \Htl\SpendenportalBundle\Entity\Project $project */
+                foreach ($user[$i]->getProjects() as $project) {
+                    $currentAmount += $project->getCurrentAmount();
+                }
+
+                $item = array(
+                    "id" => $user[$i]->getId(),
+                    "username" => $user[$i]->getUsername(),
+                    "usernameCanonical" => $user[$i]->getUsernameCanonical(),
+                    "email" => $user[$i]->getEmail(),
+                    "emailCanonical" => $user[$i]->getEmailCanonical(),
+                    "enable" => $user[$i]->getEnabled(),
+                    "password" => $user[$i]->getPassword(),
+                    "role" => ($user[$i]->getRoles()[0] == "ROLE_DONATOR") ? "Spender" : "Empfänger",
+                    "BeduerftigkeitsbeweisFile" => $user[$i]->getFileUpload(),
+                    "firstname" => $user[$i]->getFirstname(),
+                    "lastname" => $user[$i]->getLastname(),
+                    "street" => $user[$i]->getStreet(),
+                    $birthDate = $this->GetAge($user[$i]->getAge()),
+                    //$today   = (new \DateTime('today'))->format('d-m-y'),
+                    "age" => $birthDate,
+                    "town" => $user[$i]->getTown(),
+                    "zipcode" => $user[$i]->getZipcode(),
+                    "housenumberDoornumber" => $user[$i]->getHousenumberDoornumber(),
+                    "amountProjects" => count($user[$i]->getProjects()),
+                    "currentAmount" => $currentAmount,
+                    "lastLogin" => $user[$i]->getLastLogin()->format('d.m.y'),
+                );
+                array_push($responseArray, $item);
             }
 
-            $item = array(
-                "id"=>$user[$i]->getId(),
-                "username"=>$user[$i]->getUsername(),
-                "usernameCanonical"=>$user[$i]->getUsernameCanonical(),
-                "email"=>$user[$i]->getEmail(),
-                "emailCanonical"=>$user[$i]->getEmailCanonical(),
-                "enable"=>$user[$i]->getEnabled(),
-                "password"=>$user[$i]->getPassword(),
-                "role"=> ($user[$i]->getRoles()[0] == "ROLE_DONATOR") ? "Spender" : "Empfänger",
-                "BeduerftigkeitsbeweisFile"=>$user[$i]->getFileUpload(),
-                "firstname"=>$user[$i]->getFirstname(),
-                "lastname"=>$user[$i]->getLastname(),
-                "street"=>$user[$i]->getStreet(),
-                $birthDate = $this->GetAge($user[$i]->getAge()),
-                //$today   = (new \DateTime('today'))->format('d-m-y'),
-                "age" => $birthDate,
-                "town"=>$user[$i]->getTown(),
-                "zipcode"=>$user[$i]->getZipcode(),
-                "housenumberDoornumber"=>$user[$i]->getHousenumberDoornumber(),
-                "amountProjects"=>count($user[$i]->getProjects()),
-                "currentAmount"=>$currentAmount,
-                "lastLogin"=>$user[$i]->getLastLogin()->format('d.m.y'),
-            );
-            array_push($responseArray, $item);
+            $responseArray = (object)$responseArray;
+
+            return new JsonResponse($responseArray);
         }
-
-        $responseArray = (object) $responseArray;
-
-        return new JsonResponse($responseArray);
+        return new JsonResponse('not logged in');
     }
 
     public function GetAge($dob)
@@ -155,7 +158,7 @@ class UserController extends Controller
 
         return new JsonResponse($responseArray);
     }
-        
+    /*
     public function createAction ($username, $usernameCanonical, $email, $emailCanonical, $password, $BeduerftigkeitsbeweisFile, $role, $firstname, $lastname, $town, $street, $zipcode, $housenumberDoornumber) {
         
 
@@ -203,7 +206,8 @@ class UserController extends Controller
             return new \Symfony\Component\HttpFoundation\Response('Inserted User successfully');
         }
     }
-
+    */
+    /*
     public function updateAction($userId, $username, $usernameCanonical, $email, $emailCanonical, $enable, $password, $BeduerftigkeitsbeweisFile, $role, $firstname, $lastname, $street, $zipcode, $housenumberDoornumber){
 
         $em = $this->getDoctrine()->getManager();
@@ -246,7 +250,7 @@ class UserController extends Controller
             );
         }
 
-        /* Schauen ob es für diesen Post childs existieren! */
+        // Schauen ob es für diesen Post childs existieren! /
 
 
         $em->remove($user);
@@ -255,4 +259,5 @@ class UserController extends Controller
 
         return new Response('Picture has been deleted!');
     }
+    */
 }

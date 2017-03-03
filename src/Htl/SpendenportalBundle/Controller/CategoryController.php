@@ -6,6 +6,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Htl\SpendenportalBundle\Entity;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Request;
+use Htl\SpendenportalBundle\Entity\Category;
 
 class CategoryController extends Controller
 {
@@ -26,68 +28,102 @@ class CategoryController extends Controller
         return new JsonResponse($responseArray);
     }
 
-    public function createAction ($categoryText) {
+    public function createAction (Request $request) {
+        if ($this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
 
-        if (false) {
-            throw $this->createNotFoundException(
-                'No category found for id  or not User found for id '
-            );
+            $form = $this->createFormBuilder()
+                ->add('categoryText')
+                ->getForm();
+
+            if ($request->isMethod('POST')) {
+
+                $form->submit($request->request->all($form->getName()));
+
+                if ($form->isSubmitted()) {
+
+                    $data = $form->getData();
+
+                    //$data = $request->request->all(); $data["url"]
+                    $category = new Category();
+                    $category->setCategoryText($data['categoryText']);
+
+
+                    $em = $this->getDoctrine()->getManager();
+
+                    // tells Doctrine you want to (eventually) save the Product (no queries yet)
+                    $em->persist($category);
+
+                    // actually executes the queries (i.e. the INSERT query)
+                    $em->flush();
+
+                    return new JsonResponse('Inserted Category successful');
+                }
+                return false;
+            }
+            return false;
         }
-        else{
-
-            //$data = $request->request->all(); $data["url"]
-            $category = new Category();
-            $category->setCategoryText($categoryText);
-
-
-            $em = $this->getDoctrine()->getManager();
-
-            // tells Doctrine you want to (eventually) save the Product (no queries yet)
-            $em->persist($category);
-
-            // actually executes the queries (i.e. the INSERT query)
-            $em->flush();
-
-            return new \Symfony\Component\HttpFoundation\Response('Inserted Category successful');
-        }
+        return new JsonResponse('not logged in');
     }
 
-    public function updateAction($categoryId,$newName){
+    public function updateAction($categoryId, Request $request){
 
-        $em = $this->getDoctrine()->getManager();
-        $category = $em->getRepository('HtlSpendenportalBundle:Category')->find($categoryId);
+        if ($this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
 
-        if (!$category) {
-            throw $this->createNotFoundException(
-                'No category found for id '.$categoryId
-            );
+            $form = $this->createFormBuilder()
+                ->add('categoryText')
+                ->getForm();
+
+            if ($request->isMethod('POST')) {
+
+                $form->submit($request->request->all($form->getName()));
+
+                if ($form->isSubmitted()) {
+
+                    $data = $form->getData();
+
+                    $em = $this->getDoctrine()->getManager();
+                    $category = $em->getRepository('HtlSpendenportalBundle:Category')->find($categoryId);
+
+                    if (!$category) {
+                        throw $this->createNotFoundException(
+                            'No category found for id ' . $categoryId
+                        );
+                    }
+
+                    $category->setCategoryText($data['categoryText']);
+
+                    $em->flush();
+
+                    return new JsonResponse('Updated category successful');
+                }
+                return false;
+            }
+            return false;
         }
-
-        $category->setName($newName);
-
-        $em->flush();
-
-        return new Response('Updated category successful');
+        return new JsonResponse('not logged in');
     }
 
     public function deleteAction($categoryId){
+        if ($this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
 
-        $em = $this->getDoctrine()->getManager();
-        $category = $em->getRepository('HtlSpendenportalBundle:Category')->find($categoryId);
+            $em = $this->getDoctrine()->getManager();
+            $category = $em->getRepository('HtlSpendenportalBundle:Category')->find($categoryId);
 
-        if (!$category) {
-            throw $this->createNotFoundException(
-                'No category found for id '.$categoryId
-            );
+            if (!$category) {
+                throw $this->createNotFoundException(
+                    'No category found for id ' . $categoryId
+                );
+            }
+
+            /* Schauen ob es für diese Category childs existieren! */
+
+
+            $em->remove($category);
+            $em->flush();
+
+
+            return new Response('Category has been deleted!');
         }
-
-        /* Schauen ob es für diese Category childs existieren! */
-
-
-        $em->remove($category);
-        $em->flush();
-
-
-        return new Response('Category has been deleted!');
+        return new JsonResponse('not logged in');
     }
 }

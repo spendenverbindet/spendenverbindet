@@ -15,12 +15,15 @@
 <div data-ng-init="initCategories()"></div>
 <div class="container-fluid">
     <div class="col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
-        <button class="btn">Hinzufügen</button>
         <ul data-ng-repeat="category in categorys">
             <li>[[ category.name ]]</li>
         </ul>
+        <form action="insertCategory">
+            <input type="text" name="category" id="category" ng-hide="[[insertCategoryText]]">
+            <button class="btn">Hinzufügen</button>
+        </form>
     </div>
-</div>
+</div>p
 
 
 

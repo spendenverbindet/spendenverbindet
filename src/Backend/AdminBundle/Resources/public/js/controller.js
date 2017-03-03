@@ -88,7 +88,7 @@ app.controller('backendController', function($scope, $http) {
 
         $http({
             method: 'GET',
-            url: '/project/'+$scope.actualProjectId
+            url: '/backend/projects/'+$scope.actualProjectId
         }).then(function successCallback(response) {
 
             $scope.projectDetailInfo = response.data[0];

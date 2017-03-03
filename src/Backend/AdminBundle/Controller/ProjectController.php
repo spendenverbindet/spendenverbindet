@@ -77,6 +77,7 @@ class ProjectController extends Controller
             "active"=>$projects->getActive(),
             "titlePictureUrl"=>$projects->getTitlePictureUrl(),
             "description"=>$projects->getDescription(),
+            "descriptionPrivate"=>$projects->getDescriptionPrivate(),
             "shortInfo"=>$projects->getShortinfo(),
             "created_at"=>$projects->getCreatedAt()->format('Y-m-d'),
             "targetAmount"=>$projects->getTargetAmount(),
@@ -93,102 +94,137 @@ class ProjectController extends Controller
 
     public function createAction(Request $request)
     {
-        $form = $this->createFormBuilder()
-            ->add('title')
-            ->add('category')
-            ->add('created_at')
-            ->add('targetAmount')
-            ->add('shortInfo')
-            ->add('currentAmount')
-            ->add('description')
-            ->getForm();
+        if ( $this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
 
-        if ($request->isMethod('POST')) {
+            $form = $this->createFormBuilder()
+                ->add('titlePictureUrl')
+                ->add('title')
+                ->add('shortInfo')
+                ->add('description')
+                ->add('descriptionPrivate')
+                ->add('pictureUrl')
+                ->add('targetAmount')
+                ->add('category')
+                ->getForm();
 
-            $form->submit($request->request->all($form->getName()));
+            if ($request->isMethod('POST')) {
 
-            if ($form->isSubmitted()) {
+                $form->submit($request->request->all($form->getName()));
 
-                // data is an array with "phone" and "period" keys
-                $data = $form->getData();
+                if ($form->isSubmitted()) {
 
-                $em = $this->getDoctrine()->getManager();
+                    $date = new \DateTime('now');
 
-                //return new JsonResponse(date_parse_from_format('Y-m-d', $data["created_at"]));
+                    // data is an array with "phone" and "period" keys
+                    $data = $form->getData();
 
-                $project = new Project;
-                $project->setTitle($data["title"]);
-                //$project->setCategory($data["category"]);
-                $project->setCreatedAt(date_create_from_format('Y-m-d', $data["created_at"]));
-                $project->setTargetAmount($data["targetAmount"]);
-                $project->setShortinfo($data["shortInfo"]);
-                $project->setCurrentAmount($data["currentAmount"]);
-                $project->setDescription($data["description"]);
+                    $em = $this->getDoctrine()->getManager();
 
-                // or this could be $contract = new Contract("John Doe", $data["phone"], $data["period"]);
+                    //return new JsonResponse(date_parse_from_format('Y-m-d', $data["created_at"]));
 
-                $em->persist($project); // I set/modify the properties then persist
+                    $project = new Project;
+                    $project->setTitle($data["title"]);
+                    $project->setShortinfo($data["shortInfo"]);
+                    $project->setDescription($data["description"]);
+                    $project->setDescriptionPrivate($data["descriptionPrivate"]);
+                    $project->setTitlePictureUrl($data["titlePictureUrl"]);
 
-                $em->flush();
+                    $picture = new Picture();
 
-                return $this->render('BackendAdminBundle::listProjects.html.twig');
-            }
+                    $picture->setPictureUrl($data['pictureUrl']);
+                    $picture->setCreatedAt($date); //date_create_from_format('Y-m-d', $data["created_at"])
+                    $picture->setProjects($project->getId());
 
-            return $this->render('BackendAdminBundle::createProject.html.twig');
-        }
-    }
+                    $project->setActive(true);
+                    $project->setCreatedAt($date);
+                    $project->setTargetAmount($data["targetAmount"]);
+                    $project->setCurrentAmount(0);
+                    $project->setCurrentDonators(0);
 
-    public function updateAction($projectId, Request $request){
-        $form = $this->createFormBuilder()
-            ->add('id')
-            ->add('title')
-            ->add('category')
-            ->add('created_at')
-            ->add('targetAmount')
-            ->add('shortInfo')
-            ->add('currentAmount')
-            ->add('description')
-            ->add('activated')
-            ->getForm();
+                    $project->setCategory($this->getDoctrine()->getRepository('HtlSpendenportalBundle:Category')->findOneBy(
+                        array('categoryText' => $data["category"])
+                    ));
 
-        if ($request->isMethod('PUT')) {
+                    $project->setUsers($this->getUser());
+                    //$project->setUsers($this->getDoctrine()->getRepository('HtlSpendenportalBundle:User')->find(3));
 
-            $form->submit($request->request->all($form->getName()));
+                    // or this could be $contract = new Contract("John Doe", $data["phone"], $data["period"]);
 
-            //if ($form->isSubmitted()) {
+                    $em->persist($project); // I set/modify the properties then persist
 
-                $data = $form->getData();
+                    $em->flush();
 
-                $em = $this->getDoctrine()->getManager();
-
-                $project = $em->getRepository('HtlSpendenportalBundle:Project')->find($projectId);
-
-                $project = $em->getRepository('HtlSpendenportalBundle:Category')->findBy('Title', $data['category']);
-
-                if (!$project) {
-                    throw $this->createNotFoundException(
-                        'No category found for id ' . $data["id"]
-                    );
+                    return new JsonResponse($project);
+                    return $this->render('BackendAdminBundle::listProjects.html.twig');
                 }
 
-                $project->setTitle($data["title"]);
-                //$project->setTitlePictureUrl($data["titlePictureUrl"]);
-                $project->setDescription($data["description"]);
-                //$project->setDescriptionPrivate($data["descriptionPrivate"]);
-                $project->setShortinfo($data["shortInfo"]);
-                $project->setTargetAmount($data["targetAmount"]);
-                $project->setCurrentAmount($data["currentAmount"]);
-                //$project->setCategory($this->getDoctrine()->getRepository('HtlSpendenportalBundle:Category')->findBy('Title', $data['category']));
-                //$project->setUser($user);
-                $project->setActive($data["activated"]);
-
-                $em->flush();
-
-                return $this->render('BackendAdminBundle::listProjects.html.twig');
+                return $this->render('BackendAdminBundle::createProject.html.twig');
             }
-            return new JsonResponse(null);
-        //}
-        //return new JsonResponse(null);
+            return new JsonResponse("false method");
+        }
+        return new JsonResponse("not logged in");
+    }
+
+    public function updateAction($projectId, Request $request)
+    {
+        //if ( $this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
+
+            $form = $this->createFormBuilder()
+                ->add('title')
+                ->add('shortInfo')
+                ->add('description')
+                ->add('descriptionPrivate')
+                ->add('titlePictureUrl')
+                //->add('pictureUrl')
+                ->add('category')
+                ->getForm();
+
+            if ($request->isMethod('POST')) {
+
+                $form->submit($request->request->all($form->getName()));
+                //return new JsonResponse($request);
+
+                if ($form->isSubmitted()) {
+
+                    $date = new \DateTime('now');
+
+                    // data is an array with "phone" and "period" keys
+                    $data = $form->getData();
+
+                    $em = $this->getDoctrine()->getManager();
+
+                    //return new JsonResponse(date_parse_from_format('Y-m-d', $data["created_at"]));
+
+                    $project = $em->getRepository('HtlSpendenportalBundle:Project')->find($projectId);
+                    $project->setTitle($data["title"]);
+                    $project->setShortinfo($data["shortInfo"]);
+                    $project->setDescription($data["description"]);
+                    $project->setDescriptionPrivate($data["descriptionPrivate"]);
+                    $project->setTitlePictureUrl($data["titlePictureUrl"]);
+
+                    // $picture = new Picture();
+
+                    //$picture->setPictureUrl($data['pictureUrl']);
+                    //$picture->setCreatedAt($date); //date_create_from_format('Y-m-d', $data["created_at"])
+                    //$picture->setProjects($project->getId());
+
+                    $project->setCategory($this->getDoctrine()->getRepository('HtlSpendenportalBundle:Category')->findOneBy(
+                        array('categoryText' => $data["category"])
+                    ));
+
+                    $project->setUsers($this->getUser());
+                    //$project->setUsers($this->getDoctrine()->getRepository('HtlSpendenportalBundle:User')->find(3));
+
+                    $em->flush();
+                    
+                    return $this->render('BackendAdminBundle::listProjects.html.twig');
+                }
+
+                return $this->render('BackendAdminBundle::createProject.html.twig');
+            }
+            return new JsonResponse("false method");
+       // }
+        return new JsonResponse("not logged in");
     }
 
     public function renderCreateAction()

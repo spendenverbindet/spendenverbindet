@@ -33,20 +33,31 @@ class DonationController extends Controller
     }
 
     public function listAction(){
+        if ($this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
 
-        $repository = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:Follower');
-        $donation = $repository->findAll();
+            $repository = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:Donation');
+            $donation = $repository->findAll();
 
-        $responseArray = array();
+            $responseArray = array();
 
-        for($i=0;$i<count($donation);$i++){
-            $item = array("id"=>$donation[$i]->getId(), "amount"=>$donation[$i]->getAmount(), "dateSent"=>$donation[$i]->getDateSent(), "dateReceived"=>$donation[$i]->getDateReceived(), "anonym"=>$donation[$i]->getAnonym(), "users"=>$donation[$i]->getUsers(), "projects"=>$donation[$i]->getProjects());
-            array_push($responseArray, $item);
+            for ($i = 0; $i < count($donation); $i++) {
+                $item = array(
+                    "id" => $donation[$i]->getId(),
+                    "amount" => $donation[$i]->getAmount(),
+                    "dateSent" => $donation[$i]->getDateSent(),
+                    "dateReceived" => $donation[$i]->getDateReceived(),
+                    "anonym" => $donation[$i]->getAnonym(),
+                    "users" => $donation[$i]->getUsers(),
+                    "projects" => $donation[$i]->getProjects()
+                );
+                array_push($responseArray, $item);
+            }
+
+            $responseArray = (object)$responseArray;
+
+            return new JsonResponse($responseArray);
         }
-
-        $responseArray = (object) $responseArray;
-
-        return new JsonResponse($responseArray);
+        return new JsonResponse('not logged in');
     }
 
     public function createAction ($projectId, $userId, $amount) {
