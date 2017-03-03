@@ -63,9 +63,9 @@ class ProjectController extends Controller
     public function listMyActiveAction(){
         if ( $this->get('security.authorization_checker')->isGranted('ROLE_RECEIVER')) {
 
-            //$projects = $this->getUser()->getProjects();
+            $projects = $this->getUser()->getProjects();
 
-            $projects = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:User')->find(5)->getProjects();
+            //$projects = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:User')->find(5)->getProjects();
 
             $responseArray = array();
 
