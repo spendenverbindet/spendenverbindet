@@ -392,7 +392,7 @@ class ProjectController extends Controller
 
                     $picture = new Picture();
 
-                    $picture->setPictureUrl($data['pictureUrl']);
+                    //$picture->setPictureUrl($data['pictureUrl']);
                     $picture->setCreatedAt($date); //date_create_from_format('Y-m-d', $data["created_at"])
                     $picture->setProjects($project->getId());
 
