@@ -416,7 +416,7 @@ class ProjectController extends Controller
 
                     $em->flush();
 
-                    return true;
+                    return $this->render('HtlSpendenportalBundle::empfaenger_dashboard.html.twig');
                 }
 
                 return false;
