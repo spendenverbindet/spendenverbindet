@@ -27,5 +27,9 @@ class DefaultController extends Controller
         return $this->render('HtlSpendenportalBundle::empfaenger_dashboard.html.twig');
     }
 
+    public function projekt_erstellenAction(){
+        return $this->render('HtlSpendenportalBundle::projekt_erstellen.html.twig');
+    }
+
 }
 

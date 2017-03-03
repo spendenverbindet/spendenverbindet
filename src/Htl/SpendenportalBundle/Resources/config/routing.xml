@@ -24,7 +24,11 @@
 
     <route id="htl_spendenportal_empfaenger_dashboard" path="/empfaenger_dashboard">
         <default key="_controller">HtlSpendenportalBundle:Default:empfaenger_dashboard</default>
-    </route> 
+    </route>
+
+    <route id="htl_spendenportal_projekt_erstellen" path="/projekt_erstellen">
+        <default key="_controller">HtlSpendenportalBundle:Default:projekt_erstellen</default>
+    </route>
 
 
     <!--                                        FERTL                                              -->
