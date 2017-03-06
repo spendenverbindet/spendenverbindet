@@ -544,10 +544,23 @@ app.controller('spendenverbindetController', function($scope, $http) {
     $scope.clickUpload = function(){
         document.getElementById('myupload').click();
     };
-    
-    
+
+    $scope.clickUpload2 = function(){
+        document.getElementById('file').click();
+    };
+
+    $scope.displayTitelPictureError = false;
+
+    $scope.titlePictureSelected = function(){
+        if(document.getElementById("myupload").value == "") {
+          // Bild muss noch ausgewählt werden
+            $scope.displayTitelPictureError = true;
+        }
+    };
 
 
+
+    
 });
 
 
