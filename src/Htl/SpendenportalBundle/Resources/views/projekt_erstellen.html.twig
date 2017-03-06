@@ -87,6 +87,41 @@
             </div>
         </div>
 
+
+            <div style="margin-bottom:50px;" class="row">
+
+                <div class="col-xs-12 col-sm-6" style="padding:50px;padding-top: 0">
+                    <input accept="image/*" style="margin-top:25px;padding:10px;width:100%;border:1px solid black;font-weight: bold;font-size: 20pt;" id="file" type="file" name="file[]" multiple/>
+                </div>
+
+                <div class="col-xs-12 col-sm-6" style="padding:50px;padding-top:0">
+                    <div class="uk-slidenav-position" data-uk-slideshow="{animation: 'scroll'}" data-uk-slideshow>
+                        <ul id="imagePreview" class="uk-slideshow"></ul>
+                        <a href="" class="uk-slidenav uk-slidenav-contrast uk-slidenav-previous" data-uk-slideshow-item="previous"></a>
+                        <a href="" class="uk-slidenav uk-slidenav-contrast uk-slidenav-next" data-uk-slideshow-item="next"></a>
+                    </div>
+                </div>
+
+            </div>
+
+            <script>
+                var inputLocalFont = document.getElementById("file");
+                inputLocalFont.addEventListener("change",previewImages,false);
+
+                function previewImages(){
+                    var fileList = this.files;
+
+                    var anyWindow = window.URL || window.webkitURL;
+
+                    for(var i = 0; i < fileList.length; i++){
+                        var objectUrl = anyWindow.createObjectURL(fileList[i]);
+                        $('#imagePreview').append('<li><img style="width:100px;" src="' + objectUrl + '" /></li>');
+                        window.URL.revokeObjectURL(fileList[i]);
+                    }
+                }
+            </script>
+
+
         </form>
    </div>
 
