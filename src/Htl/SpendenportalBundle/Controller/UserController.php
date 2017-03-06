@@ -55,6 +55,14 @@ class UserController extends Controller
                     $currentAmount += $project->getCurrentAmount();
                 }
 
+                if($user[$i]->getRoles()[0] == "ROLE_DONATOR"){
+                    $userRole = "Spender";
+                } elseif ($user[$i]->getRoles()[0] == "ROLE_RECEIVER"){
+                    $userRole = "Empfänger";
+                } else {
+                    $userRole = "Admin";
+                }
+
                 $item = array(
                     "id" => $user[$i]->getId(),
                     "username" => $user[$i]->getUsername(),
@@ -63,7 +71,7 @@ class UserController extends Controller
                     "emailCanonical" => $user[$i]->getEmailCanonical(),
                     "enable" => $user[$i]->getEnabled(),
                     "password" => $user[$i]->getPassword(),
-                    "role" => ($user[$i]->getRoles()[0] == "ROLE_DONATOR") ? "Spender" : "Empfänger",
+                    "role" => $userRole,
                     "BeduerftigkeitsbeweisFile" => $user[$i]->getFileUpload(),
                     "firstname" => $user[$i]->getFirstname(),
                     "lastname" => $user[$i]->getLastname(),

@@ -8,6 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Htl\SpendenportalBundle\Entity\Project;
 use Symfony\Component\HttpFoundation\Request;
 use Htl\SpendenportalBundle\Entity\Picture;
+use Htl\SpendenportalBundle\Controller\PictureController;
 
 class ProjectController extends Controller
 {
@@ -348,7 +349,11 @@ class ProjectController extends Controller
         return false;
         
     }
-    
+
+    /**
+     * @param Request $request
+     * @return bool|JsonResponse|\Symfony\Component\HttpFoundation\Response
+     */
     public function createAction(Request $request)
     {
 
@@ -364,6 +369,7 @@ class ProjectController extends Controller
                     ->add('uploadFile')
                     ->add('targetAmount')
                     ->add('category')
+                    ->add('file')
                     ->getForm();
 
                 if ($request->isMethod('POST')) {
@@ -377,7 +383,8 @@ class ProjectController extends Controller
                         // data is an array with "phone" and "period" keys
                         $data = $form->getData();
 
-                        $em = $this->getDoctrine()->getManager();
+                        $em = $this->getDoctrine()->getManager('default');
+                        $pictureEm = $this->getDoctrine()->getManager();
 
                         //return new JsonResponse(date_parse_from_format('Y-m-d', $data["created_at"]));
                         /*
@@ -417,6 +424,22 @@ class ProjectController extends Controller
                         $em->persist($project); // I set/modify the properties then persist
 
                         $em->flush();
+
+                        foreach($data['file'] as $pictureUrl){
+                            $picture = new Picture();
+                            $picture->setPictureUrl($pictureUrl);
+                            $picture->setCreatedAt($date);
+                            /*
+                            $picture->setProjects($this->getDoctrine()->getRepository('HtlSpendenportalBundle:Project')->findOneBy(
+                                array('title' => $data["title"])
+                            ));
+                            */
+                            $picture->setProjects($this->getDoctrine()->getRepository('HtlSpendenportalBundle:Project')->find($project->getId()));
+
+                            $pictureEm->persist($picture);
+                            $pictureEm->flush();
+                            $pictureEm->clear();
+                        }
 
                         return $this->render('HtlSpendenportalBundle::empfaenger_dashboard.html.twig');
                     }

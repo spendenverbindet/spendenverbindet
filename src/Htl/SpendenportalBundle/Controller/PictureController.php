@@ -5,6 +5,7 @@ namespace Htl\SpendenportalBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Htl\SpendenportalBundle\Entity\Picture;
 
 class PictureController extends Controller
 {
@@ -27,6 +28,40 @@ class PictureController extends Controller
         $responseArray = (object) $responseArray;
 
         return new JsonResponse($responseArray);
+    }
+
+    public function insertMultiplePictures($pictureArray, $projectId){
+        if ($this->get('security.authorization_checker')->isGranted('ROLE_RECEIVER')) {
+
+            $form = $this->createFormBuilder()
+                ->add('pictureUrl')
+                ->getForm();
+
+        
+                
+                $date = new \DateTime('now');
+
+                $items = false;
+
+                $em = $this->getDoctrine()->getManager();
+
+                foreach ($pictureArray as $item) {
+                    $picture = new Picture();
+
+                    $picture->setPictureUrl($item['pictureUrl']);
+                    $picture->setCreatedAt($date);
+                    $picture->setProjects($projectId);
+
+                    $em->persist($picture);
+
+                    // flush everything to the database every 20 inserts
+
+                    $em->flush();
+                    $em->clear();                     
+            }
+            return new JsonResponse('no files');
+        }
+        return false;
     }
 
     public function createPictureAction ($projectId, $pictureUrl) {
