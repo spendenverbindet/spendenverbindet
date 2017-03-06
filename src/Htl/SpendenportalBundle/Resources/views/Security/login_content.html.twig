@@ -9,13 +9,19 @@
     <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
 {% endif %}
 
-<form style="border-width:0;margin-top:50px;margin-bottom: 100px;" action="{{ path("fos_user_security_check") }}" method="post">
+<form class="form-searchbar" style="border-width:0;margin-top:50px;margin-bottom: 100px;" action="{{ path("fos_user_security_check") }}" method="post">
     {% if csrf_token %}
         <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
     {% endif %}
 
         <div class="row text-center">
             <h2>ANMELDEN</h2>
+            {% if error %}
+                {% if error.messageKey|trans(error.messageData, 'security') == "Invalid credentials." %}
+                    <span style="color:red"><b>Benutzername oder Passwort falsch</b></span>
+                {% endif %}
+            {% endif %}
+
         </div>
         <div class="row text-center">
             <input style="margin:10px;padding:5px;width:250px;border:1px solid black;" placeholder="Benutzername" type="text" id="username" name="_username" value="{{ last_username }}" required="required" />
