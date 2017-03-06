@@ -8,6 +8,6 @@ class BackendAdminBundle extends Bundle
 {
     public function getParent()
     {
-        return 'FOSUserBundle';
+        return 'HtlSpendenportalBundle';
     }
 }
