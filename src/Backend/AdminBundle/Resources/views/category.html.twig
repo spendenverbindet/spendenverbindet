@@ -1,3 +1,4 @@
+{% if is_granted('ROLE_ADMIN') %}
 {% embed "BackendAdminBundle::header.html.twig" %}
 
     {# override the title-tag text #}
@@ -25,7 +26,5 @@
     </div>
 </div>p
 
-
-
-
 {% include "BackendAdminBundle::footer.html.twig" %}
+{% endif %}

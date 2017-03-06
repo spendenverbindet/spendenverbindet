@@ -1,3 +1,4 @@
+{% if is_granted('ROLE_ADMIN') %}
 <!DOCTYPE html>
 <html data-ng-app="BackendApp">
 <head>
@@ -27,5 +28,4 @@
         </div>
     </div>
 </nav>
-
-
+{% endif %}

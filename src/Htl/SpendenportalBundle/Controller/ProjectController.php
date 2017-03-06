@@ -349,79 +349,83 @@ class ProjectController extends Controller
         
     }
     
-    public function createAction(Request $request){
+    public function createAction(Request $request)
+    {
 
-        if ( $this->get('security.authorization_checker')->isGranted('ROLE_RECEIVER')) { // && !$this->hasActive()
+        if ($this->get('security.authorization_checker')->isGranted('ROLE_RECEIVER')) { // && !$this->hasActive()
+            if($this->hasActive() == false){
 
-            $form = $this->createFormBuilder()
-                ->add('titlePictureUrl')
-                ->add('title')
-                ->add('shortInfo')
-                ->add('description')
-                ->add('descriptionPrivate')
-                ->add('uploadFile')
-                ->add('targetAmount')
-                ->add('category')
-                ->getForm();
+                $form = $this->createFormBuilder()
+                    ->add('titlePictureUrl')
+                    ->add('title')
+                    ->add('shortInfo')
+                    ->add('description')
+                    ->add('descriptionPrivate')
+                    ->add('uploadFile')
+                    ->add('targetAmount')
+                    ->add('category')
+                    ->getForm();
 
-            if ($request->isMethod('POST')) {
+                if ($request->isMethod('POST')) {
 
-                $form->submit($request->request->all($form->getName()));
+                    $form->submit($request->request->all($form->getName()));
 
-                if ($form->isSubmitted()) {
+                    if ($form->isSubmitted()) {
 
-                    $date = new \DateTime('now');
+                        $date = new \DateTime('now');
 
-                    // data is an array with "phone" and "period" keys
-                    $data = $form->getData();
+                        // data is an array with "phone" and "period" keys
+                        $data = $form->getData();
 
-                    $em = $this->getDoctrine()->getManager();
+                        $em = $this->getDoctrine()->getManager();
 
-                    //return new JsonResponse(date_parse_from_format('Y-m-d', $data["created_at"]));
-                    /*
-                    $target_dir = "uploads/";
-                    $target_file = $target_dir . basename($_FILES["uploadFile"]["name"]);
-                    $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
-                    */
+                        //return new JsonResponse(date_parse_from_format('Y-m-d', $data["created_at"]));
+                        /*
+                        $target_dir = "uploads/";
+                        $target_file = $target_dir . basename($_FILES["uploadFile"]["name"]);
+                        $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
+                        */
 
-                    $project = new Project;
-                    $project->setTitle($data["title"]);
-                    $project->setShortinfo($data["shortInfo"]);
-                    $project->setDescription($data["description"]);
-                    $project->setDescriptionPrivate($data["descriptionPrivate"]);
-                    $project->setTitlePictureUrl($data["titlePictureUrl"]);
+                        $project = new Project;
+                        $project->setTitle($data["title"]);
+                        $project->setShortinfo($data["shortInfo"]);
+                        $project->setDescription($data["description"]);
+                        $project->setDescriptionPrivate($data["descriptionPrivate"]);
+                        $project->setTitlePictureUrl($data["titlePictureUrl"]);
 
-                    $picture = new Picture();
+                        //$picture = new Picture();
 
-                    //$picture->setPictureUrl($data['pictureUrl']);
-                    $picture->setCreatedAt($date); //date_create_from_format('Y-m-d', $data["created_at"])
-                    $picture->setProjects($project->getId());
+                        //$picture->setPictureUrl($data['pictureUrl']);
+                        //$picture->setCreatedAt($date); //date_create_from_format('Y-m-d', $data["created_at"])
+                        //$picture->setProjects($project->getId());
 
-                    $project->setActive(true);
-                    $project->setCreatedAt($date);
-                    $project->setTargetAmount($data["targetAmount"]);
-                    $project->setCurrentAmount(0);
-                    $project->setCurrentDonators(0);
+                        $project->setActive(true);
+                        $project->setCreatedAt($date);
+                        $project->setTargetAmount($data["targetAmount"]);
+                        $project->setCurrentAmount(0);
+                        $project->setCurrentDonators(0);
 
-                    $project->setCategory($this->getDoctrine()->getRepository('HtlSpendenportalBundle:Category')->findOneBy(
-                        array('categoryText' => $data["category"])
-                    ));
+                        $project->setCategory($this->getDoctrine()->getRepository('HtlSpendenportalBundle:Category')->findOneBy(
+                            array('categoryText' => $data["category"])
+                        ));
 
-                    $project->setUsers($this->getUser());
-                    //$project->setUsers($this->getDoctrine()->getRepository('HtlSpendenportalBundle:User')->find(3));
+                        $project->setUsers($this->getUser());
+                        //$project->setUsers($this->getDoctrine()->getRepository('HtlSpendenportalBundle:User')->find(3));
 
-                    // or this could be $contract = new Contract("John Doe", $data["phone"], $data["period"]);
+                        // or this could be $contract = new Contract("John Doe", $data["phone"], $data["period"]);
 
-                    $em->persist($project); // I set/modify the properties then persist
+                        $em->persist($project); // I set/modify the properties then persist
 
-                    $em->flush();
+                        $em->flush();
 
-                    return $this->render('HtlSpendenportalBundle::empfaenger_dashboard.html.twig');
+                        return $this->render('HtlSpendenportalBundle::empfaenger_dashboard.html.twig');
+                    }
+
+                    return false;
                 }
-
-                return false;
+                return new JsonResponse("false method");
             }
-            return new JsonResponse("false method");
+            return new JsonResponse("has active so can't");
         }
         return new JsonResponse("not logged in");
     }
