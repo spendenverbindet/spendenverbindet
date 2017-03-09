@@ -21,8 +21,10 @@ class Picture
      */
     private $id;
 
+    //const SERVER_PATH_TO_IMAGE_FOLDER = '/web/bundles/htlspendenportal/img';
+
     /**
-     * @var sring
+     * @var string
      *
      * @ORM\Column(name="picture", type="string")
      */
@@ -123,5 +125,29 @@ class Picture
     {
         return $this->projects;
     }
+
+    /*
+    public function upload()
+    {
+        // the file property can be empty if the field is not required
+        if (null === $this->getPictureUrl()) {
+            return;
+        }
+
+        // we use the original file name here but you should
+        // sanitize it at least to avoid any security issues
+
+        // move takes the target directory and target filename as params
+        $this->getPictureUrl()->move(
+            self::SERVER_PATH_TO_IMAGE_FOLDER,$this->getPictureUrl()
+        );
+
+        // set the path property to the filename where you've saved the file
+        $this->filename = $this->getPictureUrl();
+
+        // clean up the file property as you won't need it anymore
+        $this->setPictureUrl(null);
+    }
+    */
 }
 

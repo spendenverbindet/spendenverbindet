@@ -21,6 +21,8 @@ class Project
      */
     private $id;
 
+    //const SERVER_PATH_TO_IMAGE_FOLDER = '/web/bundles/htlspendenportal/img';
+
     /**
      * @var string
      *
@@ -62,6 +64,13 @@ class Project
      * @ORM\Column(name="active", type="boolean")
      */
     private $active;
+
+    /**
+     * @var bool
+     *
+     * @ORM\Column(name="deleted", type="boolean")
+     */
+    private $deleted = false;
 
     /**
      * @var \DateTime
@@ -289,6 +298,30 @@ class Project
     public function getActive()
     {
         return (boolean)$this->active;
+    }
+
+    /**
+     * Set deleted
+     *
+     * @param boolean $deleted
+     *
+     * @return Project
+     */
+    public function setDeleted($deleted)
+    {
+        $this->deleted = $deleted;
+
+        return $this;
+    }
+
+    /**
+     * Get deleted
+     *
+     * @return boolean
+     */
+    public function getDeleted()
+    {
+        return (boolean)$this->deleted;
     }
 
     /**
@@ -579,5 +612,28 @@ class Project
     {
         return $this->pictures;
     }
+
+    /*
+    public function upload()
+    {
+        // the file property can be empty if the field is not required
+        if (null === $this->getPicture()) {
+            return;
+        }
+
+        // we use the original file name here but you should
+        // sanitize it at least to avoid any security issues
+
+        // move takes the target directory and target filename as params
+        $this->getPicture()->move(
+            self::SERVER_PATH_TO_IMAGE_FOLDER,$this->getPicture()
+        );
+        // set the path property to the filename where you've saved the file
+        $this->filename = $this->getPicture();
+
+        // clean up the file property as you won't need it anymore
+        $this->setPicture(null);
+    }
+    */
 }
 

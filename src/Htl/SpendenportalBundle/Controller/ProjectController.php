@@ -32,7 +32,7 @@ class ProjectController extends Controller
             $hasDonated = null;
 
             foreach ($projects as $project) {
-                //if($project->getActive()) {
+                if($project->getActive()) {
                     if ($this->get('security.authorization_checker')->isGranted('ROLE_DONATOR')) {
                         $hasDonated = $this->hasDonated($project->getId());
                     }
@@ -53,7 +53,7 @@ class ProjectController extends Controller
                         "hasDonated" => $hasDonated
                     );
                     array_push($responseArray, $item);
-                //}
+                }
             }
 
             $responseArray = (object)$responseArray;
@@ -357,7 +357,7 @@ class ProjectController extends Controller
     public function createAction(Request $request)
     {
 
-        if ($this->get('security.authorization_checker')->isGranted('ROLE_RECEIVER')) { // && !$this->hasActive()
+        if ($this->get('security.authorization_checker')->isGranted('ROLE_RECEIVER')) {
             if($this->hasActive() == false){
 
                 $form = $this->createFormBuilder()
@@ -421,41 +421,124 @@ class ProjectController extends Controller
 
                         // or this could be $contract = new Contract("John Doe", $data["phone"], $data["period"]);
 
+                        $project->setTitlePictureUrl($_FILES["titlePictureUrl"]["name"]);
+
+                        //var_dump(count($_FILES['file']["name"]));
+                        //return new JsonResponse("Test");
+
                         $em->persist($project); // I set/modify the properties then persist
+
+                        //$project->upload();
+
+                        //var_dump($_FILES);
+
+                        //file upload
+                        $target_dir = $_SERVER['DOCUMENT_ROOT'] . '/bundles/htlspendenportal/img/';
+                        $target_file = $target_dir . basename($_FILES["titlePictureUrl"]["name"]);
+                        $uploadOk = 1;
+                        $imageFileType = pathinfo($target_file, PATHINFO_EXTENSION);
+                        // Check if image file is a actual image or fake image
+                        if (isset($_POST["submit"])) {
+                            $check = getimagesize($_FILES["titlePictureUrl"]["tmp_name"]);
+                            if ($check !== false) {
+                                $uploadOk = 1;
+                            } else {
+                                $uploadOk = 0;
+                                return new JsonResponse("File is not an image.");
+                            }
+                        }
+                        // Check file size
+                        if ($_FILES["titlePictureUrl"]["size"] > 500000) {
+                            $uploadOk = 0;
+                            return new JsonResponse("Sorry, your file is too large.");
+                        }
+                        // Allow certain file formats
+                        if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
+                            && $imageFileType != "gif"
+                        ) {
+                            $uploadOk = 0;
+                            return new JsonResponse("Sorry, only JPG, JPEG, PNG & GIF files are allowed.");
+                        }
+                        // Check if $uploadOk is set to 0 by an error
+                        if ($uploadOk == 0) {
+                            return new JsonResponse("Sorry, your file was not uploaded.");
+                            // if everything is ok, try to upload file
+                        } else {
+                            if (move_uploaded_file($_FILES["titlePictureUrl"]["tmp_name"], $target_file)) {
+                            } else {
+                                return new JsonResponse("Sorry, there was an error uploading your file.");
+                            }
+                        }
 
                         $em->flush();
 
-                        foreach($data['file'] as $pictureUrl){
+
+                            //return new JsonResponse('test');
+                        //return new JsonResponse('test');
+                        for($i = 0; $i<count($_FILES['file']["name"]);$i++){
+                            //var_dump($_FILES['file']["name"][$i]);
+                            //return new JsonResponse('Test');
                             $picture = new Picture();
-                            $picture->setPictureUrl($pictureUrl);
+                            $picture->setPictureUrl($_FILES['file']["name"][$i]);
                             $picture->setCreatedAt($date);
-                            /*
-                            $picture->setProjects($this->getDoctrine()->getRepository('HtlSpendenportalBundle:Project')->findOneBy(
-                                array('title' => $data["title"])
-                            ));
-                            */
+
                             $picture->setProjects($this->getDoctrine()->getRepository('HtlSpendenportalBundle:Project')->find($project->getId()));
+                            //$target_dir . basename($_FILES["file[]"];
+
+                            $target_file = $target_dir . basename($_FILES["file"]["name"][$i]);
+                            $uploadOk = 1;
+                            $imageFileType = pathinfo($target_file, PATHINFO_EXTENSION);
+                            if (isset($_POST["submit"])) {
+                                $check = getimagesize($_FILES["file"]["tmp_name"][$i]);
+                                if ($check !== false) {
+                                    $uploadOk = 1;
+                                } else {
+                                    $uploadOk = 0;
+                                    return new JsonResponse("File is not an image.");
+                                }
+                            }
+                            // Check file size
+                            if ($_FILES["file"]["size"][$i] > 500000) {
+                                $uploadOk = 0;
+                                return new JsonResponse("Sorry, your file is too large.");
+                            }
+                            // Allow certain file formats
+                            if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
+                                && $imageFileType != "gif"
+                            ) {
+                                $uploadOk = 0;
+                                return new JsonResponse("Sorry, only JPG, JPEG, PNG & GIF files are allowed.");
+                            }
+                            // Check if $uploadOk is set to 0 by an error
+                            if ($uploadOk == 0) {
+                                return new JsonResponse("Sorry, your file was not uploaded.");
+                                // if everything is ok, try to upload file
+                            } else {
+                                if(move_uploaded_file($_FILES["file"]["tmp_name"][$i], $target_file)){
+                                    $uploadOk = 1;
+                                }
+                            }
 
                             $pictureEm->persist($picture);
                             $pictureEm->flush();
                             $pictureEm->clear();
                         }
 
+
                         return $this->render('HtlSpendenportalBundle::empfaenger_dashboard.html.twig');
                     }
-
                     return false;
                 }
                 return new JsonResponse("false method");
             }
-            return new JsonResponse("has active so can't");
+            return new JsonResponse("has active so you cannot create another");
         }
         return new JsonResponse("not logged in");
     }
 
     public function updateAction($projectId, Request $request)
     {
-        if ( $this->get('security.authorization_checker')->isGranted('ROLE_RECEIVER')) {
+        if ( $this->get('security.authorization_checker')->isGranted('ROLE_RECEIVER')) {    // && $this->getUser()->getProjects()->find($projectId)
 
         $form = $this->createFormBuilder()
             ->add('title')
@@ -530,8 +613,9 @@ class ProjectController extends Controller
 
             /* Schauen ob es für dieses Project childs existieren! */
 
-
-            $em->remove($project);
+            $project->setDeleted(true);
+            
+            //$em->remove($project);
             $em->flush();
 
 
