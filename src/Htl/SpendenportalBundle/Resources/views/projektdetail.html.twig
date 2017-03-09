@@ -62,15 +62,39 @@
             </div>
             <div class="col-xs-12 col-sm-6" style="padding:50px;padding-top:0">
                 <h2>[[projectDetailInfo.title]]</h2>
-                <p style="padding-bottom:20px">
-                    [[firstPartOfText]]
-                    <br>
+
+                {% if is_granted('ROLE_RECEIVER') %}
+                     <!--  Dieser Teil ist noch nicht fertig, das umschalten von pubic/private und umgekehrt -->
+                     <!--  --------------------------------------------------------------------------------- -->
+                    <div style="margin-bottom:20px;">
+                        <button style="width:110px;" class="folgen-detail-btn"><span style="font-size:18px"><i style="padding-right:5px" class="fa fa-eye" aria-hidden="true"></i>PUBLIC</span></button>
+                        <button style="width:110px;" class="spenden-detail-btn"><span style="font-size:18px"><i style="padding-right:5px" class="fa fa-eye" aria-hidden="true"></i>PRIVATE</span></button>
+                    </div>
+
+                    <p style="padding-bottom:20px">
+                        Text
+                        <br>
                     <div id="readmore" class="collapse">
-                       [[secondPartOfText]]
+                        Text
+                    </div>
+                    <button style="width:150px;margin-left:0;margin-top:10px;" class="spenden-detail-btn" ><span style="font-size:18px">mehr lesen</span></button>
+                    </p>
+                    <!--  --------------------------------------------------------------------------------- -->
+                    <!--  Dieser Teil ist noch nicht fertig, das umschalten von pubic/private und umgekehrt -->
+
+                {% else %}
+
+                    <p style="padding-bottom:20px">
+                        [[firstPartOfText]]
+                        <br>
+                    <div id="readmore" class="collapse">
+                        [[secondPartOfText]]
                     </div>
                     <button style="display:none;width:150px;margin-left:0;margin-top:10px;" id="readMoreBtnId" ng-click="readMoreOrLessTriggered()" data-toggle="collapse" data-target="#readmore" class="spenden-detail-btn" ><span style="font-size:18px">[[readMoreTxt]]</span></button>
+                    </p>
 
-                </p>
+                {% endif %}
+
             </div>
         </div>
     </div>
