@@ -206,7 +206,7 @@ class ProjectController extends Controller
                     "deleted" => $projects[$i]->getDeleted(),
                     "progress" => $progress,
                     "currentDonators" => $projects[$i]->getCurrentDonators(),
-                    "hasDonated" => $hasDonated 
+                    "hasDonated" => $hasDonated
                 );
                 array_push($responseArray, $item);
             }
@@ -457,7 +457,7 @@ class ProjectController extends Controller
                         // Check file size
                         if ($_FILES["titlePictureUrl"]["size"] > 500000) {
                             $uploadOk = 0;
-                            return new JsonResponse("Sorry, your file is too large.");
+                            return new JsonResponse("Sorry, your file is too large. Maximal 250kB");
                         }
                         // Allow certain file formats
                         if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
@@ -505,9 +505,9 @@ class ProjectController extends Controller
                                 }
                             }
                             // Check file size
-                            if ($_FILES["file"]["size"][$i] > 500000) {
+                            if ($_FILES["file"]["size"][$i] > 2000000) {
                                 $uploadOk = 0;
-                                return new JsonResponse("Sorry, your file is too large.");
+                                return new JsonResponse("Sorry, your file is too large. Maximal 250kB");
                             }
                             // Allow certain file formats
                             if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
@@ -553,7 +553,6 @@ class ProjectController extends Controller
             ->add('description')
             ->add('descriptionPrivate')
             ->add('titlePictureUrl')
-            //->add('pictureUrl')
             ->add('category')
             ->getForm();
 
@@ -579,12 +578,6 @@ class ProjectController extends Controller
                 $project->setDescription($data["description"]);
                 $project->setDescriptionPrivate($data["descriptionPrivate"]);
                 $project->setTitlePictureUrl($data["titlePictureUrl"]);
-
-               // $picture = new Picture();
-
-                //$picture->setPictureUrl($data['pictureUrl']);
-                //$picture->setCreatedAt($date); //date_create_from_format('Y-m-d', $data["created_at"])
-                //$picture->setProjects($project->getId());
 
                 $project->setCategory($this->getDoctrine()->getRepository('HtlSpendenportalBundle:Category')->findOneBy(
                     array('categoryText' => $data["category"])
