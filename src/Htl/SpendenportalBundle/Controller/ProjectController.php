@@ -48,6 +48,7 @@ class ProjectController extends Controller
                         "created_at" => $project->getCreatedAt()->format('d.m.Y'),
                         "targetAmount" => $project->getTargetAmount(),
                         "currentAmount" => $project->getCurrentAmount(),
+                        "deleted" => $project->getDeleted(),
                         "progress" => $progress,
                         "currentDonators" => $project->getCurrentDonators(),
                         "hasDonated" => $hasDonated
@@ -82,6 +83,7 @@ class ProjectController extends Controller
                         "created_at" => $project->getCreatedAt()->format('d.m.Y'),
                         "targetAmount" => $project->getTargetAmount(),
                         "currentAmount" => $project->getCurrentAmount(),
+                        "deleted" => $project->getDeleted(),
                         "progress" => $progress,
                         "currentDonators" => $project->getCurrentDonators(),
                     );
@@ -117,6 +119,7 @@ class ProjectController extends Controller
                         "created_at" => $project->getCreatedAt()->format('d.m.Y'),
                         "targetAmount" => $project->getTargetAmount(),
                         "currentAmount" => $project->getCurrentAmount(),
+                        "deleted" => $project->getDeleted(),
                         "progress" => $progress,
                         "currentDonators" => $project->getCurrentDonators(),
                     );
@@ -158,6 +161,7 @@ class ProjectController extends Controller
                     "created_at" => $project->getCreatedAt()->format('d.m.Y'),
                     "targetAmount" => $project->getTargetAmount(),
                     "currentAmount" => $project->getCurrentAmount(),
+                    "deleted" => $project->getDeleted(),
                     "progress" => $progress,
                     "currentDonators" => $project->getCurrentDonators(),
                     "username" => $project->getUsers()->getUsername(),
@@ -199,6 +203,7 @@ class ProjectController extends Controller
                     "created_at" => $projects[$i]->getCreatedAt()->format('d.m.Y'),
                     "targetAmount" => $projects[$i]->getTargetAmount(),
                     "currentAmount" => $projects[$i]->getCurrentAmount(),
+                    "deleted" => $projects[$i]->getDeleted(),
                     "progress" => $progress,
                     "currentDonators" => $projects[$i]->getCurrentDonators(),
                     "hasDonated" => $hasDonated
@@ -234,6 +239,7 @@ class ProjectController extends Controller
                         "created_at" => $project->getCreatedAt()->format('d.m.Y'),
                         "targetAmount" => $project->getTargetAmount(),
                         "currentAmount" => $project->getCurrentAmount(),
+                        "deleted" => $project->getDeleted(),
                         "progress" => $progress,
                         "currentDonators" => $project->getCurrentDonators(),
                         "hasDonated" => $this->hasDonated($project->getId()),
@@ -295,6 +301,7 @@ class ProjectController extends Controller
                 "created_at_backend" => $projects->getCreatedAt()->format('Y-m-d'),
                 "targetAmount" => $projects->getTargetAmount(),
                 "currentAmount" => $projects->getCurrentAmount(),
+                "deleted" => $projects->getDeleted(),
                 "progress" => $progress,
                 "currentDonators" => $projects->getCurrentDonators(),
                 "category" => $projects->getCategory()->getCategoryText(),
