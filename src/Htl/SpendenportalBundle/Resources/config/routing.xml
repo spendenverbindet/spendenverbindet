@@ -154,7 +154,7 @@
         <default key="_controller">HtlSpendenportalBundle:Project:listFollowing</default>
     </route>
 
-    <route id="showProjectsFromCategory" path="/project/{projectId}" methods="GET">
+    <route id="showProjectDetail" path="/project/{projectId}" methods="GET">
         <default key="_controller">HtlSpendenportalBundle:Project:show</default>
     </route>
 
@@ -208,7 +208,7 @@
         <default key="_controller">HtlSpendenportalBundle:User:create</default>
     </route>
 
-    <route id="updateUser" path="/updateUser/{userId}"  methods="PUT">
+    <route id="updatingUser" path="/updateUser/{userId}"  methods="POST">
         <default key="_controller">HtlSpendenportalBundle:User:update</default>
     </route>
 

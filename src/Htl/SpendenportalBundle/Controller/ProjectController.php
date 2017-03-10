@@ -546,7 +546,7 @@ class ProjectController extends Controller
 
     public function updateAction($projectId, Request $request)
     {
-        if ( $this->get('security.authorization_checker')->isGranted('ROLE_RECEIVER')) {    // && $this->getUser()->getProjects()->find($projectId)
+        //if ( $this->get('security.authorization_checker')->isGranted('ROLE_RECEIVER')) {    // && $this->getUser()->getProjects()->find($projectId)
 
         $form = $this->createFormBuilder()
             ->add('title')
@@ -554,6 +554,7 @@ class ProjectController extends Controller
             ->add('description')
             ->add('descriptionPrivate')
             ->add('titlePictureUrl')
+            ->add('targetAmount')
             ->add('category')
             ->getForm();
 
@@ -578,7 +579,53 @@ class ProjectController extends Controller
                 $project->setShortinfo($data["shortInfo"]);
                 $project->setDescription($data["description"]);
                 $project->setDescriptionPrivate($data["descriptionPrivate"]);
+
+                //file upload
+                $target_dir = $_SERVER['DOCUMENT_ROOT'] . '/bundles/htlspendenportal/img/';
+                $target_file = $target_dir . basename($_FILES["titlePictureUrl"]["name"]);
+                $uploadOk = 1;
+
+                if(unlink($target_dir.$project->getTitlePictureUrl())){
+                    $uploadOk = 1;
+                }
+
+                $imageFileType = pathinfo($target_file, PATHINFO_EXTENSION);
+                // Check if image file is a actual image or fake image
+                if (isset($_POST["submit"])) {
+                    $check = getimagesize($_FILES["titlePictureUrl"]["tmp_name"]);
+                    if ($check !== false) {
+                        $uploadOk = 1;
+                    } else {
+                        $uploadOk = 0;
+                        return new JsonResponse("File is not an image.");
+                    }
+                }
+                // Check file size
+                if ($_FILES["titlePictureUrl"]["size"] > 6000000) {
+                    $uploadOk = 0;
+                    return new JsonResponse("Sorry, your file is too large. Maximal 750kB");
+                }
+                // Allow certain file formats
+                if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
+                    && $imageFileType != "gif" && $imageFileType != "JPG" && $imageFileType != "PNG" && $imageFileType != "JPEG"
+                    && $imageFileType != "GIF"
+                ) {
+                    $uploadOk = 0;
+                    return new JsonResponse("Sorry, only JPG, JPEG, PNG & GIF files are allowed.");
+                }
+                // Check if $uploadOk is set to 0 by an error
+                if ($uploadOk == 0) {
+                    return new JsonResponse("Sorry, your file was not uploaded.");
+                    // if everything is ok, try to upload file
+                } else {
+                    if (move_uploaded_file($_FILES["titlePictureUrl"]["tmp_name"], $target_file)) {
+                    } else {
+                        return new JsonResponse("Sorry, there was an error uploading your file.");
+                    }
+                }
+
                 $project->setTitlePictureUrl($data["titlePictureUrl"]);
+                $project->setTargetAmount($data["targetAmount"]);
 
                 $project->setCategory($this->getDoctrine()->getRepository('HtlSpendenportalBundle:Category')->findOneBy(
                     array('categoryText' => $data["category"])
@@ -589,13 +636,13 @@ class ProjectController extends Controller
 
                 $em->flush();
 
-                return true;
+                return new JsonResponse('hat funktioniert');
             }
 
             return false;
         }
         return new JsonResponse("false method");
-        }
+        //}
         return new JsonResponse("not logged in");
     }
 
@@ -620,7 +667,7 @@ class ProjectController extends Controller
             $em->flush();
 
 
-            return new Response('Project has been deleted!');
+            return new JsonResponse('Project has been deleted!');
         }
         return new JsonResponse(false);
     }

@@ -86,13 +86,52 @@ class PictureController extends Controller
 
                 $em = $this->getDoctrine()->getManager();
 
+                //file upload
+                $target_dir = $_SERVER['DOCUMENT_ROOT'] . '/bundles/htlspendenportal/img/';
+                $target_file = $target_dir . basename($_FILES["picture"]["name"]);
+                $uploadOk = 1;
+                $imageFileType = pathinfo($target_file, PATHINFO_EXTENSION);
+                // Check if image file is a actual image or fake image
+                if (isset($_POST["submit"])) {
+                    $check = getimagesize($_FILES["picture"]["tmp_name"]);
+                    if ($check !== false) {
+                        $uploadOk = 1;
+                    } else {
+                        $uploadOk = 0;
+                        return new JsonResponse("File is not an image.");
+                    }
+                }
+                // Check file size
+                if ($_FILES["picture"]["size"] > 6000000) {
+                    $uploadOk = 0;
+                    return new JsonResponse("Sorry, your file is too large. Maximal 750kB");
+                }
+                // Allow certain file formats
+                if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
+                    && $imageFileType != "gif" && $imageFileType != "JPG" && $imageFileType != "PNG" && $imageFileType != "JPEG"
+                    && $imageFileType != "GIF"
+                ) {
+                    $uploadOk = 0;
+                    return new JsonResponse("Sorry, only JPG, JPEG, PNG & GIF files are allowed.");
+                }
+                // Check if $uploadOk is set to 0 by an error
+                if ($uploadOk == 0) {
+                    return new JsonResponse("Sorry, your file was not uploaded.");
+                    // if everything is ok, try to upload file
+                } else {
+                    if (move_uploaded_file($_FILES["picture"]["tmp_name"], $target_file)) {
+                    } else {
+                        return new JsonResponse("Sorry, there was an error uploading your file.");
+                    }
+                }
+
                 // tells Doctrine you want to (eventually) save the Product (no queries yet)
                 $em->persist($picture);
 
                 // actually executes the queries (i.e. the INSERT query)
                 $em->flush();
 
-                return new \Symfony\Component\HttpFoundation\Response('Inserted Picture successful');
+                return new JsonResponse('Inserted Picture successful');
             }
             return new JsonResponse('not logged in');
         }
@@ -123,7 +162,7 @@ class PictureController extends Controller
     public function deleteAction($pictureId)
     {
 
-        if ($this->get('security.authorization_checker')->isGranted('ROLE_RECEIVER')) {
+        //if ($this->get('security.authorization_checker')->isGranted('ROLE_RECEIVER')) {
 
             $em = $this->getDoctrine()->getManager();
             $picture = $em->getRepository('HtlSpendenportalBundle:Picture')->find($pictureId);
@@ -136,13 +175,18 @@ class PictureController extends Controller
 
             /* Schauen ob es für dieses Picture childs existieren! */
 
+            $target_dir = $_SERVER['DOCUMENT_ROOT'] . '/bundles/htlspendenportal/img/';
 
-            $em->remove($picture);
+            if(unlink($target_dir.$picture->getPictureUrl())){
+                $em->remove($picture);
+            }
+
+            //$em->remove($picture);
             $em->flush();
 
 
             return new JsonResponse('Picture has been deleted!');
-        }
+        //}
         return new JsonResponse('not logged in');
     }
 }

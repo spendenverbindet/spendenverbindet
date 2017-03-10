@@ -6,6 +6,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Validator\Constraints\DateTime;
+use Htl\SpendenportalBundle\Entity\User;
+use Symfony\Component\HttpFoundation\Request;
+
 class UserController extends Controller
 {
     public function listAllAction(){
@@ -268,4 +271,51 @@ class UserController extends Controller
         return new Response('Picture has been deleted!');
     }
     */
+
+    public function updateAction($userId, Request $request)
+    {
+        if ( $this->get('security.authorization_checker')->isGranted('ROLE_RECEIVER')) {    // && $this->getUser()->getProjects()->find($projectId)
+
+        $form = $this->createFormBuilder()
+            ->add('firstname')
+            ->add('lastname')
+            ->add('age')
+            ->add('town')
+            ->add('street')
+            ->add('zipcode')
+            ->add('housenumberDoornumber')
+            ->getForm();
+
+        if ($request->isMethod('POST')) {
+
+            $form->submit($request->request->all($form->getName()));
+            //return new JsonResponse($request);
+
+            if ($form->isSubmitted()) {
+
+                // data is an array with "phone" and "period" keys
+                $data = $form->getData();
+
+                $em = $this->getDoctrine()->getManager();
+
+                $user = $em->getRepository('HtlSpendenportalBundle:User')->find($userId);
+                $user->setFirstname($data["firstname"]);
+                $user->setLastname($data["lastname"]);
+                $user->setAge($data["age"]);
+                $user->setTown($data["town"]);
+                $user->setStreet($data["street"]);
+                $user->setZipcode($data["zipcode"]);
+                $user->setHousenumberDoornumber($data["housenumberDoornumber"]);
+
+                $em->flush();
+
+                return new JsonResponse('hat funktioniert');
+            }
+
+            return false;
+        }
+        return new JsonResponse("false method");
+        }
+        return new JsonResponse("not logged in");
+    }
 }
