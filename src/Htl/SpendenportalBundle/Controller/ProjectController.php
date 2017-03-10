@@ -206,7 +206,7 @@ class ProjectController extends Controller
                     "deleted" => $projects[$i]->getDeleted(),
                     "progress" => $progress,
                     "currentDonators" => $projects[$i]->getCurrentDonators(),
-                    "hasDonated" => $hasDonated
+                    "hasDonated" => $hasDonated 
                 );
                 array_push($responseArray, $item);
             }
