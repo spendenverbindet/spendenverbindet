@@ -455,9 +455,9 @@ class ProjectController extends Controller
                             }
                         }
                         // Check file size
-                        if ($_FILES["titlePictureUrl"]["size"] > 2000000) {
+                        if ($_FILES["titlePictureUrl"]["size"] > 6000000) {
                             $uploadOk = 0;
-                            return new JsonResponse("Sorry, your file is too large. Maximal 250kB");
+                            return new JsonResponse("Sorry, your file is too large. Maximal 750kB");
                         }
                         // Allow certain file formats
                         if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
@@ -505,9 +505,9 @@ class ProjectController extends Controller
                                 }
                             }
                             // Check file size
-                            if ($_FILES["file"]["size"][$i] > 2000000) {
+                            if ($_FILES["file"]["size"][$i] > 6000000) {
                                 $uploadOk = 0;
-                                return new JsonResponse("Sorry, your file is too large. Maximal 250kB");
+                                return new JsonResponse("Sorry, your file is too large. Maximal 750kB");
                             }
                             // Allow certain file formats
                             if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
