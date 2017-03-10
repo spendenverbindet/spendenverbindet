@@ -455,7 +455,7 @@ class ProjectController extends Controller
                             }
                         }
                         // Check file size
-                        if ($_FILES["titlePictureUrl"]["size"] > 500000) {
+                        if ($_FILES["titlePictureUrl"]["size"] > 2000000) {
                             $uploadOk = 0;
                             return new JsonResponse("Sorry, your file is too large. Maximal 250kB");
                         }
