@@ -30,6 +30,10 @@
         <default key="_controller">HtlSpendenportalBundle:Default:projekt_erstellen</default>
     </route>
 
+    <route id="htl_spendenportal_projekt_bearbeiten" path="/projekt_bearbeiten">
+        <default key="_controller">HtlSpendenportalBundle:Default:projekt_bearbeiten</default>
+    </route>
+
 
     <!--                                        FERTL                                              -->
 
