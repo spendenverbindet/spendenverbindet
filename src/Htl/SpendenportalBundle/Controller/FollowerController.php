@@ -48,7 +48,7 @@ class FollowerController extends Controller
 
         }
 
-        return new JsonResponse(false);
+        return new JsonResponse(null);
 
     }
 
