@@ -315,6 +315,44 @@ class ProjectController extends Controller
             return new JsonResponse($responseArray);
     }
 
+    public function showActiveProjectAction(){
+        $projects = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:Project')->find($projectId);
+
+        $responseArray = array();
+        if ($this->hasDonated($projectId)){
+            $description = $projects->getDescriptionPrivate();
+        } else {
+            $description = $projects->getDescription();
+        }
+        $progress = floor(($projects->getCurrentAmount() / $projects->getTargetAmount()) * 100);
+
+        $hasDonated = $this->hasDonated($projects->getId());
+
+        $item = array(
+            "id" => $projects->getId(),
+            "title" => $projects->getTitle(),
+            "active" => $projects->getActive(),
+            "titlePictureUrl" => $projects->getTitlePictureUrl(),
+            "description" => $description,
+            "shortInfo" => $projects->getShortinfo(),
+            "created_at" => $projects->getCreatedAt()->format('d.m.Y'),
+            "created_at_backend" => $projects->getCreatedAt()->format('Y-m-d'),
+            "targetAmount" => $projects->getTargetAmount(),
+            "currentAmount" => $projects->getCurrentAmount(),
+            "deleted" => $projects->getDeleted(),
+            "progress" => $progress,
+            "currentDonators" => $projects->getCurrentDonators(),
+            "category" => $projects->getCategory()->getCategoryText(),
+            "hasDonated"=>$hasDonated
+
+        );
+        array_push($responseArray, $item);
+
+        $responseArray = (object)$responseArray;
+
+        return new JsonResponse($responseArray);
+    }
+
     public function hasDonated($projectId){
         //anzahl der ProjectIds checken
 
@@ -535,7 +573,7 @@ class ProjectController extends Controller
                         }
 
 
-                        return $this->render('HtlSpendenportalBundle::empfaenger_dashboard.html.twig');
+                        return $this->redirectToRoute('htl_spendenportal_empfaenger_dashboard');
                     }
                     return false;
                 }
