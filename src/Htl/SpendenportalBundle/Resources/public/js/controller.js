@@ -560,6 +560,28 @@ app.controller('spendenverbindetController', function($scope, $http) {
 
 
 
+
+    $scope.projektInfoBearbeiten = null;
+
+    // Projekt_bearbeiten Seite
+
+    $scope.initBearbeiten = function(){
+
+        $http({
+            method: 'GET',
+            url: '/activeprojects'
+
+        }).then(function successCallback(response) {
+
+            $scope.projektInfoBearbeiten = response.data;
+
+            console.log($scope.projektInfoBearbeiten);
+
+        }, function errorCallback(response) {
+        });
+    }
+
+
     
 });
 
