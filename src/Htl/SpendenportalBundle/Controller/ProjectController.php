@@ -95,7 +95,7 @@ class ProjectController extends Controller
 
             return new JsonResponse($responseArray);
         }
-        return null;
+        return new JsonResponse("no active project");
     }
 
     public function listMyFinishedAction(){
@@ -460,13 +460,14 @@ class ProjectController extends Controller
                             return new JsonResponse("Sorry, your file is too large. Maximal 750kB");
                         }
                         // Allow certain file formats
+                        /*
                         if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
                             && $imageFileType != "gif" && $imageFileType != "JPG" && $imageFileType != "PNG" && $imageFileType != "JPEG"
                             && $imageFileType != "GIF"
                         ) {
                             $uploadOk = 0;
                             return new JsonResponse("Sorry, only JPG, JPEG, PNG & GIF files are allowed.");
-                        }
+                        }*/
                         // Check if $uploadOk is set to 0 by an error
                         if ($uploadOk == 0) {
                             return new JsonResponse("Sorry, your file was not uploaded.");
@@ -511,12 +512,13 @@ class ProjectController extends Controller
                                 return new JsonResponse("Sorry, your file is too large. Maximal 750kB");
                             }
                             // Allow certain file formats
+                            /*
                             if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
                                 && $imageFileType != "gif"
                             ) {
                                 $uploadOk = 0;
                                 return new JsonResponse("Sorry, only JPG, JPEG, PNG & GIF files are allowed.");
-                            }
+                            }*/
                             // Check if $uploadOk is set to 0 by an error
                             if ($uploadOk == 0) {
                                 return new JsonResponse("Sorry, your file was not uploaded.");
