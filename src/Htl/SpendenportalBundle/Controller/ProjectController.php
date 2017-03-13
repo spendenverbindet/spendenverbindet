@@ -89,7 +89,7 @@ class ProjectController extends Controller
                         "deleted" => $project->getDeleted(),
                         "progress" => $progress,
                         "currentDonators" => $project->getCurrentDonators(),
-                        "categories" => $categories,
+                        "category" => $project->getCategory()->getCategoryText()
                     );
                     array_push($responseArray, $item);
                 }
@@ -319,6 +319,7 @@ class ProjectController extends Controller
             return new JsonResponse($responseArray);
     }
 
+    /*
     public function showActiveProjectAction(){
         $projects = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:Project')->find($projectId);
 
@@ -356,6 +357,7 @@ class ProjectController extends Controller
 
         return new JsonResponse($responseArray);
     }
+    */
 
     public function hasDonated($projectId){
         //anzahl der ProjectIds checken
