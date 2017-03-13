@@ -74,7 +74,7 @@ class ProjectController extends Controller
             $responseArray = array();
 
             foreach ($projects as $project) {
-                if ($project->getActive() && $project->getDeleted()) {
+                if ($project->getActive() && !$project->getDeleted()) {
                     $progress = ($project->getTargetAmount() == 0) ? 0 : floor(($project->getCurrentAmount() / $project->getTargetAmount()) * 100);
                     $item = array(
                         "id" => $project->getId(),
