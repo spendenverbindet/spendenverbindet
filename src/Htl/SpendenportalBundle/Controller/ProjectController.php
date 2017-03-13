@@ -67,6 +67,8 @@ class ProjectController extends Controller
 
             $projects = $this->getUser()->getProjects();
 
+            $categories = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:Category')->findAll();
+
             //$projects = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:User')->find(5)->getProjects();
 
             $responseArray = array();
@@ -79,6 +81,7 @@ class ProjectController extends Controller
                         "title" => $project->getTitle(),
                         "titlePictureUrl" => $project->getTitlePictureUrl(),
                         "description" => $project->getDescription(),
+                        "descriptionPrivate" => $project->getDescriptionPrivate(),
                         "shortinfo" => $project->getShortinfo(),
                         "created_at" => $project->getCreatedAt()->format('d.m.Y'),
                         "targetAmount" => $project->getTargetAmount(),
@@ -86,6 +89,7 @@ class ProjectController extends Controller
                         "deleted" => $project->getDeleted(),
                         "progress" => $progress,
                         "currentDonators" => $project->getCurrentDonators(),
+                        "categories" => $categories,
                     );
                     array_push($responseArray, $item);
                 }
@@ -466,7 +470,7 @@ class ProjectController extends Controller
 
                         // or this could be $contract = new Contract("John Doe", $data["phone"], $data["period"]);
 
-                        $project->setTitlePictureUrl($_FILES["titlePictureUrl"]["name"]);
+                        $project->setTitlePictureUrl(preg_replace('/\s+/', '_',trim(addslashes($_FILES["titlePictureUrl"]["name"]))));
 
                         //var_dump(count($_FILES['file']["name"]));
                         //return new JsonResponse("Test");
@@ -479,7 +483,9 @@ class ProjectController extends Controller
 
                         //file upload
                         $target_dir = $_SERVER['DOCUMENT_ROOT'] . '/bundles/htlspendenportal/img/';
-                        $target_file = $target_dir . basename($_FILES["titlePictureUrl"]["name"]);
+                        $filename = trim(addslashes($_FILES['titlePictureUrl']['name']));
+                        $filename = preg_replace('/\s+/', '_', $filename);
+                        $target_file = $target_dir . $filename;
                         $uploadOk = 1;
                         $imageFileType = pathinfo($target_file, PATHINFO_EXTENSION);
                         // Check if image file is a actual image or fake image
@@ -526,13 +532,14 @@ class ProjectController extends Controller
                             //var_dump($_FILES['file']["name"][$i]);
                             //return new JsonResponse('Test');
                             $picture = new Picture();
-                            $picture->setPictureUrl($_FILES['file']["name"][$i]);
+                            $picture->setPictureUrl(preg_replace('/\s+/', '_',trim(addslashes($_FILES['file']["name"][$i]))));
                             $picture->setCreatedAt($date);
 
                             $picture->setProjects($this->getDoctrine()->getRepository('HtlSpendenportalBundle:Project')->find($project->getId()));
                             //$target_dir . basename($_FILES["file[]"];
-
-                            $target_file = $target_dir . basename($_FILES["file"]["name"][$i]);
+                            $filename = trim(addslashes($_FILES['titlePictureUrl']['name']));
+                            $filename = preg_replace('/\s+/', '_', $filename);
+                            $target_file = $target_dir . $filename;
                             $uploadOk = 1;
                             $imageFileType = pathinfo($target_file, PATHINFO_EXTENSION);
                             if (isset($_POST["submit"])) {
