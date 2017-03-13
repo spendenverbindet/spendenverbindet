@@ -170,7 +170,7 @@
         <default key="_controller">HtlSpendenportalBundle:Project:update</default>
     </route>
 
-    <route id="deleteProjects" path="/deleteProject/{projectId}" methods="DESTROY">
+    <route id="deleteProjects" path="/deleteProject/{projectId}" methods="POST">
         <default key="_controller">HtlSpendenportalBundle:Project:delete</default>
     </route>
 

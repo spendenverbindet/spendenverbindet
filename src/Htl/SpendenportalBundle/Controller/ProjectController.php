@@ -32,7 +32,7 @@ class ProjectController extends Controller
             $hasDonated = null;
 
             foreach ($projects as $project) {
-                if($project->getActive()) {
+                if($project->getActive() && !$project->getDeleted()) {
                     if ($this->get('security.authorization_checker')->isGranted('ROLE_DONATOR')) {
                         $hasDonated = $this->hasDonated($project->getId());
                     }
@@ -74,7 +74,7 @@ class ProjectController extends Controller
             $responseArray = array();
 
             foreach ($projects as $project) {
-                if ($project->getActive()) {
+                if ($project->getActive() && $project->getDeleted()) {
                     $progress = ($project->getTargetAmount() == 0) ? 0 : floor(($project->getCurrentAmount() / $project->getTargetAmount()) * 100);
                     $item = array(
                         "id" => $project->getId(),
@@ -634,9 +634,12 @@ class ProjectController extends Controller
                 $target_file = $target_dir . basename($_FILES["titlePictureUrl"]["name"]);
                 $uploadOk = 1;
 
-                if(unlink($target_dir.$project->getTitlePictureUrl())){
-                    $uploadOk = 1;
-                }
+                //if(is_null($project->getTitlePictureUrl())){
+                    if(unlink($target_dir.$project->getTitlePictureUrl())){
+                        $uploadOk = 1;
+                    }
+                //}
+                $project->setTitlePictureUrl($data["titlePictureUrl"]);
 
                 $imageFileType = pathinfo($target_file, PATHINFO_EXTENSION);
                 // Check if image file is a actual image or fake image
@@ -673,7 +676,6 @@ class ProjectController extends Controller
                     }
                 }
 
-                $project->setTitlePictureUrl($data["titlePictureUrl"]);
                 $project->setTargetAmount($data["targetAmount"]);
 
                 $project->setCategory($this->getDoctrine()->getRepository('HtlSpendenportalBundle:Category')->findOneBy(
@@ -685,7 +687,7 @@ class ProjectController extends Controller
 
                 $em->flush();
 
-                return new JsonResponse('hat funktioniert');
+                return $this->redirectToRoute('htl_spendenportal_projekt_bearbeiten');
             }
 
             return false;
@@ -697,7 +699,7 @@ class ProjectController extends Controller
 
     public function deleteAction($projectId)
     {
-        if ($this->get('security.authorization_checker')->isGranted('ROLE_RECEIVER') && $this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
+        //if ($this->get('security.authorization_checker')->isGranted('ROLE_RECEIVER') && $this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
 
             $em = $this->getDoctrine()->getManager();
             $project = $em->getRepository('HtlSpendenportalBundle:Project')->find($projectId);
@@ -708,16 +710,22 @@ class ProjectController extends Controller
                 );
             }
 
-            /* Schauen ob es für dieses Project childs existieren! */
+            $projects = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:User')->find(5)->getProjects();
 
-            $project->setDeleted(true);
+            //if($this->getUser()->getProjects()->find($projectId)){
+             if($projects->find($projectId)){
+                $project->setDeleted(true);
+
+                $em->flush();
+
+                return new JsonResponse('Project has been deleted!');                
+            }
             
             //$em->remove($project);
-            $em->flush();
 
 
-            return new JsonResponse('Project has been deleted!');
-        }
+            return new JsonResponse('Failed!');
+        //}
         return new JsonResponse(false);
     }
 }
