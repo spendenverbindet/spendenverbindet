@@ -31,5 +31,9 @@ class DefaultController extends Controller
         return $this->render('HtlSpendenportalBundle::projekt_erstellen.html.twig');
     }
 
+    public function projekt_bearbeitenAction(){
+        return $this->render('HtlSpendenportalBundle::projekt_bearbeiten.html.twig');
+    }
+
 }
 
