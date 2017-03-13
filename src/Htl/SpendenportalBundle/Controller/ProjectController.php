@@ -548,7 +548,7 @@ class ProjectController extends Controller
 
     public function updateAction($projectId, Request $request)
     {
-        //if ( $this->get('security.authorization_checker')->isGranted('ROLE_RECEIVER')) {    // && $this->getUser()->getProjects()->find($projectId)
+        if ( $this->get('security.authorization_checker')->isGranted('ROLE_RECEIVER')) {    // && $this->getUser()->getProjects()->find($projectId)
 
         $form = $this->createFormBuilder()
             ->add('title')
@@ -644,7 +644,7 @@ class ProjectController extends Controller
             return false;
         }
         return new JsonResponse("false method");
-        //}
+        }
         return new JsonResponse("not logged in");
     }
 
