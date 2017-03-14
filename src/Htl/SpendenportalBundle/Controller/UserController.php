@@ -332,7 +332,10 @@ class UserController extends Controller
 
                 $em->flush();
 
-                return new JsonResponse('hat funktioniert');
+                if($this->get('security.authorization_checker')->isGranted('ROLE_RECEIVER')) {
+                    return $this->redirectToRoute('htl_spendenportal_empfaenger_dashboard');
+                }
+                return $this->redirectToRoute('htl_spendenportal_spender_dashboard');
             }
 
             return false;
