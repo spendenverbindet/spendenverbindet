@@ -325,7 +325,7 @@ class UserController extends Controller
                 $user->setFirstname($data["email"]);
                 $user->setFirstname($data["firstname"]);
                 $user->setLastname($data["lastname"]);
-                $user->setAge($data["age"]);
+                //$user->setAge($data["age"]);
                 $user->setTown($data["town"]);
                 $user->setStreet($data["street"]);
                 $user->setZipcode($data["zipcode"]);
