@@ -162,6 +162,10 @@
         <default key="_controller">HtlSpendenportalBundle:Project:show</default>
     </route>
 
+    <route id="showMyActiveProject" path="/activeproject" methods="GET">
+        <default key="_controller">HtlSpendenportalBundle:Project:showActiveProject</default>
+    </route>
+
     <route id="insertingProject" path="/insertProject" methods="POST">
         <default key="_controller">HtlSpendenportalBundle:Project:create</default>
     </route>

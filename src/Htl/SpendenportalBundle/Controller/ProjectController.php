@@ -319,45 +319,57 @@ class ProjectController extends Controller
             return new JsonResponse($responseArray);
     }
 
-    /*
+    
     public function showActiveProjectAction(){
-        $projects = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:Project')->find($projectId);
+        $projects = $this->getUser()->getProjects();
 
-        $responseArray = array();
-        if ($this->hasDonated($projectId)){
-            $description = $projects->getDescriptionPrivate();
-        } else {
-            $description = $projects->getDescription();
+        foreach($projects as $project){
+            if($project->getActive()){
+                
+                $projectId = $project->getId();
+
+                $projects = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:Project')->find($projectId);
+
+                $responseArray = array();
+                if ($this->hasDonated($projectId)){
+                    $description = $projects->getDescriptionPrivate();
+                } else {
+                    $description = $projects->getDescription();
+                }
+                $progress = floor(($projects->getCurrentAmount() / $projects->getTargetAmount()) * 100);
+
+                $hasDonated = $this->hasDonated($projects->getId());
+
+                $item = array(
+                    "id" => $projects->getId(),
+                    "title" => $projects->getTitle(),
+                    "active" => $projects->getActive(),
+                    "titlePictureUrl" => $projects->getTitlePictureUrl(),
+                    "description" => $description,
+                    "shortInfo" => $projects->getShortinfo(),
+                    "created_at" => $projects->getCreatedAt()->format('d.m.Y'),
+                    "created_at_backend" => $projects->getCreatedAt()->format('Y-m-d'),
+                    "targetAmount" => $projects->getTargetAmount(),
+                    "currentAmount" => $projects->getCurrentAmount(),
+                    "deleted" => $projects->getDeleted(),
+                    "progress" => $progress,
+                    "currentDonators" => $projects->getCurrentDonators(),
+                    "category" => $projects->getCategory()->getCategoryText(),
+                    "hasDonated"=>$hasDonated
+
+                );
+                array_push($responseArray, $item);
+
+                $responseArray = (object)$responseArray;
+
+                return new JsonResponse($responseArray);
+
+            }
         }
-        $progress = floor(($projects->getCurrentAmount() / $projects->getTargetAmount()) * 100);
-
-        $hasDonated = $this->hasDonated($projects->getId());
-
-        $item = array(
-            "id" => $projects->getId(),
-            "title" => $projects->getTitle(),
-            "active" => $projects->getActive(),
-            "titlePictureUrl" => $projects->getTitlePictureUrl(),
-            "description" => $description,
-            "shortInfo" => $projects->getShortinfo(),
-            "created_at" => $projects->getCreatedAt()->format('d.m.Y'),
-            "created_at_backend" => $projects->getCreatedAt()->format('Y-m-d'),
-            "targetAmount" => $projects->getTargetAmount(),
-            "currentAmount" => $projects->getCurrentAmount(),
-            "deleted" => $projects->getDeleted(),
-            "progress" => $progress,
-            "currentDonators" => $projects->getCurrentDonators(),
-            "category" => $projects->getCategory()->getCategoryText(),
-            "hasDonated"=>$hasDonated
-
-        );
-        array_push($responseArray, $item);
-
-        $responseArray = (object)$responseArray;
-
-        return new JsonResponse($responseArray);
+        return new JsonResponse('no active project');
+        
     }
-    */
+    
 
     public function hasDonated($projectId){
         //anzahl der ProjectIds checken
@@ -593,106 +605,114 @@ class ProjectController extends Controller
         return new JsonResponse("not logged in");
     }
 
-    public function updateAction($projectId, Request $request)
+    public function updateAction(Request $request)
     {
         if ( $this->get('security.authorization_checker')->isGranted('ROLE_RECEIVER')) {    // && $this->getUser()->getProjects()->find($projectId)
 
-        $form = $this->createFormBuilder()
-            ->add('title')
-            ->add('shortInfo')
-            ->add('description')
-            ->add('descriptionPrivate')
-            ->add('titlePictureUrl')
-            ->add('targetAmount')
-            ->add('category')
-            ->getForm();
+            $form = $this->createFormBuilder()
+                ->add('title')
+                ->add('shortInfo')
+                ->add('description')
+                ->add('descriptionPrivate')
+                ->add('titlePictureUrl')
+                ->add('targetAmount')
+                ->add('category')
+                ->getForm();
 
-        if ($request->isMethod('POST')) {
+            $projects = $this->getUser()->getProjects();
 
-            $form->submit($request->request->all($form->getName()));
-            //return new JsonResponse($request);
+            foreach ($projects as $project) {
+                if ($project->getActive()) {
 
-            if ($form->isSubmitted()) {
+                    if ($request->isMethod('POST')) {
 
-                $date = new \DateTime('now');
+                        $form->submit($request->request->all($form->getName()));
+                        //return new JsonResponse($request);
 
-                // data is an array with "phone" and "period" keys
-                $data = $form->getData();
+                        if ($form->isSubmitted()) {
 
-                $em = $this->getDoctrine()->getManager();
+                            $date = new \DateTime('now');
 
-                //return new JsonResponse(date_parse_from_format('Y-m-d', $data["created_at"]));
+                            // data is an array with "phone" and "period" keys
+                            $data = $form->getData();
 
-                $project = $em->getRepository('HtlSpendenportalBundle:Project')->find($projectId);
-                $project->setTitle($data["title"]);
-                $project->setShortinfo($data["shortInfo"]);
-                $project->setDescription($data["description"]);
-                $project->setDescriptionPrivate($data["descriptionPrivate"]);
+                            $em = $this->getDoctrine()->getManager();
 
-                //file upload
-                $target_dir = $_SERVER['DOCUMENT_ROOT'] . '/bundles/htlspendenportal/img/';
-                $target_file = $target_dir . basename($_FILES["titlePictureUrl"]["name"]);
-                $uploadOk = 1;
+                            //return new JsonResponse(date_parse_from_format('Y-m-d', $data["created_at"]));
 
-                if($project->getTitlePictureUrl() == ""){
-                    if(unlink($target_dir.$project->getTitlePictureUrl())){
-                        $uploadOk = 1;
+                            $project = $em->getRepository('HtlSpendenportalBundle:Project')->find($projectId);
+                            $project->setTitle($data["title"]);
+                            $project->setShortinfo($data["shortInfo"]);
+                            $project->setDescription($data["description"]);
+                            $project->setDescriptionPrivate($data["descriptionPrivate"]);
+
+                            //file upload
+                            $target_dir = $_SERVER['DOCUMENT_ROOT'] . '/bundles/htlspendenportal/img/';
+                            $target_file = $target_dir . basename($_FILES["titlePictureUrl"]["name"]);
+                            $uploadOk = 1;
+
+                            if ($project->getTitlePictureUrl() == "") {
+                                if (unlink($target_dir . $project->getTitlePictureUrl())) {
+                                    $uploadOk = 1;
+                                }
+                                $project->setTitlePictureUrl($data["titlePictureUrl"]);
+                            }
+
+                            $imageFileType = pathinfo($target_file, PATHINFO_EXTENSION);
+                            // Check if image file is a actual image or fake image
+                            if (isset($_POST["submit"])) {
+                                $check = getimagesize($_FILES["titlePictureUrl"]["tmp_name"]);
+                                if ($check !== false) {
+                                    $uploadOk = 1;
+                                } else {
+                                    $uploadOk = 0;
+                                    return new JsonResponse("File is not an image.");
+                                }
+                            }
+                            // Check file size
+                            if ($_FILES["titlePictureUrl"]["size"] > 6000000) {
+                                $uploadOk = 0;
+                                return new JsonResponse("Sorry, your file is too large. Maximal 750kB");
+                            }
+                            // Allow certain file formats
+                            if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
+                                && $imageFileType != "gif" && $imageFileType != "JPG" && $imageFileType != "PNG" && $imageFileType != "JPEG"
+                                && $imageFileType != "GIF"
+                            ) {
+                                $uploadOk = 0;
+                                return new JsonResponse("Sorry, only JPG, JPEG, PNG & GIF files are allowed.");
+                            }
+                            // Check if $uploadOk is set to 0 by an error
+                            if ($uploadOk == 0) {
+                                return new JsonResponse("Sorry, your file was not uploaded.");
+                                // if everything is ok, try to upload file
+                            } else {
+                                if (move_uploaded_file($_FILES["titlePictureUrl"]["tmp_name"], $target_file)) {
+                                } else {
+                                    return new JsonResponse("Sorry, there was an error uploading your file.");
+                                }
+                            }
+
+                            $project->setTargetAmount($data["targetAmount"]);
+
+                            $project->setCategory($this->getDoctrine()->getRepository('HtlSpendenportalBundle:Category')->findOneBy(
+                                array('categoryText' => $data["category"])
+                            ));
+
+                            $project->setUsers($this->getUser());
+                            //$project->setUsers($this->getDoctrine()->getRepository('HtlSpendenportalBundle:User')->find(3));
+
+                            $em->flush();
+
+                            return $this->redirectToRoute('htl_spendenportal_projekt_bearbeiten');
+                        }
+
+                        return false;
                     }
-                    $project->setTitlePictureUrl($data["titlePictureUrl"]);
+                    return new JsonResponse("false method");
                 }
-
-                $imageFileType = pathinfo($target_file, PATHINFO_EXTENSION);
-                // Check if image file is a actual image or fake image
-                if (isset($_POST["submit"])) {
-                    $check = getimagesize($_FILES["titlePictureUrl"]["tmp_name"]);
-                    if ($check !== false) {
-                        $uploadOk = 1;
-                    } else {
-                        $uploadOk = 0;
-                        return new JsonResponse("File is not an image.");
-                    }
-                }
-                // Check file size
-                if ($_FILES["titlePictureUrl"]["size"] > 6000000) {
-                    $uploadOk = 0;
-                    return new JsonResponse("Sorry, your file is too large. Maximal 750kB");
-                }
-                // Allow certain file formats
-                if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
-                    && $imageFileType != "gif" && $imageFileType != "JPG" && $imageFileType != "PNG" && $imageFileType != "JPEG"
-                    && $imageFileType != "GIF"
-                ) {
-                    $uploadOk = 0;
-                    return new JsonResponse("Sorry, only JPG, JPEG, PNG & GIF files are allowed.");
-                }
-                // Check if $uploadOk is set to 0 by an error
-                if ($uploadOk == 0) {
-                    return new JsonResponse("Sorry, your file was not uploaded.");
-                    // if everything is ok, try to upload file
-                } else {
-                    if (move_uploaded_file($_FILES["titlePictureUrl"]["tmp_name"], $target_file)) {
-                    } else {
-                        return new JsonResponse("Sorry, there was an error uploading your file.");
-                    }
-                }
-
-                $project->setTargetAmount($data["targetAmount"]);
-
-                $project->setCategory($this->getDoctrine()->getRepository('HtlSpendenportalBundle:Category')->findOneBy(
-                    array('categoryText' => $data["category"])
-                ));
-
-                $project->setUsers($this->getUser());
-                //$project->setUsers($this->getDoctrine()->getRepository('HtlSpendenportalBundle:User')->find(3));
-
-                $em->flush();
-
-                return $this->redirectToRoute('htl_spendenportal_projekt_bearbeiten');
             }
-
-            return false;
-        }
-        return new JsonResponse("false method");
+            return new JsonResponse('no active project');
         }
         return new JsonResponse("not logged in");
     }
