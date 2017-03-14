@@ -220,7 +220,7 @@
         <default key="_controller">HtlSpendenportalBundle:User:create</default>
     </route>
 
-    <route id="updatingUser" path="/updateUser/{userId}"  methods="POST">
+    <route id="updatingUser" path="/updateUser"  methods="POST">
         <default key="_controller">HtlSpendenportalBundle:User:update</default>
     </route>
 

@@ -11,39 +11,41 @@ use Symfony\Component\HttpFoundation\Request;
 
 class UserController extends Controller
 {
-    public function listAllAction(){
+    public function listAllAction()
+    {
         $user = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:User')->findAll();
 
 
         $responseArray = array();
 
-        for($i=0;$i<count($user);$i++){
+        for ($i = 0; $i < count($user); $i++) {
             $item = array(
-                "id"=>$user[$i]->getId(),
-                "username"=>$user[$i]->getUsername(),
-                "usernameCanonical"=>$user[$i]->getUsernameCanonical(),
-                "email"=>$user[$i]->getEmail(),
-                "emailCanonical"=>$user[$i]->getEmailCanonical(),
-                "enable"=>$user[$i]->getEnabled(),
-                "password"=>$user[$i]->getPassword(),
-                "role"=>$user[$i]->getRoles(),
-                "BeduerftigkeitsbeweisFile"=>$user[$i]->getFileUpload(),
-                "firstname"=>$user[$i]->getFirstname(),
-                "lastname"=>$user[$i]->getLastname(),
-                "street"=>$user[$i]->getStreet(),
+                "id" => $user[$i]->getId(),
+                "username" => $user[$i]->getUsername(),
+                "usernameCanonical" => $user[$i]->getUsernameCanonical(),
+                "email" => $user[$i]->getEmail(),
+                "emailCanonical" => $user[$i]->getEmailCanonical(),
+                "enable" => $user[$i]->getEnabled(),
+                "password" => $user[$i]->getPassword(),
+                "role" => $user[$i]->getRoles(),
+                "BeduerftigkeitsbeweisFile" => $user[$i]->getFileUpload(),
+                "firstname" => $user[$i]->getFirstname(),
+                "lastname" => $user[$i]->getLastname(),
+                "street" => $user[$i]->getStreet(),
                 //"town"=>$user->getTown(),
-                "zipcode"=>$user[$i]->getZipcode(),
-                "housenumberDoornumber"=>$user[$i]->getHousenumberDoornumber(),
+                "zipcode" => $user[$i]->getZipcode(),
+                "housenumberDoornumber" => $user[$i]->getHousenumberDoornumber(),
             );
             array_push($responseArray, $item);
         }
 
-        $responseArray = (object) $responseArray;
+        $responseArray = (object)$responseArray;
 
         return new JsonResponse($responseArray);
     }
 
-    public function listAllBackendAction(){
+    public function listAllBackendAction()
+    {
         if ($this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
             $user = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:User')->findAll();
 
@@ -58,9 +60,9 @@ class UserController extends Controller
                     $currentAmount += $project->getCurrentAmount();
                 }
 
-                if($user[$i]->getRoles()[0] == "ROLE_DONATOR"){
+                if ($user[$i]->getRoles()[0] == "ROLE_DONATOR") {
                     $userRole = "Spender";
-                } elseif ($user[$i]->getRoles()[0] == "ROLE_RECEIVER"){
+                } elseif ($user[$i]->getRoles()[0] == "ROLE_RECEIVER") {
                     $userRole = "Empfänger";
                 } else {
                     $userRole = "Admin";
@@ -101,45 +103,54 @@ class UserController extends Controller
 
     public function GetAge($dob)
     {
-        $dob=explode("-",$dob);
+        $dob = explode("-", $dob);
         $curMonth = date("m");
         $curDay = date("j");
         $curYear = date("Y");
         $age = $curYear - $dob[0];
-        if($curMonth<$dob[1] || ($curMonth==$dob[1] && $curDay<$dob[2]))
+        if ($curMonth < $dob[1] || ($curMonth == $dob[1] && $curDay < $dob[2]))
             $age--;
         return $age;
     }
-    
-    public function listSpecificAction($userId){
+
+    public function listSpecificAction()
+    {
+        $userId = $this->getUser()->getId();
         $user = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:User')->find($userId);
-        
+
         $responseArray = array();
-        
+
+        $beweisfile = null;
+
+        if ($this->get('security.authorization_checker')->isGranted('ROLE_RECEIVER')) {
+            $beweisfile = $user->getFileUpload();
+        }
+
         $item = array(
-            "id"=>$user->getId(),
-            "username"=>$user->getUsername(),
-            "usernameCanonical"=>$user->getUsernameCanonical(),
-            "email"=>$user->getEmail(),
-            "emailCanonical"=>$user->getEmailCanonical(),
-            "enable"=>$user->getEnabled(),
-            "password"=>$user->getPassword(),
-            "role"=>($user->getRoles()[0] == "ROLE_DONATOR") ? "Spender" : "Empfänger",
-            "BeduerftigkeitsbeweisFile"=>$user->getFileUpload(),
-            "firstname"=>$user->getFirstname(),
-            "lastname"=>$user->getLastname(),
-            "birthDate"=>$user->getAge(),
+            "id" => $user->getId(),
+            "username" => $user->getUsername(),
+            "usernameCanonical" => $user->getUsernameCanonical(),
+            "email" => $user->getEmail(),
+            "emailCanonical" => $user->getEmailCanonical(),
+            "enable" => $user->getEnabled(),
+            "password" => $user->getPassword(),
+            "role" => ($user->getRoles()[0] == "ROLE_DONATOR") ? "Spender" : "Empfänger",
+            "BeduerftigkeitsbeweisFile" => $user->getFileUpload(),
+            "firstname" => $user->getFirstname(),
+            "lastname" => $user->getLastname(),
+            "birthDate" => $user->getAge(),
             $birthDate = $this->GetAge($user->getAge()),
             //$today   = (new \DateTime('today'))->format('d-m-y'),
             "age" => $birthDate,
-            "town"=>$user->getTown(),
-            "street"=>$user->getStreet(),
-            "zipcode"=>$user->getZipcode(),
-            "housenumberDoornumber"=>$user->getHousenumberDoornumber(),
+            "town" => $user->getTown(),
+            "street" => $user->getStreet(),
+            "zipcode" => $user->getZipcode(),
+            "housenumberDoornumber" => $user->getHousenumberDoornumber(),
+            "file" => $user->$beweisfile,
         );
         array_push($responseArray, $item);
-        
-        $responseArray = (object) $responseArray;
+
+        $responseArray = (object)$responseArray;
 
         return new JsonResponse($responseArray);
     }
@@ -272,26 +283,36 @@ class UserController extends Controller
     }
     */
 
-    public function updateAction($userId, Request $request)
+    public function updateAction(Request $request)
     {
-        if ( $this->get('security.authorization_checker')->isGranted('ROLE_RECEIVER')) {    // && $this->getUser()->getProjects()->find($projectId)
+        if ($this->get('security.authorization_checker')->isGranted('ROLE_RECEIVER') || $this->get('security.authorization_checker')->isGranted('ROLE_DONATOR')) {    // && $this->getUser()->getProjects()->find($projectId)
+            $userId = $this->getUser()->getId();
 
-        $form = $this->createFormBuilder()
-            ->add('firstname')
-            ->add('lastname')
-            ->add('age')
-            ->add('town')
-            ->add('street')
-            ->add('zipcode')
-            ->add('housenumberDoornumber')
-            ->getForm();
+            $form = $this->createFormBuilder()
+                ->add('username')
+                ->add('email')
+                ->add('firstname')
+                ->add('lastname')
+                ->add('age')
+                ->add('town')
+                ->add('street')
+                ->add('zipcode')
+                ->add('housenumberDoornumber')
+                ->add('fileUrl')
+                ->getForm();
 
-        if ($request->isMethod('POST')) {
+            if ($request->isMethod('POST')) {
 
-            $form->submit($request->request->all($form->getName()));
-            //return new JsonResponse($request);
+                $form->submit($request->request->all($form->getName()));
+                //return new JsonResponse($request);
 
-            if ($form->isSubmitted()) {
+                if ($form->isSubmitted()) {
+
+                    /*
+                    if($this->get('security.authorization_checker')->isGranted('ROLE_RECEIVER')){
+                    $beweisfile = $user->getFileUpload();
+                    */
+                }
 
                 // data is an array with "phone" and "period" keys
                 $data = $form->getData();
@@ -299,6 +320,8 @@ class UserController extends Controller
                 $em = $this->getDoctrine()->getManager();
 
                 $user = $em->getRepository('HtlSpendenportalBundle:User')->find($userId);
+                $user->setFirstname($data["username"]);
+                $user->setFirstname($data["email"]);
                 $user->setFirstname($data["firstname"]);
                 $user->setLastname($data["lastname"]);
                 $user->setAge($data["age"]);
@@ -313,8 +336,6 @@ class UserController extends Controller
             }
 
             return false;
-        }
-        return new JsonResponse("false method");
         }
         return new JsonResponse("not logged in");
     }
