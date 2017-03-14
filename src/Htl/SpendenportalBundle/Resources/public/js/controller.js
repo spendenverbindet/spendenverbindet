@@ -557,11 +557,11 @@ app.controller('spendenverbindetController', function($scope, $http) {
             $scope.displayTitelPictureError = true;
         }
     };
-    
 
-    $scope.projektInfoBearbeiten = null;
 
     // Projekt_bearbeiten Seite
+
+    $scope.projektInfoBearbeiten = null;
 
     $scope.initBearbeiten = function(){
 
@@ -573,7 +573,26 @@ app.controller('spendenverbindetController', function($scope, $http) {
 
             $scope.projektInfoBearbeiten = response.data;
 
-            console.log($scope.projektInfoBearbeiten);
+        }, function errorCallback(response) {
+        });
+    }
+
+
+    // mein_profil_empfaenger Seite
+
+    $scope.empfaengerProfilInfo = null;
+    
+    $scope.initMeinProfilEmpfaenger = function(){
+
+        $http({
+            method: 'GET',
+            url: '/userData'
+
+        }).then(function successCallback(response) {
+
+            $scope.empfaengerProfilInfo = response.data;
+
+            console.log($scope.empfaengerProfilInfo);
 
         }, function errorCallback(response) {
         });
