@@ -623,7 +623,7 @@ class ProjectController extends Controller
 
             foreach ($projects as $project) {
                 if ($project->getActive()) {
-
+                    $projectId = $project->getId();
                     if ($request->isMethod('POST')) {
 
                         $form->submit($request->request->all($form->getName()));
