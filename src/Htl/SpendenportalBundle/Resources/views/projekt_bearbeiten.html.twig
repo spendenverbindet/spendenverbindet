@@ -16,7 +16,7 @@
                 <div class="col-xs-12 col-md-6 text-center"><h2>PROJEKT BEARBEITEN</h2></div>
                 <div class="col-xs-12 col-md-6">
                     <div class="row second-ent-section text-center">
-                        <button type="submit" style="margin-top:27px;" class="uk-button uk-button-primary"><span style="font-size:18px;">PROJEKT GESPEICHERT</span></button>
+                        <button id="saveButtonId" type="submit" style="margin-top:27px;" class="uk-button uk-button-primary"><span id="btnTextId" style="font-size:18px;">PROJEKT GESPEICHERT</span></button>
                     </div>
                 </div>
             </div>
@@ -27,13 +27,16 @@
                     <img id="image" src="{{ asset('bundles/htlspendenportal/img/[[projektInfoBearbeiten[0].titlePictureUrl]]') }}" />
 
                     <input name="titlePictureUrl" style="display:none" id="myupload" type="file" size="100" accept="image/*">
-                    <span ng-show="displayTitelPictureError" style="color:red"><b>Kein Titelbild ausgewählt</b></span>
+
                     <div class="clickable" style="text-align: center;width:100%;height:100px;background-color:gray;" ng-click="clickUpload()" >
                         <span style="color:white;vertical-align: middle;line-height: 100px;"><i style="padding-right:5px;" class="fa fa-upload fa-3x" aria-hidden="true"></i> Titelbild hochladen</span>
                     </div>
 
                     <script>
                         document.getElementById("myupload").onchange = function () {
+
+                            changeBtnText();
+
                             var reader = new FileReader();
 
                             reader.onload = function (e) {
@@ -47,32 +50,32 @@
 
                 </div>
                 <div class="col-xs-12 col-sm-6" style="padding:50px;padding-top:0">
-                    <input value="[[projektInfoBearbeiten[0].title]]" title="Titel muss mindestens 4 Zeichen haben, maximal 50" name="title" style="margin-top:25px;padding:10px;width:100%;border:1px solid black;font-weight: bold;font-size: 20pt;" placeholder="Titel" pattern=".{4,50}" type="text" required>
+                    <input onkeyup="changeBtnText()" id="titelId" value="[[projektInfoBearbeiten[0].title]]" title="Titel muss mindestens 4 Zeichen haben, maximal 50" name="title" style="margin-top:25px;padding:10px;width:100%;border:1px solid black;font-weight: bold;font-size: 20pt;" placeholder="Titel" pattern=".{4,50}" type="text" required>
                     <small style="color:#47A1DE;font-size:18px;">Titel</small>
-                    <textarea title="Kurzbeschreibung muss mindestens 20 Zeichen haben, maximal 245" name="shortInfo" minlength="20" maxlength="245" style="box-sizing: border-box;margin-top:25px;padding:10px;width:100%;border:1px solid black;font-size: 15pt;height:200px;" placeholder="Kurzbeschreibung" rows="4" cols="50" required>[[projektInfoBearbeiten[0].shortinfo]]</textarea>
+                    <textarea onkeyup="changeBtnText()" title="Kurzbeschreibung muss mindestens 20 Zeichen haben, maximal 245" name="shortInfo" minlength="20" maxlength="245" style="box-sizing: border-box;margin-top:25px;padding:10px;width:100%;border:1px solid black;font-size: 15pt;height:200px;" placeholder="Kurzbeschreibung" rows="4" cols="50" required>[[projektInfoBearbeiten[0].shortinfo]]</textarea>
                     <small style="color:#47A1DE;font-size:18px;">Kurzbeschreibung</small>
                 </div>
             </div>
 
             <div style="margin-bottom:50px;" class="row">
                 <div class="col-xs-12 col-sm-6" style="padding:50px;padding-top: 0">
-                    <textarea title="Publik Text muss mindestens 20 Zeichen haben, maximal 3000" name="description" minlength="20" maxlength="3000" style="box-sizing: border-box;margin-top:25px;padding:10px;width:100%;border:1px solid black;font-size: 15pt;height:500px;" placeholder="Publik Text" rows="4" cols="50" required>[[projektInfoBearbeiten[0].description]]</textarea>
+                    <textarea onkeyup="changeBtnText()" title="Publik Text muss mindestens 20 Zeichen haben, maximal 3000" name="description" minlength="20" maxlength="3000" style="box-sizing: border-box;margin-top:25px;padding:10px;width:100%;border:1px solid black;font-size: 15pt;height:500px;" placeholder="Publik Text" rows="4" cols="50" required>[[projektInfoBearbeiten[0].description]]</textarea>
                     <small style="color:#47A1DE;font-size:18px;">Publik Text</small>
                 </div>
                 <div class="col-xs-12 col-sm-6" style="padding:50px;padding-top:0">
-                    <textarea title="Privat Text muss mindestens 20 Zeichen haben, maximal 3000" name="descriptionPrivate" minlength="20" maxlength="3000" style="box-sizing: border-box;margin-top:25px;padding:10px;width:100%;border:1px solid black;font-size: 15pt;height:500px;" placeholder="Privat Text" rows="4" cols="50" required>[[projektInfoBearbeiten[0].descriptionPrivate]]</textarea>
+                    <textarea onkeyup="changeBtnText()" title="Privat Text muss mindestens 20 Zeichen haben, maximal 3000" name="descriptionPrivate" minlength="20" maxlength="3000" style="box-sizing: border-box;margin-top:25px;padding:10px;width:100%;border:1px solid black;font-size: 15pt;height:500px;" placeholder="Privat Text" rows="4" cols="50" required>[[projektInfoBearbeiten[0].descriptionPrivate]]</textarea>
                     <small style="color:#47A1DE;font-size:18px;">Privat Text</small>
                 </div>
             </div>
 
             <div style="margin-bottom:50px;" class="row">
                 <div class="col-xs-12 col-sm-6" style="padding:50px;padding-top: 0">
-                    <input value="[[projektInfoBearbeiten[0].targetAmount]]" step="0.01" title="Zielbetrag in € muss mindestens 1€ sein" name="targetAmount" min="1" max="9999" style="margin-top:25px;padding:10px;width:100%;border:1px solid black;font-weight: bold;font-size: 20pt;" placeholder="€" type="number" required>
+                    <input onchange="changeBtnText()" value="[[projektInfoBearbeiten[0].targetAmount]]" step="0.01" title="Zielbetrag in € muss mindestens 1€ sein" name="targetAmount" min="1" max="9999" style="margin-top:25px;padding:10px;width:100%;border:1px solid black;font-weight: bold;font-size: 20pt;" placeholder="€" type="number" required>
                     <small style="color:#47A1DE;font-size:18px;">Zielbetrag in €</small>
                 </div>
                 <div class="col-xs-12 col-sm-6" style="padding:50px;padding-top:0">
 
-                    <select id="childs" name="category" style="margin-top:25px;padding:10px;width:100%;border:1px solid black;font-size: 20pt;" name="Kategorie" required>
+                    <select onchange="changeBtnText()" id="childs" name="category" style="margin-top:25px;padding:10px;width:100%;border:1px solid black;font-size: 20pt;" name="Kategorie" required>
                         <option value="Bildung">Bildung</option>
                         <option value="Arbeit">Arbeit</option>
                         <option value="Kinder">Kinder</option>
@@ -94,6 +97,14 @@
                                 }
                             }
                         }
+
+                        function changeBtnText(){
+                            console.log("cahnged");
+                            document.getElementById("saveButtonId").setAttribute("class", "uk-button uk-button-danger");
+                            document.getElementById("btnTextId").innerHTML = "PROJEKT SPEICHERN";
+                        }
+
+
                     </script>
 
                 </div>

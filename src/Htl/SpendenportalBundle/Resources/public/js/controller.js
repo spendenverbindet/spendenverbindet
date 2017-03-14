@@ -557,9 +557,7 @@ app.controller('spendenverbindetController', function($scope, $http) {
             $scope.displayTitelPictureError = true;
         }
     };
-
-
-
+    
 
     $scope.projektInfoBearbeiten = null;
 
@@ -580,8 +578,7 @@ app.controller('spendenverbindetController', function($scope, $http) {
         }, function errorCallback(response) {
         });
     }
-
-
+    
     
 });
 
