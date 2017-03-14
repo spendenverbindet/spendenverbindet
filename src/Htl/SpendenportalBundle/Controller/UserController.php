@@ -103,7 +103,8 @@ class UserController extends Controller
 
     public function GetAge($dob)
     {
-        $dob = explode("-", $dob);
+        return 19;
+        $dob = explode("-", $dob['date']);
         $curMonth = date("m");
         $curDay = date("j");
         $curYear = date("Y");
