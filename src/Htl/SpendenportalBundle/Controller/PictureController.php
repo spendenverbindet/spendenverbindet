@@ -64,7 +64,7 @@ class PictureController extends Controller
         return false;
     }
 
-    public function createPictureAction ($projectId, $pictureUrl) {
+    public function createPictureAction ($projectId) {
 
         if ($this->get('security.authorization_checker')->isGranted('ROLE_RECEIVER')) {
 
@@ -79,7 +79,7 @@ class PictureController extends Controller
             } else {
 
                 $picture = new Picture();
-                $picture->setPictureUrl($pictureUrl);
+                $picture->setPictureUrl($_FILES['pictureUrl']['name']);
                 $picture->setCreatedAt($date);
                 $picture->setProjects($projectId);
 
