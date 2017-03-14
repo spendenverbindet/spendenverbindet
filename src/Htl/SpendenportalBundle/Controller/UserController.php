@@ -299,7 +299,7 @@ class UserController extends Controller
                 ->add('street')
                 ->add('zipcode')
                 ->add('housenumberDoornumber')
-                ->add('fileUrl')
+                //->add('fileUrl')
                 ->getForm();
 
             if ($request->isMethod('POST')) {
@@ -321,8 +321,8 @@ class UserController extends Controller
                 $em = $this->getDoctrine()->getManager();
 
                 $user = $em->getRepository('HtlSpendenportalBundle:User')->find($userId);
-                $user->setFirstname($data["username"]);
-                $user->setFirstname($data["email"]);
+                $user->setUsername($data["username"]);
+                $user->setEmail($data["email"]);
                 $user->setFirstname($data["firstname"]);
                 $user->setLastname($data["lastname"]);
                 //$user->setAge($data["age"]);
