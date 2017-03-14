@@ -334,9 +334,9 @@ class UserController extends Controller
                 $em->flush();
 
                 if($this->get('security.authorization_checker')->isGranted('ROLE_RECEIVER')) {
-                    return $this->redirectToRoute('htl_spendenportal_empfaenger_dashboard');
+                    return $this->redirectToRoute('htl_spendenportal_mein_profil_empfaenger');
                 }
-                return $this->redirectToRoute('htl_spendenportal_spender_dashboard');
+                return $this->redirectToRoute('htl_spendenportal_mein_profil_spender');
             }
 
             return false;

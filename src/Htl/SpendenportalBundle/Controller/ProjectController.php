@@ -704,7 +704,7 @@ class ProjectController extends Controller
 
                             $em->flush();
 
-                            return $this->redirectToRoute('htl_spendenportal_mein_profil_empfaenger');
+                            return $this->redirectToRoute('htl_spendenportal_empfaenger_dashboard');
                         }
 
                         return false;
