@@ -146,7 +146,7 @@ class UserController extends Controller
             "street" => $user->getStreet(),
             "zipcode" => $user->getZipcode(),
             "housenumberDoornumber" => $user->getHousenumberDoornumber(),
-            "file" => $user->$beweisfile,
+            "file" => $beweisfile,
         );
         array_push($responseArray, $item);
 

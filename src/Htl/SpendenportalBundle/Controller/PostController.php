@@ -67,7 +67,7 @@ class PostController extends Controller
     {
 
         //if ($this->get('security.authorization_checker')->isGranted('ROLE_RECEIVER')) {
-
+        
             $form = $this->createFormBuilder()
                 ->add('title')
                 ->add('postPictureUrl')
@@ -94,6 +94,49 @@ class PostController extends Controller
                     $post->setCreatedAt($date);
                     $post->setProjects($this->getDoctrine()->getRepository('HtlSpendenportalBundle:Project')->find($projectId));
 
+                    /*
+                    $target_dir = $_SERVER['DOCUMENT_ROOT'] . '/bundles/htlspendenportal/img/';
+                    $filename = trim(addslashes($_FILES['postPictureUrl']['name']));
+                    $filename = preg_replace('/\s+/', '_', $filename);
+                    $target_file = $target_dir . $filename;
+                    $uploadOk = 1;
+                    $imageFileType = pathinfo($target_file, PATHINFO_EXTENSION);
+                    // Check if image file is a actual image or fake image
+                    if (isset($_POST["submit"])) {
+                        $check = getimagesize($_FILES["postPictureUrl"]["tmp_name"]);
+                        if ($check !== false) {
+                            $uploadOk = 1;
+                        } else {
+                            $uploadOk = 0;
+                            return new JsonResponse("File is not an image.");
+                        }
+                    }
+                    // Check file size
+                    if ($_FILES["postPictureUrl"]["size"] > 6000000) {
+                        $uploadOk = 0;
+                        return new JsonResponse("Sorry, your file is too large. Maximal 750kB");
+                    }
+                    // Allow certain file formats
+                    /*
+                    if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
+                        && $imageFileType != "gif" && $imageFileType != "JPG" && $imageFileType != "PNG" && $imageFileType != "JPEG"
+                        && $imageFileType != "GIF"
+                    ) {
+                        $uploadOk = 0;
+                        return new JsonResponse("Sorry, only JPG, JPEG, PNG & GIF files are allowed.");
+                    }*/
+                    /*
+                    // Check if $uploadOk is set to 0 by an error
+                    if ($uploadOk == 0) {
+                        return new JsonResponse("Sorry, your file was not uploaded.");
+                        // if everything is ok, try to upload file
+                    } else {
+                        if (move_uploaded_file($_FILES["postPictureUrl"]["tmp_name"], $target_file)) {
+                        } else {
+                            return new JsonResponse("Sorry, there was an error uploading your file.");
+                        }
+                    }
+                    */
 
                     $em = $this->getDoctrine()->getManager();
 
@@ -118,7 +161,7 @@ class PostController extends Controller
     public function updateAction($postId, Request $request)
     {
 
-        if ($this->get('security.authorization_checker')->isGranted('ROLE_RECEIVER')) {
+        //if ($this->get('security.authorization_checker')->isGranted('ROLE_RECEIVER')) {
 
             $form = $this->createFormBuilder()
                 ->add('title')
@@ -154,7 +197,7 @@ class PostController extends Controller
                 return false;
             }
             return null;
-        }
+        //}
     }
     
     public function deleteAction($postId)
