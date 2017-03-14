@@ -170,7 +170,7 @@
         <default key="_controller">HtlSpendenportalBundle:Project:create</default>
     </route>
 
-    <route id="updatingProject" path="/updateProject/{projectId}"  methods="POST">
+    <route id="updatingProject" path="/updateProject"  methods="POST">
         <default key="_controller">HtlSpendenportalBundle:Project:update</default>
     </route>
 
