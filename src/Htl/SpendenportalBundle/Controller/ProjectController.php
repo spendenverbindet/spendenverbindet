@@ -220,6 +220,28 @@ class ProjectController extends Controller
             return new JsonResponse($responseArray);
     }
 
+    public function ifFollowing($projectId){
+        if ( $this->get('security.authorization_checker')->isGranted('ROLE_DONATOR')) {
+            //anzahl der ProjectIds checken
+
+            $repository = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:Project')->find($projectId);
+            $follower = $repository->getFollowers();
+
+            $user = $this->getUser();
+            //$user = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:User')->find(1);
+
+            foreach ($follower as $follower) {
+                if ($follower->getUsers()->getId() == $user->getId()) {
+                    return true;
+                } else {
+                    continue;
+                }
+            }
+            return false;
+        }
+        return false;
+    }
+
     public function listFollowingAction(){
         if ( $this->get('security.authorization_checker')->isGranted('ROLE_DONATOR')) {
             $projects = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:Project')->findAll();
@@ -259,26 +281,67 @@ class ProjectController extends Controller
         return new JsonResponse(null);
     }
 
-    public function ifFollowing($projectId){
+    public function hasDonated($projectId){
+        //anzahl der ProjectIds checken
+
         if ( $this->get('security.authorization_checker')->isGranted('ROLE_DONATOR')) {
-            //anzahl der ProjectIds checken
 
             $repository = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:Project')->find($projectId);
-            $follower = $repository->getFollowers();
+            $donations = $repository->getDonations();
 
             $user = $this->getUser();
             //$user = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:User')->find(1);
 
-            foreach ($follower as $follower) {
-                if ($follower->getUsers()->getId() == $user->getId()) {
+            foreach($donations as $donation){
+                if($donation->getUsers()->getId() == $user->getId()){
                     return true;
-                } else {
-                    continue;
                 }
             }
+
             return false;
+
         }
-        return false;
+
+        return null;
+
+    }
+
+    public function listDonatedAction(){
+        if ( $this->get('security.authorization_checker')->isGranted('ROLE_DONATOR')) {
+            $projects = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:Project')->findAll();
+
+            $responseArray = array();
+
+            foreach ($projects as $project) {
+
+                if ($this->hasDonated($project) == true) {
+                    if($project->getTargetAmount()==0){
+                        $progress = 0;
+                    } else {
+                        $progress = floor(($project->getCurrentAmount() / $project->getTargetAmount()) * 100);
+                    }
+                    $item = array(
+                        "id" => $project->getId(),
+                        "title" => $project->getTitle(),
+                        "titlePictureUrl" => $project->getTitlePictureUrl(),
+                        "shortinfo" => $project->getShortinfo(),
+                        "created_at" => $project->getCreatedAt()->format('d.m.Y'),
+                        "targetAmount" => $project->getTargetAmount(),
+                        "currentAmount" => $project->getCurrentAmount(),
+                        "deleted" => $project->getDeleted(),
+                        "progress" => $progress,
+                        "currentDonators" => $project->getCurrentDonators(),
+                        "hasDonated" => $this->hasDonated($project->getId()),
+                    );
+                    array_push($responseArray, $item);
+                }
+            }
+
+            $responseArray = (object)$responseArray;
+
+            return new JsonResponse($responseArray);
+        }
+        return new JsonResponse(null);
     }
 
     public function showAction($projectId){
@@ -369,32 +432,6 @@ class ProjectController extends Controller
         return new JsonResponse('no active project');
         
     }
-    
-
-    public function hasDonated($projectId){
-        //anzahl der ProjectIds checken
-
-        if ( $this->get('security.authorization_checker')->isGranted('ROLE_DONATOR')) {
-
-            $repository = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:Project')->find($projectId);
-            $donations = $repository->getDonations();
-    
-            $user = $this->getUser();
-            //$user = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:User')->find(1);
-    
-            foreach($donations as $donation){
-                if($donation->getUsers()->getId() == $user->getId()){
-                    return true;
-                }
-            }
-    
-            return false;
-
-        }
-
-        return null;
-
-    }
 
     public function hasActive(){
         
@@ -449,25 +486,12 @@ class ProjectController extends Controller
                         $em = $this->getDoctrine()->getManager('default');
                         $pictureEm = $this->getDoctrine()->getManager();
 
-                        //return new JsonResponse(date_parse_from_format('Y-m-d', $data["created_at"]));
-                        /*
-                        $target_dir = "uploads/";
-                        $target_file = $target_dir . basename($_FILES["uploadFile"]["name"]);
-                        $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
-                        */
-
                         $project = new Project;
                         $project->setTitle($data["title"]);
                         $project->setShortinfo($data["shortInfo"]);
                         $project->setDescription($data["description"]);
                         $project->setDescriptionPrivate($data["descriptionPrivate"]);
                         $project->setTitlePictureUrl($data["titlePictureUrl"]);
-
-                        //$picture = new Picture();
-
-                        //$picture->setPictureUrl($data['pictureUrl']);
-                        //$picture->setCreatedAt($date); //date_create_from_format('Y-m-d', $data["created_at"])
-                        //$picture->setProjects($project->getId());
 
                         $project->setActive(true);
                         $project->setCreatedAt($date);
@@ -481,8 +505,6 @@ class ProjectController extends Controller
 
                         $project->setUsers($this->getUser());
                         //$project->setUsers($this->getDoctrine()->getRepository('HtlSpendenportalBundle:User')->find(3));
-
-                        // or this could be $contract = new Contract("John Doe", $data["phone"], $data["period"]);
 
                         $project->setTitlePictureUrl(preg_replace('/\s+/', '_',trim(addslashes($_FILES["titlePictureUrl"]["name"]))));
 
@@ -518,14 +540,14 @@ class ProjectController extends Controller
                             return new JsonResponse("Sorry, your file is too large. Maximal 750kB");
                         }
                         // Allow certain file formats
-                        /*
+
                         if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
                             && $imageFileType != "gif" && $imageFileType != "JPG" && $imageFileType != "PNG" && $imageFileType != "JPEG"
-                            && $imageFileType != "GIF"
+                            && $imageFileType != "GIF" && $imageFileType != ""
                         ) {
                             $uploadOk = 0;
                             return new JsonResponse("Sorry, only JPG, JPEG, PNG & GIF files are allowed.");
-                        }*/
+                        }
                         // Check if $uploadOk is set to 0 by an error
                         if ($uploadOk == 0) {
                             return new JsonResponse("Sorry, your file was not uploaded.");
@@ -537,21 +559,19 @@ class ProjectController extends Controller
                             }
                         }
 
+
                         $em->flush();
 
-
-                            //return new JsonResponse('test');
-                        //return new JsonResponse('test');
                         for($i = 0; $i<count($_FILES['file']["name"]);$i++){
                             //var_dump($_FILES['file']["name"][$i]);
                             //return new JsonResponse('Test');
                             $picture = new Picture();
-                            $picture->setPictureUrl(preg_replace('/\s+/', '_',trim(addslashes($_FILES['file']["name"][$i]))));
+                            $picture->setPictureUrl(preg_replace('/\s+/', '_',trim(addslashes($_FILES["file"]["name"][$i]))));
                             $picture->setCreatedAt($date);
 
                             $picture->setProjects($this->getDoctrine()->getRepository('HtlSpendenportalBundle:Project')->find($project->getId()));
-                            //$target_dir . basename($_FILES["file[]"];
-                            $filename = trim(addslashes($_FILES['titlePictureUrl']['name']));
+
+                            $filename = trim(addslashes($_FILES['file']['name'][$i]));
                             $filename = preg_replace('/\s+/', '_', $filename);
                             $target_file = $target_dir . $filename;
                             $uploadOk = 1;
@@ -571,13 +591,13 @@ class ProjectController extends Controller
                                 return new JsonResponse("Sorry, your file is too large. Maximal 750kB");
                             }
                             // Allow certain file formats
-                            /*
+
                             if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
-                                && $imageFileType != "gif"
+                                && $imageFileType != "gif" && $imageFileType != ""
                             ) {
                                 $uploadOk = 0;
                                 return new JsonResponse("Sorry, only JPG, JPEG, PNG & GIF files are allowed.");
-                            }*/
+                            }
                             // Check if $uploadOk is set to 0 by an error
                             if ($uploadOk == 0) {
                                 return new JsonResponse("Sorry, your file was not uploaded.");
@@ -592,7 +612,6 @@ class ProjectController extends Controller
                             $pictureEm->flush();
                             $pictureEm->clear();
                         }
-
 
                         return $this->redirectToRoute('htl_spendenportal_empfaenger_dashboard');
                     }
@@ -693,13 +712,7 @@ class ProjectController extends Controller
                                 }
                             }
 
-                            $project->setTargetAmount($data["targetAmount"]);
-
-                            $project->setCategory($this->getDoctrine()->getRepository('HtlSpendenportalBundle:Category')->findOneBy(
-                                array('categoryText' => $data["category"])
-                            ));
-
-                            $project->setUsers($this->getUser());
+                            //$project->setUsers($this->getUser());
                             //$project->setUsers($this->getDoctrine()->getRepository('HtlSpendenportalBundle:User')->find(3));
 
                             $em->flush();
