@@ -54,7 +54,7 @@ class User extends BaseUser
 
     /**
      * @var string
-     * @ORM\Column(name="year_of_birth", type="string")
+     * @ORM\Column(name="year_of_birth", type="datetime")
      * @Assert\DateTime()
      */
     private $age;
