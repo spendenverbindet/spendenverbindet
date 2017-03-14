@@ -34,6 +34,10 @@
         <default key="_controller">HtlSpendenportalBundle:Default:projekt_bearbeiten</default>
     </route>
 
+    <route id="htl_spendenportal_mein_profil_empfaenger" path="/mein_profil_empfaenger">
+        <default key="_controller">HtlSpendenportalBundle:Default:mein_profil_empfaenger</default>
+    </route>
+
 
     <!--                                        FERTL                                              -->
 
