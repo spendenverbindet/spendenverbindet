@@ -325,7 +325,10 @@ class UserController extends Controller
                 $user->setEmail($data["email"]);
                 $user->setFirstname($data["firstname"]);
                 $user->setLastname($data["lastname"]);
-                //$user->setAge($data["age"]);
+                //$dob = DateTime::createFromFormat($data["age"]);
+                //return new JsonResponse($dob);
+                //$user->setAge($data["age"]->format('Y-m-d')); //date_create_from_format('d/M/Y', $data["age"])
+                //$date->format('Y-m-d H:i:s');
                 $user->setTown($data["town"]);
                 $user->setStreet($data["street"]);
                 $user->setZipcode($data["zipcode"]);
