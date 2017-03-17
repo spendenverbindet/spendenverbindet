@@ -415,7 +415,7 @@ class UserController extends Controller
                     if (unlink($target_dir . $user->getFileUpload())) {
                         $uploadOk = 1;
                     }
-                    $user->setFileUpload($_FILES['titlePictureUrl']['name']);
+                    $user->setFileUpload($_FILES['fileUrl']['name']);
 
                     $imageFileType = pathinfo($target_file, PATHINFO_EXTENSION);
                     // Check if image file is a actual image or fake image
