@@ -111,6 +111,7 @@
                     <input accept="image/*" style="display:none;margin-top:25px;padding:10px;width:100%;border:1px solid black;font-weight: bold;font-size: 20pt;" id="file" type="file" name="file[]" multiple/>
 
                     <div ng-click="clickUpload2()" class="folgen-detail-btn clickable" style="text-align: center;width:300px;height:50px;"><span style="vertical-align: middle;line-height: 50px;font-size:19px">PROJEKTBILD(ER) HOCHLADEN</span></div>
+                    <span style="color:red"><b id="errorMsgMultipleId"></b></span>
                 </div>
 
                 <div class="col-xs-12 col-sm-6" style="padding:50px;padding-top:0">
@@ -128,21 +129,50 @@
                 inputLocalFont.addEventListener("change",previewImages,false);
 
                 function previewImages(){
-                    var fileList = this.files;
 
-                    var anyWindow = window.URL || window.webkitURL;
+                    if(allAreValidImages() == true){
+                        document.getElementById('saveButtonId').disabled = false;
+                        document.getElementById('errorMsgMultipleId').innerHTML = "";
 
-                    var myNode = document.getElementById("imagePreview");
-                    while (myNode.firstChild) {
-                        myNode.removeChild(myNode.firstChild);
+                        var fileList = this.files;
+
+                        var anyWindow = window.URL || window.webkitURL;
+
+                        var myNode = document.getElementById("imagePreview");
+                        while (myNode.firstChild) {
+                            myNode.removeChild(myNode.firstChild);
+                        }
+
+                        for(var i = 0; i < fileList.length; i++){
+                            var objectUrl = anyWindow.createObjectURL(fileList[i]);
+                            $('#imagePreview').append('<li><img style="width:100px;" src="' + objectUrl + '" /></li>');
+                            window.URL.revokeObjectURL(fileList[i]);
+                        }
+
+                    }else{
+                        document.getElementById('saveButtonId').disabled = true;
+                        document.getElementById('errorMsgMultipleId').innerHTML = "Bitte ein valides Bild hochladen";
                     }
 
-                    for(var i = 0; i < fileList.length; i++){
-                        var objectUrl = anyWindow.createObjectURL(fileList[i]);
-                        $('#imagePreview').append('<li><img style="width:100px;" src="' + objectUrl + '" /></li>');
-                        window.URL.revokeObjectURL(fileList[i]);
-                    }
                 }
+
+
+                function allAreValidImages(){
+                    var valid = true;
+                    var inp = document.getElementById('file');
+                    for (var i = 0; i < inp.files.length; ++i) {
+                        var name = inp.files.item(i).name;
+
+                        if(name.match(/.(jpg|jpeg|png|gif|JPG|JPEG|PNG|GIF)$/i)){}
+                        else{
+                            valid = false;
+                            break;
+                        }
+                    }
+
+                    return valid;
+                }
+
             </script>
 
 
