@@ -68,7 +68,7 @@ class PictureController extends Controller
 
         if ($this->get('security.authorization_checker')->isGranted('ROLE_RECEIVER')) {
 
-            $projectId = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:Project')->find($projectId);
+            $project = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:Project')->find($projectId);
 
             $date = new \DateTime('now');
 
@@ -81,7 +81,7 @@ class PictureController extends Controller
                 $picture = new Picture();
                 $picture->setPictureUrl($_FILES['pictureUrl']['name']);
                 $picture->setCreatedAt($date);
-                $picture->setProjects($projectId);
+                $picture->setProjects($project);
 
 
                 $em = $this->getDoctrine()->getManager();
@@ -109,7 +109,7 @@ class PictureController extends Controller
                 // Allow certain file formats
                 if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
                     && $imageFileType != "gif" && $imageFileType != "JPG" && $imageFileType != "PNG" && $imageFileType != "JPEG"
-                    && $imageFileType != "GIF"
+                    && $imageFileType != "GIF" && $imageFileType != ""
                 ) {
                     $uploadOk = 0;
                     return new JsonResponse("Sorry, only JPG, JPEG, PNG & GIF files are allowed.");
@@ -130,13 +130,14 @@ class PictureController extends Controller
 
                 // actually executes the queries (i.e. the INSERT query)
                 $em->flush();
-
-                return new JsonResponse('Inserted Picture successful');
+                
+                return $this->redirectToRoute('htl_spendenportal_projekt_bearbeiten');
             }
             return new JsonResponse('not logged in');
         }
     }
 
+    /*
     public function updateAction($pictureId,$newUrl){
 
         if ($this->get('security.authorization_checker')->isGranted('ROLE_RECEIVER')) {
@@ -158,11 +159,12 @@ class PictureController extends Controller
         }
         return new JsonResponse('not logged in');
     }
+    */
 
     public function deleteAction($pictureId)
     {
 
-        //if ($this->get('security.authorization_checker')->isGranted('ROLE_RECEIVER')) {
+        if ($this->get('security.authorization_checker')->isGranted('ROLE_RECEIVER')) {
 
             $em = $this->getDoctrine()->getManager();
             $picture = $em->getRepository('HtlSpendenportalBundle:Picture')->find($pictureId);
@@ -185,8 +187,8 @@ class PictureController extends Controller
             $em->flush();
 
 
-            return new JsonResponse('Picture has been deleted!');
-        //}
+        return $this->redirectToRoute('htl_spendenportal_projekt_bearbeiten');
+        }
         return new JsonResponse('not logged in');
     }
 }

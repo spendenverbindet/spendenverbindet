@@ -89,7 +89,7 @@ class PostController extends Controller
 
                     $post = new Post();
                     $post->setTitle($data['title']);
-                    $post->setPostPictureUrl($data['postPictureUrl']);
+                    $post->setPostPictureUrl($_FILES['postPictureUrl']['name']);
                     $post->setPostText($data['postText']);
                     $post->setCreatedAt($date);
                     $post->setProjects($this->getDoctrine()->getRepository('HtlSpendenportalBundle:Project')->find($projectId));
