@@ -190,34 +190,36 @@ class ProjectController extends Controller
             $responseArray = array();
 
             for ($i = 0; $i < count($projects); $i++) {
-                if ($this->get('security.authorization_checker')->isGranted('ROLE_DONATOR')) {
-                    $hasDonated = $this->hasDonated($projects[$i]->getId());
+                if($projects[$i]->getActive() && !$projects[$i]->getDeleted()) {
+                    if ($this->get('security.authorization_checker')->isGranted('ROLE_DONATOR')) {
+                        $hasDonated = $this->hasDonated($projects[$i]->getId());
+                    } else {
+                        $hasDonated = false;
+                    }
+                    if ($projects[$i]->getTargetAmount() == 0) {
+                        $progress = 0;
+                    } else {
+                        $progress = floor(($projects[$i]->getCurrentAmount() / $projects[$i]->getTargetAmount()) * 100);
+                    }
+                    $item = array(
+                        "id" => $projects[$i]->getId(),
+                        "title" => $projects[$i]->getTitle(),
+                        "titlePictureUrl" => $projects[$i]->getTitlePictureUrl(),
+                        "description" => $projects[$i]->getDescription(),
+                        "shortinfo" => $projects[$i]->getShortinfo(),
+                        "created_at" => $projects[$i]->getCreatedAt()->format('d.m.Y'),
+                        "targetAmount" => $projects[$i]->getTargetAmount(),
+                        "currentAmount" => $projects[$i]->getCurrentAmount(),
+                        "deleted" => $projects[$i]->getDeleted(),
+                        "progress" => $progress,
+                        "currentDonators" => $projects[$i]->getCurrentDonators(),
+                        "hasDonated" => $hasDonated
+                    );
+                    array_push($responseArray, $item);
                 }
-                if ($projects[$i]->getTargetAmount() == 0) {
-                    $progress = 0;
-                } else {
-                    $progress = floor(($projects[$i]->getCurrentAmount() / $projects[$i]->getTargetAmount()) * 100);
-                }
-                $item = array(
-                    "id" => $projects[$i]->getId(),
-                    "title" => $projects[$i]->getTitle(),
-                    "titlePictureUrl" => $projects[$i]->getTitlePictureUrl(),
-                    "description" => $projects[$i]->getDescription(),
-                    "shortinfo" => $projects[$i]->getShortinfo(),
-                    "created_at" => $projects[$i]->getCreatedAt()->format('d.m.Y'),
-                    "targetAmount" => $projects[$i]->getTargetAmount(),
-                    "currentAmount" => $projects[$i]->getCurrentAmount(),
-                    "deleted" => $projects[$i]->getDeleted(),
-                    "progress" => $progress,
-                    "currentDonators" => $projects[$i]->getCurrentDonators(),
-                    "hasDonated" => $hasDonated
-                );
-                array_push($responseArray, $item);
-            }
-
-            $responseArray = (object)$responseArray;
-
-            return new JsonResponse($responseArray);
+                $responseArray = (object)$responseArray;
+        }
+        return new JsonResponse($responseArray);
     }
 
     public function ifFollowing($projectId){
@@ -540,7 +542,7 @@ class ProjectController extends Controller
                             return new JsonResponse("Sorry, your file is too large. Maximal 750kB");
                         }
                         // Allow certain file formats
-
+                        /*
                         if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
                             && $imageFileType != "gif" && $imageFileType != "JPG" && $imageFileType != "PNG" && $imageFileType != "JPEG"
                             && $imageFileType != "GIF" && $imageFileType != ""
@@ -548,6 +550,7 @@ class ProjectController extends Controller
                             $uploadOk = 0;
                             return new JsonResponse("Sorry, only JPG, JPEG, PNG & GIF files are allowed.");
                         }
+                        */
                         // Check if $uploadOk is set to 0 by an error
                         if ($uploadOk == 0) {
                             return new JsonResponse("Sorry, your file was not uploaded.");

@@ -13,6 +13,7 @@ security:
 
     firewalls:
         main:
+            #stateless:  true
             pattern: ^/
             form_login:
                 provider: fos_userbundle
