@@ -742,7 +742,7 @@ class ProjectController extends Controller
 
     public function deleteAction()
     {
-        if ($this->get('security.authorization_checker')->isGranted('ROLE_RECEIVER') && $this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
+        if ($this->get('security.authorization_checker')->isGranted('ROLE_RECEIVER') || $this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
             $projects = $this->getUser()->getProjects();
             //$projects = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:User')->find(4)->getProjects();
 

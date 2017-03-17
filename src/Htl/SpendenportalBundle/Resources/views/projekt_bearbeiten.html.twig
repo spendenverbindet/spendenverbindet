@@ -29,24 +29,39 @@
                     <input name="titlePictureUrl" style="display:none" id="myupload" type="file" size="100" accept="image/*">
 
                     <div class="clickable" style="text-align: center;width:100%;height:100px;background-color:gray;" ng-click="clickUpload()" >
-                        <span style="color:white;vertical-align: middle;line-height: 100px;"><i style="padding-right:5px;" class="fa fa-upload fa-3x" aria-hidden="true"></i> Titelbild hochladen</span>
+                        <span style="color:white;vertical-align: middle;line-height: 100px;"><i style="padding-right:5px;" class="fa fa-upload fa-3x" aria-hidden="true"></i> <span id="fileTextId">Titelbild hochladen</span></span>
                     </div>
+
 
                     <script>
                         document.getElementById("myupload").onchange = function () {
 
-                            changeBtnText();
+                            var fileName = $(this).val().split('/').pop().split('\\').pop();
 
-                            var reader = new FileReader();
+                            if(fileName.match(/.(jpg|jpeg|png|gif|JPG|JPEG|PNG|GIF)$/i)){
+                                document.getElementById('fileTextId').innerHTML = fileName;
+                                document.getElementById('fileTextId').setAttribute("style","color:white");
+                                document.getElementById('saveButtonId').disabled = false;
 
-                            reader.onload = function (e) {
-                                // get loaded data and render thumbnail.
-                                document.getElementById("image").src = e.target.result;
-                            };
-                            // read the image file as a data URL.
-                            reader.readAsDataURL(this.files[0]);
+                                var reader = new FileReader();
+
+                                reader.onload = function (e) {
+                                    // get loaded data and render thumbnail.
+                                    document.getElementById("image").src = e.target.result;
+                                };
+                                // read the image file as a data URL.
+                                reader.readAsDataURL(this.files[0]);
+
+                            }else{
+                                document.getElementById('fileTextId').innerHTML = "Nur Bilder möglich!";
+                                document.getElementById('fileTextId').setAttribute("style","color:red");
+                                document.getElementById('saveButtonId').disabled = true;
+                                document.getElementById("image").src = "";
+                            }
                         };
+
                     </script>
+
 
                 </div>
                 <div class="col-xs-12 col-sm-6" style="padding:50px;padding-top:0">
@@ -68,49 +83,14 @@
                 </div>
             </div>
 
-            <div style="margin-bottom:50px;" class="row">
-                <div class="col-xs-12 col-sm-6" style="padding:50px;padding-top: 0">
-                    <input onchange="changeBtnText()" value="[[projektInfoBearbeiten[0].targetAmount]]" step="0.01" title="Zielbetrag in € muss mindestens 1€ sein" name="targetAmount" min="1" max="9999" style="margin-top:25px;padding:10px;width:100%;border:1px solid black;font-weight: bold;font-size: 20pt;" placeholder="€" type="number" required>
-                    <small style="color:#47A1DE;font-size:18px;">Zielbetrag in €</small>
-                </div>
-                <div class="col-xs-12 col-sm-6" style="padding:50px;padding-top:0">
+            <script>
+                function changeBtnText(){
+                    console.log("cahnged");
+                    document.getElementById("saveButtonId").setAttribute("class", "uk-button uk-button-danger");
+                    document.getElementById("btnTextId").innerHTML = "PROJEKT SPEICHERN";
+                }
+            </script>
 
-                    <select onchange="changeBtnText()" id="childs" name="category" style="margin-top:25px;padding:10px;width:100%;border:1px solid black;font-size: 20pt;" name="Kategorie" required>
-                        <option value="Bildung">Bildung</option>
-                        <option value="Arbeit">Arbeit</option>
-                        <option value="Kinder">Kinder</option>
-                        <option value="Nahrung">Nahrung</option>
-                        <option value="Medizin">Medizin</option>
-                        <option value="Technologie">Technologie</option>
-                        <option value="Sonstige">Sonstige</option>
-                    </select>
-                    <small style="color:#47A1DE;font-size:18px;">Projekt-Kategorie</small>
-
-                    <span style="display:none" id="getCategory">[[projektInfoBearbeiten[0].category]]</span>
-                    <script>
-                        window.onload = function () {
-                            var c = document.getElementById("getCategory").innerHTML;
-                            var nodes = document.getElementById('childs').childNodes;
-                            for(var i=0; i<nodes.length; i++) {
-                                console.log(nodes[i].innerHTML);
-                                console.log(c);
-                                if (nodes[i].innerHTML == c) {
-                                    nodes[i].setAttribute("selected", "selected");
-                                }
-                            }
-                        }
-
-                        function changeBtnText(){
-                            console.log("cahnged");
-                            document.getElementById("saveButtonId").setAttribute("class", "uk-button uk-button-danger");
-                            document.getElementById("btnTextId").innerHTML = "PROJEKT SPEICHERN";
-                        }
-
-
-                    </script>
-
-                </div>
-            </div>
 
         </form>
 

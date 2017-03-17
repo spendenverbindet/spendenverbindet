@@ -598,6 +598,25 @@ app.controller('spendenverbindetController', function($scope, $http) {
         }, function errorCallback(response) {
         });
     }
+
+
+
+    //Empfänger dashboard
+
+    $scope.setProjectToDeleted = function(){
+
+        var config = {
+            headers : {
+                'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;'
+            }
+        }
+
+        $http.post('/deleteProject', null, config).then(function successCallback(response) {
+            location.reload();
+        }, function errorCallback(response) {
+            console.log(response);
+        });
+    }
     
     
 });

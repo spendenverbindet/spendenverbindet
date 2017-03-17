@@ -40,7 +40,7 @@
                     <input onkeyup="changeBtnText()" value="[[empfaengerProfilInfo[0].username]]" title="Benutzername muss mindestens 3 Zeichen haben, maximal 20" name="username" style="margin-top:25px;padding:10px;width:100%;border:1px solid black;font-weight: bold;font-size: 20pt;" placeholder="Benutzername" pattern=".{3,20}" type="text" required>
                     <small style="color:#47A1DE;font-size:18px;">Benutzername</small>
 
-                    <input onkeyup="changeBtnText()" value="[[empfaengerProfilInfo[0].birthday]]" title="Geburtsdatum muss angegeben werden" name="age" style="margin-top:25px;padding:10px;width:100%;border:1px solid black;font-weight: bold;font-size: 20pt;" type="date" required>
+                    <input onchange="changeBtnText()" value="[[empfaengerProfilInfo[0].birthday]]" title="Geburtsdatum muss angegeben werden" name="age" style="margin-top:25px;padding:10px;width:100%;border:1px solid black;font-weight: bold;font-size: 20pt;" type="date" required>
                     <small style="color:#47A1DE;font-size:18px;">Geburtsdatum</small>
 
                 </div>
