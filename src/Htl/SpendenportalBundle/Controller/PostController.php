@@ -89,7 +89,6 @@ class PostController extends Controller
 
                     $post = new Post();
                     $post->setTitle($data['title']);
-                    $post->setPostPictureUrl($_FILES['postPictureUrl']['name']);
                     $post->setPostText($data['postText']);
                     $post->setCreatedAt($date);
                     $post->setProjects($this->getDoctrine()->getRepository('HtlSpendenportalBundle:Project')->find($projectId));
@@ -97,8 +96,9 @@ class PostController extends Controller
                     $rand = rand(1, 300);
                     $target_dir = $_SERVER['DOCUMENT_ROOT'] . '/bundles/htlspendenportal/img/';
                     $filename = trim(addslashes($_FILES['postPictureUrl']['name']));
-                    $filename = preg_replace('/\s+/', '_', $filename);
+                    $filename = $rand.preg_replace('/\s+/', '_', $filename);
                     $target_file = $target_dir . $filename;
+                    $post->setPostPictureUrl($filename);
                     $uploadOk = 1;
                     $imageFileType = pathinfo($target_file, PATHINFO_EXTENSION);
                     // Check if image file is a actual image or fake image

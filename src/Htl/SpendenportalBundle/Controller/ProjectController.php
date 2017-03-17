@@ -508,8 +508,6 @@ class ProjectController extends Controller
                         $project->setUsers($this->getUser());
                         //$project->setUsers($this->getDoctrine()->getRepository('HtlSpendenportalBundle:User')->find(3));
 
-                        $project->setTitlePictureUrl(preg_replace('/\s+/', '_',trim(addslashes($_FILES["titlePictureUrl"]["name"]))));
-
                         //var_dump(count($_FILES['file']["name"]));
                         //return new JsonResponse("Test");
 
@@ -520,10 +518,12 @@ class ProjectController extends Controller
                         //var_dump($_FILES);
 
                         //file upload
+                        $rand = rand(1,30000);
                         $target_dir = $_SERVER['DOCUMENT_ROOT'] . '/bundles/htlspendenportal/img/';
                         $filename = trim(addslashes($_FILES['titlePictureUrl']['name']));
-                        $filename = preg_replace('/\s+/', '_', $filename);
+                        $filename = $rand.preg_replace('/\s+/', '_', $filename);
                         $target_file = $target_dir . $filename;
+                        $picture->setTitlePictureUrl($filename);
                         $uploadOk = 1;
                         $imageFileType = pathinfo($target_file, PATHINFO_EXTENSION);
                         // Check if image file is a actual image or fake image
@@ -563,57 +563,60 @@ class ProjectController extends Controller
                         }
 
                         $em->flush();
-                        for($i = 0; $i<count($_FILES['file']["name"]);$i++){
-                            //var_dump($_FILES['file']["name"][$i]);
-                            //return new JsonResponse('Test');
-                            $picture = new Picture();
-                            $picture->setPictureUrl(preg_replace('/\s+/', '_',trim(addslashes($_FILES["file"]["name"][$i]))));
-                            $picture->setCreatedAt($date);
+                        if($_FILES['file']['name'][0] != null){
+                            for($i = 0; $i<count($_FILES['file']["name"]);$i++){
+                                //var_dump($_FILES['file']["name"][$i]);
+                                //return new JsonResponse('Test');
+                                $picture = new Picture();
+                                
+                                $picture->setCreatedAt($date);
 
-                            $picture->setProjects($this->getDoctrine()->getRepository('HtlSpendenportalBundle:Project')->find($project->getId()));
+                                $picture->setProjects($this->getDoctrine()->getRepository('HtlSpendenportalBundle:Project')->find($project->getId()));
 
-                            $filename = trim(addslashes($_FILES['file']['name'][$i]));
-                            $filename = preg_replace('/\s+/', '_', $filename);
-                            $target_file = $target_dir . $filename;
-                            $uploadOk = 1;
-                            $imageFileType = pathinfo($target_file, PATHINFO_EXTENSION);
-                            if (isset($_POST["submit"])) {
-                                $check = getimagesize($_FILES["file"]["tmp_name"][$i]);
-                                if ($check !== false) {
-                                    $uploadOk = 1;
-                                } else {
+                                $rand = rand(1,30000);
+                                $filename = trim(addslashes($_FILES['file']['name'][$i]));
+                                $filename = $rand.preg_replace('/\s+/', '_', $filename);
+                                $target_file = $target_dir . $filename;
+                                $uploadOk = 1;
+                                $picture->setPictureUrl($filename);
+                                $imageFileType = pathinfo($target_file, PATHINFO_EXTENSION);
+                                if (isset($_POST["submit"])) {
+                                    $check = getimagesize($_FILES["file"]["tmp_name"][$i]);
+                                    if ($check !== false) {
+                                        $uploadOk = 1;
+                                    } else {
+                                        $uploadOk = 0;
+                                        return new JsonResponse("File is not an image.");
+                                    }
+                                }
+                                // Check file size
+                                if ($_FILES["file"]["size"][$i] > 6000000) {
                                     $uploadOk = 0;
-                                    return new JsonResponse("File is not an image.");
+                                    return new JsonResponse("Sorry, your file is too large. Maximal 750kB");
                                 }
-                            }
-                            // Check file size
-                            if ($_FILES["file"]["size"][$i] > 6000000) {
-                                $uploadOk = 0;
-                                return new JsonResponse("Sorry, your file is too large. Maximal 750kB");
-                            }
-                            // Allow certain file formats
+                                // Allow certain file formats
 
-                            if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
-                                && $imageFileType != "gif" && $imageFileType != "JPG" && $imageFileType != "PNG" && $imageFileType != "JPEG"
-                                && $imageFileType != "GIF"
-                            ) {
-                                $uploadOk = 0;
-                                return new JsonResponse("Sorry, only JPG, JPEG, PNG & GIF files are allowed.");
-                            }
-                            // Check if $uploadOk is set to 0 by an error
-                            if ($uploadOk == 0) {
-                                return new JsonResponse("Sorry, your file was not uploaded.");
-                                // if everything is ok, try to upload file
-                            } else {
-                                if(move_uploaded_file($_FILES["file"]["tmp_name"][$i], $target_file)){
-                                    $uploadOk = 1;
+                                if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
+                                    && $imageFileType != "gif" && $imageFileType != "JPG" && $imageFileType != "PNG" && $imageFileType != "JPEG"
+                                    && $imageFileType != "GIF" && $imageFileType != ""
+                                ) {
+                                    $uploadOk = 0;
+                                    return new JsonResponse("Sorry, only JPG, JPEG, PNG & GIF files are allowed.");
                                 }
+                                // Check if $uploadOk is set to 0 by an error
+                                if ($uploadOk == 0) {
+                                    return new JsonResponse("Sorry, your file was not uploaded.");
+                                    // if everything is ok, try to upload file
+                                } else {
+                                    if(move_uploaded_file($_FILES["file"]["tmp_name"][$i], $target_file)){
+                                        $uploadOk = 1;
+                                    }
+                                }
+                                $pictureEm->persist($picture);
+                                $pictureEm->flush();
+                                $pictureEm->clear();
                             }
-                            $pictureEm->persist($picture);
-                            $pictureEm->flush();
-                            $pictureEm->clear();
                         }
-
                         return $this->redirectToRoute('htl_spendenportal_empfaenger_dashboard');
                     }
                     return false;
