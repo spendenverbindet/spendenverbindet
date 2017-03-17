@@ -301,8 +301,8 @@ class UserController extends Controller
 
                 if ($this->getDoctrine()->getRepository('HtlSpendenportalBundle:User')->findOneBy(array('username' => $data["username"])) && $this->getDoctrine()->getRepository('HtlSpendenportalBundle:User')->findOneBy(array('email' => $data["email"]))) {
                     $item = array(
-                        "usernameTaken" => true,
-                        "emailTaken" => true,
+                        "username" => true,
+                        "email" => true,
                     );
                     array_push($responseArray, $item);
                     $responseArray = (object)$responseArray;
@@ -310,8 +310,8 @@ class UserController extends Controller
                     return new JsonResponse($responseArray);
                 } else if ($this->getDoctrine()->getRepository('HtlSpendenportalBundle:User')->findOneBy(array('username' => $data["username"]))) {
                     $item = array(
-                        "usernameTaken" => true,
-                        "emailTaken" => false,
+                        "username" => true,
+                        "email" => false,
                     );
                     array_push($responseArray, $item);
 
@@ -320,8 +320,8 @@ class UserController extends Controller
                     return new JsonResponse($responseArray);
                 } else if ($this->getDoctrine()->getRepository('HtlSpendenportalBundle:User')->findOneBy(array('username' => $data["username"]))) {
                     $item = array(
-                        "usernameTaken" => false,
-                        "emailTaken" => true,
+                        "username" => false,
+                        "email" => true,
                     );
                     array_push($responseArray, $item);
 
@@ -330,8 +330,8 @@ class UserController extends Controller
                     return new JsonResponse($responseArray);
                 } else {
                     $item = array(
-                        "usernameTaken" => false,
-                        "emailTaken" => false,
+                        "username" => false,
+                        "email" => false,
                     );
                     array_push($responseArray, $item);
 
