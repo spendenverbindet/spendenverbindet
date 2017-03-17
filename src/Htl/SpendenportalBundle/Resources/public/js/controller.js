@@ -554,6 +554,7 @@ app.controller('spendenverbindetController', function($scope, $http) {
     $scope.titlePictureSelected = function(){
         if(document.getElementById("myupload").value == "") {
           // Bild muss noch ausgewählt werden
+            document.getElementById('errorMsgId').innerHTML = "Kein Titelbild ausgewählt";
             $scope.displayTitelPictureError = true;
         }
     };

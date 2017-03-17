@@ -1,5 +1,9 @@
 /* generally */
 
+body {
+  word-break: break-all;
+}
+
 .coo-blue-color {
   color: $cooperative-design-color-blue;
 }

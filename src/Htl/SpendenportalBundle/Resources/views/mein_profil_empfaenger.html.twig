@@ -44,12 +44,13 @@
                                 document.getElementById('fileTextId').innerHTML = fileName;
                                 document.getElementById('delTextId').innerHTML = "*nur PDF";
                                 document.getElementById('fileTextId').setAttribute("style","color:white");
-                                document.getElementById('saveButtonId').removeAttribute("disabled");
+                                document.getElementById('saveButtonId').disabled = false;
                             }else{
                                 document.getElementById('fileTextId').innerHTML = "Nur PDF möglich!";
                                 document.getElementById('fileTextId').setAttribute("style","color:red");
                                 document.getElementById('delTextId').innerHTML = "*nur PDF";
                                 document.getElementById('saveButtonId').disabled = true;
+
                             }
                         };
                     </script>
