@@ -26,7 +26,6 @@ class UserController extends Controller
                 "email" => $user[$i]->getEmail(),
                 "emailCanonical" => $user[$i]->getEmailCanonical(),
                 "enable" => $user[$i]->getEnabled(),
-                "password" => $user[$i]->getPassword(),
                 "role" => $user[$i]->getRoles(),
                 "BeduerftigkeitsbeweisFile" => $user[$i]->getFileUpload(),
                 "firstname" => $user[$i]->getFirstname(),
@@ -75,7 +74,6 @@ class UserController extends Controller
                     "email" => $user[$i]->getEmail(),
                     "emailCanonical" => $user[$i]->getEmailCanonical(),
                     "enable" => $user[$i]->getEnabled(),
-                    "password" => $user[$i]->getPassword(),
                     "role" => $userRole,
                     "BeduerftigkeitsbeweisFile" => $user[$i]->getFileUpload(),
                     "firstname" => $user[$i]->getFirstname(),
@@ -134,7 +132,6 @@ class UserController extends Controller
             "email" => $user->getEmail(),
             "emailCanonical" => $user->getEmailCanonical(),
             "enable" => $user->getEnabled(),
-            "password" => $user->getPassword(),
             "role" => ($user->getRoles()[0] == "ROLE_DONATOR") ? "Spender" : "Empfänger",
             "BeduerftigkeitsbeweisFile" => $user->getFileUpload(),
             "firstname" => $user->getFirstname(),
@@ -143,6 +140,7 @@ class UserController extends Controller
             $birthDate = $this->GetAge($user->getAge()),
             //$today   = (new \DateTime('today'))->format('d-m-y'),
             "age" => $birthDate,
+            "birthday" => $user->getAge()->format('Y-m-d'),
             "town" => $user->getTown(),
             "street" => $user->getStreet(),
             "zipcode" => $user->getZipcode(),
@@ -318,6 +316,10 @@ class UserController extends Controller
                 // data is an array with "phone" and "period" keys
                 $data = $form->getData();
 
+                if($this->getDoctrine()->getRepository('HtlSpendenportalBundle:User')->findOneBy(array('username' => $data["username"]))){
+                    
+                }
+
                 $em = $this->getDoctrine()->getManager();
 
                 $user = $em->getRepository('HtlSpendenportalBundle:User')->find($userId);
@@ -329,6 +331,7 @@ class UserController extends Controller
                 //return new JsonResponse($dob);
                 //$user->setAge($data["age"]->format('Y-m-d')); //date_create_from_format('d/M/Y', $data["age"])
                 //$date->format('Y-m-d H:i:s');
+                $user->setAge(date_create(date('Y-m-d', strtotime($data['age']))));
                 $user->setTown($data["town"]);
                 $user->setStreet($data["street"]);
                 $user->setZipcode($data["zipcode"]);

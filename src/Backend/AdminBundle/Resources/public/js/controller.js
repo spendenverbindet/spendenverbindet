@@ -128,7 +128,7 @@ app.controller('backendController', function($scope, $http) {
 
         $http({
             method: 'GET',
-            url: '/users/'+$scope.actualUserId
+            url: '/backend/users/'+$scope.actualUserId
         }).then(function successCallback(response) {
             
             $scope.userDetailInfo = response.data[0];
