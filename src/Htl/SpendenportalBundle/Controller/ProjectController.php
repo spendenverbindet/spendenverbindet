@@ -562,6 +562,7 @@ class ProjectController extends Controller
                             }
                         }
 
+                        $em->flush();
                         for($i = 0; $i<count($_FILES['file']["name"]);$i++){
                             //var_dump($_FILES['file']["name"][$i]);
                             //return new JsonResponse('Test');
@@ -608,7 +609,6 @@ class ProjectController extends Controller
                                     $uploadOk = 1;
                                 }
                             }
-                            $em->flush();
                             $pictureEm->persist($picture);
                             $pictureEm->flush();
                             $pictureEm->clear();
