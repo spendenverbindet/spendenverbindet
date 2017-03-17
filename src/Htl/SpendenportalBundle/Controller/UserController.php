@@ -408,16 +408,21 @@ class UserController extends Controller
 
                 if(!$_FILES['fileUrl']['name']==""){
                     //file upload
+                    $rand = rand(1,30000);
                     $target_dir = $_SERVER['DOCUMENT_ROOT'] . '/bundles/htlspendenportal/img/';
-                    $target_file = $target_dir . basename($_FILES["fileUrl"]["name"]);
+                    $filename = trim(addslashes($_FILES['fileUrl']['name']));
+                    $filename = $rand.preg_replace('/\s+/', '_', $filename);
+                    $target_file = $target_dir . $filename;
                     $uploadOk = 1;
+
+                    //
 
                     if (unlink($target_dir . $user->getFileUpload())) {
                         $uploadOk = 1;
                     }
-                    $user->setFileUpload($_FILES['fileUrl']['name']);
+                    $user->setFileUpload($filename);
 
-                    $imageFileType = pathinfo($target_file, PATHINFO_EXTENSION);
+                    $pdfFileType = pathinfo($filename, PATHINFO_EXTENSION);
                     // Check if image file is a actual image or fake image
                     if (isset($_POST["submit"])) {
                         $check = getimagesize($_FILES["fileUrl"]["tmp_name"]);
@@ -434,7 +439,7 @@ class UserController extends Controller
                         return new JsonResponse("Sorry, your file is too large. Maximal 750kB");
                     }
                     // Allow certain file formats
-                    if ($imageFileType != "pdf" && $imageFileType != "PDF" && $imageFileType != ""
+                    if ($pdfFileType != "pdf" && $pdfFileType != "PDF" && $pdfFileType != ""
                     ) {
                         $uploadOk = 0;
                         return new JsonResponse("Sorry, only PDF files are allowed.");

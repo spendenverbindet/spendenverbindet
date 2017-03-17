@@ -595,7 +595,7 @@ class ProjectController extends Controller
 
                             if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
                                 && $imageFileType != "gif" && $imageFileType != "JPG" && $imageFileType != "PNG" && $imageFileType != "JPEG"
-                                && $imageFileType != "GIF" && $imageFileType != ""
+                                && $imageFileType != "GIF"
                             ) {
                                 $uploadOk = 0;
                                 return new JsonResponse("Sorry, only JPG, JPEG, PNG & GIF files are allowed.");

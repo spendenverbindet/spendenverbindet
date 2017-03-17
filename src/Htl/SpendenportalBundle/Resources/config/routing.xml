@@ -220,6 +220,10 @@
         <default key="_controller">HtlSpendenportalBundle:User:listProjectsFromUser</default>
     </route>
 
+    <route id="ifalreadygiven" path="/alreadyGiven" methods="GET">
+        <default key="_controller">HtlSpendenportalBundle:User:ifAlreadyGiven</default>
+    </route>
+
     <route id="createUser" path="/createUser" methods="POST">
         <default key="_controller">HtlSpendenportalBundle:User:create</default>
     </route>

@@ -94,7 +94,7 @@ class PostController extends Controller
                     $post->setCreatedAt($date);
                     $post->setProjects($this->getDoctrine()->getRepository('HtlSpendenportalBundle:Project')->find($projectId));
 
-
+                    $rand = rand(1, 300);
                     $target_dir = $_SERVER['DOCUMENT_ROOT'] . '/bundles/htlspendenportal/img/';
                     $filename = trim(addslashes($_FILES['postPictureUrl']['name']));
                     $filename = preg_replace('/\s+/', '_', $filename);
