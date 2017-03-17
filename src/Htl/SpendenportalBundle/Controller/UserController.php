@@ -281,6 +281,83 @@ class UserController extends Controller
         return new Response('Picture has been deleted!');
     }
     */
+    public function ifAlreadyGivenAction(Request $request){
+        if ($this->get('security.authorization_checker')->isGranted('ROLE_RECEIVER') || $this->get('security.authorization_checker')->isGranted('ROLE_DONATOR')) {    // && $this->getUser()->getProjects()->find($projectId)
+            $userId = $this->getUser()->getId();
+
+            $form = $this->createFormBuilder()
+                ->add('username')
+                ->add('email')
+                ->getForm();
+
+            if ($request->isMethod('POST')) {
+
+                $form->submit($request->request->all($form->getName()));
+                //return new JsonResponse($request);
+
+                // data is an array with keys
+                $data = $form->getData();
+                $responseArray = array();
+
+                if ($this->getDoctrine()->getRepository('HtlSpendenportalBundle:User')->findOneBy(array('username' => $data["username"])) && $this->getDoctrine()->getRepository('HtlSpendenportalBundle:User')->findOneBy(array('email' => $data["email"]))) {
+                    $item = array(
+                        "usernameTaken" => true,
+                        "emailTaken" => true,
+                    );
+                    array_push($responseArray, $item);
+                    $responseArray = (object)$responseArray;
+
+                    return new JsonResponse($responseArray);
+                } else if ($this->getDoctrine()->getRepository('HtlSpendenportalBundle:User')->findOneBy(array('username' => $data["username"]))) {
+                    $item = array(
+                        "usernameTaken" => true,
+                        "emailTaken" => false,
+                    );
+                    array_push($responseArray, $item);
+
+                    $responseArray = (object)$responseArray;
+
+                    return new JsonResponse($responseArray);
+                } else if ($this->getDoctrine()->getRepository('HtlSpendenportalBundle:User')->findOneBy(array('username' => $data["username"]))) {
+                    $item = array(
+                        "usernameTaken" => false,
+                        "emailTaken" => true,
+                    );
+                    array_push($responseArray, $item);
+
+                    $responseArray = (object)$responseArray;
+
+                    return new JsonResponse($responseArray);
+                } else {
+                    $item = array(
+                        "usernameTaken" => false,
+                        "emailTaken" => false,
+                    );
+                    array_push($responseArray, $item);
+
+                    $responseArray = (object)$responseArray;
+
+                    return new JsonResponse($responseArray);
+                }
+            }
+        }
+
+    }
+
+/*
+     * else if($this->getDoctrine()->getRepository('HtlSpendenportalBundle:User')->findOneBy(array('username' => $data["username"]))){
+                    $responseArray = array();
+
+                    $item = array(
+                        "usernameTaken" => true,
+                        "emailTaken" => false,
+                    );
+                    array_push($responseArray, $item);
+                    }
+                    $responseArray = (object)$responseArray;
+
+            }
+     */
 
     public function updateAction(Request $request)
     {
@@ -316,10 +393,6 @@ class UserController extends Controller
                 // data is an array with "phone" and "period" keys
                 $data = $form->getData();
 
-                if($this->getDoctrine()->getRepository('HtlSpendenportalBundle:User')->findOneBy(array('username' => $data["username"]))){
-                    
-                }
-
                 $em = $this->getDoctrine()->getManager();
 
                 $user = $em->getRepository('HtlSpendenportalBundle:User')->find($userId);
@@ -327,15 +400,56 @@ class UserController extends Controller
                 $user->setEmail($data["email"]);
                 $user->setFirstname($data["firstname"]);
                 $user->setLastname($data["lastname"]);
-                //$dob = DateTime::createFromFormat($data["age"]);
-                //return new JsonResponse($dob);
-                //$user->setAge($data["age"]->format('Y-m-d')); //date_create_from_format('d/M/Y', $data["age"])
-                //$date->format('Y-m-d H:i:s');
                 $user->setAge(date_create(date('Y-m-d', strtotime($data['age']))));
                 $user->setTown($data["town"]);
                 $user->setStreet($data["street"]);
                 $user->setZipcode($data["zipcode"]);
                 $user->setHousenumberDoornumber($data["housenumberDoornumber"]);
+
+                if(!$_FILES['fileUrl']['name']==""){
+                    //file upload
+                    $target_dir = $_SERVER['DOCUMENT_ROOT'] . '/bundles/htlspendenportal/img/';
+                    $target_file = $target_dir . basename($_FILES["fileUrl"]["name"]);
+                    $uploadOk = 1;
+
+                    if (unlink($target_dir . $user->getFileUpload())) {
+                        $uploadOk = 1;
+                    }
+                    $user->setFileUpload($_FILES['titlePictureUrl']['name']);
+
+                    $imageFileType = pathinfo($target_file, PATHINFO_EXTENSION);
+                    // Check if image file is a actual image or fake image
+                    if (isset($_POST["submit"])) {
+                        $check = getimagesize($_FILES["fileUrl"]["tmp_name"]);
+                        if ($check !== false) {
+                            $uploadOk = 1;
+                        } else {
+                            $uploadOk = 0;
+                            return new JsonResponse("File is not an image.");
+                        }
+                    }
+                    // Check file size
+                    if ($_FILES["fileUrl"]["size"] > 6000000) {
+                        $uploadOk = 0;
+                        return new JsonResponse("Sorry, your file is too large. Maximal 750kB");
+                    }
+                    // Allow certain file formats
+                    if ($imageFileType != "pdf" && $imageFileType != "PDF" && $imageFileType != ""
+                    ) {
+                        $uploadOk = 0;
+                        return new JsonResponse("Sorry, only PDF files are allowed.");
+                    }
+                    // Check if $uploadOk is set to 0 by an error
+                    if ($uploadOk == 0) {
+                        return new JsonResponse("Sorry, your file was not uploaded.");
+                        // if everything is ok, try to upload file
+                    } else {
+                        if (move_uploaded_file($_FILES["fileUrl"]["tmp_name"], $target_file)) {
+                        } else {
+                            return new JsonResponse("Sorry, there was an error uploading your file.");
+                        }
+                    }
+                }
 
                 $em->flush();
 
