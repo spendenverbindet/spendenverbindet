@@ -92,6 +92,8 @@
                             var c = document.getElementById("getCategory").innerHTML;
                             var nodes = document.getElementById('childs').childNodes;
                             for(var i=0; i<nodes.length; i++) {
+                                console.log(nodes[i].innerHTML);
+                                console.log(c);
                                 if (nodes[i].innerHTML == c) {
                                     nodes[i].setAttribute("selected", "selected");
                                 }

@@ -33,7 +33,6 @@ class RegistrationType extends AbstractType
             'choices_as_values' => true,'multiple'=>false,'expanded'=>true));
 
         $builder->add('fileUpload');
-
     }
 
     public function getParent()

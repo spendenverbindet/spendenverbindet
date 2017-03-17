@@ -1,4 +1,4 @@
-{% if is_granted('ROLE_RECEIVER') %}
+{% if is_granted('ROLE_DONATOR') %}
 
     {% embed "HtlSpendenportalBundle::header.html.twig" %}
         {# override the title-tag text #}
@@ -8,7 +8,7 @@
     {% endembed %}
 
     <script>
-        document.getElementById("mein_profil_empfaenger_id").style["color"] = "#47A1DE";
+        document.getElementById("mein_profil_spender_id").style["color"] = "#47A1DE";
     </script>
 
     <div ng-init="initMeinProfilEmpfaenger()" class="helper-navbar"></div>
@@ -25,46 +25,14 @@
                 </div>
             </div>
 
-            <div class="row">
+            <div style="margin-bottom:50px;" class="row">
                 <div class="col-xs-12 col-sm-6" style="padding:50px;padding-top: 0">
 
-                    <img id="image" src="{{ asset('bundles/htlspendenportal/img/[[projektInfoBearbeiten[0].titlePictureUrl]]') }}" />
-
-                    <input name="fileUrl" style="display:none" id="myupload" type="file" size="100" accept="image/*">
-
-                    <div class="clickable" style="text-align: center;width:100%;height:100px;background-color:gray;" ng-click="clickUpload()" >
-                        <span style="color:white;vertical-align: middle;line-height: 100px;"><i style="padding-right:5px;" class="fa fa-upload fa-3x" aria-hidden="true"></i> Bedürftigkeitsnachweis hochladen</span>
-                    </div>
-
-                    <script>
-                        document.getElementById("myupload").onchange = function () {
-
-                            changeBtnText();
-
-                            var reader = new FileReader();
-
-                            reader.onload = function (e) {
-                                // get loaded data and render thumbnail.
-                                document.getElementById("image").src = e.target.result;
-                            };
-                            // read the image file as a data URL.
-                            reader.readAsDataURL(this.files[0]);
-                        };
-                    </script>
-
-                </div>
-                <div class="col-xs-12 col-sm-6" style="padding:50px;padding-top:0">
                     <input onkeyup="changeBtnText()" id="titelId" value="[[empfaengerProfilInfo[0].firstname]]" title="Vorname muss mindestens 3 Zeichen haben, maximal 20" name="firstname" style="margin-top:25px;padding:10px;width:100%;border:1px solid black;font-weight: bold;font-size: 20pt;" placeholder="Vorname" pattern=".{3,20}" type="text" required>
                     <small style="color:#47A1DE;font-size:18px;">Vorname</small>
 
                     <input onkeyup="changeBtnText()" value="[[empfaengerProfilInfo[0].lastname]]" title="Nachname muss mindestens 3 Zeichen haben, maximal 20" name="lastname" style="margin-top:25px;padding:10px;width:100%;border:1px solid black;font-weight: bold;font-size: 20pt;" placeholder="Nachname" pattern=".{3,20}" type="text" required>
                     <small style="color:#47A1DE;font-size:18px;">Nachname</small>
-
-                </div>
-            </div>
-
-            <div style="margin-bottom:50px;" class="row">
-                <div class="col-xs-12 col-sm-6" style="padding:50px;padding-top: 0">
 
                     <input onkeyup="changeBtnText()" value="[[empfaengerProfilInfo[0].email]]" title="Muss eine valide Email-Adresse sein" name="email" style="margin-top:25px;padding:10px;width:100%;border:1px solid black;font-weight: bold;font-size: 20pt;" placeholder="Email" pattern="[^@]+@[^@]+\.[a-zA-Z]{2,6}" type="text" required>
                     <small style="color:#47A1DE;font-size:18px;">Email</small>

@@ -39,5 +39,9 @@ class DefaultController extends Controller
         return $this->render('HtlSpendenportalBundle::mein_profil_empfaenger.html.twig');
     }
 
+    public function mein_profil_spenderAction(){
+        return $this->render('HtlSpendenportalBundle::mein_profil_spender.html.twig');
+    }
+
 }
 
