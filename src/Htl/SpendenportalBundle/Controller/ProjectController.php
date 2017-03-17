@@ -744,10 +744,10 @@ class ProjectController extends Controller
     {
         if ($this->get('security.authorization_checker')->isGranted('ROLE_RECEIVER') && $this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
             $projects = $this->getUser()->getProjects();
-            //$projects = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:Project')->find(4);
+            //$projects = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:User')->find(4)->getProjects();
 
-            foreach($projects as $project){
-                if($projects->getActive()){
+            foreach($projects as $project) {
+                if ($project->getActive()) {
                     $projectId = $project->getId();
                 }
             }
@@ -757,7 +757,7 @@ class ProjectController extends Controller
 
             if (!$project) {
                 throw $this->createNotFoundException(
-                    'No Project found for id ' . $project
+                    'No Project found for id ' . $projectId
                 );
             }
 
