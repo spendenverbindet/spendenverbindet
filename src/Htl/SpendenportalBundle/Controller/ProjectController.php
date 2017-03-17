@@ -523,7 +523,7 @@ class ProjectController extends Controller
                         $filename = trim(addslashes($_FILES['titlePictureUrl']['name']));
                         $filename = $rand.preg_replace('/\s+/', '_', $filename);
                         $target_file = $target_dir . $filename;
-                        $picture->setTitlePictureUrl($filename);
+                        $project->setTitlePictureUrl($filename);
                         $uploadOk = 1;
                         $imageFileType = pathinfo($target_file, PATHINFO_EXTENSION);
                         // Check if image file is a actual image or fake image
