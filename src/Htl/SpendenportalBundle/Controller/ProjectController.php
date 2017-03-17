@@ -744,6 +744,7 @@ class ProjectController extends Controller
     {
         if ($this->get('security.authorization_checker')->isGranted('ROLE_RECEIVER') && $this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
             $projects = $this->getUser()->getProjects();
+            //$projects = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:Project')->find(4);
 
             foreach($projects as $project){
                 if($projects->getActive()){
@@ -764,8 +765,8 @@ class ProjectController extends Controller
 
             $em->flush();
 
-            return new JsonResponse('Project has been deleted!');
 
+            return $this->redirectToRoute('htl_spendenportal_empfaenger_dashboard');
             
             //$em->remove($project);
 
