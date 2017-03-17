@@ -317,6 +317,11 @@ class ProjectController extends Controller
             foreach ($projects as $project) {
 
                 if ($this->hasDonated($project) == true) {
+                    if($project->getDeleted()){
+                        $deleted = true;
+                    }else{
+                        $deleted = false;
+                    }
                     if($project->getTargetAmount()==0){
                         $progress = 0;
                     } else {
@@ -334,6 +339,7 @@ class ProjectController extends Controller
                         "progress" => $progress,
                         "currentDonators" => $project->getCurrentDonators(),
                         "hasDonated" => $this->hasDonated($project->getId()),
+                        "isDeleted" => $deleted,
                     );
                     array_push($responseArray, $item);
                 }
@@ -734,9 +740,16 @@ class ProjectController extends Controller
         return new JsonResponse("not logged in");
     }
 
-    public function deleteAction($projectId)
+    public function deleteAction()
     {
-        //if ($this->get('security.authorization_checker')->isGranted('ROLE_RECEIVER') && $this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
+        if ($this->get('security.authorization_checker')->isGranted('ROLE_RECEIVER') && $this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
+            $projects = $this->getUser()->getProjects();
+
+            foreach($projects as $project){
+                if($projects->getActive()){
+                    $projectId = $project->getId();
+                }
+            }
 
             $em = $this->getDoctrine()->getManager();
             $project = $em->getRepository('HtlSpendenportalBundle:Project')->find($projectId);
@@ -756,9 +769,7 @@ class ProjectController extends Controller
             
             //$em->remove($project);
 
-
-            return new JsonResponse('Failed!');
-        //}
+        }
         return new JsonResponse(false);
     }
 }
