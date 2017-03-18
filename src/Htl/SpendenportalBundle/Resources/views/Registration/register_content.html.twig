@@ -1,8 +1,138 @@
 {% trans_default_domain 'FOSUserBundle' %}
 
+{#
 {{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register'}}) }}
     {{ form_widget(form) }}
 <div>
     <input type="submit" value="{{ 'registration.submit'|trans }}" />
 </div>
 {{ form_end(form) }}
+
+#}
+
+<script>
+    document.getElementById("register_id").style["color"] = "#47A1DE";
+    document.title = "Spendenverbindet | Registrieren";
+</script>
+
+
+<form action="{{ path('fos_user_registration_register') }}" class="form-searchbar" style="border-width: 0" enctype="multipart/form-data" method="POST">
+
+    <div class="row text-center">
+        <h2 class="form-signin-heading">Registrieren</h2>
+    </div>
+
+    <div class="form-group" id="fos_user_registration_form">
+
+
+        {{ form_widget(form.firstname, { 'attr': {'style': 'padding:5px;width:250px;border:1px solid black;', 'placeholder': 'Vorname'|trans } }) }}
+        <small style="color:#47A1DE;font-size:13px;margin-bottom: 15px">Vorname</small>
+        {{ form_errors(form.firstname) }}
+
+        {{ form_widget(form.lastname, { 'attr': {'style': 'margin-top:10px;padding:5px;width:250px;border:1px solid black;', 'placeholder': 'Nachname'|trans } }) }}
+        <small style="color:#47A1DE;font-size:13px;margin-bottom: 15px">Nachname</small>
+        {{ form_errors(form.lastname) }}
+
+        {{ form_widget(form.email, { 'attr': {'style': 'margin-top:10px;padding:5px;width:250px;border:1px solid black;', 'placeholder': 'Email'|trans } }) }}
+        <small style="color:#47A1DE;font-size:13px;margin-bottom: 15px">Email</small>
+        {{ form_errors(form.email) }}
+
+        {{ form_widget(form.username, { 'attr': {'style': 'margin-top:10px;padding:5px;width:250px;border:1px solid black;', 'placeholder': 'Benutzername'|trans } }) }}
+        <small style="color:#47A1DE;font-size:13px;margin-bottom: 15px">Benutzername</small>
+        {{ form_errors(form.username) }}
+
+        {{ form_widget(form.plainPassword.first, { 'attr': {'style': 'margin-top:10px;padding:5px;width:250px;border:1px solid black;', 'placeholder': 'Passwort'|trans } }) }}
+        <small style="color:#47A1DE;font-size:13px;margin-bottom: 15px">Passwort</small>
+        {{ form_errors(form.plainPassword.first) }}
+
+        {{ form_widget(form.plainPassword.second, { 'attr': {'style': 'margin-top:10px;padding:5px;width:250px;border:1px solid black;', 'placeholder': 'Passwort bestätigen'|trans } }) }}
+        <small style="color:#47A1DE;font-size:13px;margin-bottom: 15px">Passwort bestätigen</small>
+        {{ form_errors(form.plainPassword.second) }}
+
+        {{ form_widget(form.age, { 'attr': {'style': 'margin-top:10px;padding:5px;width:250px;border:1px solid black;'} }) }}
+        <small style="color:#47A1DE;font-size:13px;margin-bottom: 15px">Geburtsdatum</small>
+        {{ form_errors(form.age) }}
+
+        <style>
+            #fos_user_registration_form_isDonator_0 {
+                margin-right: 5px;
+            }
+
+            #fos_user_registration_form_isDonator_1 {
+                margin-left: 10px;
+                margin-right: 5px;
+            }
+        </style>
+        <small style="display:block;color:#47A1DE;font-size:18px;margin-top: 20px;margin-bottom: 10px;">Ich bin:</small>
+        {{ form_widget(form.isDonator, { 'attr': {'': ''} }) }}
+        {{ form_errors(form.isDonator) }}
+
+        {{ form_widget(form.town, { 'attr': {'style': 'margin-top:20px;padding:5px;width:250px;border:1px solid black;', 'placeholder': 'Stadt'|trans } }) }}
+        <small style="color:#47A1DE;font-size:13px;margin-bottom: 15px">Stadt</small>
+        {{ form_errors(form.town) }}
+
+        {{ form_widget(form.zipcode, { 'attr': {'style': 'margin-top:10px;padding:5px;width:250px;border:1px solid black;', 'placeholder': 'Postleitzahl'|trans } }) }}
+        <small style="color:#47A1DE;font-size:13px;margin-bottom: 15px">Postleitzahl</small>
+        {{ form_errors(form.zipcode) }}
+
+        {{ form_widget(form.street, { 'attr': {'style': 'margin-top:10px;padding:5px;width:250px;border:1px solid black;', 'placeholder': 'Straße'|trans } }) }}
+        <small style="color:#47A1DE;font-size:13px;margin-bottom: 15px">Straße</small>
+        {{ form_errors(form.street) }}
+
+        {{ form_widget(form.housenumberDoornumber, { 'attr': {'style': 'margin-top:10px;padding:5px;width:250px;border:1px solid black;', 'placeholder': 'Straße'|trans } }) }}
+        <small style="color:#47A1DE;font-size:13px;margin-bottom: 15px">Hausnr. Stiege / Tür</small>
+        {{ form_errors(form.housenumberDoornumber) }}
+
+
+
+        {{ form_rest(form) }}
+    </div>
+
+    <div class="row text-center">
+        <input style="margin-top:40px" class="folgen-detail-btn" type="submit" value="{{ 'Registrieren'|trans }}" />
+    </div>
+
+</form>
+
+
+
+
+
+{#
+
+<form name="fos_user_registration_form" method="post" action="/register/" class="fos_user_registration_register form-searchbar" enctype="multipart/form-data">
+
+        <div id="fos_user_registration_form">
+
+            <div class="row text-center">
+                <h2 class="form-signin-heading">Registrieren</h2>
+            </div>
+
+
+            <div><input type="email" id="fos_user_registration_form_email" name="fos_user_registration_form[email]" required="required" /></div>
+            <div><label for="fos_user_registration_form_username" class="required">form.username</label><input type="text" id="fos_user_registration_form_username" name="fos_user_registration_form[username]" required="required" maxlength="255" pattern=".{2,}" /></div>
+            <div><label for="fos_user_registration_form_plainPassword_first" class="required">form.password</label><input type="password" id="fos_user_registration_form_plainPassword_first" name="fos_user_registration_form[plainPassword][first]" required="required" /></div>
+            <div><label for="fos_user_registration_form_plainPassword_second" class="required">form.password_confirmation</label><input type="password" id="fos_user_registration_form_plainPassword_second" name="fos_user_registration_form[plainPassword][second]" required="required" /></div>
+            <div><label for="fos_user_registration_form_firstname" class="required">Firstname</label><input type="text" id="fos_user_registration_form_firstname" name="fos_user_registration_form[firstname]" required="required" maxlength="50" /></div>
+            <div><label for="fos_user_registration_form_lastname" class="required">Lastname</label><input type="text" id="fos_user_registration_form_lastname" name="fos_user_registration_form[lastname]" required="required" maxlength="60" /></div>
+            <div><label for="fos_user_registration_form_age" class="required">Age</label><input type="date" id="fos_user_registration_form_age" name="fos_user_registration_form[age]" required="required" /></div>
+            <div><label for="fos_user_registration_form_street">Street</label><input type="text" id="fos_user_registration_form_street" name="fos_user_registration_form[street]" /></div>
+            <div><label for="fos_user_registration_form_zipcode">Zipcode</label><input type="text" id="fos_user_registration_form_zipcode" name="fos_user_registration_form[zipcode]" maxlength="20" /></div>
+            <div><label for="fos_user_registration_form_housenumberDoornumber">Housenumber doornumber</label><input type="text" id="fos_user_registration_form_housenumberDoornumber" name="fos_user_registration_form[housenumberDoornumber]" maxlength="20" /></div>
+            <div><label for="fos_user_registration_form_town">Town</label><input type="text" id="fos_user_registration_form_town" name="fos_user_registration_form[town]" /></div>
+            <div>
+                <label class="required">Is donator</label>
+                <div id="fos_user_registration_form_isDonator"><input type="radio" id="fos_user_registration_form_isDonator_0" name="fos_user_registration_form[isDonator]" required="required" value="1" /><label for="fos_user_registration_form_isDonator_0" class="required">Spender</label><input type="radio" id="fos_user_registration_form_isDonator_1" name="fos_user_registration_form[isDonator]" required="required" value="0" checked="checked" /><label for="fos_user_registration_form_isDonator_1" class="required">Empfänger</label></div>
+            </div>
+            <div><label for="fos_user_registration_form_fileUpload" class="required">File upload</label><input type="file" id="fos_user_registration_form_fileUpload" name="fos_user_registration_form[fileUpload]" required="required" /></div>
+
+            <input type="hidden" id="fos_user_registration_form__token" name="fos_user_registration_form[_token]" value="{{ csrf_token("intention") }}" />
+
+
+        </div>
+        <div>
+            <input type="submit" value="registration.submit" />
+        </div>
+</form>
+
+#}

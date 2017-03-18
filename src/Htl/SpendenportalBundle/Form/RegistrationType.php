@@ -1,11 +1,13 @@
 <?php
 // src/HtlSpendenportalBundle/Form/RegistrationType.php
 
+
 namespace Htl\SpendenportalBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class RegistrationType extends AbstractType
@@ -17,13 +19,17 @@ class RegistrationType extends AbstractType
 
         $builder->add('lastname');
 
-        $builder->add('age');
+        $builder->add('age', DateType::class, array(
+            'widget' => 'single_text',
+        ));
 
         $builder->add('street');
 
         $builder->add('zipcode');
 
         $builder->add('housenumberDoornumber');
+
+        $builder->add('town');
 
 
         $builder->add('isDonator',ChoiceType::class,
