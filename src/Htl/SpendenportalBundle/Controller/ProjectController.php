@@ -677,14 +677,17 @@ class ProjectController extends Controller
 
                             if(!$_FILES['titlePictureUrl']['name']==""){
                                 //file upload
+                                $rand = rand(1,30000);
+                                $filename = trim(addslashes($_FILES['titlePictureUrl']['name']));
+                                $filename = $rand.preg_replace('/\s+/', '_', $filename);
                                 $target_dir = $_SERVER['DOCUMENT_ROOT'] . '/bundles/htlspendenportal/img/';
-                                $target_file = $target_dir . basename($_FILES["titlePictureUrl"]["name"]);
+                                $target_file = $target_dir . $filename;
                                 $uploadOk = 1;
 
                                 if (unlink($target_dir . $project->getTitlePictureUrl())) {
                                     $uploadOk = 1;
                                 }
-                                $project->setTitlePictureUrl($_FILES['titlePictureUrl']['name']);
+                                $project->setTitlePictureUrl($filename);
 
                                 $imageFileType = pathinfo($target_file, PATHINFO_EXTENSION);
                                 // Check if image file is a actual image or fake image
