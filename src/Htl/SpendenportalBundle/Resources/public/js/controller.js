@@ -629,6 +629,66 @@ app.controller('spendenverbindetController', function($scope, $http) {
             console.log(response);
         });
     }
+
+
+
+    $scope.checkIfUsernameOrEmalExists = function(){
+
+
+
+        document.getElementById('saveButtonId').setAttribute("disabled","disabled");
+        document.body.style.cursor='wait';
+
+        var username = document.getElementById("usernameID").value;
+        var email = document.getElementById('emailID').value;
+
+        console.log(username);
+        console.log(email);
+
+
+        var config = {
+            headers : {
+                'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;'
+            }
+        }
+
+        var data = $.param({
+            username: username,
+            email: email
+        });
+
+        $http.post('/alreadyGiven', data, config).then(function successCallback(response) {
+
+            $scope.alreadGiven = response.data;
+            
+            if($scope.alreadGiven[0].email == false){
+
+                if($scope.alreadGiven[0].username == false){
+
+                    // add action to btn and trigger the button
+
+                    console.log("yeah");
+                    //document.getElementById('addActionId').setAttribute("action","/updateUser");
+                   // document.getElementById('saveButtonId').click();
+                    
+                }else{
+                    // Username gibts bereits
+                    alert('Benutzername existiert bereits!');
+                }
+            }else{
+                // Email gibts bereits
+                alert('Email existiert bereits!');
+            }
+
+            document.body.style.cursor='default';
+            document.getElementById('saveButtonId').removeAttribute("disabled");
+
+        }, function errorCallback(response) {
+            console.log(response);
+        });
+
+
+    }
     
     
 });
