@@ -51,7 +51,7 @@ class Donation
 
     /**
      * @ORM\ManyToOne(targetEntity="user", inversedBy="donations")
-     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=true)
      */
     private $users;
 
