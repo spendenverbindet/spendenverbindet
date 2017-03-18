@@ -17,7 +17,7 @@ class PostController extends Controller
         }else{
             $security = false;
         }
-        if($this->get('security.authorization_checker')->isGranted('ROLE_DONATOR') || $security){
+        if($this->get('security.authorization_checker')->isGranted('ROLE_RECEIVER') || $security){
 
 
 
