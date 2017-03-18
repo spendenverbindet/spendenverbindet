@@ -282,8 +282,9 @@ class UserController extends Controller
     }
     */
     public function ifAlreadyGivenAction(Request $request){
-        if ($this->get('security.authorization_checker')->isGranted('ROLE_RECEIVER') || $this->get('security.authorization_checker')->isGranted('ROLE_DONATOR')) {    // && $this->getUser()->getProjects()->find($projectId)
-            $userId = $this->getUser()->getId();
+        //if ($this->get('security.authorization_checker')->isGranted('ROLE_RECEIVER') || $this->get('security.authorization_checker')->isGranted('ROLE_DONATOR')) {    // && $this->getUser()->getProjects()->find($projectId)
+            //$userId = $this->getUser()->getId();
+            $userId = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:User')->find(1);
 
             $form = $this->createFormBuilder()
                 ->add('username')
@@ -318,7 +319,7 @@ class UserController extends Controller
                     $responseArray = (object)$responseArray;
 
                     return new JsonResponse($responseArray);
-                } else if ($this->getDoctrine()->getRepository('HtlSpendenportalBundle:User')->findOneBy(array('username' => $data["username"]))) {
+                } else if ($this->getDoctrine()->getRepository('HtlSpendenportalBundle:User')->findOneBy(array('email' => $data["email"]))) {
                     $item = array(
                         "username" => false,
                         "email" => true,
@@ -339,7 +340,7 @@ class UserController extends Controller
 
                     return new JsonResponse($responseArray);
                 }
-            }
+            //}
             return new JsonResponse(false);
         }
         return new JsonResponse(false);
