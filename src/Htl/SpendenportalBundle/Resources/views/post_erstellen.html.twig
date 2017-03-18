@@ -1,0 +1,83 @@
+{% if is_granted('ROLE_RECEIVER') %}
+
+    {% embed "HtlSpendenportalBundle::header.html.twig" %}
+        {# override the title-tag text #}
+        {% block title_text %}
+            Spendenverbindet | POST ERSTELLEN
+        {% endblock %}
+    {% endembed %}
+
+    <div class="helper-navbar"></div>
+
+    <div class="container">
+        <form method="POST" action="/insertPost" enctype="multipart/form-data" >
+
+            <div class="row fisrt-ent-section">
+                <div class="col-xs-12 col-md-6 text-center"><h2>POST ERSTELLEN</h2></div>
+                <div class="col-xs-12 col-md-6">
+                    <div class="row second-ent-section text-center">
+                        <button id="saveButtonId" ng-click="titlePictureSelected()" type="submit" style="margin-top:27px;" class="uk-button uk-button-primary"><span style="font-size:18px;">POST ERSTELLEN</span></button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-12 col-sm-6" style="padding:50px;padding-top: 0">
+
+                    <img id="image" />
+
+                    <input name="postPictureUrl" style="display:none" id="myupload" type="file" size="100" accept="image/*" required>
+                    <span ng-show="displayTitelPictureError" style="color:red"><b id="errorMsgId">Kein Titelbild ausgewählt</b></span>
+                    <div class="clickable" style="text-align: center;width:100%;height:100px;background-color:gray;" ng-click="clickUpload()" >
+                        <span style="color:white;vertical-align: middle;line-height: 100px;"><i style="padding-right:5px;" class="fa fa-upload fa-3x" aria-hidden="true"></i> <span id="fileTextId">Bild hochladen</span></span>
+                    </div>
+
+                    <script>
+                        document.getElementById("myupload").onchange = function () {
+
+                            var fileName = $(this).val().split('/').pop().split('\\').pop();
+
+                            if(fileName.match(/.(jpg|jpeg|png|gif|JPG|JPEG|PNG|GIF)$/i)){
+                                document.getElementById('fileTextId').innerHTML = fileName;
+                                document.getElementById('fileTextId').setAttribute("style","color:white");
+                                document.getElementById('saveButtonId').disabled = false;
+                                document.getElementById('errorMsgId').innerHTML = "";
+
+                                var reader = new FileReader();
+
+                                reader.onload = function (e) {
+                                    // get loaded data and render thumbnail.
+                                    document.getElementById("image").src = e.target.result;
+                                };
+                                // read the image file as a data URL.
+                                reader.readAsDataURL(this.files[0]);
+
+                            }else{
+                                document.getElementById('fileTextId').innerHTML = "Nur Bilder möglich!";
+                                document.getElementById('fileTextId').setAttribute("style","color:red");
+                                document.getElementById('saveButtonId').disabled = true;
+                                document.getElementById("image").src = "";
+                            }
+                        };
+
+                    </script>
+
+                </div>
+                <div class="col-xs-12 col-sm-6" style="padding:50px;padding-top:0">
+                    <input title="Titel muss mindestens 4 Zeichen haben, maximal 50" name="title" style="margin-top:25px;padding:10px;width:100%;border:1px solid black;font-weight: bold;font-size: 20pt;" placeholder="Titel" pattern=".{4,50}" type="text" required>
+                    <small style="color:#47A1DE;font-size:18px;">Titel</small>
+                    <textarea title="Post Text muss mindestens 20 Zeichen haben, maximal 10000" name="postText" minlength="20" maxlength="10000" style="box-sizing: border-box;margin-top:25px;padding:10px;width:100%;border:1px solid black;font-size: 15pt;height:500px;" placeholder="Post-text" rows="4" cols="50" required></textarea>
+                    <small style="color:#47A1DE;font-size:18px;">Post Text</small>
+                </div>
+            </div>
+
+        </form>
+    </div>
+
+
+
+
+
+    {% include "HtlSpendenportalBundle::footer.html.twig" %}
+
+{% endif %}

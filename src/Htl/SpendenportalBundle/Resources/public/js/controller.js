@@ -387,6 +387,8 @@ app.controller('spendenverbindetController', function($scope, $http) {
 
             $scope.allPostsOfCurrentSite = response.data;
 
+            console.log($scope.allPostsOfCurrentSite);
+
             $scope.inishedLoadingProjektDetailCounter+=1;
             $scope.didFinishLoading();
 

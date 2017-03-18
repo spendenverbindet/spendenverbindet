@@ -42,6 +42,10 @@
         <default key="_controller">HtlSpendenportalBundle:Default:mein_profil_spender</default>
     </route>
 
+    <route id="htl_spendenportal_post_erstellen" path="/post_erstellen">
+        <default key="_controller">HtlSpendenportalBundle:Default:post_erstellen</default>
+    </route>
+
 
     <!--                                        FERTL                                              -->
 

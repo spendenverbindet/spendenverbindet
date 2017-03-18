@@ -59,11 +59,15 @@
                             [[activeProject[0].shortinfo]]
                         </p>
                         <button ng-click="redirectToProjekt([[activeProject[0].id]],[[activeProject[0].title]])" class="spenden-detail-btn" style="width:200px;margin-left:0;margin-top:10px;"><span style="font-size:18px">PROJEKT ANSEHEN</span></button>
+                        <br>
+                        <button onclick="location.href='/post_erstellen';" class="spenden-detail-btn" style="width:200px;margin-left:0;margin-top:10px;"><span style="font-size:18px">POST ERSTELLEN</span></button>
                     </div>
                 </div>
 
             <div ng-show="showActiveProject" class="row fisrt-ent-section text-center" style="margin-top:40px;margin-bottom: 50px;">
+
                 <button data-uk-modal="{target:'#follower-modal'}" data-toggle="collapse" class="folgen-detail-btn" style="width:120px;"><span style="font-size:18px">LÖSCHEN</span></button>
+
                 <button onclick="location.href='/projekt_bearbeiten';" class="spenden-detail-btn" style="width:120px;"><span style="font-size:18px">BEARBEITEN</span></button>
 
                 <div id="follower-modal" class="uk-modal">
