@@ -33,6 +33,7 @@ class RegistrationController extends BaseController
         $user = $userManager->createUser();
         $user->setEnabled(false);
 
+
         $event = new GetResponseUserEvent($user, $request);
         $dispatcher->dispatch(FOSUserEvents::REGISTRATION_INITIALIZE, $event);
 
@@ -49,6 +50,20 @@ class RegistrationController extends BaseController
             if ($form->isValid()) {
                 $event = new FormEvent($form, $request);
                 $dispatcher->dispatch(FOSUserEvents::REGISTRATION_SUCCESS, $event);
+
+
+
+                $erg = $user->getIsDonator();
+
+                if($erg == 0){
+                    $rolesArr = array('ROLE_RECEIVER');
+                    $user->setRoles($rolesArr);
+                }else{
+                    $rolesArr = array('ROLE_DONATOR');
+                    $user->setRoles($rolesArr);
+                }
+
+
 
                 $userManager->updateUser($user);
 
@@ -74,4 +89,6 @@ class RegistrationController extends BaseController
             'form' => $form->createView(),
         ));
     }
+
+
 }

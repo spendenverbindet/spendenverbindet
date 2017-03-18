@@ -339,9 +339,11 @@ app.controller('spendenverbindetController', function($scope, $http) {
         function callThisFuncAfterAllPicturesLoaded() {
 
             // Schon gespendet button ein/ausblenden anfang
-            var hasDonated = document.getElementById("getHasDonatedValueId").innerHTML;
-            if(hasDonated == "true" ){
-                document.getElementById("ifDonatedShowId").setAttribute("style", "display:block");
+            window.onload = function () {
+                var hasDonated = document.getElementById("getHasDonatedValueId").innerHTML;
+                if(hasDonated == "true" ){
+                    document.getElementById("ifDonatedShowId").setAttribute("style", "display:block");
+                }
             }
             // Schon gespendet button ein/ausblenden ende
 
@@ -611,6 +613,9 @@ app.controller('spendenverbindetController', function($scope, $http) {
 
     $scope.setProjectToDeleted = function(){
 
+        document.getElementById('delBtnId').setAttribute("disabled","disabled");
+        document.body.style.cursor='wait';
+
         var config = {
             headers : {
                 'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;'
@@ -619,6 +624,7 @@ app.controller('spendenverbindetController', function($scope, $http) {
 
         $http.post('/deleteProject', null, config).then(function successCallback(response) {
             location.reload();
+            document.body.style.cursor='default';
         }, function errorCallback(response) {
             console.log(response);
         });
