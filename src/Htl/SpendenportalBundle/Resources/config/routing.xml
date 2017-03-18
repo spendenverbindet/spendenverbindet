@@ -129,7 +129,7 @@
         <default key="_controller">HtlSpendenportalBundle:Post:listFromProject</default>
     </route>
 
-    <route id="creatingProject" path="/insertPost/{projectId}" methods="POST">
+    <route id="creatingProject" path="/insertPost" methods="POST">
         <default key="_controller">HtlSpendenportalBundle:Post:create</default>
     </route>
 

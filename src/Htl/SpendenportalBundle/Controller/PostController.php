@@ -63,7 +63,7 @@ class PostController extends Controller
 
     }
     
-    public function createAction($projectId, Request $request)
+    public function createAction(Request $request)
     {
 
         if ($this->get('security.authorization_checker')->isGranted('ROLE_RECEIVER')) {
@@ -80,73 +80,80 @@ class PostController extends Controller
 
                 if ($form->isSubmitted()) {
 
-                    $date = new \DateTime('now');
+                    $projects = $this->getUser()->getProjects();
 
-                    // data is an array with "phone" and "period" keys
-                    $data = $form->getData();
+                    foreach ($projects as $project) {
+                        if ($project->getActive()) {
+                            $projectId = $project->getId();
+                            $date = new \DateTime('now');
 
-                    $em = $this->getDoctrine()->getManager();
+                            // data is an array with "phone" and "period" keys
+                            $data = $form->getData();
 
-                    $post = new Post();
-                    $post->setTitle($data['title']);
-                    $post->setPostText($data['postText']);
-                    $post->setCreatedAt($date);
-                    $post->setProjects($this->getDoctrine()->getRepository('HtlSpendenportalBundle:Project')->find($projectId));
+                            $em = $this->getDoctrine()->getManager();
 
-                    $rand = rand(1, 300);
-                    $target_dir = $_SERVER['DOCUMENT_ROOT'] . '/bundles/htlspendenportal/img/';
-                    $filename = trim(addslashes($_FILES['postPictureUrl']['name']));
-                    $filename = $rand.preg_replace('/\s+/', '_', $filename);
-                    $target_file = $target_dir . $filename;
-                    $post->setPostPictureUrl($filename);
-                    $uploadOk = 1;
-                    $imageFileType = pathinfo($target_file, PATHINFO_EXTENSION);
-                    // Check if image file is a actual image or fake image
-                    if (isset($_POST["submit"])) {
-                        $check = getimagesize($_FILES["postPictureUrl"]["tmp_name"]);
-                        if ($check !== false) {
+                            $post = new Post();
+                            $post->setTitle($data['title']);
+                            $post->setPostText($data['postText']);
+                            $post->setCreatedAt($date);
+                            $post->setProjects($this->getDoctrine()->getRepository('HtlSpendenportalBundle:Project')->find($projectId));
+
+                            $rand = rand(1, 300);
+                            $target_dir = $_SERVER['DOCUMENT_ROOT'] . '/bundles/htlspendenportal/img/';
+                            $filename = trim(addslashes($_FILES['postPictureUrl']['name']));
+                            $filename = $rand . preg_replace('/\s+/', '_', $filename);
+                            $target_file = $target_dir . $filename;
+                            $post->setPostPictureUrl($filename);
                             $uploadOk = 1;
-                        } else {
-                            $uploadOk = 0;
-                            return new JsonResponse("File is not an image.");
+                            $imageFileType = pathinfo($target_file, PATHINFO_EXTENSION);
+                            // Check if image file is a actual image or fake image
+                            if (isset($_POST["submit"])) {
+                                $check = getimagesize($_FILES["postPictureUrl"]["tmp_name"]);
+                                if ($check !== false) {
+                                    $uploadOk = 1;
+                                } else {
+                                    $uploadOk = 0;
+                                    return new JsonResponse("File is not an image.");
+                                }
+                            }
+                            // Check file size
+                            if ($_FILES["postPictureUrl"]["size"] > 6000000) {
+                                $uploadOk = 0;
+                                return new JsonResponse("Sorry, your file is too large. Maximal 750kB");
+                            }
+                            // Allow certain file formats
+
+                            if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
+                                && $imageFileType != "gif" && $imageFileType != "JPG" && $imageFileType != "PNG" && $imageFileType != "JPEG"
+                                && $imageFileType != "GIF" && $imageFileType != ""
+                            ) {
+                                $uploadOk = 0;
+                                return new JsonResponse("Sorry, only JPG, JPEG, PNG & GIF files are allowed.");
+                            }
+
+                            // Check if $uploadOk is set to 0 by an error
+                            if ($uploadOk == 0) {
+                                return new JsonResponse("Sorry, your file was not uploaded.");
+                                // if everything is ok, try to upload file
+                            } else {
+                                if (move_uploaded_file($_FILES["postPictureUrl"]["tmp_name"], $target_file)) {
+                                } else {
+                                    return new JsonResponse("Sorry, there was an error uploading your file.");
+                                }
+                            }
+
+
+                            $em = $this->getDoctrine()->getManager();
+
+                            // tells Doctrine you want to (eventually) save the Product (no queries yet)
+                            $em->persist($post);
+
+                            // actually executes the queries (i.e. the INSERT query)
+                            $em->flush();
+
+                            return $this->redirectToRoute('htl_spendenportal_projekt_bearbeiten');
                         }
                     }
-                    // Check file size
-                    if ($_FILES["postPictureUrl"]["size"] > 6000000) {
-                        $uploadOk = 0;
-                        return new JsonResponse("Sorry, your file is too large. Maximal 750kB");
-                    }
-                    // Allow certain file formats
-
-                    if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
-                        && $imageFileType != "gif" && $imageFileType != "JPG" && $imageFileType != "PNG" && $imageFileType != "JPEG"
-                        && $imageFileType != "GIF" && $imageFileType != ""
-                    ) {
-                        $uploadOk = 0;
-                        return new JsonResponse("Sorry, only JPG, JPEG, PNG & GIF files are allowed.");
-                    }
-
-                    // Check if $uploadOk is set to 0 by an error
-                    if ($uploadOk == 0) {
-                        return new JsonResponse("Sorry, your file was not uploaded.");
-                        // if everything is ok, try to upload file
-                    } else {
-                        if (move_uploaded_file($_FILES["postPictureUrl"]["tmp_name"], $target_file)) {
-                        } else {
-                            return new JsonResponse("Sorry, there was an error uploading your file.");
-                        }
-                    }
-
-
-                    $em = $this->getDoctrine()->getManager();
-
-                    // tells Doctrine you want to (eventually) save the Product (no queries yet)
-                    $em->persist($post);
-
-                    // actually executes the queries (i.e. the INSERT query)
-                    $em->flush();
-
-                    return $this->redirectToRoute('htl_spendenportal_projekt_bearbeiten');
                 }
                 return false;
             }
