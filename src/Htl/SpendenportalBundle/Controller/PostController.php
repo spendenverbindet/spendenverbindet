@@ -11,7 +11,15 @@ use Htl\SpendenportalBundle\Entity\Post;
 class PostController extends Controller
 {
     public function listFromProjectAction($projectId){
+
         if ($this->get('security.authorization_checker')->isGranted('ROLE_DONATOR') && $this->hasDonated($projectId)) {
+            $security = true;
+        }else{
+            $security = false;
+        }
+        if($this->get('security.authorization_checker')->isGranted('ROLE_DONATOR') || $security){
+
+
 
             $projects = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:Project')->find($projectId);
 
@@ -151,6 +159,7 @@ class PostController extends Controller
                             // actually executes the queries (i.e. the INSERT query)
                             $em->flush();
 
+                            return $this->render('HtlSpendenportalBundle::projektdetail.html.twig');
                             return $this->redirectToRoute('htl_spendenportal_projekt_bearbeiten');
                         }
                     }
