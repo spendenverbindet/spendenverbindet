@@ -14,13 +14,13 @@
     <div ng-init="initMeinProfilEmpfaenger()" class="helper-navbar"></div>
 
     <div class="container">
-        <form id="addActionId" method="POST" {# action="/updateUser" #} enctype="multipart/form-data" >
+        <form id="addActionId" method="POST" enctype="multipart/form-data" >
 
             <div class="row fisrt-ent-section">
                 <div class="col-xs-12 col-md-6 text-center"><h2>MEIN PROFIL</h2></div>
                 <div class="col-xs-12 col-md-6">
                     <div class="row second-ent-section text-center">
-                        <button ng-click="checkIfUsernameOrEmalExists()" id="saveButtonId" type="submit" style="margin-top:27px;" class="uk-button uk-button-primary"><span id="btnTextId" style="font-size:18px;">PROFIL GESPEICHERT</span></button>
+                        <button data-ng-click="checkIfUsernameOrEmalExists()" id="saveButtonId" type="submit" style="margin-top:27px;" class="uk-button uk-button-primary"><span id="btnTextId" style="font-size:18px;">PROFIL GESPEICHERT</span></button>
                     </div>
                 </div>
             </div>

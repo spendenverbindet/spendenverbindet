@@ -14,13 +14,13 @@
     <div ng-init="initMeinProfilEmpfaenger()" class="helper-navbar"></div>
 
     <div class="container">
-        <form method="POST" action="/updateUser" enctype="multipart/form-data" >
+        <form id="addActionId" method="POST" action="/updateUser" enctype="multipart/form-data" >
 
             <div class="row fisrt-ent-section">
                 <div class="col-xs-12 col-md-6 text-center"><h2>MEIN PROFIL</h2></div>
                 <div class="col-xs-12 col-md-6">
                     <div class="row second-ent-section text-center">
-                        <button id="saveButtonId" type="submit" style="margin-top:27px;" class="uk-button uk-button-primary"><span id="btnTextId" style="font-size:18px;">PROFIL GESPEICHERT</span></button>
+                        <button data-ng-click="checkIfUsernameOrEmalExists()" id="saveButtonId" type="submit" style="margin-top:27px;" class="uk-button uk-button-primary"><span id="btnTextId" style="font-size:18px;">PROFIL GESPEICHERT</span></button>
                     </div>
                 </div>
             </div>
@@ -34,10 +34,10 @@
                     <input onkeyup="changeBtnText()" value="[[empfaengerProfilInfo[0].lastname]]" title="Nachname muss mindestens 3 Zeichen haben, maximal 20" name="lastname" style="margin-top:25px;padding:10px;width:100%;border:1px solid black;font-weight: bold;font-size: 20pt;" placeholder="Nachname" pattern=".{3,20}" type="text" required>
                     <small style="color:#47A1DE;font-size:18px;">Nachname</small>
 
-                    <input onkeyup="changeBtnText()" value="[[empfaengerProfilInfo[0].email]]" title="Muss eine valide Email-Adresse sein" name="email" style="margin-top:25px;padding:10px;width:100%;border:1px solid black;font-weight: bold;font-size: 20pt;" placeholder="Email" pattern="[^@]+@[^@]+\.[a-zA-Z]{2,6}" type="text" required>
+                    <input id="emailID" onkeyup="changeBtnText()" value="[[empfaengerProfilInfo[0].email]]" title="Muss eine valide Email-Adresse sein" name="email" style="margin-top:25px;padding:10px;width:100%;border:1px solid black;font-weight: bold;font-size: 20pt;" placeholder="Email" pattern="[^@]+@[^@]+\.[a-zA-Z]{2,6}" type="text" required>
                     <small style="color:#47A1DE;font-size:18px;">Email</small>
 
-                    <input onkeyup="changeBtnText()" value="[[empfaengerProfilInfo[0].username]]" title="Benutzername muss mindestens 3 Zeichen haben, maximal 20" name="username" style="margin-top:25px;padding:10px;width:100%;border:1px solid black;font-weight: bold;font-size: 20pt;" placeholder="Benutzername" pattern=".{3,20}" type="text" required>
+                    <input id="usernameID" onkeyup="changeBtnText()" value="[[empfaengerProfilInfo[0].username]]" title="Benutzername muss mindestens 3 Zeichen haben, maximal 20" name="username" style="margin-top:25px;padding:10px;width:100%;border:1px solid black;font-weight: bold;font-size: 20pt;" placeholder="Benutzername" pattern=".{3,20}" type="text" required>
                     <small style="color:#47A1DE;font-size:18px;">Benutzername</small>
 
                     <input onchange="changeBtnText()" value="[[empfaengerProfilInfo[0].birthday]]" title="Geburtsdatum muss angegeben werden" name="age" style="margin-top:25px;padding:10px;width:100%;border:1px solid black;font-weight: bold;font-size: 20pt;" type="date" required>

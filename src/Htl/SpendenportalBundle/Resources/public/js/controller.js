@@ -634,17 +634,11 @@ app.controller('spendenverbindetController', function($scope, $http) {
 
     $scope.checkIfUsernameOrEmalExists = function(){
 
-
-
         document.getElementById('saveButtonId').setAttribute("disabled","disabled");
         document.body.style.cursor='wait';
 
         var username = document.getElementById("usernameID").value;
         var email = document.getElementById('emailID').value;
-
-        console.log(username);
-        console.log(email);
-
 
         var config = {
             headers : {
@@ -667,9 +661,9 @@ app.controller('spendenverbindetController', function($scope, $http) {
 
                     // add action to btn and trigger the button
 
-                    console.log("yeah");
-                    //document.getElementById('addActionId').setAttribute("action","/updateUser");
-                   // document.getElementById('saveButtonId').click();
+                    document.getElementById('addActionId').setAttribute("action","/updateUser");
+
+                    document.forms["addActionId"].submit();
                     
                 }else{
                     // Username gibts bereits
@@ -686,8 +680,6 @@ app.controller('spendenverbindetController', function($scope, $http) {
         }, function errorCallback(response) {
             console.log(response);
         });
-
-
     }
     
     
