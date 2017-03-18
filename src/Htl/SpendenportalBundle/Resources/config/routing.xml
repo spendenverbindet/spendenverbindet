@@ -232,7 +232,7 @@
         <default key="_controller">HtlSpendenportalBundle:User:listProjectsFromUser</default>
     </route>
 
-    <route id="ifalreadygiven" path="/alreadyGiven" methods="GET">
+    <route id="ifalreadygiven" path="/alreadyGiven" methods="POST">
         <default key="_controller">HtlSpendenportalBundle:User:ifAlreadyGiven</default>
     </route>
 

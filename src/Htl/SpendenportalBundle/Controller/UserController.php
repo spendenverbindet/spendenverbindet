@@ -340,7 +340,9 @@ class UserController extends Controller
                     return new JsonResponse($responseArray);
                 }
             }
+            return new JsonResponse(false);
         }
+        return new JsonResponse(false);
 
     }
 
