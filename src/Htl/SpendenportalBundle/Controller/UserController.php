@@ -340,7 +340,29 @@ class UserController extends Controller
 
                         return new JsonResponse($responseArray);
                     }
-                } else if($this->getUser()->getEmail() == $data["email"] && $this->getUser()->getUsername() != $data["Username"]){
+                } else if($this->getUser()->getUsername() == $data["username"] && $this->getUser()->getEmail() != $data["email"]){
+                    if ($this->getDoctrine()->getRepository('HtlSpendenportalBundle:User')->findOneBy(array('email' => $data["email"]))) {
+                        $item = array(
+                            "username" => false,
+                            "email" => true,
+                        );
+                        array_push($responseArray, $item);
+
+                        $responseArray = (object)$responseArray;
+
+                        return new JsonResponse($responseArray);
+                    } else {
+                        $item = array(
+                            "username" => false,
+                            "email" => false,
+                        );
+                        array_push($responseArray, $item);
+
+                        $responseArray = (object)$responseArray;
+
+                        return new JsonResponse($responseArray);
+                    }
+                } else if($this->getUser()->getUsername() != $data["username"] && $this->getUser()->getEmail() == $data["email"]){
                     if ($this->getDoctrine()->getRepository('HtlSpendenportalBundle:User')->findOneBy(array('username' => $data["username"]))) {
                         $item = array(
                             "username" => true,
@@ -362,28 +384,6 @@ class UserController extends Controller
 
                         return new JsonResponse($responseArray);
                     }
-                }else if($this->getUser()->getUsername() != $data["username"] && $this->getUser()->getEmail() != $data["email"]){
-                    if ($this->getDoctrine()->getRepository('HtlSpendenportalBundle:User')->findOneBy(array('email' => $data["email"]))) {
-                        $item = array(
-                            "username" => false,
-                            "email" => true,
-                        );
-                        array_push($responseArray, $item);
-
-                        $responseArray = (object)$responseArray;
-
-                        return new JsonResponse($responseArray);
-                    }
-                } else{
-                    $item = array(
-                        "username" => false,
-                        "email" => false,
-                    );
-                    array_push($responseArray, $item);
-
-                    $responseArray = (object)$responseArray;
-
-                    return new JsonResponse($responseArray);
                 }
                 $item = array(
                     "username" => false,
