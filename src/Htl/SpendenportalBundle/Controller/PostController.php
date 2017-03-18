@@ -47,6 +47,47 @@ class PostController extends Controller
         return new JsonResponse(null);
     }
 
+    public function listFromActiveProjectAction(){
+        $projects = $this->getUser()->getProjects();
+        foreach($projects as $project){
+            if($project->getActive()){
+                $projectId  = $project->getId();
+                if ($this->get('security.authorization_checker')->isGranted('ROLE_DONATOR') && $this->hasDonated($projectId)) {
+                    $security = true;
+                }else{
+                    $security = false;
+                }
+                if($this->get('security.authorization_checker')->isGranted('ROLE_RECEIVER') || $security){
+
+
+
+                    $projects = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:Project')->find($projectId);
+
+                    $post = $projects->getPost();
+
+                    $responseArray = array();
+
+                    for ($i = 0; $i < count($post); $i++) {
+                        $item = array(
+                            "id" => $post[$i]->getId(),
+                            "title" => $post[$i]->getTitle(),
+                            "postPictureUrl" => $post[$i]->getPostPictureUrl(),
+                            "postTitle" => $post[$i]->getTitle(),
+                            "postText" => $post[$i]->getPostText(),
+                            "created_at" => $post[$i]->getCreatedAt()
+                        );
+                        array_push($responseArray, $item);
+                    }
+
+                    $responseArray = (object)$responseArray;
+
+                    return new JsonResponse($responseArray);
+                }
+            }
+        }
+        return new JsonResponse("fail");
+    }
+
     public function hasDonated($projectId){
         //anzahl der ProjectIds checken
 
