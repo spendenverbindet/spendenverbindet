@@ -7,7 +7,6 @@
     <input type="submit" value="{{ 'registration.submit'|trans }}" />
 </div>
 {{ form_end(form) }}
-
 #}
 
 <script>
@@ -25,29 +24,52 @@
     <div class="form-group" id="fos_user_registration_form">
 
 
-        {{ form_widget(form.firstname, { 'attr': {'style': 'padding:5px;width:250px;border:1px solid black;', 'placeholder': 'Vorname'|trans } }) }}
+        {{ form_widget(form.firstname, { 'attr': {'pattern':'.{3,20}', 'title' : 'Vorname muss mindestens 3 Zeichen haben, maximal 20', 'style': 'padding:5px;width:250px;border:1px solid black;', 'placeholder': 'Vorname'|trans } }) }}
         <small style="color:#47A1DE;font-size:13px;margin-bottom: 15px">Vorname</small>
         {{ form_errors(form.firstname) }}
 
-        {{ form_widget(form.lastname, { 'attr': {'style': 'margin-top:10px;padding:5px;width:250px;border:1px solid black;', 'placeholder': 'Nachname'|trans } }) }}
+        {{ form_widget(form.lastname, { 'attr': {'pattern':'.{3,20}', 'title' : 'Nachname muss mindestens 3 Zeichen haben, maximal 20', 'style': 'margin-top:10px;padding:5px;width:250px;border:1px solid black;', 'placeholder': 'Nachname'|trans } }) }}
         <small style="color:#47A1DE;font-size:13px;margin-bottom: 15px">Nachname</small>
         {{ form_errors(form.lastname) }}
 
-        {{ form_widget(form.email, { 'attr': {'style': 'margin-top:10px;padding:5px;width:250px;border:1px solid black;', 'placeholder': 'Email'|trans } }) }}
+        {{ form_widget(form.email, { 'attr': {'pattern':'[^@]+@[^@]+\.[a-zA-Z]{2,6}', 'title' : 'Muss eine valide Email-Adresse sein', 'style': 'margin-top:10px;padding:5px;width:250px;border:1px solid black;', 'placeholder': 'Email'|trans } }) }}
         <small style="color:#47A1DE;font-size:13px;margin-bottom: 15px">Email</small>
-        {{ form_errors(form.email) }}
 
-        {{ form_widget(form.username, { 'attr': {'style': 'margin-top:10px;padding:5px;width:250px;border:1px solid black;', 'placeholder': 'Benutzername'|trans } }) }}
+        {% if form_errors(form.email) %}
+            <br>
+            <span style="color:red">Email bereits vergeben</span>
+            <br>
+        {% endif %}
+
+
+        {{ form_widget(form.username, { 'attr': {'pattern':'.{3,20}', 'title' : 'Benutzername muss mindestens 3 Zeichen haben, maximal 20', 'style': 'margin-top:10px;padding:5px;width:250px;border:1px solid black;', 'placeholder': 'Benutzername'|trans } }) }}
         <small style="color:#47A1DE;font-size:13px;margin-bottom: 15px">Benutzername</small>
-        {{ form_errors(form.username) }}
 
-        {{ form_widget(form.plainPassword.first, { 'attr': {'style': 'margin-top:10px;padding:5px;width:250px;border:1px solid black;', 'placeholder': 'Passwort'|trans } }) }}
+        {% if form_errors(form.username) %}
+            <br>
+            <span style="color:red">Benutzername bereits vergeben</span>
+            <br>
+        {% endif %}
+
+
+        {{ form_widget(form.plainPassword.first, { 'attr': {'pattern':'.{5,}', 'title' : 'Passwort muss mindestens 5 Zeichen haben', 'style': 'margin-top:10px;padding:5px;width:250px;border:1px solid black;', 'placeholder': 'Passwort'|trans } }) }}
         <small style="color:#47A1DE;font-size:13px;margin-bottom: 15px">Passwort</small>
         {{ form_errors(form.plainPassword.first) }}
 
-        {{ form_widget(form.plainPassword.second, { 'attr': {'style': 'margin-top:10px;padding:5px;width:250px;border:1px solid black;', 'placeholder': 'Passwort bestätigen'|trans } }) }}
+        {{ form_widget(form.plainPassword.second, { 'attr': {'oninput': 'check(this)' ,'pattern':'.{5,}', 'title' : 'Passwort bestätigen muss mindestens 5 Zeichen haben', 'style': 'margin-top:10px;padding:5px;width:250px;border:1px solid black;', 'placeholder': 'Passwort bestätigen'|trans } }) }}
         <small style="color:#47A1DE;font-size:13px;margin-bottom: 15px">Passwort bestätigen</small>
         {{ form_errors(form.plainPassword.second) }}
+
+        <script>
+            function check(input) {
+                if (input.value != document.getElementById('fos_user_registration_form_plainPassword_first').value) {
+                    input.setCustomValidity('Passwort muss übereinstimmen');
+                } else {
+                    input.setCustomValidity('');
+                }
+            }
+        </script>
+
 
         {{ form_widget(form.age, { 'attr': {'style': 'margin-top:10px;padding:5px;width:250px;border:1px solid black;'} }) }}
         <small style="color:#47A1DE;font-size:13px;margin-bottom: 15px">Geburtsdatum</small>
@@ -67,21 +89,96 @@
         {{ form_widget(form.isDonator, { 'attr': {'': ''} }) }}
         {{ form_errors(form.isDonator) }}
 
-        {{ form_widget(form.town, { 'attr': {'style': 'margin-top:20px;padding:5px;width:250px;border:1px solid black;', 'placeholder': 'Stadt'|trans } }) }}
-        <small style="color:#47A1DE;font-size:13px;margin-bottom: 15px">Stadt</small>
-        {{ form_errors(form.town) }}
+        <div id="switch" style="display:none">
+            {{ form_widget(form.town, { 'attr': {'pattern':'.{3,20}', 'title' : 'Stadt muss mindestens 3 Zeichen haben, maximal 20', 'style': 'margin-top:20px;padding:5px;width:250px;border:1px solid black;', 'placeholder': 'Stadt'|trans } }) }}
+            <small style="color:#47A1DE;font-size:13px;margin-bottom: 15px">Stadt</small>
+            {{ form_errors(form.town) }}
 
-        {{ form_widget(form.zipcode, { 'attr': {'style': 'margin-top:10px;padding:5px;width:250px;border:1px solid black;', 'placeholder': 'Postleitzahl'|trans } }) }}
-        <small style="color:#47A1DE;font-size:13px;margin-bottom: 15px">Postleitzahl</small>
-        {{ form_errors(form.zipcode) }}
+            {{ form_widget(form.zipcode, { 'attr': {'pattern':'[0-9]{4}', 'title' : 'Muss eine valide Postleitzahl von Österreich sein', 'style': 'margin-top:10px;padding:5px;width:250px;border:1px solid black;', 'placeholder': 'Postleitzahl'|trans } }) }}
+            <small style="color:#47A1DE;font-size:13px;margin-bottom: 15px">Postleitzahl</small>
+            {{ form_errors(form.zipcode) }}
 
-        {{ form_widget(form.street, { 'attr': {'style': 'margin-top:10px;padding:5px;width:250px;border:1px solid black;', 'placeholder': 'Straße'|trans } }) }}
-        <small style="color:#47A1DE;font-size:13px;margin-bottom: 15px">Straße</small>
-        {{ form_errors(form.street) }}
+            {{ form_widget(form.street, { 'attr': {'pattern':'.{3,20}', 'title' : 'Straßenname muss mindestens 3 Zeichen haben, maximal 20', 'style': 'margin-top:10px;padding:5px;width:250px;border:1px solid black;', 'placeholder': 'Straße'|trans } }) }}
+            <small style="color:#47A1DE;font-size:13px;margin-bottom: 15px">Straße</small>
+            {{ form_errors(form.street) }}
 
-        {{ form_widget(form.housenumberDoornumber, { 'attr': {'style': 'margin-top:10px;padding:5px;width:250px;border:1px solid black;', 'placeholder': 'Straße'|trans } }) }}
-        <small style="color:#47A1DE;font-size:13px;margin-bottom: 15px">Hausnr. Stiege / Tür</small>
-        {{ form_errors(form.housenumberDoornumber) }}
+            {{ form_widget(form.housenumberDoornumber, { 'attr': {'pattern':'.{1,30}', 'title' : 'Dieses Feld muss mindestens 1 Zeichen haben, maximal 30', 'style': 'margin-top:10px;padding:5px;width:250px;border:1px solid black;', 'placeholder': 'Hausnr. Stiege / Tür'|trans } }) }}
+            <small style="color:#47A1DE;font-size:13px;margin-bottom: 15px">Hausnr. Stiege / Tür</small>
+            {{ form_errors(form.housenumberDoornumber) }}
+
+            <div ng-click="clickUpload3()" style="margin-top:10px;width:100%;text-align: center;height:50px;" class="folgen-detail-btn clickable">
+                <span style="color:white;vertical-align: middle;line-height: 50px;"><i style="padding-right:5px;" class="fa fa-upload fa-1x" aria-hidden="true"></i><span id="uploadTxtId">Pdf hochladen</span></span>
+            </div>
+
+            {{ form_widget(form.fileUpload, { 'attr': { 'style': 'display:none;margin-top:10px;padding:5px;width:250px;border:1px solid black;', 'placeholder': ''|trans } }) }}
+            <small style="color:#47A1DE;font-size:13px;margin-bottom: 15px">Bedürftigkeitsnachweis als PDF</small>
+            {{ form_errors(form.fileUpload) }}
+            <br>
+            <span id="uploadErrorMsg" style="display:none;color:red;font-size:15px;">Bitte PDF hochladen</span>
+
+
+        </div>
+
+        <script>
+            window.onload = function () {
+                document.getElementById('fos_user_registration_form_fileUpload').removeAttribute("required");
+
+
+                document.getElementById("fos_user_registration_form_isDonator_0").addEventListener("click", function(){
+                    document.getElementById("switch").style.display = "none";
+
+                    document.getElementById("fos_user_registration_form_town").removeAttribute("required");
+                    document.getElementById("fos_user_registration_form_zipcode").removeAttribute("required");
+                    document.getElementById("fos_user_registration_form_street").removeAttribute("required");
+                    document.getElementById("fos_user_registration_form_housenumberDoornumber").removeAttribute("required");
+                    document.getElementById("fos_user_registration_form_fileUpload").removeAttribute("required");
+                });
+
+                document.getElementById("fos_user_registration_form_isDonator_1").addEventListener("click", function(){
+                    document.getElementById("switch").style.display = "block";
+
+                    document.getElementById("fos_user_registration_form_town").setAttribute("required","required");
+                    document.getElementById("fos_user_registration_form_zipcode").setAttribute("required","required");
+                    document.getElementById("fos_user_registration_form_street").setAttribute("required","required");
+                    document.getElementById("fos_user_registration_form_housenumberDoornumber").setAttribute("required","required");
+                    document.getElementById("fos_user_registration_form_fileUpload").setAttribute("required","required");
+
+                });
+
+            }
+
+            function pdfInputBlank(){
+
+                var fullPath = document.getElementById('fos_user_registration_form_fileUpload').value;
+
+                if(fullPath){
+                    document.getElementById('uploadErrorMsg').style.display = "none";
+                }else{
+                    document.getElementById('uploadErrorMsg').innerHTML = "Bitte PDF hochladen";
+                    document.getElementById('uploadErrorMsg').style.display = "block";
+                }
+            }
+
+
+            document.getElementById("fos_user_registration_form_fileUpload").onchange = function () {
+
+                var fileName = $(this).val().split('/').pop().split('\\').pop();
+
+                document.getElementById('uploadTxtId').innerHTML = fileName;
+
+                if(fileName.match(/.(pdf|PDF)$/i)){
+                    document.getElementById('uploadErrorMsg').style.display = "none";
+                    document.getElementById('uploadErrorMsg').innerHTML = "Bitte PDF hochladen";
+                    document.getElementById('saveButtonId').disabled = false;
+                }else{
+                    document.getElementById('uploadErrorMsg').style.display = "block";
+                    document.getElementById('uploadErrorMsg').innerHTML = "Nur PDF möglich";
+                    document.getElementById('saveButtonId').disabled = true;
+                }
+            };
+
+
+        </script>
 
 
 
@@ -89,50 +186,7 @@
     </div>
 
     <div class="row text-center">
-        <input style="margin-top:40px" class="folgen-detail-btn" type="submit" value="{{ 'Registrieren'|trans }}" />
+        <input id="saveButtonId" onclick="pdfInputBlank()" style="margin-top:40px" class="folgen-detail-btn" type="submit" value="{{ 'Registrieren'|trans }}" />
     </div>
 
 </form>
-
-
-
-
-
-{#
-
-<form name="fos_user_registration_form" method="post" action="/register/" class="fos_user_registration_register form-searchbar" enctype="multipart/form-data">
-
-        <div id="fos_user_registration_form">
-
-            <div class="row text-center">
-                <h2 class="form-signin-heading">Registrieren</h2>
-            </div>
-
-
-            <div><input type="email" id="fos_user_registration_form_email" name="fos_user_registration_form[email]" required="required" /></div>
-            <div><label for="fos_user_registration_form_username" class="required">form.username</label><input type="text" id="fos_user_registration_form_username" name="fos_user_registration_form[username]" required="required" maxlength="255" pattern=".{2,}" /></div>
-            <div><label for="fos_user_registration_form_plainPassword_first" class="required">form.password</label><input type="password" id="fos_user_registration_form_plainPassword_first" name="fos_user_registration_form[plainPassword][first]" required="required" /></div>
-            <div><label for="fos_user_registration_form_plainPassword_second" class="required">form.password_confirmation</label><input type="password" id="fos_user_registration_form_plainPassword_second" name="fos_user_registration_form[plainPassword][second]" required="required" /></div>
-            <div><label for="fos_user_registration_form_firstname" class="required">Firstname</label><input type="text" id="fos_user_registration_form_firstname" name="fos_user_registration_form[firstname]" required="required" maxlength="50" /></div>
-            <div><label for="fos_user_registration_form_lastname" class="required">Lastname</label><input type="text" id="fos_user_registration_form_lastname" name="fos_user_registration_form[lastname]" required="required" maxlength="60" /></div>
-            <div><label for="fos_user_registration_form_age" class="required">Age</label><input type="date" id="fos_user_registration_form_age" name="fos_user_registration_form[age]" required="required" /></div>
-            <div><label for="fos_user_registration_form_street">Street</label><input type="text" id="fos_user_registration_form_street" name="fos_user_registration_form[street]" /></div>
-            <div><label for="fos_user_registration_form_zipcode">Zipcode</label><input type="text" id="fos_user_registration_form_zipcode" name="fos_user_registration_form[zipcode]" maxlength="20" /></div>
-            <div><label for="fos_user_registration_form_housenumberDoornumber">Housenumber doornumber</label><input type="text" id="fos_user_registration_form_housenumberDoornumber" name="fos_user_registration_form[housenumberDoornumber]" maxlength="20" /></div>
-            <div><label for="fos_user_registration_form_town">Town</label><input type="text" id="fos_user_registration_form_town" name="fos_user_registration_form[town]" /></div>
-            <div>
-                <label class="required">Is donator</label>
-                <div id="fos_user_registration_form_isDonator"><input type="radio" id="fos_user_registration_form_isDonator_0" name="fos_user_registration_form[isDonator]" required="required" value="1" /><label for="fos_user_registration_form_isDonator_0" class="required">Spender</label><input type="radio" id="fos_user_registration_form_isDonator_1" name="fos_user_registration_form[isDonator]" required="required" value="0" checked="checked" /><label for="fos_user_registration_form_isDonator_1" class="required">Empfänger</label></div>
-            </div>
-            <div><label for="fos_user_registration_form_fileUpload" class="required">File upload</label><input type="file" id="fos_user_registration_form_fileUpload" name="fos_user_registration_form[fileUpload]" required="required" /></div>
-
-            <input type="hidden" id="fos_user_registration_form__token" name="fos_user_registration_form[_token]" value="{{ csrf_token("intention") }}" />
-
-
-        </div>
-        <div>
-            <input type="submit" value="registration.submit" />
-        </div>
-</form>
-
-#}

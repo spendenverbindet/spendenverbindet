@@ -549,6 +549,10 @@ app.controller('spendenverbindetController', function($scope, $http) {
         document.getElementById('file').click();
     };
 
+    $scope.clickUpload3 = function(){
+        document.getElementById('fos_user_registration_form_fileUpload').click();
+    };
+
     $scope.displayTitelPictureError = false;
 
     $scope.titlePictureSelected = function(){

@@ -26,13 +26,12 @@ class User extends BaseUser
      *
      * @Assert\NotBlank(message="Please enter if you are Spender or Empfaenger", groups={"Registration", "Profile"})
      */
-    protected $isDonator = false;
+    protected $isDonator = true;
 
 
     /**
      * @ORM\Column(name="BeduerftigkeitsbeweisFile", type="string", nullable=true)
      *
-     * @Assert\NotBlank(message="Please, upload the product brochure as a PDF file.")
      * @Assert\File(mimeTypes={ "application/pdf" })
      */
     private $fileUpload;
