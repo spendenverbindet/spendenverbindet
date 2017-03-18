@@ -282,9 +282,9 @@ class UserController extends Controller
     }
     */
     public function ifAlreadyGivenAction(Request $request){
-        //if ($this->get('security.authorization_checker')->isGranted('ROLE_RECEIVER') || $this->get('security.authorization_checker')->isGranted('ROLE_DONATOR')) {    // && $this->getUser()->getProjects()->find($projectId)
+        if ($this->get('security.authorization_checker')->isGranted('ROLE_RECEIVER') || $this->get('security.authorization_checker')->isGranted('ROLE_DONATOR')) {    // && $this->getUser()->getProjects()->find($projectId)
             //$userId = $this->getUser()->getId();
-            $userId = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:User')->find(1);
+            //$userId = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:User')->find(1);
 
             $form = $this->createFormBuilder()
                 ->add('username')
@@ -299,48 +299,83 @@ class UserController extends Controller
                 // data is an array with keys
                 $data = $form->getData();
                 $responseArray = array();
+                if($this->getUser()->getUsername() != $data["username"] && $this->getUser()->getEmail() != $data["email"]){
+                    if ($this->getDoctrine()->getRepository('HtlSpendenportalBundle:User')->findOneBy(array('username' => $data["username"])) && $this->getDoctrine()->getRepository('HtlSpendenportalBundle:User')->findOneBy(array('email' => $data["email"]))) {
+                        $item = array(
+                            "username" => true,
+                            "email" => true,
+                        );
+                        array_push($responseArray, $item);
+                        $responseArray = (object)$responseArray;
 
-                if ($this->getDoctrine()->getRepository('HtlSpendenportalBundle:User')->findOneBy(array('username' => $data["username"])) && $this->getDoctrine()->getRepository('HtlSpendenportalBundle:User')->findOneBy(array('email' => $data["email"]))) {
-                    $item = array(
-                        "username" => true,
-                        "email" => true,
-                    );
-                    array_push($responseArray, $item);
-                    $responseArray = (object)$responseArray;
+                        return new JsonResponse($responseArray);
+                    } else if ($this->getDoctrine()->getRepository('HtlSpendenportalBundle:User')->findOneBy(array('username' => $data["username"]))) {
+                        $item = array(
+                            "username" => true,
+                            "email" => false,
+                        );
+                        array_push($responseArray, $item);
 
-                    return new JsonResponse($responseArray);
-                } else if ($this->getDoctrine()->getRepository('HtlSpendenportalBundle:User')->findOneBy(array('username' => $data["username"]))) {
-                    $item = array(
-                        "username" => true,
-                        "email" => false,
-                    );
-                    array_push($responseArray, $item);
+                        $responseArray = (object)$responseArray;
 
-                    $responseArray = (object)$responseArray;
+                        return new JsonResponse($responseArray);
+                    } else if ($this->getDoctrine()->getRepository('HtlSpendenportalBundle:User')->findOneBy(array('email' => $data["email"]))) {
+                        $item = array(
+                            "username" => false,
+                            "email" => true,
+                        );
+                        array_push($responseArray, $item);
 
-                    return new JsonResponse($responseArray);
-                } else if ($this->getDoctrine()->getRepository('HtlSpendenportalBundle:User')->findOneBy(array('email' => $data["email"]))) {
-                    $item = array(
-                        "username" => false,
-                        "email" => true,
-                    );
-                    array_push($responseArray, $item);
+                        $responseArray = (object)$responseArray;
 
-                    $responseArray = (object)$responseArray;
+                        return new JsonResponse($responseArray);
+                    } else {
+                        $item = array(
+                            "username" => false,
+                            "email" => false,
+                        );
+                        array_push($responseArray, $item);
 
-                    return new JsonResponse($responseArray);
-                } else {
-                    $item = array(
-                        "username" => false,
-                        "email" => false,
-                    );
-                    array_push($responseArray, $item);
+                        $responseArray = (object)$responseArray;
 
-                    $responseArray = (object)$responseArray;
+                        return new JsonResponse($responseArray);
+                    }
+                } else if($this->getUser()->getEmail() == $data["email"]){
+                    if ($this->getDoctrine()->getRepository('HtlSpendenportalBundle:User')->findOneBy(array('username' => $data["username"]))) {
+                        $item = array(
+                            "username" => true,
+                            "email" => false,
+                        );
+                        array_push($responseArray, $item);
 
-                    return new JsonResponse($responseArray);
+                        $responseArray = (object)$responseArray;
+
+                        return new JsonResponse($responseArray);
+                    }
+                }else if($this->getUser()->getUsername() != $data["username"]){
+                    if ($this->getDoctrine()->getRepository('HtlSpendenportalBundle:User')->findOneBy(array('email' => $data["email"]))) {
+                        $item = array(
+                            "username" => false,
+                            "email" => true,
+                        );
+                        array_push($responseArray, $item);
+
+                        $responseArray = (object)$responseArray;
+
+                        return new JsonResponse($responseArray);
+                    }
                 }
-            //}
+                $item = array(
+                    "username" => false,
+                    "email" => false,
+                );
+                array_push($responseArray, $item);
+
+                $responseArray = (object)$responseArray;
+
+                return new JsonResponse($responseArray);
+
+            }
             return new JsonResponse(false);
         }
         return new JsonResponse(false);

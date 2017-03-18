@@ -302,7 +302,11 @@ class PostController extends Controller
     
     public function deleteAction($postId)
     {
-        if ($this->get('security.authorization_checker')->isGranted('ROLE_RECEIVER')) {
+        //if ($this->get('security.authorization_checker')->isGranted('ROLE_RECEIVER')) {
+            $user = $this->getUser();
+            $user = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:User')->find(5);
+        
+            $target_dir = $_SERVER['DOCUMENT_ROOT'] . '/bundles/htlspendenportal/img/';
 
 
             $em = $this->getDoctrine()->getManager();
@@ -315,14 +319,16 @@ class PostController extends Controller
             }
 
             /* Schauen ob es für diesen Post childs existieren! */
-
-
+            if (unlink($target_dir . $user->getFileUpload())) {
+                $uploadOk = 1;
+            }
+        
             $em->remove($post);
             $em->flush();
 
 
             return new Response('Picture has been deleted!');
-        }
+        //}
         return new JsonResponse('not logged in');
     }
 }
