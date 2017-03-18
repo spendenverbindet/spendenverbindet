@@ -159,6 +159,7 @@ class PostController extends Controller
                             // actually executes the queries (i.e. the INSERT query)
                             $em->flush();
 
+                            return $this->redirectToRoute('htl_spendenportal_projekt', array('projectName' => $project->getTitle(),'projectId' => $projectId));
                             return $this->redirectToRoute('htl_spendenportal_projekt_bearbeiten');
                             return $this->redirectToRoute('htl_spendenportal_projekt');
                         }
