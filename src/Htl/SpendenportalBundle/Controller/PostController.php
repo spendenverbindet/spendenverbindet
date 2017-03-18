@@ -302,9 +302,9 @@ class PostController extends Controller
     
     public function deleteAction($postId)
     {
-        //if ($this->get('security.authorization_checker')->isGranted('ROLE_RECEIVER')) {
+        if ($this->get('security.authorization_checker')->isGranted('ROLE_RECEIVER')) {
             $user = $this->getUser();
-            $user = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:User')->find(5);
+            //$user = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:User')->find(5);
         
             $target_dir = $_SERVER['DOCUMENT_ROOT'] . '/bundles/htlspendenportal/img/';
 
@@ -328,7 +328,7 @@ class PostController extends Controller
 
 
             return new Response('Picture has been deleted!');
-        //}
+        }
         return new JsonResponse('not logged in');
     }
 }

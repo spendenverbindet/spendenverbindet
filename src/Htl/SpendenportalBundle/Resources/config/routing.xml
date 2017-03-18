@@ -248,14 +248,6 @@
         <default key="_controller">HtlSpendenportalBundle:User:delete</default>
     </route>
 
-
-
-
-
-
-
-
-
     <!--
     <route id="testAtion" path="/test" methods="GET">
         <default key="_controller">HtlSpendenportalBundle:Project:test</default>
