@@ -159,8 +159,7 @@ class PostController extends Controller
                             // actually executes the queries (i.e. the INSERT query)
                             $em->flush();
 
-                            return $this->render('HtlSpendenportalBundle::projektdetail.html.twig');
-                            return $this->redirectToRoute('htl_spendenportal_projekt_bearbeiten');
+                            return $this->redirectToRoute('htl_spendenportal_projekt');
                         }
                     }
                 }

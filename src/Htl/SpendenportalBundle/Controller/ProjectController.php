@@ -765,6 +765,7 @@ class ProjectController extends Controller
             }
 
             $project->setDeleted(true);
+            $project->setActive(false);
 
             $em->flush();
 
