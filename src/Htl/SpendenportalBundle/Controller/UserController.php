@@ -463,8 +463,10 @@ class UserController extends Controller
                 $user->setStreet($data["street"]);
                 $user->setZipcode($data["zipcode"]);
                 $user->setHousenumberDoornumber($data["housenumberDoornumber"]);
-                if ($this->get('security.authorization_checker')->isGranted('ROLE_RECEIVER')){
-                    if(!$_FILES['fileUrl']['name']==""){
+                if ($this->get('security.authorization_checker')->isGranted('ROLE_RECEIVER') || $this->get('security.authorization_checker')->isGranted('ROLE_DONATOR')){
+                    //
+                    //!$_FILES['fileUrl']['name']
+                    if(!empty($_FILES)) {
                         //file upload
                         $rand = rand(1,30000);
                         $target_dir = $_SERVER['DOCUMENT_ROOT'] . '/bundles/htlspendenportal/img/';
@@ -475,9 +477,13 @@ class UserController extends Controller
 
                         //
 
+
+                        //return new JsonResponse($user->getFileUpload());
+
                         if (unlink($target_dir . $user->getFileUpload())) {
                             $uploadOk = 1;
                         }
+
                         $user->setFileUpload($filename);
 
                         $pdfFileType = pathinfo($filename, PATHINFO_EXTENSION);
@@ -513,7 +519,6 @@ class UserController extends Controller
                             }
                         }
                     }
-
                     $em->flush();
 
                     if($this->get('security.authorization_checker')->isGranted('ROLE_RECEIVER')) {
