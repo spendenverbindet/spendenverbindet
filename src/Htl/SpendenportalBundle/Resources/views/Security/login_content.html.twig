@@ -5,9 +5,6 @@
 
 {% trans_default_domain 'FOSUserBundle' %}
 
-{% if error %}
-    <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-{% endif %}
 
 <form class="form-searchbar" style="border-width:0;margin-top:50px;margin-bottom: 100px;" action="{{ path("fos_user_security_check") }}" method="post">
     {% if csrf_token %}
@@ -34,6 +31,9 @@
         </div>
         <div class="row text-left" style="margin-top:10px;padding-left:23px;">
              <input type="checkbox" id="remember_me" name="_remember_me" value="on" /> Erinnere dich an mich
+            {% if error %}
+                <div style="color:red">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+            {% endif %}
         </div>
         <div class="row text-center">
             <input style="margin-top:40px" class="folgen-detail-btn" type="submit" id="_submit" name="_submit" value="Anmelden" />
