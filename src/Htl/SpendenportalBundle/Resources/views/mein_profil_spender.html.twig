@@ -37,26 +37,16 @@
                     <input id="emailID" onkeyup="changeBtnText()" value="[[empfaengerProfilInfo[0].email]]" title="Muss eine valide Email-Adresse sein" name="email" style="margin-top:25px;padding:10px;width:100%;border:1px solid black;font-weight: bold;font-size: 20pt;" placeholder="Email" pattern="[^@]+@[^@]+\.[a-zA-Z]{2,6}" type="text" required>
                     <small style="color:#47A1DE;font-size:18px;">Email</small>
 
+
+                </div>
+                <div class="col-xs-12 col-sm-6" style="padding:50px;padding-top:0">
+
                     <input id="usernameID" onkeyup="changeBtnText()" value="[[empfaengerProfilInfo[0].username]]" title="Benutzername muss mindestens 3 Zeichen haben, maximal 20" name="username" style="margin-top:25px;padding:10px;width:100%;border:1px solid black;font-weight: bold;font-size: 20pt;" placeholder="Benutzername" pattern=".{3,20}" type="text" required>
                     <small style="color:#47A1DE;font-size:18px;">Benutzername</small>
 
                     <input onchange="changeBtnText()" value="[[empfaengerProfilInfo[0].birthday]]" title="Geburtsdatum muss angegeben werden" name="age" style="margin-top:25px;padding:10px;width:100%;border:1px solid black;font-weight: bold;font-size: 20pt;" type="date" required>
                     <small style="color:#47A1DE;font-size:18px;">Geburtsdatum</small>
 
-                </div>
-                <div class="col-xs-12 col-sm-6" style="padding:50px;padding-top:0">
-
-                    <input onkeyup="changeBtnText()" value="[[empfaengerProfilInfo[0].town]]" title="Stadtname muss mindestens 3 Zeichen haben, maximal 20" name="town" style="margin-top:25px;padding:10px;width:100%;border:1px solid black;font-weight: bold;font-size: 20pt;" placeholder="Stadt" pattern=".{3,20}" type="text" required>
-                    <small style="color:#47A1DE;font-size:18px;">Stadt</small>
-
-                    <input onkeyup="changeBtnText()" value="[[empfaengerProfilInfo[0].zipcode]]" title="Muss eine valide Postleitzahl von Österreich sein" name="zipcode" style="margin-top:25px;padding:10px;width:100%;border:1px solid black;font-weight: bold;font-size: 20pt;" placeholder="Postleitzahl" pattern="[0-9]{4}" type="text" required>
-                    <small style="color:#47A1DE;font-size:18px;">Postleitzahl</small>
-
-                    <input onkeyup="changeBtnText()" value="[[empfaengerProfilInfo[0].street]]" title="Straßenname muss mindestens 3 Zeichen haben, maximal 20" name="street" style="margin-top:25px;padding:10px;width:100%;border:1px solid black;font-weight: bold;font-size: 20pt;" placeholder="Straße" pattern=".{3,20}" type="text" required>
-                    <small style="color:#47A1DE;font-size:18px;">Straße</small>
-
-                    <input onkeyup="changeBtnText()" value="[[empfaengerProfilInfo[0].housenumberDoornumber]]" title="Dieses Feld muss mindestens 1 Zeichen haben, maximal 30" name="housenumberDoornumber" style="margin-top:25px;padding:10px;width:100%;border:1px solid black;font-weight: bold;font-size: 20pt;" placeholder="Hausnr. Stiege / Tür" pattern=".{1,30}" type="text" required>
-                    <small style="color:#47A1DE;font-size:18px;">Hausnr. Stiege / Tür</small>
 
                 </div>
             </div>

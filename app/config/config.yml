@@ -80,7 +80,7 @@ fos_user:
                     # type: app_user_registration
 
                 confirmation:
-                    enabled: false
+                    enabled: true
 
 
 assetic:

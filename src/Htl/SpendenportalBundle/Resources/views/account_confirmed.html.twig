@@ -1,0 +1,30 @@
+{% embed "HtlSpendenportalBundle::header.html.twig" %}
+    {# override the title-tag text #}
+    {% block title_text %}
+        Spendenverbindet | CONFIRMED
+    {% endblock %}
+{% endembed %}
+
+<div class="helper-navbar"></div>
+
+<div style="margin-bottom:150px;" class="container">
+
+    <div class="row" style="margin-top:150px;">
+        <div class="col-xs-12 text-center"><h2 style="text-transform: uppercase">ACCOUNT BESTÄTIGT</h2></div>
+    </div>
+
+    <div ng-hide="showActiveProject" class="row text-center">
+        <p>
+            Willkommen {{ app.user.username }}, der Registrierungsprozess ist nun abgeschlossen.
+        </p>
+    </div>
+
+    <div class="row" style="margin-top:50px;">
+        <div class="col-xs-12 text-center">
+            <button onclick="location.href='/';" style="margin-top:27px;" class="uk-button uk-button-primary"><span style="font-size:18px;">ZUR HOMEPAGE</span></button>
+        </div>
+    </div>
+
+</div>
+
+{% include "HtlSpendenportalBundle::footer.html.twig" %}
