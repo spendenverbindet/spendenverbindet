@@ -30,40 +30,45 @@ app.controller('spendenverbindetController', function($scope, $http) {
     $scope.allCategories = [];
 
     // Get all categories in an array
-    $http({
-        method: 'GET',
-        url: '/categories'
-    }).then(function successCallback(response) {
+    $scope.getAllCategoriesInArray = function(){
+        $http({
+            method: 'GET',
+            url: '/categories'
+        }).then(function successCallback(response) {
 
-        $scope.allCategories = response.data;
+            $scope.allCategories = response.data;
 
-    }, function errorCallback(response) {
+        }, function errorCallback(response) {
 
-    });
+        });
+    }
 
 
     $scope.projects = [];
     $scope.projectsPrepared = [];
+    $scope.showNoProjects = false;
 
 
     // Get all projects of all categories in an array
     $scope.showLoadingIndicator = true;
+    
+    $scope.getAllProjects = function(){
 
-    $http({
-        method: 'GET',
-        url: '/projects'
-    }).then(function successCallback(response) {
+        $http({
+            method: 'GET',
+            url: '/projects'
+        }).then(function successCallback(response) {
 
-        $scope.showLoadingIndicator = false;
-        $scope.projects = [];
-        $scope.projectsPrepared = [];
+            $scope.showLoadingIndicator = false;
+            $scope.projects = [];
+            $scope.projectsPrepared = [];
 
 
-        for(var u=0;u<Object.keys(response.data).length;u++){
-            $scope.projects.push(response.data[u]);
-        }
+            for(var u=0;u<Object.keys(response.data).length;u++){
+                $scope.projects.push(response.data[u]);
+            }
 
-        if( $scope.projects.length > 3){
+            if( $scope.projects.length > 3){
 
                 var itarationValue = ($scope.projects.length / 3) | 0;
 
@@ -76,18 +81,29 @@ app.controller('spendenverbindetController', function($scope, $http) {
                     $scope.projectsPrepared.push($scope.projects);
                 }
 
-        }else{
-            $scope.projectsPrepared.push($scope.projects);
-        }
+            }else{
+                $scope.projectsPrepared.push($scope.projects);
+            }
+
+            if(Object.keys($scope.projectsPrepared[0]).length == 0){
+                $scope.showNoProjects = true;
+            }
 
 
-    }, function errorCallback(response) {
 
-    });
+        }, function errorCallback(response) {
+
+        });
+        
+    }
+
+    
 
 
     // Get all projects to the related categorie id
     $scope.loadProjectsWithId = function(id, categoryName){
+
+        $scope.showNoProjects = false;
 
         $scope.showLoadingIndicator = true;
         $scope.projects = [];
@@ -123,6 +139,10 @@ app.controller('spendenverbindetController', function($scope, $http) {
                 $scope.projectsPrepared.push($scope.projects);
             }
 
+            if(Object.keys($scope.projectsPrepared[0]).length == 0){
+                $scope.showNoProjects = true;
+            }
+
         }, function errorCallback(response) {
 
         });
@@ -132,6 +152,8 @@ app.controller('spendenverbindetController', function($scope, $http) {
 
     // Get all projects of all categories in an array
     $scope.loadAllProjects = function(){
+
+        $scope.showNoProjects = false;
 
         $scope.showLoadingIndicator = true;
         $scope.projects = [];
@@ -165,6 +187,10 @@ app.controller('spendenverbindetController', function($scope, $http) {
 
             }else{
                 $scope.projectsPrepared.push($scope.projects);
+            }
+
+            if(Object.keys($scope.projectsPrepared[0]).length == 0){
+                $scope.showNoProjects = true;
             }
 
         }, function errorCallback(response) {
@@ -416,6 +442,7 @@ app.controller('spendenverbindetController', function($scope, $http) {
     $scope.showLoadingIndicatorAbonniert = true;
     $scope.projectsAbonniert = [];
     $scope.projectsPreparedAbonniert = [];
+    $scope.showNoAbbonenten = false;
 
     // Get all abonnierte projects in an array
     $scope.loadAllProjectsAbonniert = function(){
@@ -447,6 +474,11 @@ app.controller('spendenverbindetController', function($scope, $http) {
             }else{
                 $scope.projectsPreparedAbonniert.push($scope.projectsAbonniert);
             }
+
+            if(Object.keys($scope.projectsPreparedAbonniert[0]).length == 0){
+                $scope.showNoAbbonenten = true;
+            }
+
 
         }, function errorCallback(response) {
 
