@@ -401,12 +401,14 @@ class UserController extends Controller
                             $uploadOk = 0;
                             return new JsonResponse("Sorry, your file is too large. Maximal 750kB");
                         }
+                        /*
                         // Allow certain file formats
                         if ($pdfFileType != "pdf" && $pdfFileType != "PDF" && $pdfFileType != ""
                         ) {
                             $uploadOk = 0;
                             return new JsonResponse("Sorry, only PDF files are allowed.");
                         }
+                        */
                         // Check if $uploadOk is set to 0 by an error
                         if ($uploadOk == 0) {
                             return new JsonResponse("Sorry, your file was not uploaded.");

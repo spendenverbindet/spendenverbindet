@@ -524,10 +524,10 @@ class ProjectController extends Controller
                         //var_dump($_FILES);
 
                         //file upload
-                        $rand = rand(1,30000);
                         $target_dir = $_SERVER['DOCUMENT_ROOT'] . '/bundles/htlspendenportal/img/';
                         $filename = trim(addslashes($_FILES['titlePictureUrl']['name']));
-                        $filename = $rand.preg_replace('/\s+/', '_', $filename);
+                        $filename = preg_replace('/\s+/', '_', $filename);
+                        $filename = md5(uniqid()).'_'.$filename;
                         $target_file = $target_dir . $filename;
                         $project->setTitlePictureUrl($filename);
                         $uploadOk = 1;
@@ -583,7 +583,7 @@ class ProjectController extends Controller
                                 
                                 $filename = trim(addslashes($_FILES['file']['name'][$i]));
                                 $filename = preg_replace('/\s+/', '_', $filename);
-                                $filename = $filename.'_'.md5(uniqid());
+                                $filename = md5(uniqid()).'_'.$filename;
                                 $target_file = $target_dir . $filename;
                                 $uploadOk = 1;
                                 $picture->setPictureUrl($filename);
@@ -682,7 +682,7 @@ class ProjectController extends Controller
                                 //file upload
                                 $filename = trim(addslashes($_FILES['titlePictureUrl']['name']));
                                 $filename = preg_replace('/\s+/', '_', $filename);
-                                $filename = $filename.'_'.md5(uniqid());
+                                $filename = md5(uniqid()).'_'.$filename;
                                 $target_dir = $_SERVER['DOCUMENT_ROOT'] . '/bundles/htlspendenportal/img/';
                                 $target_file = $target_dir . $filename;
                                 $uploadOk = 1;

@@ -249,7 +249,7 @@ class PostController extends Controller
                         $target_dir = $_SERVER['DOCUMENT_ROOT'] . '/bundles/htlspendenportal/img/';
                         $filename = trim(addslashes($_FILES['postPictureUrl']['name']));
                         $filename = preg_replace('/\s+/', '_', $filename);
-                        $filename = $filename.'_'.md5(uniqid());
+                        $filename = md5(uniqid()).'_'.$filename;
                         $target_file = $target_dir . $filename;
                         $uploadOk = 1;
                         $imageFileType = pathinfo($target_file, PATHINFO_EXTENSION);
@@ -269,7 +269,7 @@ class PostController extends Controller
                             return new JsonResponse("Sorry, your file is too large. Maximal 750kB");
                         }
                         // Allow certain file formats
-
+                        /*
                         if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
                             && $imageFileType != "gif" && $imageFileType != "JPG" && $imageFileType != "PNG" && $imageFileType != "JPEG"
                             && $imageFileType != "GIF" && $imageFileType != ""
@@ -277,7 +277,7 @@ class PostController extends Controller
                             $uploadOk = 0;
                             return new JsonResponse("Sorry, only JPG, JPEG, PNG & GIF files are allowed.");
                         }
-
+                        */
                         // Check if $uploadOk is set to 0 by an error
                         if ($uploadOk == 0) {
                             return new JsonResponse("Sorry, your file was not uploaded.");
