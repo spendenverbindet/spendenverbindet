@@ -17,6 +17,11 @@
                 {% if error.messageKey|trans(error.messageData, 'security') == "Invalid credentials." %}
                     <span style="color:red"><b>Benutzername oder Passwort falsch</b></span>
                 {% endif %}
+
+                {% if error.messageKey|trans(error.messageData, 'security') == "Account is disabled." %}
+                    <span style="color:red"><b>Account wurde nicht bestätigt</b></span>
+                {% endif %}
+
             {% endif %}
 
         </div>
@@ -31,11 +36,15 @@
         </div>
         <div class="row text-left" style="margin-top:10px;padding-left:23px;">
              <input type="checkbox" id="remember_me" name="_remember_me" value="on" /> Erinnere dich an mich
-            {% if error %}
-                <div style="color:red">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-            {% endif %}
         </div>
         <div class="row text-center">
             <input style="margin-top:40px" class="folgen-detail-btn" type="submit" id="_submit" name="_submit" value="Anmelden" />
         </div>
 </form>
+
+{#
+{% if error %}
+    <div style="color:red">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+{% endif %}
+
+#}
