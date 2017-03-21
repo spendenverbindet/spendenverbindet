@@ -41,6 +41,9 @@
                             var fileName = $(this).val().split('/').pop().split('\\').pop();
 
                             if(fileName.match(/.(pdf|PDF)$/i)){
+
+                                changeBtnText();
+
                                 document.getElementById('fileTextId').innerHTML = fileName;
                                 document.getElementById('delTextId').innerHTML = "*nur PDF";
                                 document.getElementById('fileTextId').setAttribute("style","color:white");

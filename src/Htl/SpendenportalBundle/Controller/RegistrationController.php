@@ -51,7 +51,26 @@ class RegistrationController extends BaseController
                 $event = new FormEvent($form, $request);
                 $dispatcher->dispatch(FOSUserEvents::REGISTRATION_SUCCESS, $event);
 
+                // pdf-file start
 
+                // $file stores the uploaded PDF file
+                /** @var Symfony\Component\HttpFoundation\File\UploadedFile $file */
+                $file = $user->getFileUpload();
+
+                // Generate a unique name for the file before saving it
+                $fileName = md5(uniqid()).'.'.$file->guessExtension();
+
+                // Move the file to the directory where brochures are stored
+                $file->move(
+                    $this->getParameter('brochures_directory'),
+                    $fileName
+                );
+
+                // Update the 'pdf' property to store the PDF file name
+                // instead of its contents
+                $user->setFileUpload($fileName);
+
+                // pdf file end
 
                 $erg = $user->getIsDonator();
 
@@ -64,7 +83,7 @@ class RegistrationController extends BaseController
                 }
 
 
-
+                //  persist the $user variable
                 $userManager->updateUser($user);
 
                 if (null === $response = $event->getResponse()) {
