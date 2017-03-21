@@ -179,108 +179,7 @@ class UserController extends Controller
 
         return new JsonResponse($responseArray);
     }
-    /*
-    public function createAction ($username, $usernameCanonical, $email, $emailCanonical, $password, $BeduerftigkeitsbeweisFile, $role, $firstname, $lastname, $town, $street, $zipcode, $housenumberDoornumber) {
-        
-
-        $date = new \DateTime('now');
-
-        if (false) {
-            throw $this->createNotFoundException(
-                'No category found for id  or not User found for id '
-            );
-        }
-        else{
-
-            $user = new User();
-            $user->setUsername($username);
-            $user->setUsernameCanonical($usernameCanonical);
-            $user->setEmail($email);
-            $user->setEmailCanonical($emailCanonical);
-            $user->setEnabled(true);
-            $user->setPassword($password);
-            $user->setLastLogin($date);
-            $user->addRole(array(''.$role.''));
-            //$user->setIsDonator(true);
-            $user->setFileUpload($BeduerftigkeitsbeweisFile);
-            $user->setFirstname($firstname);
-            $user->setLastname($lastname);
-            $user->setTown($town);
-            $user->setStreet($street);
-            $user->setZipcode($zipcode);
-            $user->setHousenumberDoornumber($housenumberDoornumber);
-
-            $form = $this->createFormBuilder($user)
-                ->add('username', TextType::class)
-                ->add('dueDate', DateType::class)
-                ->add('save', SubmitType::class, array('label' => 'Create Post'))
-                ->getForm();
-            
-            $em = $this->getDoctrine()->getManager();
-
-            // tells Doctrine you want to (eventually) save the Product (no queries yet)
-            $em->persist($user);
-
-            // actually executes the queries (i.e. the INSERT query)
-            $em->flush();
-
-            return new \Symfony\Component\HttpFoundation\Response('Inserted User successfully');
-        }
-    }
-    */
-    /*
-    public function updateAction($userId, $username, $usernameCanonical, $email, $emailCanonical, $enable, $password, $BeduerftigkeitsbeweisFile, $role, $firstname, $lastname, $street, $zipcode, $housenumberDoornumber){
-
-        $em = $this->getDoctrine()->getManager();
-        $user = $em->getRepository('HtlSpendenportalBundle:User')->find($userId);
-
-        if (!$user) {
-            throw $this->createNotFoundException(
-                'No category found for id '.$userId
-            );
-        }
-
-        $user->setUsername($username);
-        $user->setUsernameCanonical($usernameCanonical);
-        $user->setEmail($email);
-        $user->setEmailCanonical($emailCanonical);
-        $user->setEnabled($enable);
-        $user->setPassword($password);
-        $user->addRole(array(''.$role.''));
-        //$user->setIsDonator(true);
-        $user->setFileUpload($BeduerftigkeitsbeweisFile);
-        $user->setFirstname($firstname);
-        $user->setLastname($lastname);
-        $user->setStreet($street);
-        $user->setZipcode($zipcode);
-        $user->setHousenumberDoornumber($housenumberDoornumber);
-
-        $em->flush();
-
-        return new Response('Updated user successful');
-    }
-
-    public function deleteAction($userId){
-
-        $em = $this->getDoctrine()->getManager();
-        $user = $em->getRepository('HtlSpendenportalBundle:Category')->find($userId);
-
-        if (!$user) {
-            throw $this->createNotFoundException(
-                'No category found for id '.$userId
-            );
-        }
-
-        // Schauen ob es für diesen Post childs existieren! /
-
-
-        $em->remove($user);
-        $em->flush();
-
-
-        return new Response('Picture has been deleted!');
-    }
-    */
+    
     public function ifAlreadyGivenAction(Request $request){
         if ($this->get('security.authorization_checker')->isGranted('ROLE_RECEIVER') || $this->get('security.authorization_checker')->isGranted('ROLE_DONATOR')) {    // && $this->getUser()->getProjects()->find($projectId)
             //$userId = $this->getUser()->getId();
@@ -468,15 +367,15 @@ class UserController extends Controller
                     //!$_FILES['fileUrl']['name']
                     if(!empty($_FILES)) {
                         //file upload
-                        $rand = rand(1,30000);
                         $target_dir = $_SERVER['DOCUMENT_ROOT'] . '/bundles/htlspendenportal/img/';
                         $filename = trim(addslashes($_FILES['fileUrl']['name']));
-                        $filename = $rand.preg_replace('/\s+/', '_', $filename);
+                        $filename = preg_replace('/\s+/', '_', $filename);
+                        $filename = $filename.'_'.md5(uniqid());
                         $target_file = $target_dir . $filename;
                         $uploadOk = 1;
 
-                        //
-
+                        // Generate a unique name for the file before saving it
+                        //$filename = md5(uniqid()).'.'.$filename;
 
                         //return new JsonResponse($user->getFileUpload());
 

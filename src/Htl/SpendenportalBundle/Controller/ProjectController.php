@@ -578,10 +578,10 @@ class ProjectController extends Controller
                                 $picture->setCreatedAt($date);
 
                                 $picture->setProjects($this->getDoctrine()->getRepository('HtlSpendenportalBundle:Project')->find($project->getId()));
-
-                                $rand = rand(1,30000);
+                                
                                 $filename = trim(addslashes($_FILES['file']['name'][$i]));
-                                $filename = $rand.preg_replace('/\s+/', '_', $filename);
+                                $filename = preg_replace('/\s+/', '_', $filename);
+                                $filename = $filename.'_'.md5(uniqid());
                                 $target_file = $target_dir . $filename;
                                 $uploadOk = 1;
                                 $picture->setPictureUrl($filename);
@@ -677,9 +677,9 @@ class ProjectController extends Controller
 
                             if(!$_FILES['titlePictureUrl']['name']==""){
                                 //file upload
-                                $rand = rand(1,30000);
                                 $filename = trim(addslashes($_FILES['titlePictureUrl']['name']));
-                                $filename = $rand.preg_replace('/\s+/', '_', $filename);
+                                $filename = preg_replace('/\s+/', '_', $filename);
+                                $filename = $filename.'_'.md5(uniqid());
                                 $target_dir = $_SERVER['DOCUMENT_ROOT'] . '/bundles/htlspendenportal/img/';
                                 $target_file = $target_dir . $filename;
                                 $uploadOk = 1;

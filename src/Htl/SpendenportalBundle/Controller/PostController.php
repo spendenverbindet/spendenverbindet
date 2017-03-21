@@ -249,6 +249,7 @@ class PostController extends Controller
                         $target_dir = $_SERVER['DOCUMENT_ROOT'] . '/bundles/htlspendenportal/img/';
                         $filename = trim(addslashes($_FILES['postPictureUrl']['name']));
                         $filename = preg_replace('/\s+/', '_', $filename);
+                        $filename = $filename.'_'.md5(uniqid());
                         $target_file = $target_dir . $filename;
                         $uploadOk = 1;
                         $imageFileType = pathinfo($target_file, PATHINFO_EXTENSION);
