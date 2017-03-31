@@ -320,7 +320,7 @@ class PostController extends Controller
             }
 
             /* Schauen ob es für diesen Post childs existieren! */
-            if (unlink($target_dir . $user->getFileUpload())) {
+            if (unlink($target_dir . $post->getPostPictureUrl())) {
                 $uploadOk = 1;
             }
         
