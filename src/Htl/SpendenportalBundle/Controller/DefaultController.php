@@ -47,5 +47,9 @@ class DefaultController extends Controller
         return $this->render('HtlSpendenportalBundle::post_erstellen.html.twig');
     }
 
+    public function impressumAction(){
+        return $this->render('HtlSpendenportalBundle::impressum.html.twig');
+    }
+
 }
 

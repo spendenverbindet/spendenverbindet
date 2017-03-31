@@ -46,6 +46,10 @@
         <default key="_controller">HtlSpendenportalBundle:Default:post_erstellen</default>
     </route>
 
+    <route id="htl_spendenportal_impressum" path="/impressum">
+        <default key="_controller">HtlSpendenportalBundle:Default:impressum</default>
+    </route>
+
 
     <!--                                        FERTL                                              -->
 

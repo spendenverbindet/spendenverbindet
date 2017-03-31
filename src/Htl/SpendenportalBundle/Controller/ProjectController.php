@@ -186,39 +186,39 @@ class ProjectController extends Controller
 
             $projects = $category->getProjects();
 
-
             $responseArray = array();
 
-            for ($i = 0; $i < count($projects); $i++) {
-                if($projects[$i]->getActive() && !$projects[$i]->getDeleted()) {
+            foreach ($projects as $project) {
+                if($project->getActive() && !$project->getDeleted()) {
                     if ($this->get('security.authorization_checker')->isGranted('ROLE_DONATOR')) {
-                        $hasDonated = $this->hasDonated($projects[$i]->getId());
+                        $hasDonated = $this->hasDonated($project->getId());
                     } else {
                         $hasDonated = false;
                     }
-                    if ($projects[$i]->getTargetAmount() == 0) {
+                    if ($project->getTargetAmount() == 0) {
                         $progress = 0;
                     } else {
-                        $progress = floor(($projects[$i]->getCurrentAmount() / $projects[$i]->getTargetAmount()) * 100);
+                        $progress = floor(($project->getCurrentAmount() / $project->getTargetAmount()) * 100);
                     }
                     $item = array(
-                        "id" => $projects[$i]->getId(),
-                        "title" => $projects[$i]->getTitle(),
-                        "titlePictureUrl" => $projects[$i]->getTitlePictureUrl(),
-                        "description" => $projects[$i]->getDescription(),
-                        "shortinfo" => $projects[$i]->getShortinfo(),
-                        "created_at" => $projects[$i]->getCreatedAt()->format('d.m.Y'),
-                        "targetAmount" => $projects[$i]->getTargetAmount(),
-                        "currentAmount" => $projects[$i]->getCurrentAmount(),
-                        "deleted" => $projects[$i]->getDeleted(),
+                        "id" => $project->getId(),
+                        "title" => $project->getTitle(),
+                        "titlePictureUrl" => $project->getTitlePictureUrl(),
+                        "description" => $project->getDescription(),
+                        "shortinfo" => $project->getShortinfo(),
+                        "created_at" => $project->getCreatedAt()->format('d.m.Y'),
+                        "targetAmount" => $project->getTargetAmount(),
+                        "currentAmount" => $project->getCurrentAmount(),
+                        "deleted" => $project->getDeleted(),
                         "progress" => $progress,
-                        "currentDonators" => $projects[$i]->getCurrentDonators(),
+                        "currentDonators" => $project->getCurrentDonators(),
                         "hasDonated" => $hasDonated
                     );
-                    array_push($responseArray, $item);
+                    array_push($responseArray, (array) $item);
                 }
-                $responseArray = (object)$responseArray;
+
         }
+        $responseArray = (object)$responseArray;
         return new JsonResponse($responseArray);
     }
 

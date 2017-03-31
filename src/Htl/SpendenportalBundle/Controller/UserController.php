@@ -365,67 +365,71 @@ class UserController extends Controller
                 if ($this->get('security.authorization_checker')->isGranted('ROLE_RECEIVER') || $this->get('security.authorization_checker')->isGranted('ROLE_DONATOR')){
                     //
                     //!$_FILES['fileUrl']['name']
-                    if(!empty($_FILES)) {
-                        //file upload
-                        $target_dir = $_SERVER['DOCUMENT_ROOT'] . '/bundles/htlspendenportal/img/';
-                        $filename = trim(addslashes($_FILES['fileUrl']['name']));
-                        $filename = preg_replace('/\s+/', '_', $filename);
-                        $filename = md5(uniqid()).'_'.$filename;
-                        $target_file = $target_dir . $filename;
-                        $uploadOk = 1;
-
-                        // Generate a unique name for the file before saving it
-                        //$filename = md5(uniqid()).'.'.$filename;
-
-                        //return new JsonResponse($user->getFileUpload());
-
-                        if (unlink($target_dir . $user->getFileUpload())) {
+                    if(!empty($_FILES)){
+                        if($_FILES['fileUrl']['name']!="") {
+                            //return new JsonResponse($_FILES);
+                            //file upload
+                            $target_dir = $_SERVER['DOCUMENT_ROOT'] . '/bundles/htlspendenportal/img/';
+                            $filename = trim(addslashes($_FILES['fileUrl']['name']));
+                            $filename = preg_replace('/\s+/', '_', $filename);
+                            $filename = md5(uniqid()).'_'.$filename;
+                            $target_file = $target_dir . $filename;
                             $uploadOk = 1;
-                        }
 
-                        $user->setFileUpload($filename);
+                            // Generate a unique name for the file before saving it
+                            //$filename = md5(uniqid()).'.'.$filename;
 
-                        $pdfFileType = pathinfo($filename, PATHINFO_EXTENSION);
-                        // Check if image file is a actual image or fake image
-                        if (isset($_POST["submit"])) {
-                            $check = getimagesize($_FILES["fileUrl"]["tmp_name"]);
-                            if ($check !== false) {
+                            //return new JsonResponse($user->getFileUpload());
+
+                            if (unlink($target_dir . $user->getFileUpload())) {
                                 $uploadOk = 1;
-                            } else {
-                                $uploadOk = 0;
-                                return new JsonResponse("File is not an image.");
                             }
-                        }
-                        // Check file size
-                        if ($_FILES["fileUrl"]["size"] > 6000000) {
-                            $uploadOk = 0;
-                            return new JsonResponse("Sorry, your file is too large. Maximal 750kB");
-                        }
-                        /*
-                        // Allow certain file formats
-                        if ($pdfFileType != "pdf" && $pdfFileType != "PDF" && $pdfFileType != ""
-                        ) {
-                            $uploadOk = 0;
-                            return new JsonResponse("Sorry, only PDF files are allowed.");
-                        }
-                        */
-                        // Check if $uploadOk is set to 0 by an error
-                        if ($uploadOk == 0) {
-                            return new JsonResponse("Sorry, your file was not uploaded.");
-                            // if everything is ok, try to upload file
-                        } else {
-                            if (move_uploaded_file($_FILES["fileUrl"]["tmp_name"], $target_file)) {
-                            } else {
-                                return new JsonResponse("Sorry, there was an error uploading your file.");
-                            }
-                        }
-                    }
-                    $em->flush();
 
-                    if($this->get('security.authorization_checker')->isGranted('ROLE_RECEIVER')) {
-                        return $this->redirectToRoute('htl_spendenportal_mein_profil_empfaenger');
+                            $user->setFileUpload($filename);
+
+                            $pdfFileType = pathinfo($filename, PATHINFO_EXTENSION);
+                            // Check if image file is a actual image or fake image
+                            if (isset($_POST["submit"])) {
+                                $check = getimagesize($_FILES["fileUrl"]["tmp_name"]);
+                                if ($check !== false) {
+                                    $uploadOk = 1;
+                                } else {
+                                    $uploadOk = 0;
+                                    return new JsonResponse("File is not an image.");
+                                }
+                            }
+                            // Check file size
+                            if ($_FILES["fileUrl"]["size"] > 6000000) {
+                                $uploadOk = 0;
+                                return new JsonResponse("Sorry, your file is too large. Maximal 750kB");
+                            }
+                            /*
+                            // Allow certain file formats
+                            if ($pdfFileType != "pdf" && $pdfFileType != "PDF" && $pdfFileType != ""
+                            ) {
+                                $uploadOk = 0;
+                                return new JsonResponse("Sorry, only PDF files are allowed.");
+                            }
+                            */
+                            // Check if $uploadOk is set to 0 by an error
+                            if ($uploadOk == 0) {
+                                return new JsonResponse("Sorry, your file was not uploaded.");
+                                // if everything is ok, try to upload file
+                            } else {
+                                if (move_uploaded_file($_FILES["fileUrl"]["tmp_name"], $target_file)) {
+                                } else {
+                                    return new JsonResponse("Sorry, there was an error uploading your file.".$_FILES["fileUrl"]["name"]." target_file".$target_file);
+                                }
+                            }
+                        }
+                        $em->flush();
+
+                        if($this->get('security.authorization_checker')->isGranted('ROLE_RECEIVER')) {
+                            return $this->redirectToRoute('htl_spendenportal_mein_profil_empfaenger');
+                        }
                     }
                 }
+                $em->flush();
                 return $this->redirectToRoute('htl_spendenportal_mein_profil_spender');
             }
 
