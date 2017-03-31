@@ -7,7 +7,7 @@
         {% endblock %}
     {% endembed %}
 
-    <div ng-init="initBearbeiten()" class="helper-navbar"></div>
+    <div ng-init="initBearbeiten();initAllPostsOfActualSite();" class="helper-navbar"></div>
 
     <div class="container">
         <form method="POST" action="/updateProject" enctype="multipart/form-data" >
@@ -134,6 +134,41 @@
             </script>
 
 
+    </div>
+
+    <div class="container-fluid" style="background-color: #47A1DE;">
+        <div class="container">
+
+            <div ng-repeat="post in allPostsOfActualSite" class="row" style="padding-top: 50px;">
+                <div class="col-xs-12 col-sm-6" style="padding:50px;padding-top: 0">
+                    <img src="{{ asset('bundles/htlspendenportal/img/[[post.postPictureUrl]]') }}" alt="">
+                </div>
+                <div class="col-xs-12 col-sm-6" style="color:white;padding:50px;padding-top: 0">
+                    <h3>[[post.postTitle]]</h3>
+                    <p style="padding-bottom:20px">
+                        [[post.postText]]
+                    </p>
+                    <button data-uk-modal="{target:'#delete-modal'}" data-toggle="collapse" style="margin-top:27px;" class="uk-button uk-button-danger"><span style="font-size:18px;">POST LÖSCHEN</span></button>
+
+                    <div id="delete-modal" class="uk-modal">
+                        <div style="color:black;" class="uk-modal-dialog uk-modal-body">
+                            <h2 class="uk-modal-title">Post löschen</h2>
+                            <p>
+                                Möchten Sie diesen Post wirklich löschen?
+                                <br>
+                                <br>
+                            </p>
+                            <p class="uk-text-center">
+                                <button id="delBtnId-post" ng-click="deleteThisPost([[post.id]])" class="folgen-detail-btn" style="width:120px;"><span style="font-size:18px">LÖSCHEN</span></button>
+                                <button class="spenden-detail-btn uk-modal-close" style="width:120px;"><span style="font-size:18px">ABBRECHEN</span></button>
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
     </div>
 
 

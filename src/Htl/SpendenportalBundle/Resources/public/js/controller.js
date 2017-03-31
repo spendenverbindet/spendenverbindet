@@ -397,6 +397,32 @@ app.controller('spendenverbindetController', function($scope, $http) {
             }
         }
     }
+
+
+
+    $scope.allPostsOfActualSite = null;
+
+    $scope.initAllPostsOfActualSite = function(){
+
+        $http({
+            method: 'GET',
+            url: '/posts'
+
+        }).then(function successCallback(response) {
+
+            $scope.allPostsOfActualSite = response.data;
+
+        }, function errorCallback(response) {
+        });
+
+    }
+
+
+
+
+
+
+
     
 
     $scope.allPostsOfCurrentSite = null;
@@ -414,8 +440,6 @@ app.controller('spendenverbindetController', function($scope, $http) {
         }).then(function successCallback(response) {
 
             $scope.allPostsOfCurrentSite = response.data;
-
-            console.log($scope.allPostsOfCurrentSite);
 
             $scope.inishedLoadingProjektDetailCounter+=1;
             $scope.didFinishLoading();
@@ -633,11 +657,32 @@ app.controller('spendenverbindetController', function($scope, $http) {
 
             $scope.empfaengerProfilInfo = response.data;
 
-            console.log($scope.empfaengerProfilInfo);
-
         }, function errorCallback(response) {
         });
     }
+
+
+
+
+    $scope.deleteThisPost = function(id){
+
+        document.getElementById('delBtnId-post').setAttribute("disabled","disabled");
+        document.body.style.cursor='wait';
+
+        var config = {
+            headers : {
+                'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;'
+            }
+        }
+
+        $http.post('/deletePost/'+id, null, config).then(function successCallback(response) {
+            location.reload();
+            document.body.style.cursor='default';
+        }, function errorCallback(response) {
+        });
+    }
+
+
 
 
 
@@ -658,7 +703,6 @@ app.controller('spendenverbindetController', function($scope, $http) {
             location.reload();
             document.body.style.cursor='default';
         }, function errorCallback(response) {
-            console.log(response);
         });
     }
 
@@ -710,7 +754,6 @@ app.controller('spendenverbindetController', function($scope, $http) {
             document.getElementById('saveButtonId').removeAttribute("disabled");
 
         }, function errorCallback(response) {
-            console.log(response);
         });
     }
     
