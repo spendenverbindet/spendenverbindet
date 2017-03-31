@@ -9,7 +9,7 @@
     document.getElementById("entdecken_id").style["color"] = "#47A1DE";
 </script>
 
-<div class="helper-navbar"></div>
+<div ng-init="getAllProjects();getAllCategoriesInArray()" class="helper-navbar"></div>
 
 <div class="container">
     <div class="row fisrt-ent-section">
@@ -57,6 +57,10 @@
 <div class="container">
     <div class="row">
         <div class="col-xs-12"><h2 style="padding-left: 25px;text-transform: uppercase;">[[activeCategorie]]</h2></div>
+    </div>
+
+    <div ng-show="showNoProjects" class="row fisrt-ent-section text-center">
+        <h3>Keine Projekte in dieser Kategorie</h3>
     </div>
 
 
