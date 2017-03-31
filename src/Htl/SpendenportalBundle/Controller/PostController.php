@@ -303,7 +303,7 @@ class PostController extends Controller
     
     public function deleteAction($postId)
     {
-        if ($this->get('security.authorization_checker')->isGranted('ROLE_RECEIVER')) {
+        //if ($this->get('security.authorization_checker')->isGranted('ROLE_RECEIVER')) {
             $user = $this->getUser();
             //$user = $this->getDoctrine()->getRepository('HtlSpendenportalBundle:User')->find(5);
         
@@ -328,8 +328,8 @@ class PostController extends Controller
             $em->flush();
 
 
-            return new Response('Picture has been deleted!');
-        }
+            return new JsonResponse('Picture has been deleted!');
+        //}
         return new JsonResponse('not logged in');
     }
 }
